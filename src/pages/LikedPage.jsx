@@ -1,17 +1,40 @@
+import { useState } from 'react';
 import { useAppStore } from '../store/appStore';
 import { Link, useNavigate } from '@tanstack/react-router';
 import './LikedPage.css';
 
+const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+function getWeekDates(weekStart) {
+  const [year, month, day] = weekStart.split('-').map(Number);
+  const start = new Date(year, month - 1, day);
+
+  return DAYS.map((dayName, index) => {
+    const date = new Date(start);
+    date.setDate(start.getDate() + index);
+    return {
+      dayName,
+      dayIndex: index,
+      dateNum: date.getDate(),
+      isToday: new Date().toDateString() === date.toDateString(),
+    };
+  });
+}
+
 export function LikedPage() {
   const navigate = useNavigate();
   const { likedRecipes, unlikeRecipe, addToMealPlan, currentWeek } = useAppStore();
+  const [openPicker, setOpenPicker] = useState(null); // recipe id with open picker
 
-  const handleAddToWeek = (recipeId) => {
-    // Add to first available day (today's weekday)
-    const today = new Date().getDay();
-    addToMealPlan(recipeId, currentWeek, today);
-    // Show feedback
-    alert('Added to this week\'s meal plan!');
+  const weekDates = getWeekDates(currentWeek);
+
+  const handleAddToDay = (recipeId, dayIndex) => {
+    addToMealPlan(recipeId, currentWeek, dayIndex);
+    setOpenPicker(null);
+  };
+
+  const togglePicker = (recipeId) => {
+    setOpenPicker(openPicker === recipeId ? null : recipeId);
   };
 
   if (likedRecipes.length === 0) {
@@ -61,20 +84,42 @@ export function LikedPage() {
               </div>
 
               <div className="card-actions">
-                <button
-                  className="btn-action add"
-                  onClick={() => handleAddToWeek(recipe.id)}
-                  title="Add to this week"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                    <line x1="12" y1="14" x2="12" y2="18"></line>
-                    <line x1="10" y1="16" x2="14" y2="16"></line>
-                  </svg>
-                </button>
+                <div className="day-picker-container">
+                  <button
+                    className={`btn-action add ${openPicker === recipe.id ? 'active' : ''}`}
+                    onClick={() => togglePicker(recipe.id)}
+                    title="Add to planner"
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                      <line x1="3" y1="10" x2="21" y2="10"></line>
+                      <line x1="12" y1="14" x2="12" y2="18"></line>
+                      <line x1="10" y1="16" x2="14" y2="16"></line>
+                    </svg>
+                  </button>
+
+                  {openPicker === recipe.id && (
+                    <div className="day-picker-dropdown">
+                      <div className="picker-header">Add to which day?</div>
+                      <div className="picker-days">
+                        {weekDates.map(({ dayName, dayIndex, dateNum, isToday }) => (
+                          <button
+                            key={dayIndex}
+                            className={`picker-day ${isToday ? 'today' : ''}`}
+                            onClick={() => handleAddToDay(recipe.id, dayIndex)}
+                          >
+                            <span className="day-name">{dayName}</span>
+                            <span className="day-num">{dateNum}</span>
+                            {isToday && <span className="today-dot"></span>}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
                 <button
                   className="btn-action remove"
                   onClick={() => unlikeRecipe(recipe.id)}
@@ -90,6 +135,11 @@ export function LikedPage() {
           </div>
         ))}
       </div>
+
+      {/* Click outside to close picker */}
+      {openPicker && (
+        <div className="picker-backdrop" onClick={() => setOpenPicker(null)} />
+      )}
     </div>
   );
 }

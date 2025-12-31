@@ -133,7 +133,9 @@ export const useAppStore = create(
 
       navigateWeek: (direction) => {
         set(state => {
-          const current = new Date(state.currentWeek);
+          // Parse date parts to avoid timezone issues
+          const [year, month, day] = state.currentWeek.split('-').map(Number);
+          const current = new Date(year, month - 1, day);
           current.setDate(current.getDate() + (direction * 7));
           return { currentWeek: getWeekStart(current) };
         });
@@ -173,6 +175,7 @@ export const useAppStore = create(
         mealPlans: state.mealPlans,
         swipeHistory: state.swipeHistory,
         currentIndex: state.currentIndex,
+        currentWeek: state.currentWeek,
       }),
     }
   )
