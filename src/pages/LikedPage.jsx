@@ -3,38 +3,70 @@ import { useAppStore } from '../store/appStore';
 import { Link, useNavigate } from '@tanstack/react-router';
 import './LikedPage.css';
 
-const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const DAYS_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 function getWeekDates(weekStart) {
   const [year, month, day] = weekStart.split('-').map(Number);
   const start = new Date(year, month - 1, day);
 
-  return DAYS.map((dayName, index) => {
+  return DAYS_SHORT.map((dayName, index) => {
     const date = new Date(start);
     date.setDate(start.getDate() + index);
     return {
       dayName,
       dayIndex: index,
       dateNum: date.getDate(),
+      month: date.toLocaleDateString('en-US', { month: 'short' }),
       isToday: new Date().toDateString() === date.toDateString(),
     };
   });
 }
 
+function formatWeekLabel(weekStart) {
+  const [year, month, day] = weekStart.split('-').map(Number);
+  const start = new Date(year, month - 1, day);
+  const end = new Date(start);
+  end.setDate(end.getDate() + 6);
+
+  const formatDate = (d) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  return `${formatDate(start)} - ${formatDate(end)}`;
+}
+
+function getNextWeekStart(weekStart, direction) {
+  const [year, month, day] = weekStart.split('-').map(Number);
+  const current = new Date(year, month - 1, day);
+  current.setDate(current.getDate() + (direction * 7));
+  const d = current.getDay();
+  current.setDate(current.getDate() - d);
+  return current.toISOString().split('T')[0];
+}
+
 export function LikedPage() {
   const navigate = useNavigate();
   const { likedRecipes, unlikeRecipe, addToMealPlan, currentWeek } = useAppStore();
-  const [openPicker, setOpenPicker] = useState(null); // recipe id with open picker
+  const [openPicker, setOpenPicker] = useState(null);
+  const [pickerWeek, setPickerWeek] = useState(currentWeek);
 
-  const weekDates = getWeekDates(currentWeek);
+  const weekDates = getWeekDates(pickerWeek);
 
   const handleAddToDay = (recipeId, dayIndex) => {
-    addToMealPlan(recipeId, currentWeek, dayIndex);
+    addToMealPlan(recipeId, pickerWeek, dayIndex);
     setOpenPicker(null);
+    setPickerWeek(currentWeek);
   };
 
   const togglePicker = (recipeId) => {
-    setOpenPicker(openPicker === recipeId ? null : recipeId);
+    if (openPicker === recipeId) {
+      setOpenPicker(null);
+      setPickerWeek(currentWeek);
+    } else {
+      setOpenPicker(recipeId);
+      setPickerWeek(currentWeek);
+    }
+  };
+
+  const navigatePickerWeek = (direction) => {
+    setPickerWeek(getNextWeekStart(pickerWeek, direction));
   };
 
   if (likedRecipes.length === 0) {
@@ -80,45 +112,24 @@ export function LikedPage() {
               <div className="card-meta">
                 <span className="meta-item">{recipe.tags?.[0]}</span>
                 <span className="meta-divider">•</span>
-                <span className="meta-item">{recipe.prepTime + recipe.cookTime} min</span>
+                <span className="meta-item">{(recipe.prepTime || 0) + (recipe.cookTime || 0)} min</span>
               </div>
 
               <div className="card-actions">
-                <div className="day-picker-container">
-                  <button
-                    className={`btn-action add ${openPicker === recipe.id ? 'active' : ''}`}
-                    onClick={() => togglePicker(recipe.id)}
-                    title="Add to planner"
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                      <line x1="16" y1="2" x2="16" y2="6"></line>
-                      <line x1="8" y1="2" x2="8" y2="6"></line>
-                      <line x1="3" y1="10" x2="21" y2="10"></line>
-                      <line x1="12" y1="14" x2="12" y2="18"></line>
-                      <line x1="10" y1="16" x2="14" y2="16"></line>
-                    </svg>
-                  </button>
-
-                  {openPicker === recipe.id && (
-                    <div className="day-picker-dropdown">
-                      <div className="picker-header">Add to which day?</div>
-                      <div className="picker-days">
-                        {weekDates.map(({ dayName, dayIndex, dateNum, isToday }) => (
-                          <button
-                            key={dayIndex}
-                            className={`picker-day ${isToday ? 'today' : ''}`}
-                            onClick={() => handleAddToDay(recipe.id, dayIndex)}
-                          >
-                            <span className="day-name">{dayName}</span>
-                            <span className="day-num">{dateNum}</span>
-                            {isToday && <span className="today-dot"></span>}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
+                <button
+                  className={`btn-action add ${openPicker === recipe.id ? 'active' : ''}`}
+                  onClick={() => togglePicker(recipe.id)}
+                  title="Add to planner"
+                >
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6"></line>
+                    <line x1="8" y1="2" x2="8" y2="6"></line>
+                    <line x1="3" y1="10" x2="21" y2="10"></line>
+                    <line x1="12" y1="14" x2="12" y2="18"></line>
+                    <line x1="10" y1="16" x2="14" y2="16"></line>
+                  </svg>
+                </button>
 
                 <button
                   className="btn-action remove"
@@ -136,9 +147,49 @@ export function LikedPage() {
         ))}
       </div>
 
-      {/* Click outside to close picker */}
+      {/* Day picker modal */}
       {openPicker && (
-        <div className="picker-backdrop" onClick={() => setOpenPicker(null)} />
+        <>
+          <div className="picker-backdrop" onClick={() => { setOpenPicker(null); setPickerWeek(currentWeek); }} />
+          <div className="day-picker-modal">
+            <div className="picker-header">
+              <h3>Add to Meal Plan</h3>
+              <button className="close-picker" onClick={() => { setOpenPicker(null); setPickerWeek(currentWeek); }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+
+            <div className="week-navigator">
+              <button className="week-nav-btn" onClick={() => navigatePickerWeek(-1)}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+              </button>
+              <span className="week-label">{formatWeekLabel(pickerWeek)}</span>
+              <button className="week-nav-btn" onClick={() => navigatePickerWeek(1)}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+
+            <div className="picker-days">
+              {weekDates.map(({ dayName, dayIndex, dateNum, isToday }) => (
+                <button
+                  key={dayIndex}
+                  className={`picker-day ${isToday ? 'today' : ''}`}
+                  onClick={() => handleAddToDay(openPicker, dayIndex)}
+                >
+                  <span className="day-label">{dayName}</span>
+                  <span className="day-date">{dateNum}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
