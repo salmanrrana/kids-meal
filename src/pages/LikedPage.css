@@ -188,43 +188,33 @@
 }
 
 /* Day picker modal */
-.picker-backdrop {
+.picker-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 100;
-  animation: fadeIn 0.15s ease-out;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.picker-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .day-picker-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   background: var(--card-bg);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
   padding: 20px;
-  z-index: 101;
   width: 90%;
   max-width: 360px;
-  animation: slideIn 0.2s ease-out;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -45%);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, -50%);
-  }
+  max-height: 90vh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .picker-header {
@@ -242,23 +232,26 @@
 }
 
 .close-picker {
-  background: none;
+  background: var(--bg-secondary);
   border: none;
-  padding: 4px;
+  padding: 8px;
   cursor: pointer;
   color: var(--text-secondary);
   border-radius: var(--radius-sm);
-  transition: all var(--transition-fast);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.close-picker:hover {
-  background: var(--bg-secondary);
-  color: var(--text-primary);
+.close-picker:hover,
+.close-picker:active {
+  background: var(--error-light);
+  color: var(--error);
 }
 
 .close-picker svg {
   width: 20px;
   height: 20px;
+  display: block;
 }
 
 .week-navigator {
@@ -272,23 +265,26 @@
 }
 
 .week-nav-btn {
-  background: none;
+  background: var(--card-bg);
   border: none;
-  padding: 8px;
+  padding: 12px;
   cursor: pointer;
-  color: var(--text-secondary);
+  color: var(--text-primary);
   border-radius: var(--radius-sm);
-  transition: all var(--transition-fast);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.week-nav-btn:hover {
-  background: var(--card-bg);
+.week-nav-btn:hover,
+.week-nav-btn:active {
+  background: var(--primary-light);
   color: var(--primary);
 }
 
 .week-nav-btn svg {
   width: 20px;
   height: 20px;
+  display: block;
 }
 
 .week-navigator .week-label {
@@ -300,22 +296,27 @@
 .picker-days {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
+  gap: 8px;
 }
 
 .picker-day {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 12px 4px;
+  justify-content: center;
+  padding: 12px 2px;
+  min-height: 60px;
   border: 2px solid transparent;
   border-radius: var(--radius-md);
   background: var(--bg-secondary);
   cursor: pointer;
-  transition: all var(--transition-fast);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.1s, border-color 0.1s;
 }
 
-.picker-day:hover {
+.picker-day:hover,
+.picker-day:active {
   background: var(--primary);
   color: white;
   border-color: var(--primary);
@@ -326,20 +327,22 @@
   background: var(--primary-light);
 }
 
-.picker-day.today:hover {
+.picker-day.today:hover,
+.picker-day.today:active {
   background: var(--primary);
+  color: white;
 }
 
 .picker-day .day-label {
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-size: 0.65rem;
+  font-weight: 700;
   text-transform: uppercase;
-  opacity: 0.7;
-  margin-bottom: 4px;
+  opacity: 0.8;
+  margin-bottom: 2px;
 }
 
 .picker-day .day-date {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 700;
 }
 

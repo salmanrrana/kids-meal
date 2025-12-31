@@ -55,18 +55,26 @@ export function LikedPage() {
     setPickerWeek(currentWeek);
   };
 
-  const togglePicker = (recipeId) => {
-    if (openPicker === recipeId) {
-      setOpenPicker(null);
-      setPickerWeek(currentWeek);
-    } else {
-      setOpenPicker(recipeId);
-      setPickerWeek(currentWeek);
-    }
+  const closePicker = () => {
+    setOpenPicker(null);
+    setPickerWeek(currentWeek);
   };
 
-  const navigatePickerWeek = (direction) => {
+  const openPickerFor = (recipeId) => {
+    setOpenPicker(recipeId);
+    setPickerWeek(currentWeek);
+  };
+
+  const navigatePickerWeek = (e, direction) => {
+    e.preventDefault();
+    e.stopPropagation();
     setPickerWeek(getNextWeekStart(pickerWeek, direction));
+  };
+
+  const handleDayClick = (e, recipeId, dayIndex) => {
+    e.preventDefault();
+    e.stopPropagation();
+    handleAddToDay(recipeId, dayIndex);
   };
 
   if (likedRecipes.length === 0) {
@@ -117,9 +125,10 @@ export function LikedPage() {
 
               <div className="card-actions">
                 <button
+                  type="button"
                   className={`btn-action add ${openPicker === recipe.id ? 'active' : ''}`}
-                  onClick={() => togglePicker(recipe.id)}
-                  title="Add to planner"
+                  onClick={() => openPickerFor(recipe.id)}
+                  aria-label="Add to planner"
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
@@ -132,9 +141,10 @@ export function LikedPage() {
                 </button>
 
                 <button
+                  type="button"
                   className="btn-action remove"
                   onClick={() => unlikeRecipe(recipe.id)}
-                  title="Remove from liked"
+                  aria-label="Remove from liked"
                 >
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -149,12 +159,12 @@ export function LikedPage() {
 
       {/* Day picker modal */}
       {openPicker && (
-        <>
-          <div className="picker-backdrop" onClick={() => { setOpenPicker(null); setPickerWeek(currentWeek); }} />
-          <div className="day-picker-modal">
+        <div className="picker-overlay">
+          <div className="picker-backdrop" onClick={closePicker} />
+          <div className="day-picker-modal" role="dialog" aria-modal="true">
             <div className="picker-header">
               <h3>Add to Meal Plan</h3>
-              <button className="close-picker" onClick={() => { setOpenPicker(null); setPickerWeek(currentWeek); }}>
+              <button type="button" className="close-picker" onClick={closePicker} aria-label="Close">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -163,13 +173,13 @@ export function LikedPage() {
             </div>
 
             <div className="week-navigator">
-              <button className="week-nav-btn" onClick={() => navigatePickerWeek(-1)}>
+              <button type="button" className="week-nav-btn" onClick={(e) => navigatePickerWeek(e, -1)} aria-label="Previous week">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <polyline points="15 18 9 12 15 6"></polyline>
                 </svg>
               </button>
               <span className="week-label">{formatWeekLabel(pickerWeek)}</span>
-              <button className="week-nav-btn" onClick={() => navigatePickerWeek(1)}>
+              <button type="button" className="week-nav-btn" onClick={(e) => navigatePickerWeek(e, 1)} aria-label="Next week">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
@@ -179,9 +189,10 @@ export function LikedPage() {
             <div className="picker-days">
               {weekDates.map(({ dayName, dayIndex, dateNum, isToday }) => (
                 <button
+                  type="button"
                   key={dayIndex}
                   className={`picker-day ${isToday ? 'today' : ''}`}
-                  onClick={() => handleAddToDay(openPicker, dayIndex)}
+                  onClick={(e) => handleDayClick(e, openPicker, dayIndex)}
                 >
                   <span className="day-label">{dayName}</span>
                   <span className="day-date">{dateNum}</span>
@@ -189,7 +200,7 @@ export function LikedPage() {
               ))}
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
