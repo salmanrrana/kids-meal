@@ -1,0 +1,89 @@
+import { StrictMode } from 'react';
+import ReactDOM from 'react-dom/client';
+import {
+  Outlet,
+  RouterProvider,
+  createRootRoute,
+  createRoute,
+  createRouter,
+} from '@tanstack/react-router';
+
+import './styles.css';
+
+// Pages
+import { DiscoverPage } from './pages/DiscoverPage';
+import { LikedPage } from './pages/LikedPage';
+import { RecipeDetailPage } from './pages/RecipeDetailPage';
+import { PlannerPage } from './pages/PlannerPage';
+import { GroceryPage } from './pages/GroceryPage';
+
+// Components
+import { Navigation } from './components/Navigation';
+
+// Root layout with navigation
+const rootRoute = createRootRoute({
+  component: () => (
+    <>
+      <Outlet />
+      <Navigation />
+    </>
+  ),
+});
+
+// Routes
+const indexRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/',
+  component: DiscoverPage,
+});
+
+const likedRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/liked',
+  component: LikedPage,
+});
+
+const recipeRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/recipe/$recipeId',
+  component: RecipeDetailPage,
+});
+
+const plannerRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/planner',
+  component: PlannerPage,
+});
+
+const groceryRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/grocery',
+  component: GroceryPage,
+});
+
+// Build route tree
+const routeTree = rootRoute.addChildren([
+  indexRoute,
+  likedRoute,
+  recipeRoute,
+  plannerRoute,
+  groceryRoute,
+]);
+
+// Create router
+const router = createRouter({
+  routeTree,
+  defaultPreload: 'intent',
+  scrollRestoration: true,
+});
+
+// Render app
+const rootElement = document.getElementById('app');
+if (rootElement && !rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>,
+  );
+}

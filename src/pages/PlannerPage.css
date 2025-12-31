@@ -1,0 +1,420 @@
+.planner-page {
+  padding: 16px;
+  min-height: 100vh;
+  background: var(--bg-primary);
+}
+
+.planner-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.planner-header h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.week-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.week-btn {
+  width: 36px;
+  height: 36px;
+  border: none;
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.week-btn:hover {
+  background: var(--bg-secondary);
+}
+
+.week-btn svg {
+  width: 20px;
+  height: 20px;
+  color: var(--text-secondary);
+}
+
+.week-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Kanban board */
+.kanban-board {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.day-column {
+  flex: 0 0 140px;
+  min-width: 140px;
+  background: var(--card-bg);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.day-column.today {
+  border: 2px solid var(--primary);
+}
+
+.day-header {
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.day-name {
+  display: block;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.day-full {
+  display: none;
+}
+
+.today-badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--bg-secondary);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  margin-top: 4px;
+}
+
+.day-meals {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 100px;
+}
+
+/* Meal card */
+.meal-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  cursor: grab;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.meal-card:hover {
+  background: var(--bg-tertiary);
+  box-shadow: var(--shadow-sm);
+}
+
+.meal-card:active {
+  cursor: grabbing;
+}
+
+.meal-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.meal-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.meal-title {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.meal-time {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.remove-meal {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: var(--error-light);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: all var(--transition-fast);
+}
+
+.meal-card:hover .remove-meal {
+  opacity: 1;
+}
+
+.remove-meal svg {
+  width: 12px;
+  height: 12px;
+  color: var(--error);
+}
+
+.remove-meal:hover {
+  background: var(--error);
+}
+
+.remove-meal:hover svg {
+  color: white;
+}
+
+/* Add meal button */
+.add-meal-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  border: 2px dashed var(--card-border);
+  background: transparent;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.add-meal-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--bg-secondary);
+}
+
+.add-meal-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Planner actions */
+.planner-actions {
+  position: fixed;
+  bottom: 80px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: center;
+}
+
+.grocery-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow-lg);
+}
+
+.grocery-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 200;
+}
+
+.modal {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.modal-header h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.close-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn svg {
+  width: 18px;
+  height: 18px;
+  color: var(--text-secondary);
+}
+
+.modal-content {
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.no-recipes {
+  text-align: center;
+  padding: 20px;
+}
+
+.no-recipes p {
+  color: var(--text-secondary);
+  margin: 0 0 16px 0;
+}
+
+.recipe-select-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.recipe-select-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: none;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.recipe-select-item:hover {
+  background: var(--bg-tertiary);
+}
+
+.select-thumb {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
+.select-info {
+  flex: 1;
+}
+
+.select-title {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.select-meta {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Responsive - desktop */
+@media (min-width: 768px) {
+  .planner-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .kanban-board {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 16px;
+    overflow-x: visible;
+  }
+
+  .day-column {
+    flex: 1;
+    min-width: unset;
+  }
+
+  .day-name {
+    display: none;
+  }
+
+  .day-full {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .day-meals {
+    min-height: 200px;
+  }
+
+  .planner-actions {
+    position: static;
+    margin-top: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .day-column {
+    padding: 16px;
+  }
+
+  .meal-thumb {
+    width: 48px;
+    height: 48px;
+  }
+
+  .meal-title {
+    font-size: 0.85rem;
+  }
+}

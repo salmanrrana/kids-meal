@@ -1,0 +1,206 @@
+.discover-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-primary);
+  padding: 16px;
+}
+
+.discover-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.discover-header h1 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.header-stats {
+  display: flex;
+  gap: 12px;
+}
+
+.stat {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 20px;
+}
+
+.stat.liked {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.stat.remaining {
+  background: var(--neutral-light);
+  color: var(--text-secondary);
+}
+
+.card-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  min-height: 450px;
+}
+
+.card-preview {
+  position: absolute;
+  width: 100%;
+  max-width: 360px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transform: scale(0.95);
+  opacity: 0.6;
+}
+
+.preview-image-container {
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(1px);
+}
+
+/* Empty state */
+.empty-deck {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+}
+
+.empty-deck h2 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin: 0 0 8px 0;
+}
+
+.empty-deck p {
+  color: var(--text-secondary);
+  margin: 0 0 24px 0;
+}
+
+.empty-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 280px;
+  margin: 0 auto;
+}
+
+/* Swipe action buttons */
+.swipe-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.action-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn:hover:not(:disabled) {
+  transform: scale(1.1);
+}
+
+.action-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.action-btn svg {
+  width: 28px;
+  height: 28px;
+}
+
+.action-btn.nope {
+  background: white;
+  color: var(--error);
+}
+
+.action-btn.nope:hover:not(:disabled) {
+  background: var(--error-light);
+}
+
+.action-btn.undo {
+  width: 50px;
+  height: 50px;
+  background: white;
+  color: var(--warning);
+}
+
+.action-btn.undo svg {
+  width: 22px;
+  height: 22px;
+}
+
+.action-btn.undo:hover:not(:disabled) {
+  background: var(--warning-light);
+}
+
+.action-btn.like {
+  background: var(--success);
+  color: white;
+}
+
+.action-btn.like:hover:not(:disabled) {
+  background: var(--success-dark);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .discover-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .card-container {
+    min-height: 400px;
+  }
+
+  .preview-image-container {
+    height: 280px;
+  }
+
+  .action-btn {
+    width: 55px;
+    height: 55px;
+  }
+
+  .action-btn.undo {
+    width: 45px;
+    height: 45px;
+  }
+}
