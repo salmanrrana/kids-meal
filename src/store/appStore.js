@@ -1,6 +1,11 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { mockRecipes, getShuffledRecipes } from '../data/mockRecipes';
+import { recipes } from '../data/recipes';
+
+// Shuffle recipes for the deck
+function getShuffledRecipes() {
+  return [...recipes].sort(() => Math.random() - 0.5);
+}
 
 // Get start of current week (Sunday)
 function getWeekStart(date = new Date()) {
@@ -144,7 +149,7 @@ export const useAppStore = create(
 
       // Get recipe by ID
       getRecipeById: (id) => {
-        return mockRecipes.find(r => r.id === id);
+        return recipes.find(r => r.id === id);
       },
 
       // Get meals for a specific week
@@ -155,7 +160,7 @@ export const useAppStore = create(
 
         for (let day = 0; day < 7; day++) {
           const recipeIds = weekPlan[day] || [];
-          meals[day] = recipeIds.map(id => mockRecipes.find(r => r.id === id)).filter(Boolean);
+          meals[day] = recipeIds.map(id => recipes.find(r => r.id === id)).filter(Boolean);
         }
 
         return meals;

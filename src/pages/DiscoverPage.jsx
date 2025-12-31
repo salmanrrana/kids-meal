@@ -58,7 +58,7 @@ export function DiscoverPage() {
               <div className="card-preview">
                 <div className="preview-image-container">
                   <img
-                    src={deck[currentIndex + 1].image_url}
+                    src={deck[currentIndex + 1].image}
                     alt=""
                     className="preview-image"
                   />

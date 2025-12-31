@@ -46,7 +46,7 @@ export function LikedPage() {
               className="card-image-wrapper"
               onClick={() => navigate({ to: '/recipe/$recipeId', params: { recipeId: recipe.id } })}
             >
-              <img src={recipe.image_url} alt={recipe.title} className="card-img" />
+              <img src={recipe.image} alt={recipe.title} className="card-img" />
               <div className="card-overlay">
                 <span className="view-label">View Recipe</span>
               </div>
@@ -55,9 +55,9 @@ export function LikedPage() {
             <div className="card-body">
               <h3 className="card-title">{recipe.title}</h3>
               <div className="card-meta">
-                <span className="meta-item">{recipe.cuisine}</span>
+                <span className="meta-item">{recipe.tags?.[0]}</span>
                 <span className="meta-divider">•</span>
-                <span className="meta-item">{recipe.prep_time_minutes + recipe.cook_time_minutes} min</span>
+                <span className="meta-item">{recipe.prepTime + recipe.cookTime} min</span>
               </div>
 
               <div className="card-actions">

@@ -1,17 +1,8 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { useAppStore } from '../store/appStore';
-import { mockRecipes } from '../data/mockRecipes';
+import { recipes } from '../data/recipes';
 import './GroceryPage.css';
-
-// Ingredient category labels and order
-const CATEGORY_CONFIG = {
-  produce: { label: 'PRODUCE', order: 1 },
-  meat: { label: 'MEAT & PROTEIN', order: 2 },
-  dairy: { label: 'DAIRY', order: 3 },
-  pantry: { label: 'PANTRY', order: 4 },
-  spices: { label: 'SPICES & SEASONINGS', order: 5 },
-};
 
 function formatWeekRange(weekStart) {
   const start = new Date(weekStart);
@@ -35,7 +26,7 @@ export function GroceryPage() {
     for (let day = 0; day < 7; day++) {
       const recipeIds = weekPlan[day] || [];
       recipeIds.forEach(id => {
-        const recipe = mockRecipes.find(r => r.id === id);
+        const recipe = recipes.find(r => r.id === id);
         if (recipe) meals.push(recipe);
       });
     }
@@ -43,61 +34,32 @@ export function GroceryPage() {
     return meals;
   }, [mealPlans, currentWeek]);
 
-  // Aggregate ingredients by category
+  // Aggregate all ingredients (deduped)
   const groceryList = useMemo(() => {
-    const ingredientMap = {};
+    const ingredientSet = new Map();
 
     weekMeals.forEach(recipe => {
-      recipe.ingredients.forEach(ing => {
-        const key = `${ing.name.toLowerCase()}-${ing.category}`;
-        if (ingredientMap[key]) {
-          // Combine quantities (simple concatenation for now)
-          ingredientMap[key].count += 1;
-          ingredientMap[key].quantities.push(`${ing.quantity} ${ing.unit}`);
-        } else {
-          ingredientMap[key] = {
-            name: ing.name,
-            category: ing.category || 'pantry',
-            count: 1,
-            quantities: [`${ing.quantity} ${ing.unit}`],
-          };
+      recipe.ingredients.forEach(ingredient => {
+        // Normalize ingredient for deduplication
+        const normalized = ingredient.toLowerCase().trim();
+        if (!ingredientSet.has(normalized)) {
+          ingredientSet.set(normalized, ingredient);
         }
       });
     });
 
-    // Group by category
-    const grouped = {};
-    Object.values(ingredientMap).forEach(ing => {
-      const cat = ing.category;
-      if (!grouped[cat]) grouped[cat] = [];
-      grouped[cat].push(ing);
-    });
-
-    // Sort categories and items
-    return Object.entries(grouped)
-      .sort(([a], [b]) => (CATEGORY_CONFIG[a]?.order || 99) - (CATEGORY_CONFIG[b]?.order || 99))
-      .map(([category, items]) => ({
-        category,
-        label: CATEGORY_CONFIG[category]?.label || category.toUpperCase(),
-        items: items.sort((a, b) => a.name.localeCompare(b.name)),
-      }));
+    // Return as sorted array
+    return Array.from(ingredientSet.values()).sort((a, b) =>
+      a.toLowerCase().localeCompare(b.toLowerCase())
+    );
   }, [weekMeals]);
 
   // Format for copying
   const formatForCopy = () => {
-    let text = '';
-
-    groceryList.forEach(group => {
-      text += `${group.label}\n`;
-      group.items.forEach(item => {
-        const qty = item.count > 1
-          ? item.quantities.join(' + ')
-          : item.quantities[0];
-        text += `- ${qty} ${item.name}\n`;
-      });
-      text += '\n';
+    let text = 'GROCERY LIST\n\n';
+    groceryList.forEach(item => {
+      text += `- ${item}\n`;
     });
-
     return text.trim();
   };
 
@@ -125,7 +87,7 @@ export function GroceryPage() {
   return (
     <div className="grocery-page page-with-nav">
       <header className="grocery-header">
-        <button className="back-btn" onClick={() => navigate({ to: '/planner' })}>
+        <button className="back-btn" onClick={() => window.history.back()}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
@@ -179,25 +141,18 @@ export function GroceryPage() {
             </div>
           </div>
 
-          {/* Grocery list by category */}
+          {/* Grocery list */}
           <div className="grocery-list">
-            {groceryList.map(group => (
-              <div key={group.category} className="grocery-category">
-                <h3 className="category-label">{group.label}</h3>
-                <ul className="ingredient-list">
-                  {group.items.map((item, index) => (
-                    <li key={index} className="ingredient-item">
-                      <span className="ingredient-qty">
-                        {item.count > 1
-                          ? item.quantities.join(' + ')
-                          : item.quantities[0]}
-                      </span>
-                      <span className="ingredient-name">{item.name}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
+            <div className="grocery-category">
+              <h3 className="category-label">ALL INGREDIENTS ({groceryList.length})</h3>
+              <ul className="ingredient-list">
+                {groceryList.map((item, index) => (
+                  <li key={index} className="ingredient-item">
+                    <span className="ingredient-name">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </>
       )}

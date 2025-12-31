@@ -75,6 +75,8 @@ export function SwipeCard({ recipe, onSwipeLeft, onSwipeRight, onTap }) {
 
   if (gone) return null;
 
+  const totalTime = recipe.prepTime + recipe.cookTime;
+
   return (
     <animated.div
       {...bind()}
@@ -99,7 +101,7 @@ export function SwipeCard({ recipe, onSwipeLeft, onSwipeRight, onTap }) {
       {/* Card content */}
       <div className="card-image-container">
         <img
-          src={recipe.image_url}
+          src={recipe.image}
           alt={recipe.title}
           className="card-image"
           draggable={false}
@@ -110,9 +112,10 @@ export function SwipeCard({ recipe, onSwipeLeft, onSwipeRight, onTap }) {
         <h2 className="card-title">{recipe.title}</h2>
 
         <div className="card-tags">
-          <span className="tag cuisine">{recipe.cuisine}</span>
-          <span className="tag protein">{recipe.protein_type}</span>
-          <span className="tag time">{recipe.prep_time_minutes + recipe.cook_time_minutes} min</span>
+          {recipe.tags.slice(0, 2).map(tag => (
+            <span key={tag} className="tag">{tag}</span>
+          ))}
+          <span className="tag time">{totalTime} min</span>
         </div>
       </div>
     </animated.div>

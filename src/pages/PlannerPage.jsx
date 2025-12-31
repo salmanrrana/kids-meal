@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { useAppStore } from '../store/appStore';
-import { mockRecipes } from '../data/mockRecipes';
+import { recipes } from '../data/recipes';
 import './PlannerPage.css';
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -37,7 +37,7 @@ export function PlannerPage() {
 
   const getMealsForDay = (dayIndex) => {
     const recipeIds = weekPlan[dayIndex] || [];
-    return recipeIds.map(id => mockRecipes.find(r => r.id === id)).filter(Boolean);
+    return recipeIds.map(id => recipes.find(r => r.id === id)).filter(Boolean);
   };
 
   const handleDragStart = (e, recipe, fromDay) => {
@@ -129,10 +129,10 @@ export function PlannerPage() {
                     onDragStart={(e) => handleDragStart(e, meal, dayIndex)}
                     onClick={() => navigate({ to: '/recipe/$recipeId', params: { recipeId: meal.id } })}
                   >
-                    <img src={meal.image_url} alt="" className="meal-thumb" />
+                    <img src={meal.image} alt="" className="meal-thumb" />
                     <div className="meal-info">
                       <span className="meal-title">{meal.title}</span>
-                      <span className="meal-time">{meal.prep_time_minutes + meal.cook_time_minutes} min</span>
+                      <span className="meal-time">{meal.prepTime + meal.cookTime} min</span>
                     </div>
                     <button
                       className="remove-meal"
@@ -216,11 +216,11 @@ export function PlannerPage() {
                       className="recipe-select-item"
                       onClick={() => handleAddMeal(recipe.id, showAddModal)}
                     >
-                      <img src={recipe.image_url} alt="" className="select-thumb" />
+                      <img src={recipe.image} alt="" className="select-thumb" />
                       <div className="select-info">
                         <span className="select-title">{recipe.title}</span>
                         <span className="select-meta">
-                          {recipe.cuisine} • {recipe.prep_time_minutes + recipe.cook_time_minutes} min
+                          {recipe.tags[0]} • {recipe.prepTime + recipe.cookTime} min
                         </span>
                       </div>
                     </button>

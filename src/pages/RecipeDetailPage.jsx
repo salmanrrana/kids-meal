@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from '@tanstack/react-router';
 import { useAppStore } from '../store/appStore';
-import { mockRecipes } from '../data/mockRecipes';
+import { recipes } from '../data/recipes';
 import './RecipeDetailPage.css';
 
 export function RecipeDetailPage() {
@@ -10,7 +10,7 @@ export function RecipeDetailPage() {
   const { likedRecipes, addToMealPlan, currentWeek } = useAppStore();
   const [activeTab, setActiveTab] = useState('overview');
 
-  const recipe = mockRecipes.find(r => r.id === recipeId);
+  const recipe = recipes.find(r => r.id === recipeId);
   const isLiked = likedRecipes.some(r => r.id === recipeId);
 
   if (!recipe) {
@@ -26,7 +26,7 @@ export function RecipeDetailPage() {
     );
   }
 
-  const totalTime = recipe.prep_time_minutes + recipe.cook_time_minutes;
+  const totalTime = recipe.prepTime + recipe.cookTime;
 
   const handleAddToWeek = () => {
     const today = new Date().getDay();
@@ -38,7 +38,7 @@ export function RecipeDetailPage() {
     <div className="recipe-detail-page page-with-nav">
       {/* Header with back button */}
       <header className="detail-header">
-        <button className="back-btn" onClick={() => navigate({ to: -1 })}>
+        <button className="back-btn" onClick={() => window.history.back()}>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <polyline points="15 18 9 12 15 6"></polyline>
           </svg>
@@ -54,7 +54,7 @@ export function RecipeDetailPage() {
 
       {/* Hero image */}
       <div className="hero-image">
-        <img src={recipe.image_url} alt={recipe.title} />
+        <img src={recipe.image} alt={recipe.title} />
       </div>
 
       {/* Recipe info */}
@@ -79,8 +79,9 @@ export function RecipeDetailPage() {
             <span>{recipe.servings} servings</span>
           </div>
           <div className="meta-item">
-            <span className="tag">{recipe.cuisine}</span>
-            <span className="tag">{recipe.protein_type}</span>
+            {recipe.tags.slice(0, 2).map(tag => (
+              <span key={tag} className="tag">{tag}</span>
+            ))}
           </div>
         </div>
 
@@ -117,11 +118,11 @@ export function RecipeDetailPage() {
                 <div className="time-items">
                   <div className="time-item">
                     <span className="time-label">Prep</span>
-                    <span className="time-value">{recipe.prep_time_minutes} min</span>
+                    <span className="time-value">{recipe.prepTime} min</span>
                   </div>
                   <div className="time-item">
                     <span className="time-label">Cook</span>
-                    <span className="time-value">{recipe.cook_time_minutes} min</span>
+                    <span className="time-value">{recipe.cookTime} min</span>
                   </div>
                   <div className="time-item">
                     <span className="time-label">Total</span>
@@ -130,11 +131,11 @@ export function RecipeDetailPage() {
                 </div>
               </div>
 
-              {recipe.source_url && (
+              {recipe.sourceUrl && (
                 <div className="source-info">
                   <span>Recipe from: </span>
-                  <a href={recipe.source_url} target="_blank" rel="noopener noreferrer">
-                    {recipe.source_name}
+                  <a href={recipe.sourceUrl} target="_blank" rel="noopener noreferrer">
+                    {recipe.sourceName}
                   </a>
                 </div>
               )}
@@ -144,12 +145,9 @@ export function RecipeDetailPage() {
           {activeTab === 'ingredients' && (
             <div className="ingredients-tab">
               <ul className="ingredients-list">
-                {recipe.ingredients.map((ing, index) => (
+                {recipe.ingredients.map((ingredient, index) => (
                   <li key={index} className="ingredient-item">
-                    <span className="ingredient-quantity">
-                      {ing.quantity} {ing.unit}
-                    </span>
-                    <span className="ingredient-name">{ing.name}</span>
+                    {ingredient}
                   </li>
                 ))}
               </ul>
