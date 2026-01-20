@@ -13,7 +13,7 @@ export function SwipeCard({ recipe, onSwipeLeft, onSwipeRight, onTap }) {
     rotate: 0,
     scale: 1,
     opacity: 1,
-    config: { friction: 50, tension: 500 },
+    config: { friction: 60, tension: 400 },
   }));
 
   const bind = useDrag(
@@ -98,7 +98,7 @@ export function SwipeCard({ recipe, onSwipeLeft, onSwipeRight, onTap }) {
         NOPE
       </div>
 
-      {/* Card content */}
+      {/* Luxury Card content */}
       <div className="card-image-container">
         <img
           src={recipe.image}
@@ -106,6 +106,7 @@ export function SwipeCard({ recipe, onSwipeLeft, onSwipeRight, onTap }) {
           className="card-image"
           draggable={false}
         />
+        <div className="card-image-overlay" />
       </div>
 
       <div className="card-content">
@@ -113,9 +114,11 @@ export function SwipeCard({ recipe, onSwipeLeft, onSwipeRight, onTap }) {
 
         <div className="card-tags">
           {recipe.tags.slice(0, 2).map(tag => (
-            <span key={tag} className="tag">{tag}</span>
+            <span key={tag} className={`tag ${tag.includes('breakfast') || tag.includes('lunch') || tag.includes('dinner') ? 'cuisine' : tag.includes('chicken') || tag.includes('beef') || tag.includes('fish') ? 'protein' : ''}`}>
+              {tag.replace('-', ' ')}
+            </span>
           ))}
-          <span className="tag time">{totalTime} min</span>
+          <span className="tag time">⏱️ {totalTime} min</span>
         </div>
       </div>
     </animated.div>

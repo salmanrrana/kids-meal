@@ -20,13 +20,16 @@ import { GroceryPage } from './pages/GroceryPage';
 // Components
 import { Navigation } from './components/Navigation';
 
-// Root layout with navigation
+// Luxury Root layout with navigation
 const rootRoute = createRootRoute({
   component: () => (
-    <>
-      <Outlet />
+    <div className="luxury-root">
+      <div className="luxury-background" />
+      <div className="luxury-content">
+        <Outlet />
+      </div>
       <Navigation />
-    </>
+    </div>
   ),
 });
 

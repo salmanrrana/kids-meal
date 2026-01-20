@@ -1,7 +1,55 @@
 import { useState } from 'react';
 import { useAppStore } from '../store/appStore';
 import { Link, useNavigate } from '@tanstack/react-router';
+import { RecipeCard } from '../components/RecipeCard';
 import './LikedPage.css';
+
+// Get today's date for quick add functionality
+const getTodayIndex = () => new Date().getDay();
+
+// Custom LikedRecipeCard with quick add functionality
+function LikedRecipeCard({ recipe, onQuickAdd, onOpenPicker, showSuccess, ...props }) {
+  return (
+    <div className="liked-recipe-card-wrapper">
+      <RecipeCard {...props} recipe={recipe} />
+      {showSuccess && (
+        <div className="success-message">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>Added to today's plan!</span>
+        </div>
+      )}
+      <div className="quick-actions">
+        <button
+          className="quick-add-btn"
+          onClick={() => onQuickAdd(recipe.id)}
+          title="Add to today's meal plan"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+            <line x1="12" y1="14" x2="12" y2="18"></line>
+            <line x1="10" y1="16" x2="14" y2="16"></line>
+          </svg>
+          <span className="quick-add-text">Add Today</span>
+        </button>
+        <button
+          className="quick-add-btn secondary"
+          onClick={() => onOpenPicker(recipe.id)}
+          title="Choose day for meal plan"
+        >
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+          <span className="quick-add-text">Choose Day</span>
+        </button>
+      </div>
+    </div>
+  );
+}
 
 const DAYS_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -46,6 +94,7 @@ export function LikedPage() {
   const { likedRecipes, unlikeRecipe, addToMealPlan, currentWeek } = useAppStore();
   const [openPicker, setOpenPicker] = useState(null);
   const [pickerWeek, setPickerWeek] = useState(currentWeek);
+  const [showSuccess, setShowSuccess] = useState(null);
 
   const weekDates = getWeekDates(pickerWeek);
 
@@ -53,6 +102,12 @@ export function LikedPage() {
     addToMealPlan(recipeId, pickerWeek, dayIndex);
     setOpenPicker(null);
     setPickerWeek(currentWeek);
+  };
+
+  const handleQuickAddToday = (recipeId) => {
+    addToMealPlan(recipeId, currentWeek, getTodayIndex());
+    setShowSuccess(recipeId);
+    setTimeout(() => setShowSuccess(null), 2000);
   };
 
   const closePicker = () => {
@@ -102,60 +157,20 @@ export function LikedPage() {
         <span className="count">{likedRecipes.length} recipes</span>
       </header>
 
-      <div className="recipe-grid">
-        {likedRecipes.map((recipe) => (
-          <div key={recipe.id} className="recipe-card">
-            <div
-              className="card-image-wrapper"
-              onClick={() => navigate({ to: '/recipe/$recipeId', params: { recipeId: recipe.id } })}
-            >
-              <img src={recipe.image} alt={recipe.title} className="card-img" />
-              <div className="card-overlay">
-                <span className="view-label">View Recipe</span>
-              </div>
-            </div>
-
-            <div className="card-body">
-              <h3 className="card-title">{recipe.title}</h3>
-              <div className="card-meta">
-                <span className="meta-item">{recipe.tags?.[0]}</span>
-                <span className="meta-divider">•</span>
-                <span className="meta-item">{(recipe.prepTime || 0) + (recipe.cookTime || 0)} min</span>
-              </div>
-
-              <div className="card-actions">
-                <button
-                  type="button"
-                  className={`btn-action add ${openPicker === recipe.id ? 'active' : ''}`}
-                  onClick={() => openPickerFor(recipe.id)}
-                  aria-label="Add to planner"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                    <line x1="16" y1="2" x2="16" y2="6"></line>
-                    <line x1="8" y1="2" x2="8" y2="6"></line>
-                    <line x1="3" y1="10" x2="21" y2="10"></line>
-                    <line x1="12" y1="14" x2="12" y2="18"></line>
-                    <line x1="10" y1="16" x2="14" y2="16"></line>
-                  </svg>
-                </button>
-
-                <button
-                  type="button"
-                  className="btn-action remove"
-                  onClick={() => unlikeRecipe(recipe.id)}
-                  aria-label="Remove from liked"
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+        <div className="recipe-grid">
+         {likedRecipes.map((recipe) => (
+           <LikedRecipeCard
+             key={recipe.id}
+             recipe={recipe}
+             isLiked={true}
+             onClick={() => navigate({ to: '/recipe/$recipeId', params: { recipeId: recipe.id } })}
+             onLikeToggle={() => unlikeRecipe(recipe.id)}
+             onQuickAdd={handleQuickAddToday}
+             onOpenPicker={openPickerFor}
+             showSuccess={showSuccess === recipe.id}
+           />
+         ))}
+       </div>
 
       {/* Day picker modal */}
       {openPicker && (

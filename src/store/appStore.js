@@ -2,11 +2,6 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { recipes } from '../data/recipes';
 
-// Shuffle recipes for the deck
-function getShuffledRecipes() {
-  return [...recipes].sort(() => Math.random() - 0.5);
-}
-
 // Get start of current week (Sunday)
 function getWeekStart(date = new Date()) {
   const d = new Date(date);
@@ -19,15 +14,11 @@ function getWeekStart(date = new Date()) {
 export const useAppStore = create(
   persist(
     (set, get) => ({
-      // Recipe deck for swiping
-      deck: getShuffledRecipes(),
-      currentIndex: 0,
+      // All available recipes
+      recipes: recipes,
 
       // Liked recipes
       likedRecipes: [],
-
-      // Swipe history (for undo)
-      swipeHistory: [],
 
       // Weekly meal plans: { [weekStart]: { [dayIndex]: [recipeIds] } }
       mealPlans: {},
@@ -36,40 +27,19 @@ export const useAppStore = create(
       currentWeek: getWeekStart(),
 
       // Actions
-      swipeRight: (recipe) => {
+      toggleLike: (recipe) => {
         const state = get();
-        set({
-          likedRecipes: [...state.likedRecipes, recipe],
-          swipeHistory: [...state.swipeHistory, { recipe, action: 'liked' }],
-          currentIndex: state.currentIndex + 1,
-        });
-      },
+        const isLiked = state.likedRecipes.some(liked => liked.id === recipe.id);
 
-      swipeLeft: (recipe) => {
-        const state = get();
-        set({
-          swipeHistory: [...state.swipeHistory, { recipe, action: 'passed' }],
-          currentIndex: state.currentIndex + 1,
-        });
-      },
-
-      undoSwipe: () => {
-        const state = get();
-        if (state.swipeHistory.length === 0) return;
-
-        const lastSwipe = state.swipeHistory[state.swipeHistory.length - 1];
-        const newHistory = state.swipeHistory.slice(0, -1);
-
-        // If last swipe was a like, remove from liked
-        const newLiked = lastSwipe.action === 'liked'
-          ? state.likedRecipes.filter(r => r.id !== lastSwipe.recipe.id)
-          : state.likedRecipes;
-
-        set({
-          swipeHistory: newHistory,
-          likedRecipes: newLiked,
-          currentIndex: Math.max(0, state.currentIndex - 1),
-        });
+        if (isLiked) {
+          set({
+            likedRecipes: state.likedRecipes.filter(liked => liked.id !== recipe.id),
+          });
+        } else {
+          set({
+            likedRecipes: [...state.likedRecipes, recipe],
+          });
+        }
       },
 
       // Remove from liked recipes
@@ -141,13 +111,7 @@ export const useAppStore = create(
         });
       },
 
-      // Reset deck when all cards viewed
-      resetDeck: () => {
-        set({
-          deck: getShuffledRecipes(),
-          currentIndex: 0,
-        });
-      },
+
 
       // Get recipe by ID
       getRecipeById: (id) => {
@@ -173,8 +137,6 @@ export const useAppStore = create(
       partialize: (state) => ({
         likedRecipes: state.likedRecipes,
         mealPlans: state.mealPlans,
-        swipeHistory: state.swipeHistory,
-        currentIndex: state.currentIndex,
         currentWeek: state.currentWeek,
       }),
     }
