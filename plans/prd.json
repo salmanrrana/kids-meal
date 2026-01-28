@@ -1,0 +1,691 @@
+{
+  "projectName": "kids meal",
+  "projectPath": "/Users/salman.rana/code/personal-projects/kids-meal",
+  "description": "Luxury UI Redesign - Chanel/Nordstrom Inspired Elegance Redesign",
+  "generatedAt": "2026-01-28T21:27:00Z",
+  "totalEpics": 10,
+  "totalTickets": 52,
+  "epics": [
+    {
+      "id": "epic-1",
+      "title": "Design System Foundation",
+      "description": "Establish the luxury design system including color palette, typography, spacing, and CSS variables",
+      "blocks": "Everything else",
+      "effort": "High",
+      "tickets": [
+        {
+          "id": "ticket-1-1",
+          "epicId": "epic-1",
+          "title": "Finalize and document luxury color palette",
+          "priority": "high",
+          "type": "Design/Setup",
+          "tags": ["design", "setup", "css", "accessibility"],
+          "passes": false,
+          "description": "## Overview\n\nEstablish the foundational color palette for the luxury redesign. This palette will be used across all components and pages, so it must be carefully chosen for elegance, accessibility, and consistency.\n\n## Types\n\n```typescript\n// Color palette structure\ninterface ColorPalette {\n  primaryNeutral: string;    // #F8F8F8 - Soft white backgrounds\n  secondaryNeutral: string;  // #2C2C2C - Deep charcoal for text\n  accentGold: string;        // #D4AF37 - Luxe gold accents\n  sage: string;              // #A8B8A8 - Calming sage green\n  taupe: string;             // #A99680 - Warm taupe\n  borderSubtle: string;      // #E5E5E5 - Soft borders\n}\n```\n\n## Implementation Guide\n\n### Step 1: Create color CSS file\n\n**Files:** `src/styles/colors.css`\n\n```css\n/* src/styles/colors.css */\n:root {\n  --color-primary-neutral: #F8F8F8;\n  --color-secondary-neutral: #2C2C2C;\n  --color-accent-gold: #D4AF37;\n  --color-sage: #A8B8A8;\n  --color-taupe: #A99680;\n  --color-border-subtle: #E5E5E5;\n}\n```\n\n### Step 2: Test contrast ratios\n\nUse WebAIM contrast checker or similar tool to verify:\n- Body text (#2C2C2C on #F8F8F8): Must be ≥ 4.5:1\n- Large text: Must be ≥ 3:1\n- All accent colors against backgrounds\n\n### Step 3: Document usage guidelines\n\nCreate a comment block or separate doc showing:\n- When to use each color\n- Which combinations are accessible\n- Brand personality each color conveys\n\n## Acceptance Criteria\n\n- [ ] All 6 colors defined and tested for accessibility\n- [ ] Contrast ratios meet WCAG AA standards\n- [ ] CSS variables created in `src/styles/colors.css`\n- [ ] Color usage guide documented\n- [ ] Design system file shows examples\n\n## References\n\n- WCAG 2.1 Contrast Guidelines: https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html\n- WebAIM Contrast Checker: https://webaim.org/resources/contrastchecker/"
+        },
+        {
+          "id": "ticket-1-2",
+          "epicId": "epic-1",
+          "title": "Select and implement premium fonts",
+          "priority": "high",
+          "type": "Design/Typography",
+          "tags": ["design", "typography", "fonts"],
+          "passes": false,
+          "description": "## Overview\n\nChoose and implement the typography system that will define the luxury feel of the application. Serif fonts convey elegance and tradition, while sans-serif provides clean readability.\n\n## Types\n\n```typescript\ninterface TypographySystem {\n  fontSerifFamily: string;     // Headline font\n  fontSansFamily: string;      // Body font\n  fontSizeH1: string;          // 2.5rem\n  fontSizeH2: string;          // 2rem\n  fontSizeBody: string;        // 1rem\n  lineHeightTight: number;     // 1.2\n  lineHeightNormal: number;    // 1.5\n  letterSpacingTight: string;  // 0px\n  letterSpacingWide: string;   // 0.05em\n}\n```\n\n## Implementation Guide\n\n### Step 1: Select fonts\n\n**Recommended combinations:**\n- Playfair Display (serif) + Inter (sans-serif)\n- Georgia (serif) + Poppins (sans-serif)\n- Cormorant Garamond (serif) + Inter (sans-serif)\n\n### Step 2: Load fonts\n\n**Files:** `src/styles/typography.css` or `public/index.html`\n\n```css\n/* src/styles/typography.css */\n@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');\n\n:root {\n  --font-serif: 'Playfair Display', serif;\n  --font-sans: 'Inter', sans-serif;\n  --font-size-h1: 2.5rem;\n  --font-size-h2: 2rem;\n  --font-size-h3: 1.75rem;\n  --font-size-body: 1rem;\n  --font-size-caption: 0.875rem;\n  --line-height-tight: 1.2;\n  --line-height-normal: 1.5;\n  --letter-spacing-tight: 0px;\n  --letter-spacing-wide: 0.05em;\n}\n\nh1, h2, h3 { \n  font-family: var(--font-serif); \n  line-height: var(--line-height-tight);\n}\n\nbody { \n  font-family: var(--font-sans);\n  line-height: var(--line-height-normal);\n}\n```\n\n### Step 3: Define hierarchy\n\nCreate consistent heading and text styles across the app.\n\n## Design Decisions\n\n### Why Playfair Display vs Georgia?\n\n1. **Playfair Display**: More distinctive, luxury feel, designed for web\n2. **Georgia**: System font, faster load, more conservative\n\nRecommend Playfair for the premium feel, with Georgia as fallback.\n\n## Acceptance Criteria\n\n- [ ] Serif font selected for headlines (Georgia, Playfair Display, or similar)\n- [ ] Sans-serif font selected for body (Inter, Poppins, or similar)\n- [ ] Fonts loaded via Google Fonts or self-hosted\n- [ ] Font stack configured in CSS\n- [ ] Font hierarchy defined (h1-h6, body, labels, captions)\n\n## References\n\n- Google Fonts: https://fonts.google.com\n- Related file: `src/styles/colors.css` (use together)"
+        },
+        {
+          "id": "ticket-1-3",
+          "epicId": "epic-1",
+          "title": "Create CSS design tokens and variables",
+          "priority": "high",
+          "type": "Design/CSS",
+          "tags": ["design", "css", "tokens"],
+          "passes": false,
+          "description": "## Overview\n\nDesign tokens are the single source of truth for design decisions. They ensure consistency and make global changes easy. This ticket establishes spacing, shadows, borders, and transitions.\n\n## Types\n\n```typescript\ninterface DesignTokens {\n  // Spacing (8px base)\n  space1: string;  // 0.5rem = 8px\n  space2: string;  // 1rem = 16px\n  space3: string;  // 1.5rem = 24px\n  space4: string;  // 2rem = 32px\n  space5: string;  // 3rem = 48px\n  space6: string;  // 4rem = 64px\n  \n  // Shadows\n  shadowSm: string;\n  shadowMd: string;\n  shadowLg: string;\n  \n  // Border Radius\n  radiusSm: string;  // 8px\n  radiusMd: string;  // 12px\n  radiusLg: string;  // 16px\n  \n  // Transitions\n  transitionFast: string;  // 150ms\n  transitionBase: string;  // 300ms\n  transitionSlow: string;  // 500ms\n}\n```\n\n## Implementation Guide\n\n### Step 1: Create tokens file\n\n**Files:** `src/styles/tokens.css`\n\n```css\n/* src/styles/tokens.css */\n:root {\n  /* Spacing Scale (8px base) */\n  --space-1: 0.5rem;    /* 8px */\n  --space-2: 1rem;      /* 16px */\n  --space-3: 1.5rem;    /* 24px */\n  --space-4: 2rem;      /* 32px */\n  --space-5: 3rem;      /* 48px */\n  --space-6: 4rem;      /* 64px */\n\n  /* Shadows */\n  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);\n  --shadow-md: 0 4px 6px rgba(0,0,0,0.07);\n  --shadow-lg: 0 10px 15px rgba(0,0,0,0.10);\n\n  /* Border Radius */\n  --radius-sm: 8px;\n  --radius-md: 12px;\n  --radius-lg: 16px;\n\n  /* Transitions */\n  --transition-fast: 150ms ease;\n  --transition-base: 300ms ease;\n  --transition-slow: 500ms ease;\n}\n```\n\n### Step 2: Import in main CSS\n\n**Files:** `src/index.css` or `src/App.css`\n\n```css\n@import './styles/colors.css';\n@import './styles/typography.css';\n@import './styles/tokens.css';\n```\n\n### Step 3: Use tokens everywhere\n\nNever hardcode values - always reference tokens:\n```css\n/* Good */\n.card {\n  padding: var(--space-3);\n  border-radius: var(--radius-md);\n  box-shadow: var(--shadow-md);\n}\n\n/* Bad */\n.card {\n  padding: 24px;\n  border-radius: 12px;\n  box-shadow: 0 4px 6px rgba(0,0,0,0.07);\n}\n```\n\n## Design Decisions\n\n### Why 8px base spacing?\n\n1. **Mathematical harmony**: 8, 16, 24, 32, 48, 64 form a consistent scale\n2. **Responsive friendly**: Easily divisible for different screen sizes\n3. **Industry standard**: Used by Material Design, Apple HIG, many design systems\n\n## Acceptance Criteria\n\n- [ ] Spacing scale (8px base unit) defined: 8, 16, 24, 32, 48, 64px\n- [ ] Shadow system defined (subtle elevation levels)\n- [ ] Border radius standardized: 12px default\n- [ ] All tokens in CSS custom properties\n- [ ] File created at `src/styles/tokens.css`\n\n## References\n\n- Depends on: Ticket 1.1 (colors), Ticket 1.2 (typography)\n- Material Design spacing: https://material.io/design/layout/spacing-methods.html"
+        },
+        {
+          "id": "ticket-1-4",
+          "epicId": "epic-1",
+          "title": "Document design system guidelines",
+          "priority": "medium",
+          "type": "Documentation/Design",
+          "tags": ["documentation", "design"],
+          "passes": false,
+          "description": "## Overview\n\nCreate comprehensive documentation of the design system so all contributors understand how to use colors, typography, spacing, and components consistently.\n\n## Acceptance Criteria\n\n- [ ] Style guide created at `docs/DESIGN_SYSTEM.md`\n- [ ] Color palette with usage examples\n- [ ] Typography scale documented\n- [ ] Spacing guide with visual examples\n- [ ] Component showcase (when built)\n\n## References\n\n- Depends on: Tickets 1.1, 1.2, 1.3"
+        }
+      ]
+    },
+    {
+      "id": "epic-2",
+      "title": "Component Library Refinement",
+      "description": "Redesign core UI components to match luxury aesthetic",
+      "dependsOn": ["epic-1"],
+      "effort": "High",
+      "tickets": [
+        {
+          "id": "ticket-2-1",
+          "epicId": "epic-2",
+          "title": "Redesign button component with luxury styling",
+          "priority": "high",
+          "type": "Component/Design",
+          "tags": ["component", "design", "button"],
+          "passes": false,
+          "description": "## Overview\n\nButtons are a fundamental interaction element. The luxury redesign requires buttons that feel premium - generous padding, smooth transitions, and clear states.\n\n## Types\n\n```typescript\ninterface ButtonProps {\n  variant: 'primary' | 'secondary' | 'tertiary';\n  size?: 'small' | 'medium' | 'large';\n  disabled?: boolean;\n  onClick?: () => void;\n  children: React.ReactNode;\n}\n```\n\n## Implementation Guide\n\n### Step 1: Create Button component\n\n**Files:** `src/components/Button.jsx`\n\n```jsx\nimport './Button.css';\n\nexport function Button({ variant = 'primary', size = 'medium', disabled, onClick, children }) {\n  return (\n    <button \n      className={`btn btn--${variant} btn--${size}`}\n      disabled={disabled}\n      onClick={onClick}\n    >\n      {children}\n    </button>\n  );\n}\n```\n\n### Step 2: Style with design tokens\n\n**Files:** `src/components/Button.css`\n\n```css\n.btn {\n  font-family: var(--font-sans);\n  font-weight: 600;\n  border-radius: var(--radius-md);\n  transition: var(--transition-base);\n  cursor: pointer;\n  border: none;\n}\n\n.btn--primary {\n  background: var(--color-accent-gold);\n  color: white;\n  padding: var(--space-2) var(--space-4);\n}\n\n.btn--primary:hover:not(:disabled) {\n  box-shadow: var(--shadow-md);\n  transform: translateY(-1px);\n}\n\n.btn--secondary {\n  background: transparent;\n  color: var(--color-secondary-neutral);\n  border: 2px solid var(--color-border-subtle);\n  padding: var(--space-2) var(--space-4);\n}\n\n.btn--tertiary {\n  background: transparent;\n  color: var(--color-secondary-neutral);\n  padding: var(--space-2) var(--space-3);\n}\n\n.btn:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}\n```\n\n## Design Decisions\n\n### Why three button variants?\n\n1. **Primary**: Main actions (Submit, Add to Plan)\n2. **Secondary**: Alternative actions (Cancel, Go Back)\n3. **Tertiary**: Subtle actions (Learn More, See Details)\n\n## Acceptance Criteria\n\n- [ ] Primary button style created (solid, refined)\n- [ ] Secondary button style created (outlined)\n- [ ] Tertiary button style created (ghost)\n- [ ] All states working: hover, active, disabled, focus\n- [ ] Component at `src/components/Button.jsx`\n- [ ] Uses design tokens\n\n## References\n\n- Depends on: Tickets 1.1, 1.2, 1.3 (design system)\n- Follow pattern: See CLAUDE.md for component structure"
+        },
+        {
+          "id": "ticket-2-2",
+          "epicId": "epic-2",
+          "title": "Redesign card component",
+          "priority": "high",
+          "type": "Component/Design",
+          "tags": ["component", "design", "card"],
+          "passes": false,
+          "description": "## Overview\n\nCards are used throughout the app to display recipes. They need consistent structure, elegant spacing, and proper image handling.\n\n## Types\n\n```typescript\ninterface CardProps {\n  image?: string;\n  title: string;\n  subtitle?: string;\n  actions?: React.ReactNode;\n  onClick?: () => void;\n  children?: React.ReactNode;\n}\n```\n\n## Implementation Guide\n\n### Step 1: Create Card component structure\n\n**Files:** `src/components/Card.jsx`\n\n```jsx\nimport './Card.css';\n\nexport function Card({ image, title, subtitle, actions, onClick, children }) {\n  return (\n    <div className=\"card\" onClick={onClick}>\n      {image && (\n        <div className=\"card__image\">\n          <img src={image} alt={title} loading=\"lazy\" />\n        </div>\n      )}\n      <div className=\"card__content\">\n        <h3 className=\"card__title\">{title}</h3>\n        {subtitle && <p className=\"card__subtitle\">{subtitle}</p>}\n        {children}\n      </div>\n      {actions && <div className=\"card__actions\">{actions}</div>}\n    </div>\n  );\n}\n```\n\n### Step 2: Style with tokens\n\n**Files:** `src/components/Card.css`\n\n```css\n.card {\n  background: white;\n  border-radius: var(--radius-md);\n  box-shadow: var(--shadow-sm);\n  overflow: hidden;\n  transition: var(--transition-base);\n}\n\n.card:hover {\n  box-shadow: var(--shadow-md);\n  transform: translateY(-2px);\n}\n\n.card__image {\n  width: 100%;\n  aspect-ratio: 4/3;\n  overflow: hidden;\n}\n\n.card__image img {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n}\n\n.card__content {\n  padding: var(--space-3);\n}\n\n.card__title {\n  font-family: var(--font-serif);\n  font-size: var(--font-size-h3);\n  margin-bottom: var(--space-1);\n}\n\n.card__actions {\n  padding: var(--space-2) var(--space-3);\n  border-top: 1px solid var(--color-border-subtle);\n}\n```\n\n## Acceptance Criteria\n\n- [ ] Card layout component created\n- [ ] Image area with consistent aspect ratio\n- [ ] Content area with proper padding\n- [ ] Optional actions area with button slots\n- [ ] Shadow applied using design tokens\n- [ ] Border radius at 12px\n- [ ] Component at `src/components/Card.jsx`\n\n## References\n\n- Depends on: Epic 1 (design system)\n- Used in: Discover, Liked, Planner, Detail pages"
+        },
+        {
+          "id": "ticket-2-3",
+          "epicId": "epic-2",
+          "title": "Redesign navigation component",
+          "priority": "high",
+          "type": "Component/Design/Navigation",
+          "tags": ["component", "design", "navigation", "responsive"],
+          "passes": false,
+          "description": "## Overview\n\nNavigation is the primary way users move through the app. It must be accessible, elegant, and work seamlessly on mobile and desktop.\n\n## Implementation Guide\n\n### Step 1: Update desktop navigation\n\n**Files:** `src/components/Navigation.jsx`\n\n- Top navigation bar with logo/branding\n- Horizontal links with elegant spacing\n- Active state indicator (underline or color change)\n\n### Step 2: Refine mobile navigation\n\n- Bottom tab bar (already implemented)\n- Ensure touch targets are 44x44px minimum\n- Active state clearly visible\n\n## Acceptance Criteria\n\n- [ ] Desktop top navigation styled elegantly\n- [ ] Mobile bottom navigation refined\n- [ ] Active state indicators subtle but clear\n- [ ] Logo/branding area in header\n- [ ] Uses premium spacing and typography\n- [ ] Component at `src/components/Navigation.jsx`\n\n## References\n\n- Related file: `src/components/Navigation.jsx` (update existing)"
+        },
+        {
+          "id": "ticket-2-4",
+          "epicId": "epic-2",
+          "title": "Create luxury input and form components",
+          "priority": "medium",
+          "type": "Component/Design",
+          "tags": ["component", "design", "forms"],
+          "passes": false,
+          "description": "## Overview\n\nForms and inputs should feel refined and accessible. Clear focus states, proper labels, and elegant error handling are essential.\n\n## Types\n\n```typescript\ninterface FormInputProps {\n  id: string;\n  label: string;\n  type?: 'text' | 'email' | 'password' | 'number';\n  value: string;\n  onChange: (value: string) => void;\n  error?: string;\n  placeholder?: string;\n  required?: boolean;\n}\n```\n\n## Implementation Guide\n\n### Step 1: Create FormInput component\n\n**Files:** `src/components/FormInput.jsx`\n\n```jsx\nimport './FormInput.css';\n\nexport function FormInput({ id, label, type = 'text', value, onChange, error, placeholder, required }) {\n  return (\n    <div className=\"form-input\">\n      <label htmlFor={id} className=\"form-input__label\">\n        {label}\n        {required && <span className=\"form-input__required\">*</span>}\n      </label>\n      <input\n        id={id}\n        type={type}\n        value={value}\n        onChange={(e) => onChange(e.target.value)}\n        placeholder={placeholder}\n        className={`form-input__field ${error ? 'form-input__field--error' : ''}`}\n        aria-invalid={!!error}\n        aria-describedby={error ? `${id}-error` : undefined}\n      />\n      {error && (\n        <span id={`${id}-error`} className=\"form-input__error\">\n          {error}\n        </span>\n      )}\n    </div>\n  );\n}\n```\n\n### Step 2: Style inputs\n\n**Files:** `src/components/FormInput.css`\n\n```css\n.form-input {\n  margin-bottom: var(--space-3);\n}\n\n.form-input__label {\n  display: block;\n  font-weight: 600;\n  margin-bottom: var(--space-1);\n  color: var(--color-secondary-neutral);\n}\n\n.form-input__field {\n  width: 100%;\n  padding: var(--space-2);\n  border: 2px solid var(--color-border-subtle);\n  border-radius: var(--radius-md);\n  font-family: var(--font-sans);\n  transition: var(--transition-fast);\n}\n\n.form-input__field:focus {\n  outline: none;\n  border-color: var(--color-accent-gold);\n  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);\n}\n\n.form-input__field--error {\n  border-color: #D32F2F;\n}\n\n.form-input__error {\n  display: block;\n  margin-top: var(--space-1);\n  color: #D32F2F;\n  font-size: var(--font-size-caption);\n}\n```\n\n## Acceptance Criteria\n\n- [ ] Input field component with elegant styling\n- [ ] Label component with typography hierarchy\n- [ ] Form wrapper with proper spacing\n- [ ] Focus states clear and accessible\n- [ ] Error states with subtle red accent\n- [ ] Component at `src/components/FormInput.jsx`"
+        },
+        {
+          "id": "ticket-2-5",
+          "epicId": "epic-2",
+          "title": "Redesign tabs component",
+          "priority": "medium",
+          "type": "Component/Design",
+          "tags": ["component", "design", "tabs", "accessibility"],
+          "passes": false,
+          "description": "## Overview\n\nTabs organize content elegantly, particularly on the Recipe Detail page. The underline-style design is modern and fits the luxury aesthetic.\n\n## Types\n\n```typescript\ninterface Tab {\n  id: string;\n  label: string;\n  content: React.ReactNode;\n}\n\ninterface TabsProps {\n  tabs: Tab[];\n  defaultTab?: string;\n}\n```\n\n## Implementation Guide\n\n### Step 1: Build accessible tabs\n\n**Files:** `src/components/Tabs.jsx`\n\n```jsx\nimport { useState } from 'react';\nimport './Tabs.css';\n\nexport function Tabs({ tabs, defaultTab }) {\n  const [activeTab, setActiveTab] = useState(defaultTab || tabs[0]?.id);\n  \n  const handleKeyDown = (e, tabId) => {\n    if (e.key === 'Enter' || e.key === ' ') {\n      e.preventDefault();\n      setActiveTab(tabId);\n    }\n  };\n  \n  return (\n    <div className=\"tabs\">\n      <div className=\"tabs__list\" role=\"tablist\">\n        {tabs.map(tab => (\n          <button\n            key={tab.id}\n            role=\"tab\"\n            aria-selected={activeTab === tab.id}\n            aria-controls={`panel-${tab.id}`}\n            id={`tab-${tab.id}`}\n            className={`tabs__tab ${activeTab === tab.id ? 'tabs__tab--active' : ''}`}\n            onClick={() => setActiveTab(tab.id)}\n            onKeyDown={(e) => handleKeyDown(e, tab.id)}\n          >\n            {tab.label}\n          </button>\n        ))}\n      </div>\n      {tabs.map(tab => (\n        <div\n          key={tab.id}\n          role=\"tabpanel\"\n          id={`panel-${tab.id}`}\n          aria-labelledby={`tab-${tab.id}`}\n          hidden={activeTab !== tab.id}\n          className=\"tabs__panel\"\n        >\n          {tab.content}\n        </div>\n      ))}\n    </div>\n  );\n}\n```\n\n### Step 2: Style tabs\n\n**Files:** `src/components/Tabs.css`\n\n```css\n.tabs__list {\n  display: flex;\n  gap: var(--space-4);\n  border-bottom: 2px solid var(--color-border-subtle);\n}\n\n.tabs__tab {\n  background: none;\n  border: none;\n  padding: var(--space-2) 0;\n  font-family: var(--font-sans);\n  font-weight: 600;\n  color: var(--color-secondary-neutral);\n  opacity: 0.6;\n  cursor: pointer;\n  transition: var(--transition-base);\n  position: relative;\n}\n\n.tabs__tab--active {\n  opacity: 1;\n}\n\n.tabs__tab--active::after {\n  content: '';\n  position: absolute;\n  bottom: -2px;\n  left: 0;\n  right: 0;\n  height: 2px;\n  background: var(--color-accent-gold);\n}\n\n.tabs__tab:focus-visible {\n  outline: 2px solid var(--color-accent-gold);\n  outline-offset: 4px;\n}\n\n.tabs__panel {\n  padding: var(--space-4) 0;\n}\n```\n\n## Acceptance Criteria\n\n- [ ] Underline-style tab design implemented\n- [ ] Smooth transition between tabs\n- [ ] Keyboard navigation working (arrow keys, Enter)\n- [ ] Accessible to screen readers\n- [ ] Component at `src/components/Tabs.jsx`\n\n## References\n\n- Used in: Recipe Detail page (Epic 6)\n- ARIA Tabs Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/tabs/"
+        }
+      ]
+    },
+    {
+      "id": "epic-3",
+      "title": "Discover Page Redesign",
+      "description": "Transform swipe discovery interface with elegant card design",
+      "dependsOn": ["epic-1", "epic-2"],
+      "effort": "Medium-High",
+      "page": "src/pages/DiscoverPage.jsx",
+      "tickets": [
+        {
+          "id": "ticket-3-1",
+          "epicId": "epic-3",
+          "title": "Redesign swipe card with elegant frame and image treatment",
+          "priority": "high",
+          "type": "Design/Discover",
+          "tags": ["design", "discover", "card", "responsive"],
+          "passes": false,
+          "description": "## Overview\n\nThe swipe card is the centerpiece of discovery. It needs to feel premium with elegant framing, proper spacing, and refined shadows.\n\n## Implementation Guide\n\n### Step 1: Update card structure\n\n**Files:** `src/pages/DiscoverPage.jsx`\n\n- Use Card component from Epic 2\n- Apply refined shadow (--shadow-md)\n- Border radius 12px\n- Elegant padding around edges\n\n### Step 2: Optimize image display\n\n- Image should be object-fit: cover\n- Maintain aspect ratio (4:3 or 1:1)\n- No stretching or distortion\n- Add subtle border or frame effect\n\n### Step 3: Responsive sizing\n\n- Mobile: ~70vh height, ~90% width\n- Desktop: Max-width 400px, centered\n\n## Design Details\n\nMobile: ~70vh height, ~90% width with 16px padding on sides\nDesktop: Max-width 400px, centered on screen\nImage: Object-fit: cover, maintain aspect ratio\n\n## Acceptance Criteria\n\n- [ ] Card uses refined Card component\n- [ ] Image has elegant frame/border\n- [ ] Subtle shadow applied using tokens\n- [ ] Padding optimized for mobile and desktop\n- [ ] Border radius consistent (12px)\n- [ ] Image loads properly, no stretching\n\n## References\n\n- Depends on: Ticket 2.2 (Card component)\n- Related file: `src/pages/DiscoverPage.jsx`"
+        },
+        {
+          "id": "ticket-3-2",
+          "epicId": "epic-3",
+          "title": "Refine recipe metadata display",
+          "priority": "high",
+          "type": "Design/Typography/Discover",
+          "tags": ["design", "typography", "discover"],
+          "passes": false,
+          "description": "## Overview\n\nRecipe titles and metadata (prep time, cuisine) should be elegant and readable. Typography hierarchy is key.\n\n## Implementation Guide\n\n### Step 1: Apply typography system\n\n**Files:** `src/pages/DiscoverPage.jsx`\n\n- Title: Use --font-serif, --font-size-h2\n- Metadata: Use --font-sans, smaller size\n- Color contrast: Ensure WCAG AA compliance\n\n### Step 2: Layout metadata\n\n- Title prominent\n- Prep time and cuisine below or beside\n- Generous spacing between elements\n\n## Acceptance Criteria\n\n- [ ] Recipe title uses premium serif font\n- [ ] Prep time, cuisine tags displayed minimally\n- [ ] Typography hierarchy clear\n- [ ] Metadata readable on all device sizes\n- [ ] Color contrast meets accessibility standards"
+        },
+        {
+          "id": "ticket-3-3",
+          "epicId": "epic-3",
+          "title": "Enhance swipe animations",
+          "priority": "medium",
+          "type": "Animation/Discover",
+          "tags": ["animation", "discover", "performance"],
+          "passes": false,
+          "description": "## Overview\n\nSwipe animations should feel smooth and refined, not bouncy or cartoonish. 60fps performance is essential.\n\n## Implementation Guide\n\n### Step 1: Refine spring physics\n\nIf using react-spring or similar:\n- Reduce bounce\n- Smooth easing\n- Exit animation matches swipe direction\n\n### Step 2: Optimize performance\n\n- Use transform and opacity (GPU accelerated)\n- Avoid layout properties (width, height, top, left)\n- Test on mid-range devices\n\n## Acceptance Criteria\n\n- [ ] Swipe animations smooth at 60fps\n- [ ] Spring physics feel refined (not bouncy)\n- [ ] Exit animation matches direction\n- [ ] Landing state transitions smoothly\n- [ ] No jank or stuttering"
+        },
+        {
+          "id": "ticket-3-4",
+          "epicId": "epic-3",
+          "title": "Optimize discover page responsive layout",
+          "priority": "medium",
+          "type": "Responsive/Discover",
+          "tags": ["responsive", "discover", "mobile", "tablet"],
+          "passes": false,
+          "description": "## Overview\n\nEnsure the Discover page works elegantly across all screen sizes.\n\n## Acceptance Criteria\n\n- [ ] Mobile (<768px): Card takes up 70vh, centered\n- [ ] Tablet (768-1024px): Card medium size, centered\n- [ ] Desktop (>1024px): Card 400px max, centered\n- [ ] Navigation accessible on all sizes\n- [ ] No horizontal scrolling"
+        },
+        {
+          "id": "ticket-3-5",
+          "epicId": "epic-3",
+          "title": "Add subtle loading and empty states to discover",
+          "priority": "low",
+          "type": "UX/Discover",
+          "tags": ["ux", "discover", "loading", "empty-state"],
+          "passes": false,
+          "description": "## Overview\n\nProvide clear feedback when loading recipes or when no more recipes are available.\n\n## Acceptance Criteria\n\n- [ ] Loading skeleton card designed and animated\n- [ ] Empty state message when all recipes viewed\n- [ ] Both match luxury aesthetic\n- [ ] Clear call-to-action or suggestion"
+        }
+      ]
+    },
+    {
+      "id": "epic-4",
+      "title": "Liked Recipes Redesign",
+      "description": "Redesign recipe collection grid with image-forward layout",
+      "dependsOn": ["epic-1", "epic-2"],
+      "effort": "Medium",
+      "page": "src/pages/LikedPage.jsx",
+      "tickets": [
+        {
+          "id": "ticket-4-1",
+          "epicId": "epic-4",
+          "title": "Implement grid layout with luxury spacing",
+          "priority": "high",
+          "type": "Layout/Liked",
+          "tags": ["layout", "liked", "responsive", "grid"],
+          "passes": false,
+          "description": "## Overview\n\nCreate a responsive grid that displays liked recipes beautifully across all devices.\n\n## Implementation Guide\n\n### Step 1: Build responsive grid\n\n**Files:** `src/pages/LikedPage.jsx`\n\n```css\n.liked-grid {\n  display: grid;\n  gap: var(--space-2);\n  max-width: 1200px;\n  margin: 0 auto;\n  padding: var(--space-3);\n}\n\n/* Mobile: 2 columns */\n@media (min-width: 320px) {\n  .liked-grid {\n    grid-template-columns: repeat(2, 1fr);\n    gap: var(--space-2); /* 16px */\n  }\n}\n\n/* Tablet: 3 columns */\n@media (min-width: 768px) {\n  .liked-grid {\n    grid-template-columns: repeat(3, 1fr);\n    gap: var(--space-3); /* 24px */\n  }\n}\n\n/* Desktop: 4 columns */\n@media (min-width: 1024px) {\n  .liked-grid {\n    grid-template-columns: repeat(4, 1fr);\n    gap: var(--space-3); /* 24px */\n  }\n}\n```\n\n## Acceptance Criteria\n\n- [ ] Mobile: 2-column grid with 16px gap\n- [ ] Tablet: 3-column grid with 20px gap\n- [ ] Desktop: 4-column grid with 24px gap\n- [ ] Container max-width 1200px on desktop\n- [ ] Padding consistent using tokens"
+        },
+        {
+          "id": "ticket-4-2",
+          "epicId": "epic-4",
+          "title": "Redesign recipe grid cards",
+          "priority": "high",
+          "type": "Design/Cards/Liked",
+          "tags": ["design", "card", "liked"],
+          "passes": false,
+          "description": "## Overview\n\nEach recipe card in the grid should be image-forward, elegant, and consistent.\n\n## Implementation Guide\n\n### Step 1: Use Card component\n\n**Files:** `src/pages/LikedPage.jsx`\n\n- Import Card component from Epic 2\n- Large image at top\n- Title and metadata below or overlay\n- Consistent aspect ratio\n\n### Step 2: Add hover effect\n\n- Subtle elevation increase\n- Smooth transition (--transition-base)\n\n## Acceptance Criteria\n\n- [ ] Card component used (from Epic 2)\n- [ ] Image-forward design (large, top of card)\n- [ ] Title and metadata below or as overlay\n- [ ] Consistent sizing across grid\n- [ ] Elegant hover state effect"
+        },
+        {
+          "id": "ticket-4-3",
+          "epicId": "epic-4",
+          "title": "Add hover states and interactions",
+          "priority": "medium",
+          "type": "Interaction/Liked",
+          "tags": ["interaction", "liked", "animation"],
+          "passes": false,
+          "description": "## Overview\n\nProvide clear visual feedback on hover and touch interactions.\n\n## Acceptance Criteria\n\n- [ ] Subtle card elevation on hover\n- [ ] Action buttons appear on hover (or always visible on mobile)\n- [ ] Smooth transition animations\n- [ ] Remove button accessible"
+        },
+        {
+          "id": "ticket-4-4",
+          "epicId": "epic-4",
+          "title": "Optimize liked page mobile experience",
+          "priority": "medium",
+          "type": "Responsive/Liked",
+          "tags": ["responsive", "liked", "mobile"],
+          "passes": false,
+          "description": "## Overview\n\nEnsure the grid works well on small screens with proper touch targets.\n\n## Acceptance Criteria\n\n- [ ] 2-column grid works well on small screens\n- [ ] Touch targets at least 44x44px\n- [ ] No horizontal scrolling\n- [ ] Content readable without zoom"
+        },
+        {
+          "id": "ticket-4-5",
+          "epicId": "epic-4",
+          "title": "Add empty state and loading states",
+          "priority": "low",
+          "type": "UX/Liked",
+          "tags": ["ux", "liked", "loading", "empty-state"],
+          "passes": false,
+          "description": "## Overview\n\nProvide feedback when no recipes are liked yet or while loading.\n\n## Acceptance Criteria\n\n- [ ] Empty state: \"No liked recipes yet\"\n- [ ] Loading skeleton matching grid layout\n- [ ] Clear suggestion to explore"
+        }
+      ]
+    },
+    {
+      "id": "epic-5",
+      "title": "Weekly Planner Redesign",
+      "description": "Enhance kanban board with elegant columns and refined spacing",
+      "dependsOn": ["epic-1", "epic-2"],
+      "effort": "Medium-High",
+      "page": "src/pages/PlannerPage.jsx",
+      "tickets": [
+        {
+          "id": "ticket-5-1",
+          "epicId": "epic-5",
+          "title": "Redesign kanban column headers with premium styling",
+          "priority": "high",
+          "type": "Design/Layout/Planner",
+          "tags": ["design", "layout", "planner"],
+          "passes": false,
+          "description": "## Overview\n\nColumn headers should clearly indicate each day with elegant typography and spacing.\n\n## Acceptance Criteria\n\n- [ ] Day labels use premium serif font\n- [ ] Subtle background color for column headers\n- [ ] Clear visual hierarchy\n- [ ] Consistent styling across columns\n- [ ] Responsive on all breakpoints"
+        },
+        {
+          "id": "ticket-5-2",
+          "epicId": "epic-5",
+          "title": "Refine meal cards in planner",
+          "priority": "high",
+          "type": "Design/Cards/Planner",
+          "tags": ["design", "card", "planner"],
+          "passes": false,
+          "description": "## Overview\n\nMeal cards in the planner should use the Card component for consistency.\n\n## Acceptance Criteria\n\n- [ ] Uses Card component for consistency\n- [ ] Elegant shadow and padding\n- [ ] Recipe title and time visible\n- [ ] Remove/edit actions available\n- [ ] Draggable without visual clutter"
+        },
+        {
+          "id": "ticket-5-3",
+          "epicId": "epic-5",
+          "title": "Improve desktop kanban layout spacing",
+          "priority": "high",
+          "type": "Layout/Planner",
+          "tags": ["layout", "planner", "desktop"],
+          "passes": false,
+          "description": "## Overview\n\nOn desktop, all seven days should be visible without horizontal scrolling.\n\n## Acceptance Criteria\n\n- [ ] Desktop: Full week visible without scroll\n- [ ] Columns spaced generously (24px gap minimum)\n- [ ] Columns width calculated for 1200px max container\n- [ ] Smooth scrolling if overflow\n- [ ] No crowding"
+        },
+        {
+          "id": "ticket-5-4",
+          "epicId": "epic-5",
+          "title": "Implement mobile planner layout",
+          "priority": "high",
+          "type": "Responsive/Layout/Planner",
+          "tags": ["responsive", "layout", "planner", "mobile"],
+          "passes": false,
+          "description": "## Overview\n\nOn mobile, showing all seven columns isn't practical. Use horizontal scroll or day-by-day view.\n\n## Acceptance Criteria\n\n- [ ] Mobile: Horizontal scroll or day-by-day view option\n- [ ] Day picker shows current/selected day prominently\n- [ ] Cards remain readable and draggable on mobile\n- [ ] Elegant touch interactions"
+        },
+        {
+          "id": "ticket-5-5",
+          "epicId": "epic-5",
+          "title": "Enhance drag and drop animations",
+          "priority": "medium",
+          "type": "Animation/Planner",
+          "tags": ["animation", "planner"],
+          "passes": false,
+          "description": "## Overview\n\nDrag and drop should feel smooth and intentional.\n\n## Acceptance Criteria\n\n- [ ] Smooth drag animation\n- [ ] Drop zone highlight visible but subtle\n- [ ] Card placement transition smooth\n- [ ] 60fps performance"
+        },
+        {
+          "id": "ticket-5-6",
+          "epicId": "epic-5",
+          "title": "Add visual feedback for planner interactions",
+          "priority": "medium",
+          "type": "UX/Animation/Planner",
+          "tags": ["ux", "animation", "planner"],
+          "passes": false,
+          "description": "## Overview\n\nProvide clear feedback during drag operations and drop actions.\n\n## Acceptance Criteria\n\n- [ ] Hover state on droppable areas\n- [ ] Visual feedback during drag\n- [ ] Success feedback after drop\n- [ ] All animations use design tokens"
+        }
+      ]
+    },
+    {
+      "id": "epic-6",
+      "title": "Recipe Detail Redesign",
+      "description": "Transform recipe detail page with premium image treatment",
+      "dependsOn": ["epic-1", "epic-2"],
+      "effort": "Medium",
+      "page": "src/pages/RecipeDetailPage.jsx",
+      "tickets": [
+        {
+          "id": "ticket-6-1",
+          "epicId": "epic-6",
+          "title": "Redesign recipe detail header with premium image treatment",
+          "priority": "high",
+          "type": "Design/Images/Detail",
+          "tags": ["design", "images", "detail"],
+          "passes": false,
+          "description": "## Overview\n\nThe recipe detail header should showcase the recipe image beautifully.\n\n## Acceptance Criteria\n\n- [ ] Large image display (full-width or centered)\n- [ ] Elegant image frame/border\n- [ ] Refined title placement (overlay or below)\n- [ ] Recipe metadata displayed cleanly\n- [ ] Image quality preserved"
+        },
+        {
+          "id": "ticket-6-2",
+          "epicId": "epic-6",
+          "title": "Implement sophisticated tab design",
+          "priority": "high",
+          "type": "Design/Tabs/Detail",
+          "tags": ["design", "tabs", "detail"],
+          "passes": false,
+          "description": "## Overview\n\nUse the Tabs component from Epic 2 to organize ingredients and instructions.\n\n## Acceptance Criteria\n\n- [ ] Uses Tabs component from Epic 2\n- [ ] Underline-style tab design\n- [ ] Smooth tab transitions\n- [ ] Keyboard navigation working\n- [ ] Screen reader accessible"
+        },
+        {
+          "id": "ticket-6-3",
+          "epicId": "epic-6",
+          "title": "Refine ingredients and steps typography",
+          "priority": "high",
+          "type": "Typography/Detail",
+          "tags": ["typography", "detail"],
+          "passes": false,
+          "description": "## Overview\n\nIngredients and steps should be highly readable with proper spacing.\n\n## Acceptance Criteria\n\n- [ ] Generous padding (24-32px)\n- [ ] Line length 60-80 characters for readability\n- [ ] Clear hierarchy: section titles, content\n- [ ] Ingredient list bulleted, steps numbered\n- [ ] Proper spacing between items"
+        },
+        {
+          "id": "ticket-6-4",
+          "epicId": "epic-6",
+          "title": "Add elegant action buttons and navigation",
+          "priority": "medium",
+          "type": "Design/Navigation/Detail",
+          "tags": ["design", "navigation", "detail"],
+          "passes": false,
+          "description": "## Overview\n\nProvide clear actions: back, share, add to plan.\n\n## Acceptance Criteria\n\n- [ ] Back button visible and refined\n- [ ] Share button (if applicable)\n- [ ] Add-to-plan button prominent\n- [ ] All buttons use Button component\n- [ ] Touch targets 44x44px minimum"
+        },
+        {
+          "id": "ticket-6-5",
+          "epicId": "epic-6",
+          "title": "Optimize recipe detail for mobile",
+          "priority": "medium",
+          "type": "Responsive/Detail",
+          "tags": ["responsive", "detail", "mobile"],
+          "passes": false,
+          "description": "## Overview\n\nEnsure detail page works well on mobile devices.\n\n## Acceptance Criteria\n\n- [ ] Image takes full width on mobile\n- [ ] Content stacks nicely\n- [ ] Tabs work on small screens\n- [ ] Readability maintained without zoom\n- [ ] Touch interactions smooth"
+        },
+        {
+          "id": "ticket-6-6",
+          "epicId": "epic-6",
+          "title": "Add loading and error states to detail page",
+          "priority": "low",
+          "type": "UX/Detail",
+          "tags": ["ux", "detail", "loading", "error"],
+          "passes": false,
+          "description": "## Overview\n\nProvide feedback when loading or if the recipe fails to load.\n\n## Acceptance Criteria\n\n- [ ] Loading skeleton for image and content\n- [ ] Error message if recipe doesn't load\n- [ ] Both match luxury aesthetic"
+        }
+      ]
+    },
+    {
+      "id": "epic-7",
+      "title": "Grocery List Redesign",
+      "description": "Redesign shopping list with categorized layout and elegant styling",
+      "dependsOn": ["epic-1", "epic-2"],
+      "effort": "Medium",
+      "page": "src/pages/GroceryPage.jsx",
+      "tickets": [
+        {
+          "id": "ticket-7-1",
+          "epicId": "epic-7",
+          "title": "Implement categorized list layout with icons",
+          "priority": "high",
+          "type": "Layout/Design/Grocery",
+          "tags": ["layout", "design", "grocery"],
+          "passes": false,
+          "description": "## Overview\n\nOrganize grocery items by category with visual icons.\n\n## Acceptance Criteria\n\n- [ ] Categories clearly labeled (Produce, Meat, Dairy, etc.)\n- [ ] Icons used for visual reference\n- [ ] Subtle dividers between categories\n- [ ] Generous padding using tokens\n- [ ] Responsive on all breakpoints"
+        },
+        {
+          "id": "ticket-7-2",
+          "epicId": "epic-7",
+          "title": "Refine list typography and readability",
+          "priority": "high",
+          "type": "Typography/Grocery",
+          "tags": ["typography", "grocery"],
+          "passes": false,
+          "description": "## Overview\n\nEnsure ingredient names and quantities are easy to read while shopping.\n\n## Acceptance Criteria\n\n- [ ] Ingredient names readable\n- [ ] Quantities clearly visible\n- [ ] Proper line spacing\n- [ ] Consistent font sizing\n- [ ] High contrast for readability"
+        },
+        {
+          "id": "ticket-7-3",
+          "epicId": "epic-7",
+          "title": "Enhance copy-to-clipboard feedback",
+          "priority": "medium",
+          "type": "UX/Grocery",
+          "tags": ["ux", "grocery"],
+          "passes": false,
+          "description": "## Overview\n\nProvide clear feedback when copying the grocery list.\n\n## Acceptance Criteria\n\n- [ ] Copy button refined using Button component\n- [ ] Success message appears and fades\n- [ ] Subtle animation for feedback\n- [ ] Button text changes to \"Copied!\" then back\n- [ ] Works on all devices"
+        },
+        {
+          "id": "ticket-7-4",
+          "epicId": "epic-7",
+          "title": "Implement print-friendly styling",
+          "priority": "medium",
+          "type": "Print/Grocery",
+          "tags": ["print", "grocery"],
+          "passes": false,
+          "description": "## Overview\n\nMake the grocery list printer-friendly.\n\n## Acceptance Criteria\n\n- [ ] Print media query created\n- [ ] Layout optimized for paper\n- [ ] Colors print properly (no background images)\n- [ ] Navigation hidden in print\n- [ ] Content readable when printed"
+        },
+        {
+          "id": "ticket-7-5",
+          "epicId": "epic-7",
+          "title": "Add grocery list empty and loading states",
+          "priority": "low",
+          "type": "UX/Grocery",
+          "tags": ["ux", "grocery", "loading", "empty-state"],
+          "passes": false,
+          "description": "## Overview\n\nProvide feedback when no meals are planned yet.\n\n## Acceptance Criteria\n\n- [ ] Empty state: \"Plan meals to generate list\"\n- [ ] Loading skeleton showing categories\n- [ ] Clear suggestion to plan meals"
+        }
+      ]
+    },
+    {
+      "id": "epic-8",
+      "title": "Responsive & Mobile Optimization",
+      "description": "Ensure responsive design works elegantly across all breakpoints",
+      "dependsOn": ["epic-3", "epic-4", "epic-5", "epic-6", "epic-7"],
+      "effort": "Medium",
+      "tickets": [
+        {
+          "id": "ticket-8-1",
+          "epicId": "epic-8",
+          "title": "Test and refine mobile breakpoint layouts (<768px)",
+          "priority": "high",
+          "type": "Responsive/Testing/QA",
+          "tags": ["responsive", "testing", "qa", "mobile"],
+          "passes": false,
+          "description": "## Overview\n\nComprehensively test all pages on mobile devices.\n\n## Acceptance Criteria\n\n- [ ] All pages tested on mobile (<768px)\n- [ ] Navigation accessible and functional\n- [ ] Text readable without zoom\n- [ ] Touch targets 44x44px minimum\n- [ ] No horizontal scrolling\n- [ ] Content hierarchy clear"
+        },
+        {
+          "id": "ticket-8-2",
+          "epicId": "epic-8",
+          "title": "Optimize tablet layouts (768-1024px)",
+          "priority": "medium",
+          "type": "Responsive/Testing/QA",
+          "tags": ["responsive", "testing", "qa", "tablet"],
+          "passes": false,
+          "description": "## Overview\n\nEnsure tablet devices have optimal layouts (not just scaled mobile or desktop).\n\n## Acceptance Criteria\n\n- [ ] All pages work elegantly at 768-1024px\n- [ ] Intermediate grid layouts (not mobile, not desktop)\n- [ ] Navigation refined for tablet\n- [ ] Content properly spaced\n- [ ] No awkward layouts"
+        },
+        {
+          "id": "ticket-8-3",
+          "epicId": "epic-8",
+          "title": "Refine desktop experience (>1024px)",
+          "priority": "medium",
+          "type": "Responsive/Testing/QA",
+          "tags": ["responsive", "testing", "qa", "desktop"],
+          "passes": false,
+          "description": "## Overview\n\nMaximize the desktop experience with generous spacing and multi-column layouts.\n\n## Acceptance Criteria\n\n- [ ] Desktop layouts maximize screen real estate\n- [ ] Max-width containers followed\n- [ ] Spacing feels generous and premium\n- [ ] Multi-column layouts optimal\n- [ ] Comfortable viewing experience"
+        },
+        {
+          "id": "ticket-8-4",
+          "epicId": "epic-8",
+          "title": "Ensure touch-friendly interactions",
+          "priority": "high",
+          "type": "Responsive/Mobile/UX",
+          "tags": ["responsive", "mobile", "ux", "touch"],
+          "passes": false,
+          "description": "## Overview\n\nAll interactive elements must be easy to tap on touch devices.\n\n## Acceptance Criteria\n\n- [ ] All buttons and clickables 44x44px minimum\n- [ ] Spacing between touch targets adequate\n- [ ] Swipe gestures responsive to light touches\n- [ ] No accidental interactions\n- [ ] Tested on real devices"
+        },
+        {
+          "id": "ticket-8-5",
+          "epicId": "epic-8",
+          "title": "Test responsive images and performance",
+          "priority": "medium",
+          "type": "Responsive/Performance/QA",
+          "tags": ["responsive", "performance", "qa", "images"],
+          "passes": false,
+          "description": "## Overview\n\nEnsure images load properly and efficiently across all devices.\n\n## Acceptance Criteria\n\n- [ ] Images load correctly at all breakpoints\n- [ ] Image sizing optimized (srcset if applicable)\n- [ ] Lazy loading working\n- [ ] No layout shift during load\n- [ ] Performance metrics maintained"
+        }
+      ]
+    },
+    {
+      "id": "epic-9",
+      "title": "Animations & Micro-interactions",
+      "description": "Add smooth page transitions, hover states, and refined feedback",
+      "dependsOn": ["epic-3", "epic-4", "epic-5", "epic-6", "epic-7"],
+      "effort": "Medium",
+      "tickets": [
+        {
+          "id": "ticket-9-1",
+          "epicId": "epic-9",
+          "title": "Add page transition animations",
+          "priority": "medium",
+          "type": "Animation/UX",
+          "tags": ["animation", "ux"],
+          "passes": false,
+          "description": "## Overview\n\nSmooth transitions between routes enhance the premium feel.\n\n## Acceptance Criteria\n\n- [ ] Smooth transitions between routes\n- [ ] Fade or slide effects (choose one, apply consistently)\n- [ ] Timing: 300-500ms (use --transition-base or --transition-slow)\n- [ ] 60fps performance\n- [ ] Works on all browsers"
+        },
+        {
+          "id": "ticket-9-2",
+          "epicId": "epic-9",
+          "title": "Implement refined hover states",
+          "priority": "medium",
+          "type": "Animation/UX",
+          "tags": ["animation", "ux", "hover"],
+          "passes": false,
+          "description": "## Overview\n\nAll interactive elements should have subtle, elegant hover states.\n\n## Acceptance Criteria\n\n- [ ] Buttons: subtle color/elevation change on hover\n- [ ] Cards: soft elevation on hover\n- [ ] Links: underline or color change\n- [ ] All transitions smooth (use --transition-base)\n- [ ] Disabled states excluded"
+        },
+        {
+          "id": "ticket-9-3",
+          "epicId": "epic-9",
+          "title": "Design loading state animations",
+          "priority": "medium",
+          "type": "Animation/UX",
+          "tags": ["animation", "ux", "loading"],
+          "passes": false,
+          "description": "## Overview\n\nLoading states should be elegant, not generic.\n\n## Acceptance Criteria\n\n- [ ] Skeleton screens matching content layout\n- [ ] Subtle pulsing or shimmer animation\n- [ ] Looks premium, not generic\n- [ ] Performance not impacted\n- [ ] Accessible (users can skip if needed)"
+        },
+        {
+          "id": "ticket-9-4",
+          "epicId": "epic-9",
+          "title": "Implement success and error feedback animations",
+          "priority": "medium",
+          "type": "Animation/UX",
+          "tags": ["animation", "ux", "feedback"],
+          "passes": false,
+          "description": "## Overview\n\nFeedback messages should be clear but not jarring.\n\n## Acceptance Criteria\n\n- [ ] Success messages: subtle enter/exit animation\n- [ ] Error alerts: clear but not jarring\n- [ ] Feedback clear and actionable\n- [ ] Auto-dismiss optional with manual close\n- [ ] Uses design tokens for colors/timing"
+        },
+        {
+          "id": "ticket-9-5",
+          "epicId": "epic-9",
+          "title": "Polish form interaction animations",
+          "priority": "low",
+          "type": "Animation/UX",
+          "tags": ["animation", "ux", "forms"],
+          "passes": false,
+          "description": "## Overview\n\nForm interactions should feel smooth and responsive.\n\n## Acceptance Criteria\n\n- [ ] Input focus: subtle color change\n- [ ] Floating labels (if applicable): smooth animation\n- [ ] Validation feedback: smooth appearance\n- [ ] Error states: clear but elegant"
+        }
+      ]
+    },
+    {
+      "id": "epic-10",
+      "title": "Polish & Quality Assurance",
+      "description": "Visual QA, accessibility audit, performance optimization",
+      "dependsOn": ["epic-1", "epic-2", "epic-3", "epic-4", "epic-5", "epic-6", "epic-7", "epic-8", "epic-9"],
+      "effort": "Medium-High",
+      "tickets": [
+        {
+          "id": "ticket-10-1",
+          "epicId": "epic-10",
+          "title": "Conduct visual QA across all pages",
+          "priority": "high",
+          "type": "QA/Testing",
+          "tags": ["qa", "testing", "visual"],
+          "passes": false,
+          "description": "## Overview\n\nSystematically review all pages for visual consistency.\n\n## Acceptance Criteria\n\n- [ ] All pages visually reviewed\n- [ ] Design consistency verified\n- [ ] Spacing and alignment correct\n- [ ] Typography hierarchy applied\n- [ ] Colors used correctly\n- [ ] No visual bugs or inconsistencies\n- [ ] Screenshots documented"
+        },
+        {
+          "id": "ticket-10-2",
+          "epicId": "epic-10",
+          "title": "Perform accessibility audit (WCAG 2.1 AA)",
+          "priority": "high",
+          "type": "QA/Accessibility",
+          "tags": ["qa", "accessibility", "wcag"],
+          "passes": false,
+          "description": "## Overview\n\nEnsure the app meets WCAG 2.1 AA accessibility standards.\n\n## Acceptance Criteria\n\n- [ ] Color contrast ratios verified (4.5:1 for body, 3:1 for large)\n- [ ] Keyboard navigation tested (Tab, Shift+Tab, Enter, Escape)\n- [ ] Screen reader tested (VoiceOver, NVDA, or similar)\n- [ ] Focus states visible and clear\n- [ ] ARIA labels where needed\n- [ ] No keyboard traps\n- [ ] Form labels associated with inputs\n- [ ] Audit tool passes (axe, Lighthouse, etc.)\n\n## References\n\n- WCAG 2.1 Guidelines: https://www.w3.org/WAI/WCAG21/quickref/"
+        },
+        {
+          "id": "ticket-10-3",
+          "epicId": "epic-10",
+          "title": "Optimize performance metrics",
+          "priority": "high",
+          "type": "QA/Performance",
+          "tags": ["qa", "performance", "optimization"],
+          "passes": false,
+          "description": "## Overview\n\nEnsure the app performs well across all metrics.\n\n## Acceptance Criteria\n\n- [ ] Animations run at 60fps consistently\n- [ ] Page load time < 3 seconds (on avg connection)\n- [ ] First Contentful Paint < 1.5 seconds\n- [ ] CSS minified and optimized\n- [ ] Images optimized (compressed, lazy-loaded)\n- [ ] No layout shift (Cumulative Layout Shift < 0.1)\n- [ ] Lighthouse score > 90"
+        },
+        {
+          "id": "ticket-10-4",
+          "epicId": "epic-10",
+          "title": "Test cross-browser compatibility",
+          "priority": "medium",
+          "type": "QA/Testing",
+          "tags": ["qa", "testing", "cross-browser"],
+          "passes": false,
+          "description": "## Overview\n\nVerify the app works consistently across major browsers.\n\n## Acceptance Criteria\n\n- [ ] Chrome: rendering consistent\n- [ ] Firefox: rendering consistent\n- [ ] Safari: rendering consistent\n- [ ] Edge: rendering consistent\n- [ ] Mobile browsers tested\n- [ ] No critical bugs on any browser"
+        },
+        {
+          "id": "ticket-10-5",
+          "epicId": "epic-10",
+          "title": "Create final design documentation",
+          "priority": "medium",
+          "type": "Documentation/Design",
+          "tags": ["documentation", "design"],
+          "passes": false,
+          "description": "## Overview\n\nDocument the final design system for future reference and maintenance.\n\n## Acceptance Criteria\n\n- [ ] Design decisions documented\n- [ ] Final style guide complete\n- [ ] Screenshots of all pages included\n- [ ] Color palette final\n- [ ] Typography final\n- [ ] Spacing guidelines final\n- [ ] Animation guidelines documented\n- [ ] File at `docs/DESIGN_FINAL.md`"
+        },
+        {
+          "id": "ticket-10-6",
+          "epicId": "epic-10",
+          "title": "Get stakeholder approval on redesign",
+          "priority": "high",
+          "type": "QA/Stakeholder",
+          "tags": ["qa", "stakeholder", "approval"],
+          "passes": false,
+          "description": "## Overview\n\nPresent the final redesign to stakeholders and obtain approval.\n\n## Acceptance Criteria\n\n- [ ] Team reviews redesign\n- [ ] Feedback collected\n- [ ] Refinements made as needed\n- [ ] Final sign-off obtained\n- [ ] Approved for production"
+        }
+      ]
+    }
+  ],
+  "userStories": [
+    {
+      "id": "ticket-1-1",
+      "epicId": "epic-1",
+      "title": "Finalize and document luxury color palette",
+      "description": "Establish the foundational color palette for the luxury redesign with all 6 colors defined and tested for WCAG AA accessibility standards.",
+      "acceptanceCriteria": [
+        "All 6 colors defined and tested for accessibility",
+        "Contrast ratios meet WCAG AA standards",
+        "CSS variables created in `src/styles/colors.css`",
+        "Color usage guide documented",
+        "Design system file shows examples"
+      ],
+      "priority": "high",
+      "tags": ["design", "setup", "css", "accessibility"],
+      "passes": false
+    },
+    {
+      "id": "ticket-1-2",
+      "epicId": "epic-1",
+      "title": "Select and implement premium fonts",
+      "description": "Choose and implement the typography system that will define the luxury feel of the application.",
+      "acceptanceCriteria": [
+        "Serif font selected for headlines (Georgia, Playfair Display, or similar)",
+        "Sans-serif font selected for body (Inter, Poppins, or similar)",
+        "Fonts loaded via Google Fonts or self-hosted",
+        "Font stack configured in CSS",
+        "Font hierarchy defined (h1-h6, body, labels, captions)"
+      ],
+      "priority": "high",
+      "tags": ["design", "typography", "fonts"],
+      "passes": false
+    },
+    {
+      "id": "ticket-1-3",
+      "epicId": "epic-1",
+      "title": "Create CSS design tokens and variables",
+      "description": "Design tokens are the single source of truth for design decisions. Establish spacing, shadows, borders, and transitions.",
+      "acceptanceCriteria": [
+        "Spacing scale (8px base unit) defined: 8, 16, 24, 32, 48, 64px",
+        "Shadow system defined (subtle elevation levels)",
+        "Border radius standardized: 12px default",
+        "All tokens in CSS custom properties",
+        "File created at `src/styles/tokens.css`"
+      ],
+      "priority": "high",
+      "tags": ["design", "css", "tokens"],
+      "passes": false
+    },
+    {
+      "id": "ticket-1-4",
+      "epicId": "epic-1",
+      "title": "Document design system guidelines",
+      "description": "Create comprehensive documentation of the design system so all contributors understand how to use colors, typography, spacing, and components consistently.",
+      "acceptanceCriteria": [
+        "Style guide created at `docs/DESIGN_SYSTEM.md`",
+        "Color palette with usage examples",
+        "Typography scale documented",
+        "Spacing guide with visual examples",
+        "Component showcase (when built)"
+      ],
+      "priority": "medium",
+      "tags": ["documentation", "design"],
+      "passes": false
+    }
+  ]
+}
