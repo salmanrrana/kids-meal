@@ -3,9 +3,10 @@
 
 :root {
   /* Premium font families */
-  --font-display: 'Playfair Display', serif;     /* Headlines - elegant, luxury */
-  --font-body: 'Inter', sans-serif;              /* Body text - modern, readable */
-  --font-fallback: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  --font-display: 'Playfair Display', 'Georgia', 'Garamond', serif;  /* Headlines - elegant, luxury */
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; /* Body text - modern, readable */
+  --font-family-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+  --font-fallback: var(--font-family-sans);
 
   /* Typography scale - 16px base */
   /* Desktop first, mobile uses smaller sizes */

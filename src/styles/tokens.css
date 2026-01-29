@@ -166,8 +166,8 @@
 
 /* Common component sizing based on spacing */
 .min-touch-target {
-  min-width: calc(var(--space-4) * 11);  /* 44px - WCAG touch target */
-  min-height: calc(var(--space-4) * 11); /* 44px - WCAG touch target */
+  min-width: 44px;  /* WCAG 2.1 AA touch target minimum */
+  min-height: 44px; /* WCAG 2.1 AA touch target minimum */
 }
 
 /* Responsive spacing - reduce on mobile */

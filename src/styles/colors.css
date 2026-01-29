@@ -55,6 +55,18 @@
   --success: #16A34A;             /* Green on white: 5.8:1 contrast */
   --error: #DC2626;               /* Red on white: 5.4:1 contrast */
   --warning: #D97706;             /* Orange on white: 5.2:1 contrast */
+
+  /* Legacy/Brand-specific color aliases for compatibility */
+  --primary-gold: #D4AF37;        /* Same as --color-gold */
+  --primary-dark: #000000;        /* Same as --color-black */
+  --primary-light: #F5E6A3;       /* Same as --color-gold-light */
+  --primary: #000000;             /* Same as --color-black */
+  --secondary: #FFFFFF;           /* Same as --color-white */
+  --accent: #D4AF37;              /* Same as --color-gold */
+  --accent-light: #F5E6A3;        /* Same as --color-gold-light */
+  --bg-tertiary: #F5F5F5;         /* Additional background color */
+  --card-border: #E5E5E5;         /* Same as --border */
+  --neutral-light: #FAFAFA;       /* Same as --neutral-50 */
 }
 
 /* Contrast Ratio Documentation:

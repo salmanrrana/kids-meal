@@ -253,12 +253,12 @@ Subtle border radius creates luxury, rounded elegance.
 ### Radius Scale
 
 ```css
---radius-sm: 0.25rem   /* 4px - Minimal curves */
---radius-base: 0.375rem  /* 6px - Default */
---radius-md: 0.5rem    /* 8px - Cards, buttons */
---radius-lg: 0.75rem   /* 12px - Larger elements */
---radius-xl: 1rem      /* 16px - Extra softness */
---radius-full: 9999px  /* Fully rounded (pill) */
+--radius-sm: 0.25rem    /* 4px - Minimal curves */
+--radius-base: 0.375rem /* 6px - Default */
+--radius-md: 0.5rem     /* 8px - Cards, buttons */
+--radius-lg: 0.75rem    /* 12px - Larger elements */
+--radius-xl: 1rem       /* 16px - Extra softness */
+--radius-full: 9999px   /* Fully rounded (pill) */
 ```
 
 ### Usage Guidelines
@@ -478,14 +478,15 @@ Respect user motion preferences:
 
 ## File Organization
 
-Design system files are organized in `src/styles/`:
+Design system files are organized for clear separation of concerns:
 
 ```
-src/styles/
-├── colors.css      /* Color palette and contrast ratios */
-├── typography.css  /* Font families and hierarchy */
-├── tokens.css      /* Spacing, shadows, radius, transitions */
-└── styles.css      /* Main stylesheet (imports all) */
+src/
+├── styles.css                /* Main stylesheet (imports design system) */
+└── styles/
+    ├── colors.css            /* Color palette, contrast ratios, color aliases */
+    ├── typography.css        /* Font families, hierarchy, type scale */
+    └── tokens.css            /* Spacing, shadows, radius, transitions */
 ```
 
 ### Importing
