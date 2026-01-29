@@ -11,7 +11,7 @@
     {
       "id": "ticket-2-1-kids-meal-1769636949",
       "title": "Redesign button component with luxury styling",
-      "passes": false,
+      "passes": true,
       "overview": "",
       "types": [],
       "designDecisions": [],
@@ -28,7 +28,7 @@
     {
       "id": "ticket-2-2-kids-meal-1769636949",
       "title": "Redesign card component",
-      "passes": false,
+      "passes": true,
       "overview": "",
       "types": [],
       "designDecisions": [],
@@ -45,7 +45,7 @@
     {
       "id": "ticket-2-3-kids-meal-1769636949",
       "title": "Redesign navigation component",
-      "passes": false,
+      "passes": true,
       "overview": "",
       "types": [],
       "designDecisions": [],
@@ -62,7 +62,7 @@
     {
       "id": "ticket-2-4-kids-meal-1769636949",
       "title": "Create luxury input and form components",
-      "passes": false,
+      "passes": true,
       "overview": "",
       "types": [],
       "designDecisions": [],
@@ -79,7 +79,7 @@
     {
       "id": "ticket-2-5-kids-meal-1769636949",
       "title": "Redesign tabs component",
-      "passes": false,
+      "passes": true,
       "overview": "",
       "types": [],
       "designDecisions": [],

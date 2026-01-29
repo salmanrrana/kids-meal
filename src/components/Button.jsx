@@ -30,8 +30,8 @@ const Button = React.forwardRef(
       'btn',
       `btn-${variant}`,
       `btn-${size}`,
-      disabled && 'btn-disabled',
-      className
+      className,
+      ...(disabled ? ['btn-disabled'] : [])
     ]
       .filter(Boolean)
       .join(' ');

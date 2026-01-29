@@ -97,14 +97,11 @@ const Tabs = ({ children, defaultTab = null }) => {
 
       {Array.isArray(children)
         ? children.map(child => {
-            if (child.type !== TabsList) {
-              return (
-                <div key={child.props.id}>
-                  {child.type === TabsPanel
-                    ? activeTab === child.props.id && child
-                    : child}
-                </div>
-              );
+            if (child && child.type === TabsPanel) {
+              const tabId = child.props.id;
+              return activeTab === tabId ? (
+                <div key={tabId}>{child}</div>
+              ) : null;
             }
             return null;
           })
@@ -162,6 +159,7 @@ const Tab = ({
     <button
       id={id}
       role="tab"
+      tabIndex={isActive ? 0 : -1}
       aria-selected={isActive}
       aria-controls={`panel-${id}`}
       className={`tabs-tab ${isActive ? 'active' : ''} ${className}`}

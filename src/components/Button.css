@@ -12,7 +12,7 @@
   border: none;
   cursor: pointer;
   transition: all var(--transition-base);
-  border-radius: var(--radius-base);
+  border-radius: var(--radius-lg);
   min-height: 44px; /* WCAG 2.1 AA touch target */
   outline: none;
   text-decoration: none;

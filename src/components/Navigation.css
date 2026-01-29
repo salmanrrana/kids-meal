@@ -169,13 +169,7 @@
   text-overflow: ellipsis;
 }
 
-/* Adjust main content to account for fixed navigation */
-body {
-  padding-bottom: 56px; /* Height of mobile nav */
-}
-
-@media (min-width: 769px) {
-  body {
-    padding-bottom: 0;
-  }
-}
+/* Note: To accommodate the fixed mobile navigation, apply this utility class
+   to the main content wrapper in your layout component:
+   .has-mobile-nav { padding-bottom: 56px; }
+   This prevents this component from polluting the global body styles. */

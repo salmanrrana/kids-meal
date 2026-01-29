@@ -85,8 +85,8 @@
 }
 
 /* Floating label interactions */
-.form-input-wrapper:has(.form-input:focus) .form-input-label-floating,
-.form-input-wrapper:has(.form-input:not(:placeholder-shown)) .form-input-label-floating {
+.form-input-wrapper.has-value .form-input-label-floating,
+.form-input-wrapper:has(.form-input:focus) .form-input-label-floating {
   top: -12px;
   font-size: 0.75rem;
   color: var(--text-primary);

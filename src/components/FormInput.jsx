@@ -40,9 +40,10 @@ const FormInput = ({
   const helpId = helpText ? `${inputId}-help` : null;
 
   const ariaDescribedBy = [errorId, helpId].filter(Boolean).join(' ') || undefined;
+  const hasValue = value && value.toString().length > 0;
 
   return (
-    <div className={`form-input-wrapper ${error ? 'has-error' : ''} ${disabled ? 'is-disabled' : ''} ${className}`}>
+    <div className={`form-input-wrapper ${error ? 'has-error' : ''} ${disabled ? 'is-disabled' : ''} ${hasValue ? 'has-value' : ''} ${className}`}>
       {!floatingLabel && label && (
         <label htmlFor={inputId} className="form-input-label">
           {label}

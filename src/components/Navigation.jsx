@@ -71,6 +71,7 @@ export function Navigation() {
                 key={item.path}
                 to={item.path}
                 className={`nav-link ${isActive(item.path) ? 'active' : ''}`}
+                aria-current={isActive(item.path) ? 'page' : undefined}
               >
                 <span className="nav-link-label">{item.label}</span>
               </Link>
@@ -88,6 +89,7 @@ export function Navigation() {
               to={item.path}
               className={`nav-mobile-item ${isActive(item.path) ? 'active' : ''}`}
               title={item.label}
+              aria-current={isActive(item.path) ? 'page' : undefined}
             >
               <span className="nav-mobile-icon">{item.icon}</span>
               <span className="nav-mobile-label">{item.label}</span>
