@@ -1,7 +1,7 @@
 /* Kids Meal Planner - Warm & Homey Theme */
-@import './colors.css';
-@import './typography.css';
-@import './tokens.css';
+@import './styles/colors.css';
+@import './styles/typography.css';
+@import './styles/tokens.css';
 
 :root {
   /* All design tokens are imported from colors.css, typography.css, and tokens.css */
