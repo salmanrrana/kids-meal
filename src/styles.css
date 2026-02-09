@@ -384,3 +384,29 @@ p, h1, h2, h3, h4, h5, h6 {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
+
+/* ============================================================
+ * Theme Transition — smooth color change when switching themes
+ * ============================================================
+ * Only applied to key structural elements to avoid janky animations.
+ * Uses --transition-base (300ms) for a noticeable but quick shift.
+ * Respects prefers-reduced-motion for accessibility.
+ * ============================================================ */
+body,
+.luxury-background,
+.nav-bar,
+.toast {
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base),
+    border-color var(--transition-base);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .luxury-background,
+  .nav-bar,
+  .toast {
+    transition: none;
+  }
+}

@@ -2,6 +2,9 @@
 /* All colors tested for WCAG AA contrast ratios (4.5:1 minimum) */
 
 :root {
+  /* Native form controls, scrollbars, and selection colors default to light */
+  color-scheme: light;
+
   /* Primary luxury colors - 6 core colors */
   /* 1. Deep Black - Primary */
   --color-black: #000000;
@@ -111,6 +114,8 @@
  * ============================================================ */
 
 [data-theme="dark"] {
+  color-scheme: dark;
+
   /* Premium dark backgrounds — layered depth hierarchy */
   --bg-primary: #171717;           /* neutral-900: deepest layer */
   --bg-secondary: #1E1E1E;        /* slightly elevated */
@@ -179,6 +184,8 @@
 /* Automatic dark mode fallback for users without explicit preference */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
     /* Premium dark backgrounds */
     --bg-primary: #171717;
     --bg-secondary: #1E1E1E;

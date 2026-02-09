@@ -20,6 +20,9 @@ export function useThemeInit() {
           : 'light'
         : theme;
     document.documentElement.setAttribute('data-theme', effective);
+    // Keep browser chrome color in sync
+    const meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', effective === 'dark' ? '#171717' : '#FFFFFF');
   }, [theme]);
 
   // Listen for OS preference changes when theme is 'system'
@@ -28,7 +31,10 @@ export function useThemeInit() {
 
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
     const handler = (e) => {
-      document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+      const effective = e.matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', effective);
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', effective === 'dark' ? '#171717' : '#FFFFFF');
     };
     mq.addEventListener('change', handler);
     return () => mq.removeEventListener('change', handler);
