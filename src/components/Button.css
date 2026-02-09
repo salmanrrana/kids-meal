@@ -49,13 +49,15 @@
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: var(--text-secondary);
+  background-color: var(--primary);
+  filter: brightness(1.2);
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
 
 .btn-primary:active:not(:disabled) {
-  background-color: var(--text-tertiary);
+  background-color: var(--primary);
+  filter: brightness(1.4);
   box-shadow: var(--shadow-sm);
   transform: translateY(0);
 }
