@@ -229,22 +229,22 @@
 }
 
 .action-btn.nope {
-  background: linear-gradient(135deg, #ffffff 0%, #fef8f6 100%);
+  background: linear-gradient(135deg, var(--surface) 0%, var(--error-light) 100%);
   color: var(--error);
-  border-color: rgba(184, 92, 89, 0.3);
+  border-color: var(--error-ring);
 }
 
 .action-btn.nope:hover:not(:disabled) {
-  background: linear-gradient(135deg, var(--error-light) 0%, rgba(184, 92, 89, 0.1) 100%);
+  background: linear-gradient(135deg, var(--error-light) 0%, var(--error-ring) 100%);
   border-color: var(--error);
 }
 
 .action-btn.undo {
   width: 60px;
   height: 60px;
-  background: linear-gradient(135deg, #ffffff 0%, #fef9e7 100%);
+  background: linear-gradient(135deg, var(--surface) 0%, var(--warning-light) 100%);
   color: var(--warning);
-  border-color: rgba(212, 167, 44, 0.3);
+  border-color: var(--gold-ring);
 }
 
 .action-btn.undo svg {
@@ -253,19 +253,20 @@
 }
 
 .action-btn.undo:hover:not(:disabled) {
-  background: linear-gradient(135deg, var(--warning-light) 0%, rgba(212, 167, 44, 0.1) 100%);
+  background: linear-gradient(135deg, var(--warning-light) 0%, var(--gold-ring) 100%);
   border-color: var(--warning);
 }
 
 .action-btn.like {
-  background: linear-gradient(135deg, var(--success) 0%, var(--success-dark) 100%);
+  background: var(--success);
   color: white;
-  border-color: rgba(107, 142, 76, 0.3);
+  border-color: var(--success-light);
 }
 
 .action-btn.like:hover:not(:disabled) {
-  background: linear-gradient(135deg, var(--success-dark) 0%, var(--success) 100%);
+  background: var(--success);
   border-color: var(--success);
+  filter: brightness(0.9);
 }
 
 /* Luxury Mobile-First Responsive */

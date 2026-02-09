@@ -83,6 +83,7 @@
   --error-ring: rgba(220, 38, 38, 0.1);      /* Error focus ring */
   --gold-ring: rgba(212, 175, 55, 0.1);      /* Gold focus ring */
   --gold-ring-strong: rgba(212, 175, 55, 0.2); /* Gold active ring */
+  --warning-light: rgba(217, 119, 6, 0.06);   /* Warning tinted bg */
 }
 
 /* Contrast Ratio Documentation:
@@ -149,6 +150,15 @@
   --card-border: #404040;         /* Same as --border */
   --neutral-light: #262626;       /* Inverted: was #FAFAFA, now dark */
 
+  /* Neutral scale overrides — used extensively by page/component CSS */
+  --neutral-50: #262626;           /* was #FAFAFA, now dark */
+  --neutral-100: #303030;          /* was #F5F5F5, now dark */
+  --neutral-200: #404040;          /* was #E5E5E5, now dark */
+  --neutral-300: #525252;          /* was #D4D4D4, now dark */
+
+  /* Warning light — for dark background tinted bg */
+  --warning-light: rgba(251, 191, 36, 0.08);
+
   /* Tag colors — adjusted for dark backgrounds */
   --tag-cuisine-bg: rgba(78, 180, 215, 0.15);
   --tag-cuisine-text: #7DD3E8;
@@ -207,6 +217,15 @@
     --accent-light: #F5E6A3;
     --card-border: #404040;
     --neutral-light: #262626;
+
+    /* Neutral scale overrides */
+    --neutral-50: #262626;
+    --neutral-100: #303030;
+    --neutral-200: #404040;
+    --neutral-300: #525252;
+
+    /* Warning light */
+    --warning-light: rgba(251, 191, 36, 0.08);
 
     /* Tag colors — adjusted for dark backgrounds */
     --tag-cuisine-bg: rgba(78, 180, 215, 0.15);
