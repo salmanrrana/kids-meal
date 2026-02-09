@@ -81,6 +81,12 @@
   display: block;
 }
 
+/* Desktop theme toggle - right-aligned in the top nav */
+.nav-theme {
+  flex-shrink: 0;
+  margin-left: var(--space-6);
+}
+
 /* Mobile Navigation */
 .nav-mobile {
   display: flex;
@@ -167,6 +173,14 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+/* Mobile theme toggle - sits at the end of the nav bar */
+.nav-mobile-theme {
+  flex: 0 0 auto;
+  padding: var(--space-2);
+  min-height: auto;
+  color: var(--text-secondary);
 }
 
 /* Note: To accommodate the fixed mobile navigation, apply this utility class

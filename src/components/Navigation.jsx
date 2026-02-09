@@ -1,4 +1,5 @@
 import { Link, useLocation } from '@tanstack/react-router';
+import { ThemeToggle } from './ThemeToggle';
 import './Navigation.css';
 
 export function Navigation() {
@@ -77,6 +78,9 @@ export function Navigation() {
               </Link>
             ))}
           </div>
+          <div className="nav-theme">
+            <ThemeToggle />
+          </div>
         </div>
       </nav>
 
@@ -95,6 +99,9 @@ export function Navigation() {
               <span className="nav-mobile-label">{item.label}</span>
             </Link>
           ))}
+          <div className="nav-mobile-item nav-mobile-theme" aria-label="Theme">
+            <ThemeToggle compact />
+          </div>
         </div>
       </nav>
     </>
