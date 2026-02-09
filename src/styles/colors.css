@@ -67,6 +67,22 @@
   --bg-tertiary: #F5F5F5;         /* Additional background color */
   --card-border: #E5E5E5;         /* Same as --border */
   --neutral-light: #FAFAFA;       /* Same as --neutral-50 */
+
+  /* Tag colors for swipe card categories */
+  --tag-cuisine-bg: rgba(46, 125, 155, 0.1);
+  --tag-cuisine-text: #2E7D9B;
+  --tag-protein-bg: rgba(184, 92, 56, 0.1);
+  --tag-protein-text: #B85C38;
+  --tag-time-bg: rgba(107, 142, 76, 0.1);
+  --tag-time-text: #6B8E4C;
+
+  /* Accent/status semantic helpers (used for subtle tinted backgrounds) */
+  --accent-rose: #F87171;          /* Rose accent for particles */
+  --success-light: rgba(22, 163, 74, 0.08);  /* Success tinted bg */
+  --error-light: rgba(220, 38, 38, 0.02);    /* Error tinted bg */
+  --error-ring: rgba(220, 38, 38, 0.1);      /* Error focus ring */
+  --gold-ring: rgba(212, 175, 55, 0.1);      /* Gold focus ring */
+  --gold-ring-strong: rgba(212, 175, 55, 0.2); /* Gold active ring */
 }
 
 /* Contrast Ratio Documentation:
@@ -132,6 +148,22 @@
   --accent-light: #F5E6A3;        /* Kept same */
   --card-border: #404040;         /* Same as --border */
   --neutral-light: #262626;       /* Inverted: was #FAFAFA, now dark */
+
+  /* Tag colors — adjusted for dark backgrounds */
+  --tag-cuisine-bg: rgba(78, 180, 215, 0.15);
+  --tag-cuisine-text: #7DD3E8;
+  --tag-protein-bg: rgba(215, 140, 100, 0.15);
+  --tag-protein-text: #E8A87C;
+  --tag-time-bg: rgba(140, 185, 110, 0.15);
+  --tag-time-text: #A8D08D;
+
+  /* Accent/status semantic helpers — adjusted for dark backgrounds */
+  --accent-rose: #FB7185;          /* Brighter rose on dark */
+  --success-light: rgba(74, 222, 128, 0.1);  /* Success tinted bg */
+  --error-light: rgba(248, 113, 113, 0.08);  /* Error tinted bg */
+  --error-ring: rgba(248, 113, 113, 0.2);    /* Error focus ring */
+  --gold-ring: rgba(229, 192, 75, 0.15);     /* Gold focus ring */
+  --gold-ring-strong: rgba(229, 192, 75, 0.3); /* Gold active ring */
 }
 
 /* Automatic dark mode fallback for users without explicit preference */
@@ -175,6 +207,22 @@
     --accent-light: #F5E6A3;
     --card-border: #404040;
     --neutral-light: #262626;
+
+    /* Tag colors — adjusted for dark backgrounds */
+    --tag-cuisine-bg: rgba(78, 180, 215, 0.15);
+    --tag-cuisine-text: #7DD3E8;
+    --tag-protein-bg: rgba(215, 140, 100, 0.15);
+    --tag-protein-text: #E8A87C;
+    --tag-time-bg: rgba(140, 185, 110, 0.15);
+    --tag-time-text: #A8D08D;
+
+    /* Accent/status semantic helpers — adjusted for dark backgrounds */
+    --accent-rose: #FB7185;
+    --success-light: rgba(74, 222, 128, 0.1);
+    --error-light: rgba(248, 113, 113, 0.08);
+    --error-ring: rgba(248, 113, 113, 0.2);
+    --gold-ring: rgba(229, 192, 75, 0.15);
+    --gold-ring-strong: rgba(229, 192, 75, 0.3);
   }
 }
 

@@ -20,7 +20,7 @@
   width: 100%;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  background-color: var(--neutral-200);
+  background-color: var(--bg-tertiary);
   display: flex;
   align-items: center;
   justify-content: center;

@@ -66,7 +66,7 @@
 /* Focus state */
 .form-input:focus {
   border-color: var(--color-gold);
-  box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+  box-shadow: 0 0 0 3px var(--gold-ring);
   background-color: var(--surface);
 }
 
@@ -78,7 +78,7 @@
 /* Disabled state */
 .form-input:disabled,
 .is-disabled .form-input {
-  background-color: var(--neutral-100);
+  background-color: var(--bg-tertiary);
   color: var(--text-muted);
   cursor: not-allowed;
   opacity: 0.6;
@@ -95,12 +95,12 @@
 /* Error state */
 .form-input-wrapper.has-error .form-input {
   border-color: var(--error);
-  background-color: rgba(220, 38, 38, 0.02);
+  background-color: var(--error-light);
 }
 
 .form-input-wrapper.has-error .form-input:focus {
   border-color: var(--error);
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+  box-shadow: 0 0 0 3px var(--error-ring);
 }
 
 .form-input-wrapper.has-error .form-input-label {
@@ -181,4 +181,9 @@ select.form-input {
 /* Touch target sizing */
 .form-input {
   min-height: 44px;
+}
+
+/* Dark mode: lighter select chevron for visibility */
+[data-theme="dark"] select.form-input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23D4D4D4' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
 }

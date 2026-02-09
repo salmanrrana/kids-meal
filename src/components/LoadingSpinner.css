@@ -71,7 +71,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.1) 70%, transparent 100%);
+  background: radial-gradient(circle, var(--gold-ring-strong) 0%, var(--gold-ring) 70%, transparent 100%);
   animation: luxury-glow 2s ease-in-out infinite alternate;
 }
 
@@ -81,7 +81,7 @@
   height: 60%;
   border-radius: 50%;
   background: var(--primary-gold);
-  box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 20px var(--gold-ring-strong);
   z-index: 2;
 }
 

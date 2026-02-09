@@ -17,7 +17,7 @@
   width: 100%;
   height: 320px; /* Larger, more prominent like Chanel */
   overflow: hidden;
-  background: var(--neutral-100);
+  background: var(--bg-tertiary);
 }
 
 .card-image {
@@ -55,7 +55,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, var(--neutral-100) 0%, var(--neutral-200) 100%);
+  background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--surface-hover) 100%);
 }
 
 .placeholder-shimmer {
@@ -63,9 +63,9 @@
   height: 100%;
   background: linear-gradient(
     90deg,
-    var(--neutral-200) 25%,
-    var(--neutral-100) 50%,
-    var(--neutral-200) 75%
+    var(--surface-hover) 25%,
+    var(--bg-tertiary) 50%,
+    var(--surface-hover) 75%
   );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
@@ -83,8 +83,8 @@
   right: 16px;
   width: 40px;
   height: 40px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid #dc2626; /* Chanel red */
+  background: var(--surface);
+  border: 2px solid var(--error);
   border-radius: 50%;
   cursor: pointer;
   display: flex;
@@ -92,20 +92,20 @@
   justify-content: center;
   transition: all var(--transition-fast);
   z-index: 2;
-  color: #dc2626; /* Chanel red */
+  color: var(--error);
   backdrop-filter: blur(10px);
 }
 
 .like-button:hover {
   transform: scale(1.05);
-  background: rgba(255, 255, 255, 0.95);
-  border-color: #b91c1c; /* Darker red on hover */
+  background: var(--surface-hover);
+  border-color: var(--error);
 }
 
 .like-button.liked {
-  background: #dc2626; /* Solid red when liked */
-  color: white;
-  border-color: #dc2626;
+  background: var(--error);
+  color: var(--secondary);
+  border-color: var(--error);
 }
 
 .heart-icon {
@@ -122,8 +122,8 @@
 
 .like-button.liked .heart-icon {
   animation: heart-pulse 0.6s ease-out;
-  fill: white;
-  stroke: white;
+  fill: var(--secondary);
+  stroke: var(--secondary);
 }
 
 @keyframes heart-pulse {
@@ -266,15 +266,15 @@
 }
 
 .tag-1 {
-  background: var(--neutral-100);
+  background: var(--bg-tertiary);
   color: var(--text-secondary);
-  border-color: var(--neutral-200);
+  border-color: var(--border);
 }
 
 .tag-2 {
   background: var(--success-light);
   color: var(--success);
-  border-color: rgba(132, 204, 22, 0.2);
+  border-color: var(--success-light);
 }
 
 /* Remove hover overlay for cleaner Chanel look */
@@ -286,7 +286,7 @@
 
 .view-recipe-btn {
   background: var(--primary);
-  color: white;
+  color: var(--secondary);
   border: none;
   padding: 12px 24px;
   border-radius: var(--radius-lg);

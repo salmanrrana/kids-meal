@@ -43,19 +43,19 @@
 
 /* Primary variant - Bold, dominant action */
 .btn-primary {
-  background-color: var(--color-black);
-  color: var(--color-white);
+  background-color: var(--primary);
+  color: var(--secondary);
   box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover:not(:disabled) {
-  background-color: var(--neutral-900);
+  background-color: var(--text-secondary);
   box-shadow: var(--shadow-md);
   transform: translateY(-1px);
 }
 
 .btn-primary:active:not(:disabled) {
-  background-color: var(--neutral-800);
+  background-color: var(--text-tertiary);
   box-shadow: var(--shadow-sm);
   transform: translateY(0);
 }
@@ -67,21 +67,21 @@
 
 /* Secondary variant - Moderate action */
 .btn-secondary {
-  background-color: var(--neutral-100);
-  color: var(--color-black);
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
   border: 1px solid var(--border);
   box-shadow: var(--shadow-xs);
 }
 
 .btn-secondary:hover:not(:disabled) {
-  background-color: var(--neutral-200);
+  background-color: var(--surface-hover);
   border-color: var(--border-hover);
   box-shadow: var(--shadow-sm);
   transform: translateY(-1px);
 }
 
 .btn-secondary:active:not(:disabled) {
-  background-color: var(--neutral-50);
+  background-color: var(--bg-secondary);
   border-color: var(--border);
   box-shadow: var(--shadow-xs);
   transform: translateY(0);
@@ -95,18 +95,18 @@
 /* Tertiary variant - Subtle action */
 .btn-tertiary {
   background-color: transparent;
-  color: var(--color-black);
+  color: var(--text-primary);
   border: none;
 }
 
 .btn-tertiary:hover:not(:disabled) {
-  background-color: var(--neutral-50);
-  color: var(--color-black);
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
 }
 
 .btn-tertiary:active:not(:disabled) {
-  background-color: var(--neutral-100);
-  color: var(--color-black);
+  background-color: var(--bg-tertiary);
+  color: var(--text-primary);
 }
 
 .btn-tertiary:focus-visible {
@@ -119,14 +119,14 @@
 .btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  background-color: var(--neutral-300) !important;
+  background-color: var(--bg-tertiary) !important;
   color: var(--text-muted) !important;
   box-shadow: none !important;
   transform: none !important;
 }
 
 .btn-secondary:disabled {
-  background-color: var(--neutral-100) !important;
+  background-color: var(--bg-tertiary) !important;
   border-color: var(--border) !important;
 }
 
@@ -137,7 +137,7 @@
 /* Link-style button for tertiary in specific contexts */
 .btn-link {
   background-color: transparent;
-  color: var(--color-black);
+  color: var(--text-primary);
   border: none;
   padding: 0;
   min-height: auto;
