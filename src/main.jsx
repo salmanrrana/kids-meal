@@ -20,9 +20,13 @@ import { GroceryPage } from './pages/GroceryPage';
 // Components
 import { Navigation } from './components/Navigation';
 
-// Luxury Root layout with navigation
-const rootRoute = createRootRoute({
-  component: () => (
+// Hooks
+import { useThemeInit } from './hooks/useThemeInit';
+
+// Root layout component — initializes theme and renders shell
+function RootLayout() {
+  useThemeInit();
+  return (
     <div className="luxury-root">
       <div className="luxury-background" />
       <div className="luxury-content">
@@ -30,7 +34,12 @@ const rootRoute = createRootRoute({
       </div>
       <Navigation />
     </div>
-  ),
+  );
+}
+
+// Luxury Root layout with navigation
+const rootRoute = createRootRoute({
+  component: RootLayout,
 });
 
 // Routes

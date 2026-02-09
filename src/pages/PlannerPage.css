@@ -33,7 +33,7 @@
   width: 40px;
   height: 40px;
   border: 1px solid var(--border);
-  background: white;
+  background: var(--surface);
   border-radius: 0;
   cursor: pointer;
   display: flex;
@@ -72,14 +72,14 @@
 .day-column {
   flex: 0 0 160px;
   min-width: 160px;
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   padding: 16px;
 }
 
 .day-column.today {
-  border-color: #dc2626; /* Chanel red */
-  background: rgba(220, 38, 38, 0.02);
+  border-color: var(--error);
+  background: var(--error-light);
 }
 
 .day-header {
@@ -106,10 +106,10 @@
   display: inline-block;
   font-size: 0.75rem;
   font-weight: 500;
-  color: #dc2626;
-  background: rgba(220, 38, 38, 0.1);
+  color: var(--error);
+  background: var(--error-light);
   padding: 4px 8px;
-  border: 1px solid rgba(220, 38, 38, 0.2);
+  border: 1px solid var(--error-ring);
   margin-top: 6px;
   font-family: var(--font-family);
 }
@@ -136,7 +136,7 @@
 }
 
 .meal-card:hover {
-  background: white;
+  background: var(--surface);
   border-color: var(--text-primary);
 }
 
@@ -182,7 +182,7 @@
   width: 24px;
   height: 24px;
   border: 1px solid var(--border);
-  background: white;
+  background: var(--surface);
   border-radius: 0;
   cursor: pointer;
   display: flex;
@@ -203,12 +203,12 @@
 }
 
 .remove-meal:hover {
-  background: #dc2626;
-  border-color: #dc2626;
+  background: var(--error);
+  border-color: var(--error);
 }
 
 .remove-meal:hover svg {
-  color: white;
+  color: var(--bg-primary);
 }
 
 /* Add meal button - Chanel Style */
@@ -219,7 +219,7 @@
   gap: 8px;
   padding: 12px;
   border: 1px solid var(--border);
-  background: white;
+  background: var(--surface);
   border-radius: 0;
   color: var(--text-secondary);
   font-size: 0.875rem;
@@ -264,9 +264,9 @@
   align-items: center;
   justify-content: center;
   gap: 12px;
-  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-  color: white;
-  border: 3px solid #dc2626;
+  background: linear-gradient(135deg, var(--error) 0%, var(--error) 100%);
+  color: var(--bg-primary);
+  border: 3px solid var(--error);
   padding: 20px 32px;
   border-radius: 0;
   font-size: 1rem;
@@ -280,7 +280,7 @@
   min-height: 72px; /* Luxury touch target */
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
-  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-xl);
   position: relative;
   overflow: hidden;
 }
@@ -301,15 +301,16 @@
 }
 
 .grocery-btn:hover {
-  background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
-  border-color: #b91c1c;
+  background: linear-gradient(135deg, var(--error) 0%, var(--error) 100%);
+  border-color: var(--error);
   transform: translateY(-4px) scale(1.02);
-  box-shadow: 0 12px 48px rgba(220, 38, 38, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-xl);
+  filter: brightness(0.9);
 }
 
 .grocery-btn:active {
   transform: translateY(-2px) scale(1.01);
-  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.4);
+  box-shadow: var(--shadow-lg);
 }
 
 .grocery-btn svg {
@@ -332,7 +333,7 @@
 }
 
 .modal {
-  background: white;
+  background: var(--surface);
   border: 1px solid var(--border);
   width: 100%;
   max-width: 420px;
@@ -362,7 +363,7 @@
   width: 32px;
   height: 32px;
   border: 1px solid var(--border);
-  background: white;
+  background: var(--surface);
   border-radius: 0;
   cursor: pointer;
   display: flex;
@@ -410,7 +411,7 @@
   gap: 16px;
   padding: 16px;
   border: 1px solid var(--border);
-  background: white;
+  background: var(--surface);
   border-radius: 0;
   cursor: pointer;
   text-align: left;
@@ -478,7 +479,7 @@
 
   .day-column {
     width: 100%;
-    background: white;
+    background: var(--surface);
     border: 2px solid var(--border);
     border-radius: 0;
     padding: 20px;
@@ -495,14 +496,14 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, #dc2626 0%, #b91c1c 50%, #dc2626 100%);
+    background: linear-gradient(90deg, var(--error) 0%, var(--error) 50%, var(--error) 100%);
     opacity: 0;
     transition: opacity var(--transition-fast);
   }
 
   .day-column:hover {
-    border-color: #dc2626;
-    box-shadow: 0 8px 32px rgba(220, 38, 38, 0.15);
+    border-color: var(--error);
+    box-shadow: var(--shadow-lg);
     transform: translateY(-2px);
   }
 
@@ -512,12 +513,12 @@
 
   .day-column.today::before {
     opacity: 1;
-    background: linear-gradient(90deg, #dc2626 0%, #b91c1c 50%, #dc2626 100%);
+    background: linear-gradient(90deg, var(--error) 0%, var(--error) 50%, var(--error) 100%);
   }
 
   .day-column.today {
-    border-color: #dc2626;
-    background: rgba(220, 38, 38, 0.02);
+    border-color: var(--error);
+    background: var(--error-light);
   }
 
   .day-header {
@@ -543,9 +544,9 @@
     font-size: 0.75rem;
     padding: 4px 8px;
     font-weight: 500;
-    border: 1px solid rgba(220, 38, 38, 0.2);
-    background: rgba(220, 38, 38, 0.1);
-    color: #dc2626;
+    border: 1px solid var(--error-ring);
+    background: var(--error-light);
+    color: var(--error);
   }
 
   .day-meals {
@@ -585,16 +586,16 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(90deg, #dc2626 0%, #b91c1c 50%, #dc2626 100%);
+    background: linear-gradient(90deg, var(--error) 0%, var(--error) 50%, var(--error) 100%);
     opacity: 0;
     transition: opacity var(--transition-fast);
   }
 
   .meal-card:hover {
-    background: white;
-    border-color: #dc2626;
+    background: var(--surface);
+    border-color: var(--error);
     transform: translateX(4px);
-    box-shadow: 0 4px 20px rgba(220, 38, 38, 0.15);
+    box-shadow: var(--shadow-md);
   }
 
   .meal-card:hover::before {
@@ -634,7 +635,7 @@
     width: 28px;
     height: 28px;
     border: 1px solid var(--border);
-    background: white;
+    background: var(--surface);
     border-radius: 0;
     display: flex;
     align-items: center;
@@ -645,12 +646,12 @@
   }
 
   .remove-meal:hover {
-    background: #dc2626;
-    border-color: #dc2626;
+    background: var(--error);
+    border-color: var(--error);
   }
 
   .remove-meal:hover svg {
-    color: white;
+    color: var(--bg-primary);
   }
 
   .add-meal-btn {
@@ -661,7 +662,7 @@
     gap: 10px;
     padding: 16px 20px;
     border: 2px solid var(--border);
-    background: white;
+    background: var(--surface);
     border-radius: 0;
     color: var(--text-secondary);
     font-size: 0.9rem;
@@ -684,7 +685,7 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(220, 38, 38, 0.05), transparent);
+    background: linear-gradient(90deg, transparent, var(--error-light), transparent);
     transition: left 0.5s ease;
   }
 
@@ -693,11 +694,11 @@
   }
 
   .add-meal-btn:hover {
-    border-color: #dc2626;
-    color: #dc2626;
-    background: rgba(220, 38, 38, 0.02);
+    border-color: var(--error);
+    color: var(--error);
+    background: var(--error-light);
     transform: translateY(-1px);
-    box-shadow: 0 4px 16px rgba(220, 38, 38, 0.15);
+    box-shadow: var(--shadow-md);
   }
 
   .add-meal-btn svg {
@@ -718,12 +719,12 @@
     min-height: 80px; /* Ultra luxury touch target */
     max-width: 100%;
     border-width: 4px;
-    box-shadow: 0 12px 40px rgba(220, 38, 38, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-xl);
   }
 
   .grocery-btn:hover {
     transform: translateY(-6px) scale(1.03);
-    box-shadow: 0 16px 56px rgba(220, 38, 38, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    box-shadow: var(--shadow-xl);
   }
 
   .grocery-btn:active {

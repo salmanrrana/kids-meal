@@ -1,0 +1,109 @@
+{
+  "projectName": "kids meal",
+  "projectPath": "/Users/salman.rana/code/personal-projects/kids-meal",
+  "testingRequirements": [
+    "Tests must validate user-facing behavior, not implementation details",
+    "Focus on what users actually do - integration tests over unit tests",
+    "Don't mock excessively - test real behavior where possible",
+    "Coverage metrics are meaningless - user flow coverage is everything"
+  ],
+  "userStories": [
+    {
+      "id": "ticket-2-1-kids-meal-1769636949",
+      "title": "Redesign button component with luxury styling",
+      "passes": true,
+      "overview": "",
+      "types": [],
+      "designDecisions": [],
+      "implementationGuide": [],
+      "acceptanceCriteria": [
+        "Implement as described",
+        "Verify functionality works as expected"
+      ],
+      "references": [],
+      "description": "Create Button component with primary, secondary, tertiary variants. Use design tokens. Implement hover, active, disabled states.",
+      "priority": "high",
+      "tags": []
+    },
+    {
+      "id": "ticket-2-2-kids-meal-1769636949",
+      "title": "Redesign card component",
+      "passes": true,
+      "overview": "",
+      "types": [],
+      "designDecisions": [],
+      "implementationGuide": [],
+      "acceptanceCriteria": [
+        "Implement as described",
+        "Verify functionality works as expected"
+      ],
+      "references": [],
+      "description": "Create Card component for recipe display. Include image area, content area, optional actions. Use 12px border radius and subtle shadow.",
+      "priority": "high",
+      "tags": []
+    },
+    {
+      "id": "ticket-2-3-kids-meal-1769636949",
+      "title": "Redesign navigation component",
+      "passes": true,
+      "overview": "",
+      "types": [],
+      "designDecisions": [],
+      "implementationGuide": [],
+      "acceptanceCriteria": [
+        "Implement as described",
+        "Verify functionality works as expected"
+      ],
+      "references": [],
+      "description": "Update Navigation component with elegant desktop top nav and refined mobile bottom nav. Clear active states.",
+      "priority": "high",
+      "tags": []
+    },
+    {
+      "id": "ticket-2-4-kids-meal-1769636949",
+      "title": "Create luxury input and form components",
+      "passes": true,
+      "overview": "",
+      "types": [],
+      "designDecisions": [],
+      "implementationGuide": [],
+      "acceptanceCriteria": [
+        "Implement as described",
+        "Verify functionality works as expected"
+      ],
+      "references": [],
+      "description": "Create FormInput component with labels, focus states, error states. Ensure accessibility.",
+      "priority": "medium",
+      "tags": []
+    },
+    {
+      "id": "ticket-2-5-kids-meal-1769636949",
+      "title": "Redesign tabs component",
+      "passes": true,
+      "overview": "",
+      "types": [],
+      "designDecisions": [],
+      "implementationGuide": [],
+      "acceptanceCriteria": [
+        "Implement as described",
+        "Verify functionality works as expected"
+      ],
+      "references": [],
+      "description": "Create Tabs component with underline-style design. Implement keyboard navigation and ARIA support.",
+      "priority": "medium",
+      "tags": []
+    }
+  ],
+  "projectContext": {
+    "techStack": [],
+    "dosDonts": [],
+    "verificationSteps": [
+      "Run `pnpm type-check` - must pass with no errors",
+      "Run `pnpm lint` - must pass with no errors",
+      "Run `pnpm test` - all tests must pass"
+    ]
+  },
+  "generatedAt": "2026-01-29T20:25:37.789Z",
+  "epicTitle": "Component Library Refinement",
+  "epicDescription": "Redesign core UI components to match luxury aesthetic"
+}
