@@ -8,7 +8,6 @@
   border: 1px solid var(--border);
   border-radius: var(--radius-full);
   padding: 3px;
-  gap: 0;
 }
 
 /* Sliding indicator behind the active button */
@@ -92,9 +91,6 @@
   width: 14px;
   height: 14px;
 }
-
-/* ─── Keyboard navigation: left/right arrows ─── */
-/* Handled visually — JS handles the state cycling */
 
 /* ─── Reduced motion ─── */
 @media (prefers-reduced-motion: reduce) {
