@@ -11,6 +11,24 @@ function getWeekStart(date = new Date()) {
   return d.toISOString().split('T')[0];
 }
 
+/**
+ * Resolves 'system' theme to 'light' or 'dark' based on OS preference.
+ */
+function resolveTheme(theme) {
+  if (theme === 'system') {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  return theme;
+}
+
+/**
+ * Applies the resolved theme to the <html> element.
+ */
+function applyTheme(theme) {
+  const effective = resolveTheme(theme);
+  document.documentElement.setAttribute('data-theme', effective);
+}
+
 export const useAppStore = create(
   persist(
     (set, get) => ({
@@ -25,6 +43,17 @@ export const useAppStore = create(
 
       // Current week being viewed
       currentWeek: getWeekStart(),
+
+      // Theme preference: 'system' | 'light' | 'dark'
+      theme: 'system',
+
+      // Theme actions
+      setTheme: (theme) => {
+        set({ theme });
+        applyTheme(theme);
+      },
+
+      getEffectiveTheme: () => resolveTheme(get().theme),
 
       // Actions
       toggleLike: (recipe) => {
@@ -138,6 +167,7 @@ export const useAppStore = create(
         likedRecipes: state.likedRecipes,
         mealPlans: state.mealPlans,
         currentWeek: state.currentWeek,
+        theme: state.theme,
       }),
     }
   )
