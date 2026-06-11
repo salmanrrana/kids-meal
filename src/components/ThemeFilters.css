@@ -1,99 +1,43 @@
-/* Chanel-Inspired Theme Filters */
+/* ThemeFilters: horizontal chip row */
+
 .theme-filters {
-  border-bottom: 1px solid var(--border);
-  background: var(--bg-primary);
-  position: sticky;
-  top: 0;
-  z-index: 10;
+  margin: 4px 0 24px;
 }
 
 .theme-filters-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
   display: flex;
-  align-items: center;
-  gap: 0;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 2px;
+  scrollbar-width: none;
+}
+
+.theme-filters-container::-webkit-scrollbar {
+  display: none;
 }
 
 .theme-filter {
-  position: relative;
-  background: none;
-  border: none;
-  padding: 20px 16px;
+  flex-shrink: 0;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  white-space: nowrap;
   cursor: pointer;
-  transition: all var(--transition-fast);
-  font-family: var(--font-family-sans);
-  font-size: var(--font-size-sm);
-  font-weight: 400;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  border-bottom: 2px solid transparent;
+  transition: color var(--t-fast), border-color var(--t-fast),
+    background-color var(--t-fast);
 }
 
 .theme-filter:hover {
-  color: var(--text-primary);
+  color: var(--ink);
+  border-color: var(--line-strong);
 }
 
 .theme-filter.active {
-  color: var(--text-primary);
-  border-bottom-color: var(--primary);
-}
-
-.theme-name {
-  display: block;
-  transition: all var(--transition-fast);
-}
-
-.theme-description {
-  display: block;
-  font-size: var(--font-size-xs);
-  color: var(--text-tertiary);
-  margin-top: 2px;
-  opacity: 0;
-  transform: translateY(-4px);
-  animation: slideDown 0.3s ease-out forwards;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-  .theme-filters-container {
-    padding: 0 16px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .theme-filters-container::-webkit-scrollbar {
-    display: none;
-  }
-
-  .theme-filter {
-    padding: 16px 12px;
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .theme-description {
-    display: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .theme-filter {
-    padding: 14px 10px;
-    font-size: var(--font-size-xs);
-  }
+  background: var(--gold-soft);
+  border-color: var(--gold);
+  color: var(--gold);
 }

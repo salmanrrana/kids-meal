@@ -81,113 +81,133 @@ export function PlannerPage() {
     return !dayMeals.includes(recipe.id);
   });
 
+  const plannedCount = Object.values(weekPlan).reduce(
+    (sum, ids) => sum + (ids?.length || 0),
+    0
+  );
+
   return (
     <div className="planner-page page-with-nav">
-      {/* Header with week navigation */}
-      <header className="planner-header">
-        <h1>Weekly Planner</h1>
-        <div className="week-nav">
-          <button className="week-btn" onClick={() => navigateWeek(-1)}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="15 18 9 12 15 6"></polyline>
+      <div className="page-container">
+        <header className="page-header planner-header">
+          <div>
+            <h1 className="page-title">This week</h1>
+            <p className="page-subtitle">
+              {plannedCount === 0
+                ? 'Nothing planned yet'
+                : `${plannedCount} ${plannedCount === 1 ? 'meal' : 'meals'} planned`}
+            </p>
+          </div>
+          <div className="week-nav">
+            <button className="icon-btn" onClick={() => navigateWeek(-1)} aria-label="Previous week">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+              </svg>
+            </button>
+            <span className="week-label">{formatWeekRange(currentWeek)}</span>
+            <button className="icon-btn" onClick={() => navigateWeek(1)} aria-label="Next week">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+              </svg>
+            </button>
+          </div>
+        </header>
+
+        {/* Kanban board */}
+        <div className="kanban-board">
+          {DAYS.map((day, dayIndex) => {
+            const meals = getMealsForDay(dayIndex);
+            const isToday = new Date().getDay() === dayIndex;
+
+            return (
+              <section
+                key={day}
+                className={`day-column ${isToday ? 'today' : ''}`}
+                aria-label={DAYS_FULL[dayIndex]}
+                onDragOver={handleDragOver}
+                onDrop={(e) => handleDrop(e, dayIndex)}
+              >
+                <div className="day-header">
+                  <span className="day-name">{day}</span>
+                  {isToday && <span className="today-badge">Today</span>}
+                </div>
+
+                <div className="day-meals">
+                  {meals.map((meal, mealIndex) => (
+                    <div
+                      key={`${meal.id}-${mealIndex}`}
+                      className="meal-card"
+                      draggable
+                      onDragStart={(e) => handleDragStart(e, meal, dayIndex)}
+                      onClick={() => navigate({ to: '/recipe/$recipeId', params: { recipeId: meal.id } })}
+                    >
+                      <img src={meal.image} alt="" className="meal-thumb" loading="lazy" />
+                      <div className="meal-info">
+                        <span className="meal-title">{meal.title}</span>
+                        <span className="meal-time">{meal.prepTime + meal.cookTime} min</span>
+                      </div>
+                      <button
+                        className="remove-meal"
+                        aria-label={`Remove ${meal.title}`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleRemoveMeal(meal.id, dayIndex);
+                        }}
+                      >
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+                          <line x1="18" y1="6" x2="6" y2="18"></line>
+                          <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                      </button>
+                    </div>
+                  ))}
+
+                  <button
+                    className="add-meal-btn"
+                    onClick={() => setShowAddModal(dayIndex)}
+                  >
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <line x1="5" y1="12" x2="19" y2="12"></line>
+                    </svg>
+                    Add meal
+                  </button>
+                </div>
+              </section>
+            );
+          })}
+        </div>
+
+        {/* Grocery list button */}
+        <div className="planner-actions">
+          <button
+            className="btn btn-primary"
+            onClick={() => navigate({ to: '/grocery' })}
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
             </svg>
-          </button>
-          <span className="week-label">{formatWeekRange(currentWeek)}</span>
-          <button className="week-btn" onClick={() => navigateWeek(1)}>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <polyline points="9 18 15 12 9 6"></polyline>
-            </svg>
+            Build grocery list
           </button>
         </div>
-      </header>
-
-      {/* Kanban board */}
-      <div className="kanban-board">
-        {DAYS.map((day, dayIndex) => {
-          const meals = getMealsForDay(dayIndex);
-          const isToday = new Date().getDay() === dayIndex;
-
-          return (
-            <div
-              key={day}
-              className={`day-column ${isToday ? 'today' : ''}`}
-              onDragOver={handleDragOver}
-              onDrop={(e) => handleDrop(e, dayIndex)}
-            >
-              <div className="day-header">
-                <span className="day-name">{day}</span>
-                <span className="day-full">{DAYS_FULL[dayIndex]}</span>
-                {isToday && <span className="today-badge">Today</span>}
-              </div>
-
-              <div className="day-meals">
-                {meals.map((meal, mealIndex) => (
-                  <div
-                    key={`${meal.id}-${mealIndex}`}
-                    className="meal-card"
-                    draggable
-                    onDragStart={(e) => handleDragStart(e, meal, dayIndex)}
-                    onClick={() => navigate({ to: '/recipe/$recipeId', params: { recipeId: meal.id } })}
-                  >
-                    <img src={meal.image} alt="" className="meal-thumb" />
-                    <div className="meal-info">
-                      <span className="meal-title">{meal.title}</span>
-                      <span className="meal-time">{meal.prepTime + meal.cookTime} min</span>
-                    </div>
-                    <button
-                      className="remove-meal"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleRemoveMeal(meal.id, dayIndex);
-                      }}
-                    >
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                      </svg>
-                    </button>
-                  </div>
-                ))}
-
-                <button
-                  className="add-meal-btn"
-                  onClick={() => setShowAddModal(dayIndex)}
-                >
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="12" y1="5" x2="12" y2="19"></line>
-                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                  </svg>
-                  Add Meal
-                </button>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Grocery list button */}
-      <div className="planner-actions">
-        <button
-          className="btn btn-primary grocery-btn"
-          onClick={() => navigate({ to: '/grocery' })}
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
-          </svg>
-          Generate Grocery List
-        </button>
       </div>
 
       {/* Add meal modal */}
       {showAddModal !== null && (
         <div className="modal-overlay" onClick={() => setShowAddModal(null)}>
-          <div className="modal" onClick={e => e.stopPropagation()}>
+          <div
+            className="modal"
+            role="dialog"
+            aria-modal="true"
+            aria-label={`Add meal to ${DAYS_FULL[showAddModal]}`}
+            onClick={e => e.stopPropagation()}
+          >
             <div className="modal-header">
-              <h2>Add Meal to {DAYS_FULL[showAddModal]}</h2>
-              <button className="close-btn" onClick={() => setShowAddModal(null)}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <h2>Add to {DAYS_FULL[showAddModal]}</h2>
+              <button className="icon-btn" onClick={() => setShowAddModal(null)} aria-label="Close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
@@ -197,7 +217,7 @@ export function PlannerPage() {
             <div className="modal-content">
               {availableRecipes.length === 0 ? (
                 <div className="no-recipes">
-                  <p>No liked recipes available.</p>
+                  <p>Every favorite is already on this day, or you haven't saved any yet.</p>
                   <button
                     className="btn btn-secondary"
                     onClick={() => {
@@ -205,7 +225,7 @@ export function PlannerPage() {
                       navigate({ to: '/' });
                     }}
                   >
-                    Discover Meals
+                    Browse recipes
                   </button>
                 </div>
               ) : (
@@ -216,11 +236,11 @@ export function PlannerPage() {
                       className="recipe-select-item"
                       onClick={() => handleAddMeal(recipe.id, showAddModal)}
                     >
-                      <img src={recipe.image} alt="" className="select-thumb" />
+                      <img src={recipe.image} alt="" className="select-thumb" loading="lazy" />
                       <div className="select-info">
                         <span className="select-title">{recipe.title}</span>
                         <span className="select-meta">
-                          {recipe.tags[0]} • {recipe.prepTime + recipe.cookTime} min
+                          {recipe.tags[0]?.replace(/-/g, ' ')} · {recipe.prepTime + recipe.cookTime} min
                         </span>
                       </div>
                     </button>

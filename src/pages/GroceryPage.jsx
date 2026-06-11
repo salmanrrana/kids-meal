@@ -223,89 +223,95 @@ export function GroceryPage() {
 
   return (
     <div className="grocery-page page-with-nav">
-      <header className="grocery-header">
-        <button type="button" className="back-btn" onClick={() => window.history.back()}>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
-        <div className="header-info">
-          <h1>Grocery List</h1>
-          <span className="week-label">{formatWeekRange(currentWeek)}</span>
-        </div>
-        {hasItems && (
-          <button type="button" className={`copy-btn ${copied ? 'copied' : ''}`} onClick={handleCopy}>
-            {copied ? (
-              <>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <polyline points="20 6 9 17 4 12"></polyline>
-                </svg>
-                Copied!
-              </>
-            ) : (
-              <>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-                Copy
-              </>
-            )}
-          </button>
-        )}
-      </header>
+      <div className="page-container">
+        <header className="page-header grocery-header">
+          <div>
+            <h1 className="page-title">Grocery list</h1>
+            <p className="page-subtitle">
+              {hasItems
+                ? `${totalItems} items for ${formatWeekRange(currentWeek)}`
+                : formatWeekRange(currentWeek)}
+            </p>
+          </div>
+          {hasItems && (
+            <button type="button" className="btn btn-secondary btn-sm" onClick={handleCopy}>
+              {copied ? (
+                <>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  Copied
+                </>
+              ) : (
+                <>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  Copy list
+                </>
+              )}
+            </button>
+          )}
+        </header>
 
-      {!hasItems ? (
-        <div className="empty-state">
-          <div className="empty-icon">🛒</div>
-          <h2>No meals planned yet</h2>
-          <p>Add some meals to your weekly plan to generate a grocery list.</p>
-          <button type="button" className="btn btn-primary" onClick={() => navigate({ to: '/planner' })}>
-            Go to Planner
-          </button>
-        </div>
-      ) : (
-        <>
-          {/* Meal summary */}
-          <div className="meal-summary">
-            <h3>Meals This Week ({weekMeals.length})</h3>
-            <div className="meal-chips">
-              {weekMeals.map((meal, index) => (
-                <span key={`${meal.id}-${index}`} className="meal-chip">
-                  {meal.title}
-                </span>
+        {!hasItems ? (
+          <div className="empty-state">
+            <svg className="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <h2>Nothing to shop for yet</h2>
+            <p>Plan a few meals for the week and the shopping list builds itself.</p>
+            <button type="button" className="btn btn-primary" onClick={() => navigate({ to: '/planner' })}>
+              Plan the week
+            </button>
+          </div>
+        ) : (
+          <>
+            {/* Meal summary */}
+            <section className="meal-summary" aria-label="Meals this week">
+              <h2 className="summary-title">Cooking this week</h2>
+              <div className="meal-chips">
+                {weekMeals.map((meal, index) => (
+                  <span key={`${meal.id}-${index}`} className="meal-chip">
+                    {meal.title}
+                  </span>
+                ))}
+              </div>
+            </section>
+
+            {/* Grocery list by category */}
+            <div className="grocery-list">
+              {groceryList.map(({ category, label, items }) => (
+                <section key={category} className="grocery-category">
+                  <h3 className="category-label">
+                    {label}
+                    <span className="category-count">{items.length}</span>
+                  </h3>
+                  <ul className="ingredient-list">
+                    {items.map((item, index) => (
+                      <li key={index} className="ingredient-item">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </section>
               ))}
             </div>
-          </div>
+          </>
+        )}
+      </div>
 
-          {/* Grocery list by category */}
-          <div className="grocery-list">
-            {groceryList.map(({ category, label, icon, items }) => (
-              <div key={category} className="grocery-category">
-                <h3 className="category-label">
-                  <span className="category-icon">{icon}</span>
-                  {label}
-                  <span className="category-count">{items.length}</span>
-                </h3>
-                <ul className="ingredient-list">
-                  {items.map((item, index) => (
-                    <li key={index} className="ingredient-item">
-                      <span className="ingredient-name">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          {/* Total count */}
-          <div className="grocery-footer">
-            <span className="total-count">{totalItems} items total</span>
-          </div>
-        </>
+      {copied && (
+        <div className="toast" role="status">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16" style={{ color: 'var(--success)' }}>
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          Copied to clipboard
+        </div>
       )}
-
-      {copied && <div className="toast">Copied to clipboard!</div>}
     </div>
   );
 }

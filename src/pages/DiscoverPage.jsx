@@ -5,14 +5,14 @@ import { ThemeFilters } from '../components/ThemeFilters';
 import { useNavigate } from '@tanstack/react-router';
 import './DiscoverPage.css';
 
-const THEMES = [
-  { id: 'all', name: 'All Recipes', description: 'Complete collection' },
-  { id: 'quick', name: 'Quick & Easy', description: 'Under 30 minutes' },
-  { id: 'family', name: 'Family Favorites', description: 'Kid-approved classics' },
-  { id: 'healthy', name: 'Healthy & Light', description: 'Nutritious options' },
-  { id: 'comfort', name: 'Comfort Classics', description: 'Warming traditions' },
-  { id: 'one-pan', name: 'One-Pan Wonders', description: 'Easy cleanup' },
-];
+const THEME_NAMES = {
+  all: 'All Recipes',
+  quick: 'Quick & Easy',
+  family: 'Family Favorites',
+  healthy: 'Healthy & Light',
+  comfort: 'Comfort Classics',
+  'one-pan': 'One-Pan Wonders',
+};
 
 export function DiscoverPage() {
   const navigate = useNavigate();
@@ -41,67 +41,44 @@ export function DiscoverPage() {
     navigate({ to: '/recipe/$recipeId', params: { recipeId: recipe.id } });
   };
 
-  const handleLikeToggle = (recipe) => {
-    toggleLike(recipe);
-  };
-
-  const handleThemeChange = (theme) => {
-    setActiveTheme(theme);
-  };
-
   return (
-    <div className="discover-page">
+    <div className="discover-page page-with-nav">
       <div className="page-container">
-        {/* Header */}
         <header className="page-header">
-          <div className="header-content">
-            <h1 className="page-title">Discover</h1>
-            <p className="page-subtitle">
-              {activeTheme === 'all'
-                ? 'Curated meals for your family'
-                : `${recipes.length} ${THEMES.find(t => t.id === activeTheme)?.name.toLowerCase() || ''} recipes`
-              }
-            </p>
-          </div>
-          <div className="header-stats">
-            <div className="stat-item">
-              <span className="stat-number">{likedRecipes.length}</span>
-              <span className="stat-label">Favorites</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-number">{recipes.length}</span>
-              <span className="stat-label">Recipes</span>
-            </div>
-          </div>
+          <h1 className="page-title">Tonight's table</h1>
+          <p className="page-subtitle">
+            {activeTheme === 'all'
+              ? `${recipes.length} family meals, all ready in 30 minutes or less`
+              : `${recipes.length} ${THEME_NAMES[activeTheme].toLowerCase()} ${recipes.length === 1 ? 'recipe' : 'recipes'}`}
+          </p>
         </header>
 
-        {/* Theme Filters */}
-        <ThemeFilters
-          activeTheme={activeTheme}
-          onThemeChange={handleThemeChange}
-        />
+        <ThemeFilters activeTheme={activeTheme} onThemeChange={setActiveTheme} />
 
-        {/* Recipe Grid */}
-        <div className="recipes-grid">
-          {recipes.map((recipe) => (
-            <RecipeCard
-              key={recipe.id}
-              recipe={recipe}
-              isLiked={likedRecipes.some(liked => liked.id === recipe.id)}
-              onClick={() => handleRecipeClick(recipe)}
-              onLikeToggle={() => handleLikeToggle(recipe)}
-            />
-          ))}
-        </div>
-
-        {/* Empty State */}
-        {recipes.length === 0 && (
+        {recipes.length > 0 ? (
+          <div className="recipes-grid">
+            {recipes.map((recipe) => (
+              <RecipeCard
+                key={recipe.id}
+                recipe={recipe}
+                isLiked={likedRecipes.some(liked => liked.id === recipe.id)}
+                onClick={() => handleRecipeClick(recipe)}
+                onLikeToggle={() => toggleLike(recipe)}
+              />
+            ))}
+          </div>
+        ) : (
           <div className="empty-state">
-            <div className="empty-icon">🍽️</div>
-            <h2 className="empty-title">No recipes found</h2>
-            <p className="empty-description">
-              We're curating the perfect meals for your family. Check back soon!
-            </p>
+            <svg className="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M8.5 10.5h.01M15.5 10.5h.01" />
+              <path d="M9 15h6" />
+            </svg>
+            <h2>Nothing in this collection yet</h2>
+            <p>Try another collection, or browse all recipes.</p>
+            <button className="btn btn-secondary" onClick={() => setActiveTheme('all')}>
+              Show all recipes
+            </button>
           </div>
         )}
       </div>

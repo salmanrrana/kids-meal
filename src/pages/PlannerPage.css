@@ -1,143 +1,125 @@
-/* Chanel-Inspired Planner Page - Minimal & Elegant */
-.planner-page {
-  padding: 20px;
-  min-height: 100vh;
-  background: var(--surface);
-}
+/* Weekly planner */
 
 .planner-header {
   display: flex;
-  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
   gap: 16px;
-  margin-bottom: 32px;
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 20px;
-}
-
-.planner-header h1 {
-  font-size: 2rem;
-  font-weight: 400;
-  color: var(--text-primary);
-  margin: 0;
-  font-family: var(--font-family-serif);
-  letter-spacing: -0.02em;
+  flex-wrap: wrap;
 }
 
 .week-nav {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
 }
 
-.week-btn {
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition-fast);
-  color: var(--text-primary);
+.week-nav .week-label {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  color: var(--ink);
+  white-space: nowrap;
 }
 
-.week-btn:hover {
-  background: var(--neutral-50);
-}
-
-.week-btn svg {
-  width: 20px;
-  height: 20px;
-  color: var(--text-primary);
-}
-
-.week-label {
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  font-family: var(--font-family);
-}
-
-/* Kanban board - Chanel Style */
+/* Board: 7 columns on wide screens, horizontal scroll-snap below */
 .kanban-board {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  padding-bottom: 20px;
-  -webkit-overflow-scrolling: touch;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 1023px) {
+  .kanban-board {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 8px;
+    margin-inline: -20px;
+    padding-inline: 20px;
+  }
+
+  .kanban-board .day-column {
+    flex: 0 0 220px;
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 480px) {
+  .kanban-board {
+    margin-inline: -16px;
+    padding-inline: 16px;
+  }
 }
 
 .day-column {
-  flex: 0 0 160px;
-  min-width: 160px;
+  display: flex;
+  flex-direction: column;
   background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  min-height: 220px;
+  transition: border-color var(--t-fast);
 }
 
 .day-column.today {
-  border-color: var(--error);
-  background: var(--error-light);
+  border-color: var(--gold);
 }
 
 .day-header {
-  margin-bottom: 16px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 12px 10px;
+  border-bottom: 1px solid var(--line);
 }
 
 .day-name {
-  display: block;
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  font-family: var(--font-family);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.025em;
+  color: var(--ink-2);
 }
 
-.day-full {
-  display: none;
+.day-column.today .day-name {
+  color: var(--gold);
 }
 
 .today-badge {
-  display: inline-block;
-  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  background: var(--gold-soft);
+  color: var(--gold);
+  font-size: var(--text-xs);
   font-weight: 500;
-  color: var(--error);
-  background: var(--error-light);
-  padding: 4px 8px;
-  border: 1px solid var(--error-ring);
-  margin-top: 6px;
-  font-family: var(--font-family);
 }
 
 .day-meals {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  min-height: 120px;
+  gap: 8px;
+  padding: 10px;
+  flex: 1;
 }
 
-/* Meal card - Chanel Style */
+/* Meal card within a day */
 .meal-card {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px;
-  background: var(--neutral-50);
-  border: 1px solid var(--border);
+  gap: 10px;
+  padding: 8px;
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  border: 1px solid transparent;
   cursor: grab;
-  transition: all var(--transition-fast);
-  position: relative;
-  color: var(--text-primary);
+  transition: border-color var(--t-fast);
 }
 
 .meal-card:hover {
-  background: var(--surface);
-  border-color: var(--text-primary);
+  border-color: var(--line-strong);
 }
 
 .meal-card:active {
@@ -145,773 +127,170 @@
 }
 
 .meal-thumb {
-  width: 48px;
-  height: 48px;
-  border-radius: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
   object-fit: cover;
   flex-shrink: 0;
 }
 
 .meal-info {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
   min-width: 0;
 }
 
 .meal-title {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-family: var(--font-family);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--ink);
   line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .meal-time {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  font-family: var(--font-family);
+  font-size: var(--text-xs);
+  color: var(--ink-3);
 }
 
 .remove-meal {
   position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 24px;
-  height: 24px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: 0;
-  cursor: pointer;
-  display: flex;
+  top: 4px;
+  right: 4px;
+  display: none;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: all var(--transition-fast);
+  width: 22px;
+  height: 22px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--scrim);
+  color: var(--scrim-ink);
+  cursor: pointer;
 }
 
-.meal-card:hover .remove-meal {
-  opacity: 1;
-}
-
-.remove-meal svg {
-  width: 14px;
-  height: 14px;
-  color: var(--text-secondary);
+.meal-card:hover .remove-meal,
+.remove-meal:focus-visible {
+  display: flex;
 }
 
 .remove-meal:hover {
-  background: var(--error);
-  border-color: var(--error);
+  color: var(--danger);
 }
 
-.remove-meal:hover svg {
-  color: var(--bg-primary);
+.remove-meal svg {
+  width: 12px;
+  height: 12px;
 }
 
-/* Add meal button - Chanel Style */
+/* Touch devices: always show remove control */
+@media (hover: none) {
+  .remove-meal {
+    display: flex;
+  }
+}
+
+/* Add meal */
 .add-meal-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 12px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: 0;
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-  font-weight: 400;
+  gap: 6px;
+  padding: 10px;
+  margin-top: auto;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--ink-3);
+  font-size: var(--text-sm);
+  font-weight: 500;
   cursor: pointer;
-  transition: all var(--transition-fast);
-  font-family: var(--font-family);
+  transition: color var(--t-fast), border-color var(--t-fast),
+    background-color var(--t-fast);
 }
 
 .add-meal-btn:hover {
-  border-color: var(--text-primary);
-  color: var(--text-primary);
-  background: var(--neutral-50);
+  color: var(--gold);
+  border-color: var(--gold);
+  background: var(--gold-soft);
 }
 
 .add-meal-btn svg {
-  width: 16px;
-  height: 16px;
+  width: 15px;
+  height: 15px;
 }
 
-/* Planner actions - LUXURY Chanel Style */
+/* Footer action */
 .planner-actions {
-  margin-top: 48px;
   display: flex;
   justify-content: center;
-  padding: 0 20px;
-  position: relative;
+  padding-bottom: 16px;
 }
 
-.planner-actions::before {
-  content: '';
-  position: absolute;
-  top: -24px;
-  left: 20px;
-  right: 20px;
-  height: 1px;
-  background: var(--border);
-}
-
-.grocery-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  background: linear-gradient(135deg, var(--error) 0%, var(--error) 100%);
-  color: var(--bg-primary);
-  border: 3px solid var(--error);
-  padding: 20px 32px;
-  border-radius: 0;
-  font-size: 1rem;
-  font-weight: 600;
-  font-family: var(--font-family-serif);
-  letter-spacing: 0.025em;
-  text-transform: uppercase;
-  transition: all var(--transition-fast);
-  width: 100%;
-  max-width: 360px;
-  min-height: 72px; /* Luxury touch target */
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  box-shadow: var(--shadow-xl);
-  position: relative;
-  overflow: hidden;
-}
-
-.grocery-btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.6s ease;
-}
-
-.grocery-btn:hover::before {
-  left: 100%;
-}
-
-.grocery-btn:hover {
-  background: linear-gradient(135deg, var(--error) 0%, var(--error) 100%);
-  border-color: var(--error);
-  transform: translateY(-4px) scale(1.02);
-  box-shadow: var(--shadow-xl);
-  filter: brightness(0.9);
-}
-
-.grocery-btn:active {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: var(--shadow-lg);
-}
-
-.grocery-btn svg {
-  width: 24px;
-  height: 24px;
-  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
-}
-
-/* Modal - Chanel Style */
-.modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  z-index: 200;
-}
-
-.modal {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  width: 100%;
-  max-width: 420px;
-  max-height: 80vh;
-  overflow: hidden;
+/* Add-meal modal internals */
+.no-recipes {
   display: flex;
   flex-direction: column;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 24px;
-  border-bottom: 1px solid var(--border);
-}
-
-.modal-header h2 {
-  font-size: 1.25rem;
-  font-weight: 400;
-  color: var(--text-primary);
-  margin: 0;
-  font-family: var(--font-family-serif);
-}
-
-.close-btn {
-  width: 32px;
-  height: 32px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all var(--transition-fast);
-}
-
-.close-btn:hover {
-  background: var(--neutral-50);
-}
-
-.close-btn svg {
-  width: 16px;
-  height: 16px;
-  color: var(--text-secondary);
-}
-
-.modal-content {
-  padding: 24px;
-  overflow-y: auto;
-}
-
-.no-recipes {
+  gap: 16px;
   text-align: center;
-  padding: 40px 20px;
-}
-
-.no-recipes p {
-  color: var(--text-secondary);
-  margin: 0 0 24px 0;
-  font-size: 0.875rem;
-  font-family: var(--font-family);
+  padding: 24px 8px;
+  color: var(--ink-2);
 }
 
 .recipe-select-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 8px;
 }
 
 .recipe-select-item {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px;
-  border: 1px solid var(--border);
-  background: var(--surface);
-  border-radius: 0;
-  cursor: pointer;
+  gap: 12px;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
   text-align: left;
-  transition: all var(--transition-fast);
-  color: var(--text-primary);
+  cursor: pointer;
+  transition: border-color var(--t-fast), background-color var(--t-fast);
 }
 
 .recipe-select-item:hover {
-  background: var(--neutral-50);
-  border-color: var(--text-primary);
+  border-color: var(--gold);
+  background: var(--gold-soft);
 }
 
 .select-thumb {
-  width: 56px;
-  height: 56px;
-  border-radius: 0;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
   object-fit: cover;
   flex-shrink: 0;
 }
 
 .select-info {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
 }
 
 .select-title {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 400;
-  color: var(--text-primary);
-  margin-bottom: 4px;
-  font-family: var(--font-family);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--ink);
   line-height: 1.3;
 }
 
 .select-meta {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  font-family: var(--font-family);
-}
-
-/* Mobile Responsive - Card-Based Week View */
-@media (max-width: 767px) {
-  .planner-page {
-    padding: 16px;
-    padding-bottom: 160px; /* Extra padding for navigation + button clearance */
-  }
-
-  .planner-header {
-    flex-direction: column;
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-
-  .planner-header h1 {
-    font-size: 1.75rem;
-  }
-
-  /* Card-based layout for mobile week view */
-  .kanban-board {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    overflow-x: visible;
-  }
-
-  .day-column {
-    width: 100%;
-    background: var(--surface);
-    border: 2px solid var(--border);
-    border-radius: 0;
-    padding: 20px;
-    min-height: auto;
-    transition: all var(--transition-fast);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .day-column::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--error) 0%, var(--error) 50%, var(--error) 100%);
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-  }
-
-  .day-column:hover {
-    border-color: var(--error);
-    box-shadow: var(--shadow-lg);
-    transform: translateY(-2px);
-  }
-
-  .day-column:hover::before {
-    opacity: 1;
-  }
-
-  .day-column.today::before {
-    opacity: 1;
-    background: linear-gradient(90deg, var(--error) 0%, var(--error) 50%, var(--error) 100%);
-  }
-
-  .day-column.today {
-    border-color: var(--error);
-    background: var(--error-light);
-  }
-
-  .day-header {
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-  }
-
-  .day-name {
-    font-size: 1.125rem;
-    font-weight: 600;
-    font-family: var(--font-family-serif);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-primary);
-  }
-
-  .today-badge {
-    font-size: 0.75rem;
-    padding: 4px 8px;
-    font-weight: 500;
-    border: 1px solid var(--error-ring);
-    background: var(--error-light);
-    color: var(--error);
-  }
-
-  .day-meals {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    min-height: auto;
-  }
-
-  .day-meals:empty::after {
-    content: "No meals planned";
-    color: var(--text-secondary);
-    font-size: 0.8rem;
-    font-family: var(--font-family);
-    text-align: center;
-    padding: 20px 0;
-    opacity: 0.6;
-  }
-
-  .meal-card {
-    background: var(--neutral-50);
-    border: 2px solid var(--border);
-    padding: 14px;
-    border-radius: 0;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    transition: all var(--transition-fast);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .meal-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, var(--error) 0%, var(--error) 50%, var(--error) 100%);
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-  }
-
-  .meal-card:hover {
-    background: var(--surface);
-    border-color: var(--error);
-    transform: translateX(4px);
-    box-shadow: var(--shadow-md);
-  }
-
-  .meal-card:hover::before {
-    opacity: 1;
-  }
-
-  .meal-thumb {
-    width: 48px;
-    height: 48px;
-    border-radius: 0;
-    flex-shrink: 0;
-  }
-
-  .meal-info {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .meal-title {
-    font-size: 0.9rem;
-    font-weight: 400;
-    font-family: var(--font-family);
-    color: var(--text-primary);
-    margin-bottom: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .meal-time {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    font-family: var(--font-family);
-  }
-
-  .remove-meal {
-    width: 28px;
-    height: 28px;
-    border: 1px solid var(--border);
-    background: var(--surface);
-    border-radius: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    flex-shrink: 0;
-  }
-
-  .remove-meal:hover {
-    background: var(--error);
-    border-color: var(--error);
-  }
-
-  .remove-meal:hover svg {
-    color: var(--bg-primary);
-  }
-
-  .add-meal-btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    padding: 16px 20px;
-    border: 2px solid var(--border);
-    background: var(--surface);
-    border-radius: 0;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    font-weight: 500;
-    font-family: var(--font-family);
-    cursor: pointer;
-    transition: all var(--transition-fast);
-    margin-top: 12px;
-    min-height: 52px;
-    touch-action: manipulation;
-    -webkit-tap-highlight-color: transparent;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .add-meal-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, var(--error-light), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .add-meal-btn:hover::before {
-    left: 100%;
-  }
-
-  .add-meal-btn:hover {
-    border-color: var(--error);
-    color: var(--error);
-    background: var(--error-light);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
-  }
-
-  .add-meal-btn svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .planner-actions {
-    margin-top: 40px;
-    padding: 0 16px;
-  }
-
-  .grocery-btn {
-    padding: 24px 28px;
-    font-size: 1.1rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    min-height: 80px; /* Ultra luxury touch target */
-    max-width: 100%;
-    border-width: 4px;
-    box-shadow: var(--shadow-xl);
-  }
-
-  .grocery-btn:hover {
-    transform: translateY(-6px) scale(1.03);
-    box-shadow: var(--shadow-xl);
-  }
-
-  .grocery-btn:active {
-    transform: translateY(-3px) scale(1.02);
-  }
-
-  .modal {
-    max-width: calc(100vw - 32px);
-    max-height: calc(100vh - 40px);
-  }
-
-  .modal-header {
-    padding: 16px;
-  }
-
-  .modal-content {
-    padding: 16px;
-  }
-
-  .recipe-select-item {
-    padding: 12px;
-  }
-
-  .select-thumb {
-    width: 48px;
-    height: 48px;
-  }
-}
-
-  .modal-header {
-    padding: 20px;
-  }
-
-  .modal-content {
-    padding: 20px;
-  }
-}
-
-/* Very Small Mobile - Enhanced Card Layout */
-@media (max-width: 480px) {
-  .day-column {
-    padding: 14px;
-  }
-
-  .day-header {
-    margin-bottom: 14px;
-    padding-bottom: 10px;
-  }
-
-  .day-name {
-    font-size: 0.95rem;
-  }
-
-  .meal-card {
-    padding: 10px;
-    gap: 10px;
-  }
-
-  .meal-thumb {
-    width: 44px;
-    height: 44px;
-  }
-
-  .meal-title {
-    font-size: 0.85rem;
-  }
-
-  .meal-time {
-    font-size: 0.7rem;
-  }
-
-  .remove-meal {
-    width: 24px;
-    height: 24px;
-  }
-
-  .remove-meal svg {
-    width: 12px;
-    height: 12px;
-  }
-
-  .add-meal-btn {
-    padding: 12px 16px;
-    font-size: 0.8rem;
-  }
-
-  .grocery-btn {
-    padding: 14px 20px;
-    font-size: 0.85rem;
-  }
-
-  .liked-recipe-card-wrapper {
-    margin-bottom: 16px;
-  }
-
-  .quick-actions {
-    padding: 16px;
-  }
-
-  .quick-add-btn {
-    padding: 12px 16px;
-    font-size: 0.85rem;
-  }
-}
-
-/* Tablet Responsive - Chanel Style */
-@media (min-width: 768px) and (max-width: 1023px) {
-  .kanban-board {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-  }
-
-  .day-column {
-    padding: 16px;
-  }
-}
-
-/* Desktop Responsive - Chanel Style */
-@media (min-width: 768px) {
-  .planner-page {
-    padding: 24px;
-  }
-
-  .planner-header {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-  }
-
-  .planner-header h1 {
-    font-size: 2.5rem;
-  }
-
-  .kanban-board {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 20px;
-    overflow-x: visible;
-  }
-
-  .day-column {
-    flex: 1;
-    min-width: unset;
-    padding: 20px;
-  }
-
-  .day-name {
-    display: none;
-  }
-
-  .day-full {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text-primary);
-    font-family: var(--font-family);
-    text-transform: uppercase;
-    letter-spacing: 0.025em;
-  }
-
-  .day-meals {
-    min-height: 240px;
-  }
-
-  .planner-actions {
-    margin-top: 48px;
-    margin-bottom: 140px; /* Increased bottom margin to clear navigation - 80px button + 60px nav */
-    padding: 0 16px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .day-column {
-    padding: 24px;
-  }
-
-  .meal-thumb {
-    width: 52px;
-    height: 52px;
-  }
-
-  .meal-title {
-    font-size: 0.9rem;
-  }
-
-  .modal {
-    max-width: 480px;
-  }
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+  text-transform: capitalize;
 }

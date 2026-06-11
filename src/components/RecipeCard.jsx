@@ -3,7 +3,6 @@ import './RecipeCard.css';
 
 export function RecipeCard({ recipe, isLiked, onClick, onLikeToggle }) {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
 
   const totalTime = recipe.prepTime + recipe.cookTime;
 
@@ -22,52 +21,34 @@ export function RecipeCard({ recipe, isLiked, onClick, onLikeToggle }) {
   };
 
   return (
-    <div
-      className="recipe-card"
-      onClick={handleCardClick}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
+    <article className="recipe-card" onClick={handleCardClick}>
       <div className="card-image-container">
         <img
           src={recipe.image}
           alt={recipe.title}
+          loading="lazy"
           className={`card-image ${imageLoaded ? 'loaded' : ''}`}
           onLoad={() => setImageLoaded(true)}
         />
-        {!imageLoaded && (
-          <div className="image-placeholder">
-            <div className="placeholder-shimmer"></div>
-          </div>
-        )}
+        {!imageLoaded && <div className="image-placeholder" />}
 
-        {/* Like Button */}
         <button
           className={`like-button ${isLiked ? 'liked' : ''}`}
           onClick={handleLikeClick}
           aria-label={isLiked ? 'Remove from favorites' : 'Add to favorites'}
+          aria-pressed={isLiked}
         >
-          <svg viewBox="0 0 24 24" className="heart-icon">
+          <svg viewBox="0 0 24 24" className="heart-icon" aria-hidden="true">
             <path
               d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
               fill={isLiked ? 'currentColor' : 'none'}
               stroke="currentColor"
-              strokeWidth="2"
+              strokeWidth="1.75"
             />
           </svg>
-          {isLiked && (
-            <div className="heart-particles">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="particle" style={{ animationDelay: `${i * 0.1}s` }}></div>
-              ))}
-            </div>
-          )}
         </button>
 
-        {/* Time Badge */}
-        <div className="time-badge">
-          <span className="time-text">{totalTime} min</span>
-        </div>
+        <span className="time-badge">{totalTime} min</span>
       </div>
 
       <div className="card-content">
@@ -75,10 +56,13 @@ export function RecipeCard({ recipe, isLiked, onClick, onLikeToggle }) {
         <p className="recipe-description">{recipe.description}</p>
 
         <div className="recipe-tags">
-          <span className="tag">{recipe.tags[0]?.replace('-', ' ') || 'Recipe'}</span>
-          <span className="tag">{recipe.tags[1]?.replace('-', ' ') || ''}</span>
+          {recipe.tags.slice(0, 2).map((tag) => (
+            <span key={tag} className="tag">
+              {tag.replace(/-/g, ' ')}
+            </span>
+          ))}
         </div>
       </div>
-    </div>
+    </article>
   );
 }
