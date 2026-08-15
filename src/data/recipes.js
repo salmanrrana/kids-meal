@@ -3903,5 +3903,1932 @@ export const recipes = [
     ],
     "sourceUrl": "https://www.skinnytaste.com/air-fryer-burger-bites/",
     "sourceName": "Skinnytaste"
+  },
+  {
+    "id": "apple-cinnamon-pancakes",
+    "title": "Apple Cinnamon Pancakes",
+    "description": "Make breakfast extra special with these fluffy and super delicious Apple Cinnamon Pancakes. Perfect to enjoy any day of the week!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2024/08/Apple-Cinnamon-Pancakes-Pour.jpg",
+    "prepTime": 15,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "breakfast",
+      "american",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "2 large apples ($1.50)",
+      "2 Tbsp butter ($0.28)",
+      "1/2 tsp cinnamon ($0.05)",
+      "2 Tbsp brown sugar ($0.08)",
+      "1 Tbsp water ($0.00)",
+      "1 1/4 cup all-purpose flour ($0.30)",
+      "1.5 tsp baking powder ($0.05)",
+      "1/2 tsp baking soda ($0.03)",
+      "1/2 tsp salt ($0.03)",
+      "1 tsp cinnamon ($0.10)",
+      "3 Tbsp granulated sugar ($0.05)",
+      "1 cup buttermilk* ($0.53)",
+      "1 large egg, beaten ($0.22)",
+      "1/4 cup butter, melted ($0.56)",
+      "1 tsp vanilla extract ($0.30)",
+      "1 Tbsp butter (for cooking pancakes) ($0.14)"
+    ],
+    "steps": [
+      "Peel, remove the core, and dice the apples.",
+      "Melt 2 Tbsp butter in a small pot over medium-low heat. Add the diced apples, cinnamon, brown sugar and water to the pot. Stir together and allow the apples to come up to a simmer. Cook the apples for 10-15 minutes, stirring occasionally, until they are tender. Remove the pot from the heat and cover with a lid to keep warm.",
+      "While the apples are cooking, start on the pancakes. In a large bowl whisk together the flour, baking powder, baking soda, salt, cinnamon, and granulated sugar.",
+      "In a separate bowl, whisk together the buttermilk, egg, melted butter, and vanilla.",
+      "Pour the wet ingredients into the same bowl as the dry ingredients. Stir together until just combined. Be careful not to overmix at this point. The batter will be a little thick.",
+      "Heat a large nonstick skillet over medium heat. Once hot add ½ Tbsp of butter and swirl around to coat the surface. Add about ¼ cup pancake batter to the hot skillet. I like to cook two pancakes at a time.",
+      "Cook the pancakes until bubbles form over the surface and begin to pop. The edges and bottom of the pancakes will also start to become golden brown (about 60-90 seconds). Now flip the pancakes and cook on the second side until golden brown (about 30-60 seconds).",
+      "Repeat with the remaining batter, adding more butter to the skillet between batches or as needed, until all of the pancakes have been cooked. Keep the pancakes warm on a plate under a towel or on a baking sheet in a warm oven until all of the pancakes have been cooked.",
+      "Now serve the pancakes with several spoonfuls of cooked cinnamon apples on top and a drizzle of warm maple syrup. Enjoy!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/apple-cinnamon-pancakes/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "apple-spice-pork-chops",
+    "title": "Apple Spice Pork Chops",
+    "description": "These Apple Spice Pork Chops are smothered with apples, onions, cinnamon, and a buttery pan sauce that is sweet, salty, and rich.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2011/01/Apple-Spice-Pork-Chops-finished.jpg",
+    "prepTime": 10,
+    "cookTime": 35,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "main-course",
+      "american",
+      "pork-chop-recipe",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "4 pork chops ($6.44)",
+      "2 Tbsp vegetable oil ($0.08)",
+      "Pinch salt and pepper ($0.05)",
+      "1 med onion ($0.38)",
+      "2 fuji apples ($1.99)",
+      "2 Tbsp butter ($0.26)",
+      "1 Tbsp brown sugar ($0.03)",
+      "1/4 tsp cinnamon ($0.02)",
+      "1/8 tsp nutmeg ($0.02)",
+      "1 cup chicken broth ($0.13)"
+    ],
+    "steps": [
+      "Heat the vegetable oil in a heavy skillet over medium heat. While the skillet is heating, open the pork chops and season each side with a pinch of salt and freshly ground pepper.",
+      "Once the oil is hot and shimmering, place the chops in the pan. Cook the chops undisturbed for 5-7 minutes or until the bottoms form a nice brown crust. If your chops are sticking to the pan, that means they have not formed a crust yet. They will “let go” once the crust forms. Flip the chops and cook the second side in the same manner. It should take 5-7 minutes for each side.",
+      "While the chops are searing, thinly slice the onion and slice the apples into wedges. Once the chops have browned on both sides, remove them to a clean plate (they do not need to be cooked through at this point). Add the apples, onions, and butter to the skillet and sauté until the onions are softened. Allow the moisture from the apples and onions to dissolve the browned bits from the skillet as they cook.",
+      "Add the broth, brown sugar, cinnamon and nutmeg to the skillet with the apples and onions. Stir until everything is combined, then return the chops to the pan, along with any juices that may have collected on the plate. Nestle the chops down in the mixture, making sure some onions and apples are on top of the chops.",
+      "Simmer the chops in the apple and onion mixture for about 10 minutes, or until the liquid has reduced by half, the apples are soft, and the pork chops are cooked through. Stir occasionally, moving the apples and onions around so they all have a chance to simmer and soften. Serve each chop with apples, onions and sauce spooned over top."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/apple-spice-pork-chops/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "arroz-con-salchichas-puerto-rican-rice-with-sausage",
+    "title": "Arroz Con Salchichas",
+    "description": "This Puerto Rican Arroz Con Salchichas recipe is a budget-friendly quick weeknight meal of rice and sausage that s both filling and flavorful.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2023/07/Arroz-Con-Salchichas-Overhead.jpg",
+    "prepTime": 5,
+    "cookTime": 30,
+    "servings": 6,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "lunch",
+      "latin",
+      "arroz",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 Tbsp cooking oil ($0.04)",
+      "1 tsp adobo* ($0.10)",
+      "1 packet sazón** ($0.19)",
+      "1/4 cup diced yellow onion ($0.19)",
+      "1 Tbsp minced garlic ($0.24)",
+      "1/4 cup sofrito ($0.36)",
+      "2 Tbsp tomato sauce ($0.06)",
+      "2 Tbsp pimiento stuffed Spanish olives ($0.30)",
+      "2 tsp capers ($0.21)",
+      "2 5oz. cans Vienna sausages ($1.50)",
+      "2 cups long-grain white rice ($0.74)",
+      "2 1/2 cups chicken broth, boiling ($1.12)",
+      "1/4 cup chopped cilantro leaves for garnish ($0.11)"
+    ],
+    "steps": [
+      "Add the cooking oil to a large heavy-bottomed pot set over medium-high heat. Add the adobo and sazón and cook until fragrant, about 30 seconds. Add the diced yellow onion and cook until translucent, about 2 minutes. Add the minced garlic and cook until fragrant, about 30 seconds.",
+      "Add the sofrito, tomato sauce, green olives, and capers to the pot, and cook until fragrant, about 2 minutes. In the meantime, slice the Vienna sausages into 1/2-inch-thick rounds and rinse the rice until the water runs clear, making sure to drain off all excess water after rinsing.",
+      "Add the sliced Vienna sausages to the pot and sauté until browned.",
+      "Finally, add the rinsed rice and boiling chicken broth to the pot. Stir and bring to a hard boil, with large bubbles breaking through the surface of the rice. Stir once more, turn the heat to low, and cover the pot.",
+      "Simmer the rice over low until the rice is tender, about 15 minutes. Take the pot off the heat, but leave it covered. Let it rest, covered, for 10 minutes. Uncover, stir the rice, taste, and adjust the seasoning to your liking. Stir in cilantro leaves then serve yourself a big bowl full and prepare to chow!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/arroz-con-salchichas-puerto-rican-rice-with-sausage/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "bacon-spinach-pasta-parmesan",
+    "title": "Bacon and Spinach Pasta with Parmesan",
+    "description": "Bacon and Spinach Pasta with Parmesan is a quick and flavorful weeknight dinner that only requires a few ingredients.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2014/10/Bacon-and-Spinach-Pasta-with-Parmesan-bowl-1.jpg",
+    "prepTime": 10,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "6 oz. bacon ($2.15)",
+      "1 yellow onion ($0.25)",
+      "2 cups chicken broth ($0.28)",
+      "1/2 lb. pasta ($0.50)",
+      "1/4 lb. fresh spinach (about 4 cups) ($1.50)",
+      "1/3 cup grated Parmesan ($0.55)"
+    ],
+    "steps": [
+      "Cut the bacon across the strips into one-inch pieces. Sauté the bacon in a large skillet until it is brown and crispy (no extra fat needed). Remove the browned bacon to a bowl with a slotted spoon. Carefully pour the fat off into a separate bowl, leaving about one tablespoon in the skillet.",
+      "While the bacon cooks, dice the onion. Once the bacon is removed and the fat is drained from the skillet, add the diced onions and sauté until they are soft and transparent. Allow the moisture from the onions to dissolve some of the browned bits off of the bottom of the skillet.",
+      "Add two cups of chicken broth to the skillet and dissolve off any remaining browned bits of bacon drippings from the bottom of the skillet.",
+      "Finally, add the uncooked pasta to the skillet, place a lid on top, and let the skillet come to a boil over high heat. Once it reaches a boil, give it a quick stir, turn the heat down to low, and let simmer for 10 minutes with the lid in place. Give the skillet a stir to loosen the pasta from the bottom every few minutes or so, replacing the lid quickly each time. After 10 minutes the pasta should be tender and most of the broth absorbed. There should be a little bit of thick, saucy broth remaining in the bottom of the skillet.",
+      "Add the fresh spinach to the skillet and stir until it has wilted into the pasta. Turn off the heat, add the cooked bacon back to the skillet, sprinkle the Parmesan over top, stir to combine, and then serve."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/bacon-spinach-pasta-parmesan/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "bacon-caramelized-pineapple-pizza",
+    "title": "Bacon Pizza with Caramelized Pineapple",
+    "description": "Bacon and Caramelized Pineapple Pizza is everything your sweet and salty dreams are made of.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2016/05/Bacon-and-Caramelized-Bacon-Pizza-cooked-1.jpg",
+    "prepTime": 10,
+    "cookTime": 25,
+    "servings": 8,
+    "difficulty": "easy",
+    "tags": [
+      "bacon-pizza-recipe",
+      "homemade-pizza",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "3 oz. bacon* ($0.88)",
+      "8 oz. can pineapple chunks in juice ($1.09)",
+      "1 Tbsp brown sugar ($0.04)",
+      "1 large pizza dough** ($0.59)",
+      "1/2 cup pizza sauce ($0.43)",
+      "4 oz. shredded Monterrey Jack cheese ($1.25)",
+      "2 green onions ($0.17)"
+    ],
+    "steps": [
+      "Slice the bacon into one-inch pieces. Cook in a large skillet over medium heat until crisp and brown on the edges, but still slightly soft in the center (about 5 minutes). The bacon will finish cooking on the pizza. Transfer the bacon to a paper towel lined plate and pour off most of the bacon grease from the skillet.",
+      "Drain the canned pineapple well. Cut the chunks in half to make smaller pieces. Add the pineapple chunks to the skillet along with the brown sugar. Sauté over medium heat until the pineapple gets brown and sticky on the edges (about 5 minutes). Remove from the heat.",
+      "Preheat the oven to 450ºF. Stretch the pizza dough to fit a 14 inch pizza pan. Spread the sauce over the surface of the dough. Sprinkle the shredded Monterrey Jack cheese over the sauce. Finally, top the pizza with the cooked bacon and caramelized pineapple pieces.",
+      "Bake the pizza for about 15 minutes, or until the crust is golden brown and the cheese is bubbly on top. After removing the pizza from the oven, top with sliced green onions, cut into eight pieces, then serve."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/bacon-caramelized-pineapple-pizza/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "baked-chicken-artichokes-tomatoes",
+    "title": "Baked Chicken with Artichokes and Tomatoes",
+    "description": "Baked Chicken with Artichokes and Tomatoes is an easy last minute dinner you can make with pantry staples.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2016/12/Baked-Chicken-with-Artichoke-Hearts-and-Tomatoes-front-1.jpg",
+    "prepTime": 10,
+    "cookTime": 35,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "easy-dinner",
+      "gluten-free",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 15oz. can diced tomatoes, drained ($0.69)",
+      "2 Tbsp olive oil ($0.22)",
+      "3 cloves garlic, minced ($0.24)",
+      "3/4 tsp dried oregano ($0.07)",
+      "1/4 tsp salt ($0.02)",
+      "Freshly cracked black pepper",
+      "1/2 Tbsp lemon juice ($0.02)",
+      "2 boneless, skinless chicken breast halves (about 1 lb. total) ($4.04)",
+      "1 pinch salt and pepper ($0.05)",
+      "1 14oz. can artichoke hearts ($2.29)",
+      "1 cup shredded mozzarella ($0.94)"
+    ],
+    "steps": [
+      "Drain the diced tomatoes. In a medium bowl, combine the drained tomatoes with the olive oil, lemon juice, minced garlic, oregano, salt, and some freshly cracked pepper. Stir well, then set the tomato mixture aside. Preheat the oven to 400ºF.",
+      "Place the chicken breasts on a cutting board and cover them with a sheet of plastic wrap. Use a mallet or rolling pin to carefully pound the chicken breasts to an even thickness. Don't pound with too much force or the breasts may split. Start at the thickest part of the breast and work your way out toward the edges. Once pounded, slice each chicken breast into two portions and season each side with a pinch of salt and pepper.",
+      "Drain the can of artichoke hearts and roughly chop them into smaller, bite-sized pieces. Place a handful of the artichoke pieces in the bottom of a casserole dish, then lay the chicken pieces over top. Cover the chicken with the remaining artichoke pieces. Pour the tomato mixture over top.",
+      "Bake the chicken, uncovered, in the fully preheated oven for 30 minutes. After 30 minutes, sprinkle one cup of mozzarella over top. Switch oven's setting from bake to broil and broil the dish (on the middle rack) for about 5 minutes or until the cheese is bubbly and browned. Serve immediately."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/baked-chicken-artichokes-tomatoes/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "bbq-beef-and-beans",
+    "title": "BBQ Beef and Beans",
+    "description": "Serve these sweet, tangy, and savory BBQ Beef and Beans with rice and cheese for a simple and comforting weeknight dinner the whole family will love.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2019/06/BBQ-Beef-and-Beans-dressed.jpg",
+    "prepTime": 5,
+    "cookTime": 25,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "lunch",
+      "main-course",
+      "american",
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 Tbsp cooking oil ($0.04)",
+      "2 cloves garlic, minced ($0.16)",
+      "1/2 lb. ground beef ($2.65)",
+      "1 15oz. can kidney beans ($0.89)",
+      "1 15oz. can black beans ($0.89)",
+      "8 oz. tomato sauce ($0.25)",
+      "2 Tbsp tomato paste ($0.10)",
+      "2 Tbsp apple cider vinegar ($0.12)",
+      "2 Tbsp brown sugar ($0.08)",
+      "2 Tbsp molasses ($0.35)",
+      "1/2 Tbsp Dijon mustard ($0.05)",
+      "1 tsp Worcestershire sauce ($0.02)",
+      "1 tsp smoked paprika ($0.10)",
+      "1/4 tsp garlic powder ($0.02)",
+      "1/4 tsp onion powder ($0.02)",
+      "1/8 tsp cayenne pepper (optional, $0.01)",
+      "freshly cracked pepper ($0.02)",
+      "salt to taste ($0.02)",
+      "4 cups cooked rice ($0.80)",
+      "4 oz. shredded cheddar ($0.85)",
+      "2 green onions, sliced ($0.22)"
+    ],
+    "steps": [
+      "Add the oil and minced garlic to a large skillet. Sauté the garlic for one minute over medium heat. Add the ground beef and continue to sauté until cooked through. If using a higher fat content beef, drain the excess fat before moving on to the next step.",
+      "Rinse the two cans of beans, then drain them well. Add the beans to the skillet with the ground beef.",
+      "Add the ingredients for the Homemade BBQ Sauce to the skillet (tomato sauce, tomato paste, apple cider vinegar, brown sugar, molasses, Dijon, Worcestershire sauce, smoked paprika, garlic powder, onion powder, optional cayenne, and some freshly cracked pepper).",
+      "Stir and cook the mixture until the sauce ingredients have combined and created a thick sauce. Allow the sauce to come up to a simmer and then simmer the beef and beans in the sauce for 5 minutes, stirring often. Taste the sauce and add salt to taste (I added 1/2 tsp).",
+      "To serve the BBQ Beef and Beans, place 1 cup cooked rice in each bowl, top with 1 cup of the BBQ Beef and Beans, then top with about 1/4 cup shredded cheddar and a sprinkle of sliced green onion."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/bbq-beef-and-beans/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "dollar-store-dinners-bean-quesadillas",
+    "title": "Bean Quesadillas and Spanish Rice",
+    "description": "These easy bean quesadillas and a side of Spanish rice are made using only ingredients from the dollar store for an easy and affordable meal",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2022/10/Dollar-Store-Dinners-Bean-Quesadillas-front.jpg",
+    "prepTime": 15,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "main-course",
+      "southwest",
+      "bean-quesadillas",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "12 oz. Santa Fe Blend frozen vegetables ($1.25)",
+      "1 15oz. can pinto beans ($1.25)",
+      "4 oz. cheddar cheese ($1.25)",
+      "1.5 tsp Bayou Blend seasoning* ($1.25)",
+      "8 flour tortillas ($1.25)",
+      "1 5.6oz. pkg Spanish rice ($1.25)",
+      "1 10oz. can Rotel (diced tomatoes with chiles) ($1.25)"
+    ],
+    "steps": [
+      "Thaw the frozen vegetables and drain them well. Rinse and drain the pinto beans. Shred the cheddar cheese.",
+      "Add the thawed vegetables, pinto beans, shredded cheese, and 1.5 tsp seasoning blend to a large bowl and stir to combine. Taste and adjust the seasoning or salt to your liking. Set the quesadilla filling aside.",
+      "Drain the liquid from the can of Rotel into a liquid measuring cup, then add water until you have 2 cups liquid total (or the recommended amount on the package of rice).",
+      "Add the rice packet, drained tomatoes, and measured liquid to a saucepot. Stir to combine. Place a lid on top and bring it up to a boil over high heat. Once boiling, turn the heat down to medium-low and simmer for 7 minutes (or follow the instructions on the packet). After 7 minutes, turn the heat off and set the rice aside.",
+      "While the rice is cooking, divide the quesadilla filling between 8 tortillas (a scant ½ cup each), spreading it over one half of the tortilla, then folding it closed.",
+      "Cook the filled quesadillas in a skillet over medium heat until the cheese is melted on the inside and the tortillas are crispy on the outside (I do not use oil, but you can if you prefer).",
+      "Slice the quesadillas in half or into thirds. Fluff the Spanish rice. Serve the quesadillas and rice together and enjoy!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/dollar-store-dinners-bean-quesadillas/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "beef-and-tomato-rice-bowl",
+    "title": "Beef and Tomato Rice Bowl",
+    "description": "This budget-friendly, easy Beef Tomato Rice Bowl is lip-smackingly good, endlessly adaptable, and perfect for a quick weeknight dinner!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2023/04/Beef-and-Tomato-Rice-Bowls-above.jpg",
+    "prepTime": 5,
+    "cookTime": 30,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "lunch",
+      "american",
+      "diced-tomato",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "2 Tbsp cooking oil ($0.08)",
+      "1/2 lb ground beef ($4.00)",
+      "1 3/4 tsp salt, divided ($0.05)",
+      "1 yellow onion, diced ($0.42)",
+      "2 cloves garlic, minced ( $0.10)",
+      "1/2 tsp oregano ($0.05)",
+      "1/4 tsp ground cumin ($0.03)",
+      "1 tsp Worcestershire sauce ($0.03)",
+      "1 15 oz. can diced tomatoes ($1.00)",
+      "1/2 cup chicken broth ($0.08)",
+      "1 15 oz. can chickpeas, drained ($0.79)",
+      "2 cups rice ($0.85)",
+      "3 cups water ($0.00)",
+      "2 Tbsp salted butter ($0.28)",
+      "1 pinch red pepper flakes (optional, $0.02)"
+    ],
+    "steps": [
+      "Set a deep stainless steel skillet over medium-high heat and add the cooking oil. Once the oil has warmed, add the ground beef and sprinkle it with a 1/2 teaspoon salt. Once the beef has browned, remove it from the pan and set aside. Keep about 2 tablespoons of rendered fat in the pan.",
+      "Add the diced onion to the pan and cook until translucent, about 2 minutes. Add the minced garlic to the pan and cook until fragrant, about 1 minute.",
+      "Add the beef back to the pan with oregano, ground cumin, and Worcestershire sauce. Top the meat with the diced tomatoes and their juices. Stir to combine.",
+      "Add the chicken broth and drained chickpeas to the beef mixture. Sprinkle with 1/4 teaspoon salt and stir to combine. Cover the pan and cook until the chickpeas soften, about 15 to 20 minutes.",
+      "While the beef mixture cooks, add the rice to a rice cooker, along with the water, salted butter, and remaining 1 teaspoon of salt.",
+      "When the beef and tomato mixture finishes cooking, sprinkle with red pepper flakes if desired. Divide the rice into four bowls and top with the beef mixture. Enjoy!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/beef-and-tomato-rice-bowl/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "blackberry-sage-pork-chops",
+    "title": "Blackberry Sage Pork Chops",
+    "description": "A quick pan sauce turns run of the mill pork chops into restaurant quality, date night worthy, Blackberry Sage Pork Chops.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2015/04/Blackberry-Sage-Pork-Chops-front-1.jpg",
+    "prepTime": 5,
+    "cookTime": 25,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "4 thin center cut pork chops (about 1 lb. total) ($4.15)",
+      "pinch of salt and pepper ($0.05)",
+      "1 Tbsp olive oil ($0.16)",
+      "1/2 cup blackberry jam or preserves ($1.38)",
+      "1 Tbsp butter ($0.10)",
+      "2 Tbsp balsamic vinegar ($0.40)",
+      "1 Tbsp water ($0.00)",
+      "1/2 tsp dried sage ($0.05)",
+      "1/8 tsp salt ($0.02)"
+    ],
+    "steps": [
+      "Take the chops out of the refrigerator and let them warm on the countertop for about 10 minutes. Remove them from the package, pat dry with a paper towel, then season both sides of each chop with a pinch of salt and pepper.",
+      "Heat 1 Tbsp of olive oil in a large skillet over medium to medium-high heat. Once the oil is hot (it should appear wavy on the surface, but not be smoking), add the chops. Let the pork chops cook until browned on each side (3-5 minutes per side), then transfer them to a clean plate. Remove the skillet from the heat.",
+      "Let the skillet cool for just a couple of minutes, then add the blackberry jam, butter, balsamic vinegar, water, and sage. Return the skillet to the burner and turn the heat on to low. Whisk the ingredients together until the jam and the browned bits on the bottom of the skillet have dissolved into the sauce. Turn the heat up to medium and let the sauce come to a simmer. Let the sauce simmer over medium heat until it's thick enough to coat a spoon (5 minutes or so). Turn the heat off, taste the sauce, and add salt as needed (I added 1/8 tsp).",
+      "Return the chops and any juices that have accumulated on the plate to the sauce. Coat each side of the chops in the sauce and let them warm through in the simmering sauce. Spoon the sauce over each chop after plating."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/blackberry-sage-pork-chops/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "broccoli-cheddar-pizza",
+    "title": "Broccoli Cheddar Pizza",
+    "description": "This broccoli cheddar pizza starts with a super creamy herb-filled white sauce then is topped with tender broccoli florets and cheddar.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2021/05/Broccoli-Cheddar-Pizza-pull.jpg",
+    "prepTime": 10,
+    "cookTime": 25,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "lunch",
+      "main-course",
+      "american",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 large pizza dough* ($0.30)",
+      "1 Tbsp butter ($0.11)",
+      "4 oz. cream cheese ($0.40)",
+      "1/2 cup milk ($0.15)",
+      "1/4 tsp garlic powder ($0.02)",
+      "1/4 tsp onion powder ($0.02)",
+      "1/2 tsp dried basil ($0.05)",
+      "1/2 tsp dried oregano ($0.05)",
+      "1/4 tsp salt ($0.01)",
+      "1/8 tsp freshly cracked black pepper ($0.01)",
+      "12 oz. frozen broccoli florets, thawed ($0.89)",
+      "6 oz. cheddar cheese, shredded ($1.27)"
+    ],
+    "steps": [
+      "Prepare the herby white sauce first. Combine the butter, cream cheese, milk, garlic powder, onion powder, basil, oregano, salt, and pepper in a small saucepot. Heat and stir over medium until the cream cheese has fully melted and the sauce is thick and creamy.",
+      "Preheat the oven to 450ºF. Stretch your pizza dough over a pizza pan. Spread the herby white sauce over the surface of the pizza dough.",
+      "Chop the thawed frozen broccoli into smaller pieces. Sprinkle the chopped broccoli over the herby white sauce on the pizza. Top with the shredded cheddar cheese.",
+      "Bake the pizza for 10-15 minutes, or until the pizza crust is golden brown and the cheddar on top is melted. Cut into eight pieces and serve!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/broccoli-cheddar-pizza/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "broccoli-shells-n-cheese",
+    "title": "Broccoli Shells and Cheese",
+    "description": "Broccoli shells and cheese is a classic American comfort food. Serve it as a hearty side with dinner, or as a light main dish.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2011/02/Broccoli-Shells-and-Cheese-above.jpg",
+    "prepTime": 10,
+    "cookTime": 30,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "lunch",
+      "american",
+      "broccoli-and-cheese",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "8 oz. pasta ($0.55)",
+      "1/2 lb. frozen broccoli florets* (see notes, $0.90)",
+      "1/2 small onion (about 1/2 cup diced, $0.18)",
+      "3 Tbsp butter ($0.33)",
+      "3 Tbsp all-purpose flour ($0.03)",
+      "2.5 cups milk ($0.65)",
+      "2 cups sharp cheddar (shredded, $1.89)",
+      "1/4 cup grated parmesan ($0.24)",
+      "Salt and pepper to taste ($0.05)"
+    ],
+    "steps": [
+      "Bring a large pot of water to a boil for the pasta. Once boiling, add the pasta and continue to boil until the pasta is tender. Drain the pasta in a colander and set it aside until ready to use.",
+      "Meanwhile, allow the broccoli to thaw. Once partially thawed, chop the florets into smaller, bite-sized pieces, and set them aside to fully thaw while you prepare the rest of the dish.",
+      "While the pasta is cooking, begin the cheese sauce. Finely dice the onion and add it to a sauce pot with the butter. Cook the onion and butter over medium heat until the onions are softened (about 2-3 minutes).",
+      "Add the flour to the butter and onion. The flour and butter will form a paste, or roux. Whisk the roux over medium heat for 1-2 minutes more taking care not to let it scorch. This slightly cooks the flour preventing the cheese sauce from having an overly flour or paste-like flavor.",
+      "Whisk the milk into the roux until no lumps remain. Add some freshly cracked pepper to the sauce. Bring the mixture up to a simmer, stirring often (you may need to raise the heat just slightly). When the sauce reaches a simmer, it will begin to thicken. When it is thick enough to coat the back of a spoon, it’s time to add the cheese.",
+      "Turn the burner off and whisk in the shredded cheddar, one handful at a time, until it is fully melted in. Next, stir in the grated Parmesan. Give the cheese sauce a taste and add salt and pepper, plus hot sauce if desired.",
+      "Once you have the cheese sauce seasoned to your liking, return the drained pasta to its large pot, add the chopped broccoli, and pour the cheese sauce over top. Stir until everything is combined and coated in the wonderfully cheesy sauce. Serve hot."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/broccoli-shells-n-cheese/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "butternut-squash-curry",
+    "title": "Butternut Squash Curry",
+    "description": "This butternut squash curry is easy, inexpensive and so deliciously warm, cozy, and filling. It s the perfect vegetarian comfort meal!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2022/11/Butternut-Squash-Curry-Bowl.jpg",
+    "prepTime": 15,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "main-course",
+      "indian",
+      "butternut-squash",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "2 lbs. butternut squash (about 4 cups diced) ($1.78)",
+      "1 yellow onion ($0.37)",
+      "2 cloves garlic ($0.16)",
+      "1 Tbsp grated fresh ginger ($0.30)",
+      "2 Tbsp olive oil ($0.32)",
+      "1 Tbsp curry powder ($0.30)",
+      "1 tsp ground cumin ($0.10)",
+      "1 15oz. can fire roasted diced tomatoes ($1.09)",
+      "1/2 cup water ($0.00)",
+      "1 13.5oz can full-fat coconut milk ($2.29)",
+      "2 oz. fresh spinach ($0.50)",
+      "1/2 tsp salt (or to taste) ($0.02)"
+    ],
+    "steps": [
+      "Peel and dice the butternut squash into ½-inch pieces. Dice the onion, mince the garlic, and grate the ginger.",
+      "Heat a large skillet over medium. Add the olive oil, onion, garlic, and ginger, and sauté for a few minutes, or until the onions are translucent. Add the curry powder and cumin and sauté for one minute more.",
+      "Add the diced tomatoes and water to the skillet. Stir to combine and dissolve any browned bits off the bottom of the skillet.",
+      "Add the diced butternut squash and stir to combine. Place a lid on the skillet and let the squash simmer in the sauce for about 10 minutes, or just until fork-tender.",
+      "Add the coconut milk to the skillet, stir to combine, and heat through.",
+      "Once the sauce is hot again, add the fresh spinach. Stir to combine and allow the spinach to wilt in the hot sauce. Season the curry to taste with salt, then enjoy!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/butternut-squash-curry/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "chicken-cranberry-salad-lemon-poppy-seed-dressing",
+    "title": "Chicken and Cranberry Salad with Lemon Poppy Seed Dressing",
+    "description": "This Chicken and Cranberry Salad combines tender cabbage, sweet cranberries, nutty almonds, a tart lemon poppy seed dressing, plus enough chicken to make it a meal!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2017/01/Chicken-and-Cranberry-Salad-with-Lemon-Poppy-Seed-Dressing-close.jpg",
+    "prepTime": 30,
+    "cookTime": 0,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "meal-salad",
+      "side-dish",
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1/4 cup neutral salad oil* ($0.16)",
+      "2 Tbsp fresh lemon juice ($0.30)",
+      "1/2 Tbsp honey ($0.06)",
+      "1/4 tsp sugar ($0.01)",
+      "1/2 Tbsp Dijon mustard ($0.04)",
+      "1/4 Tbsp poppy seeds ($0.07)",
+      "1/8 tsp onion powder ($0.01)",
+      "1/4 tsp salt ($0.01)",
+      "6 cups shredded cabbage, (about 1/2 head) ($0.54)",
+      "Salt, as needed ($0.10)",
+      "1 cup cooked chicken, diced or shredded ($2.02)",
+      "1/2 cup sliced almonds ($1.04)",
+      "1/2 cup dried cranberries ($0.63)",
+      "3 green onions, sliced ($0.26)"
+    ],
+    "steps": [
+      "Remove an damaged outer leaves from the cabbage. Cut the cabbage into wedges, remove the core, then slice crosswise into thin shreds. Place the thinly shredded cabbage in a colander and sprinkle liberally with salt. Massage the salt into the cabbage and let it sit for about five minutes.",
+      "While the cabbage is being salted, prepare the dressing by combining the oil, lemon juice, honey, sugar, Dijon, poppy seeds, onion powder, and salt in a bowl or jar. Whisk the ingredients together or place a lid on the jar and shake until it forms an emulsion (10-15 seconds).",
+      "Rinse the cabbage well to remove the salt. Toss the cabbage in the colander as you rinse to make sure all the salt is removed. Let the excess water drain away.",
+      "Once the cabbage is rinsed and drained, add it to a bowl with the chopped chicken, sliced almonds, dried cranberries, and sliced green onions. Give the dressing a quick stir, then pour it over the salad. Toss the salad until everything is evenly mixed and coated in dressing. Let marinate 5-10 minutes before serving."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/chicken-cranberry-salad-lemon-poppy-seed-dressing/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "coconut-chicken-w-sweet-chili-dipping-sauce",
+    "title": "Coconut Chicken Strips with Sweet Chili Sauce",
+    "description": "These tender and crispy homemade Coconut Chicken Strips are perfect for dipping in a tangy and sweet chili sauce.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2010/01/Coconut-Chicken-Strips-dip.jpg",
+    "prepTime": 15,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "lunch",
+      "snack",
+      "american",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1.3 lbs. boneless, skinless chicken breasts ($7.70)",
+      "¼ tsp salt ($0.01)",
+      "2 Tbsp all-purpose flour ($0.02)",
+      "2 large eggs ($0.42)",
+      "1/4 cup coconut milk ($0.25)",
+      "1 cup panko breadcrumbs ($0.22)",
+      "1 cup sweetened flaked coconut ($0.56)",
+      "1/2 cup cooking oil, divided* ($0.32)",
+      "1 cup sweet chili sauce ($1.43)"
+    ],
+    "steps": [
+      "Slice the chicken breasts into ½-inch wide strips, slicing diagonally to maintain a more even length among the strips.",
+      "Sprinkle the salt and flour over top of the sliced chicken. Toss the chicken until they re evenly coated.",
+      "Whisk together the eggs and coconut milk in a bowl. In a separate wide shallow bowl, stir together the breadcrumbs and flaked coconut.",
+      "To bread the chicken, dip each chicken strip into the egg wash, allow the excess to drip off, then dip it into the breadcrumb mixture until it s fully coated. Place the breaded chicken strips on a clean plate or tray until they re all breaded.",
+      "Once they re all breaded, it s time to fry. Heat ¼ cup cooking oil in a skillet over medium heat. To test the heat of the oil, drop a breadcrumb into the oil. It should begin to sizzle immediately. If the oil begins to smoke at anytime, remove it from the heat and allow it to cool down.",
+      "Once the oil is hot, add the chicken strips, several at a time, leaving a little space between each one. Cook the chicken strips for about three minutes on on each side, or until they re deeply golden brown. Transfer the cooked chicken to a paper towel lined plate to drain, then repeat with another batch of chicken. Remove any burned pieces of coconut before beginning the next batch, and add more oil as needed, making sure to wait until it is hot before adding more chicken.",
+      "After frying all of the chicken, it s time to serve! Serve hot with a bowl of sweet chili sauce for dipping."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/coconut-chicken-w-sweet-chili-dipping-sauce/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "creamy-black-bean-taquitos",
+    "title": "Creamy Black Bean Taquitos",
+    "description": "Creamy Black Bean Taquitos are an easy, tasty, and inexpensive appetizer for football parties or just for fun!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2017/01/Creamy-Black-Bean-Taquitos-above.jpg",
+    "prepTime": 10,
+    "cookTime": 20,
+    "servings": 15,
+    "difficulty": "easy",
+    "tags": [
+      "appetizer",
+      "snack",
+      "southwest",
+      "bean-taquito",
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "4 oz. cream cheese (room temperature) ($1.00)",
+      "1 15oz. can black beans ($0.95)",
+      "1 4oz. can diced green chiles ($1.09)",
+      "2 green onions ($0.21)",
+      "3 dashes hot sauce (optional) ($0.05)",
+      "1/8 tsp garlic powder ($0.02)",
+      "1/8 tsp salt (or to taste) ($0.02)",
+      "15 6-inch corn tortillas ($1.37)",
+      "3 Tbsp cooking oil, divided, for frying ($0.12)"
+    ],
+    "steps": [
+      "Rinse and drain the black beans. Drain the diced green chiles. Slice the green onions. Add the cream cheese, black beans, green chiles, green onion, optional hot sauce, garlic powder, and salt to a bowl. Stir together until evenly combined, then taste and adjust the salt or hot sauce to your liking.",
+      "Stack 5 tortillas on a plate, cover with a damp paper towel, and microwave for about 20 seconds to soften (this helps prevent them from cracking when rolled). Heat a large non-stick or cast iron skillet over medium heat. Working quickly as the skillet heats, place about 2 Tbsp of the black bean filling in each tortilla then roll tightly closed.",
+      "Once all five are filled, add about 1 Tbsp cooking oil to the skillet, give it a few seconds to heat (it should shimmer), then add the filled taquitos seam side down. Cook the taquitos on each side until brown and crispy, then transfer to a clean plate.",
+      "Repeat the process in small batches of five, adding a little more oil to the skillet each time, until all the filling has been used (about 15 taquitos). Serve while still hot."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/creamy-black-bean-taquitos/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "creamy-spinach-artichoke-chicken",
+    "title": "Creamy Spinach Artichoke Chicken",
+    "description": "Creamy Spinach Artichoke Chicken is a creamy and indulgent chicken dish that is fast and easy, but still impressive enough for date night.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2019/04/Spoon-Spinach-Artichoke-Sauce-over-Chicken.jpg",
+    "prepTime": 10,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "main-course",
+      "american",
+      "date-night-recipe",
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "2 boneless, skinless chicken breasts (about 1-1.25 lb. total) ($6.29*)",
+      "1 pinch salt & pepper ($0.03)",
+      "1 Tbsp cooking oil ($0.04)",
+      "4 oz. fresh spinach ($0.60)",
+      "1 12oz. jar quartered artichoke hearts in water ($2.79)",
+      "4 cloves garlic ($0.32)",
+      "1 Tbsp butter ($0.18)",
+      "1/2 cup chicken broth ($0.07)",
+      "1/2 cup sour cream ($0.22)",
+      "4 oz. cream cheese ($0.40)",
+      "1/4 cup milk ($0.08)",
+      "1/4 cup grated parmesan ($0.44)",
+      "1 pinch crushed red pepper ($0.02)",
+      "salt and pepper to taste ($0.05)"
+    ],
+    "steps": [
+      "Place the chicken on a cutting board and cover with a sheet of plastic to prevent splatter. Use a mallet or rolling pin to gently pound the chicken out to an even thickness (about 3/4-inch thick). Slice each chicken breast in half to create two pieces each. Or, use thin sliced chicken breast filets. Season the breasts with a pinch of salt and pepper.",
+      "Heat the cooking oil in a large skillet over medium. Once hot, swirl the oil to coat the surface of the skillet. Add the chicken breasts and cook until golden brown on each side and cooked through (5-7 minutes each side).",
+      "While the chicken is cooking, roughly chop the spinach into smaller pieces. Drain the artichoke hearts and roughly chop them as well. Mince the garlic.",
+      "Once the chicken is cooked through, remove it to a clean plate and cover to keep warm. Add the butter and minced garlic to the skillet and continue to sauté over medium for one minute or just until the garlic begins to soften.",
+      "Add the chicken broth to the skillet and stir to dissolve the browned bits from the bottom of the skillet. Cut the cream cheese into chunks and add it to the skillet along with the sour cream. Whisk the ingredients together and continue to cook over medium, whisking continuously, until the cream cheese is fully melted and the sauce is smooth. Add the milk and stir until smooth again.",
+      "Add the Parmesan, an optional pinch of red pepper flakes, and some freshly ground pepper to the skillet. Continue to heat and whisk for a couple minutes more. Finally, stir the spinach into the sauce, a handful or two at a time, until wilted (this should only take about a minute), then stir in the artichoke hearts.",
+      "Return the chicken to the skillet and spoon the creamy spinach artichoke sauce over top. Serve hot."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/creamy-spinach-artichoke-chicken/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "creamy-vegetarian-enchilada-pasta",
+    "title": "Creamy Vegetarian Enchilada Pasta",
+    "description": "This super creamy and flavorful Vegetarian Enchilada Pasta is super fast and uses only one skillet for easy clean up!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2014/08/Creamy-Vegetarian-Enchilada-Pasta-1.jpg",
+    "prepTime": 10,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 Tbsp olive oil ($0.16)",
+      "2 cloves garlic ($0.16)",
+      "4 oz can green chiles ($0.87)",
+      "1 cup frozen corn kernels ($0.60)",
+      "15 oz can pinto (or black) beans ($1.19)",
+      "1 tsp cumin ($0.10)",
+      "1/4 tsp red pepper flakes (optional, $0.02)",
+      "8 oz wide egg noodles ($1.46)",
+      "2 cups vegetable broth ($0.27)",
+      "1/2 cup sour cream ($0.71)",
+      "3 green onions, sliced ($0.20)",
+      "1/4 bunch cilantro (optional) ($0.25)",
+      "2 oz shredded pepper jack cheese ($0.69)"
+    ],
+    "steps": [
+      "Mince the garlic and sauté it in a skillet with olive oil over medium-low heat for 2-3 minutes, or until soft and fragrant. Add the can of green chiles (with juices), frozen corn kernels, can of beans (rinsed and drained), cumin, and optional red pepper flakes to the skillet. Stir well.",
+      "Add the uncooked pasta and vegetable broth to the skillet. The broth will not fully cover the noodles. Place a lid on the skillet, turn the heat up to high, and allow the liquid to come up to a full boil. Once it reaches a boil, turn the heat down to low and let the skillet simmer for 10 minutes, stirring well half way through.",
+      "While the skillet is simmering, slice the green onions, roughly chop the cilantro, and shred the cheese.",
+      "After ten minutes of simmering, the noodles should be tender and most of the liquid absorbed. Stir the skillet well, then add the sour cream and stir until it has fully coated the pasta. Stir in most of the sliced green onions and cilantro, reserving a little to sprinkle over top.",
+      "Sprinkle the shredded cheese over the skillet, place the lid back on top, and let the residual heat melt the cheese. Once melted, add the remaining green onions and cilantro to the top of the pasta. Serve hot."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/creamy-vegetarian-enchilada-pasta/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "how-to-make-a-frittata",
+    "title": "Easy Frittata",
+    "description": "This easy frittata recipe is packed with vegetables, cheese, and fluffy eggs. It s perfect for breakfast, brunch, or any time of day!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2022/08/Frittata.jpg",
+    "prepTime": 10,
+    "cookTime": 30,
+    "servings": 6,
+    "difficulty": "easy",
+    "tags": [
+      "breakfast",
+      "brunch",
+      "dinner",
+      "lunch",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "6 large eggs ($1.49)",
+      "1/4 cup milk ($0.06)",
+      "1/2 tsp salt ($0.03)",
+      "1/4 tsp pepper ($0.02)",
+      "2 Tbsp cooking oil ($0.08)",
+      "1 yellow onion ($0.36)",
+      "2 cups fresh spinach (about 4 oz.) ($0.99)",
+      "1 pint grape tomatoes ($2.00)",
+      "1/4 cup crumbled feta ($0.41)"
+    ],
+    "steps": [
+      "Preheat the oven to 350ºF. In a large bowl, whisk together the eggs, milk, salt, and pepper. Set the eggs aside.",
+      "Dice on yellow onion. Heat a 10-inch oven-safe skillet over medium, then add the cooking oil and onion and sauté until the onions are soft and translucent.",
+      "Meanwhile, roughly chop the spinach and slice the tomatoes in half.",
+      "Add the spinach and tomatoes to the skillet and stir to combine with the onions.",
+      "Before the spinach has a chance to cook or wilt, pour in the egg mixture (it s okay if the eggs don t fully cover the vegetables). Top with the crumbled feta.",
+      "Let the frittata continue to cook over medium just until the eggs are set around the edges (about 3 minutes).",
+      "Transfer it to the oven and bake for about 15 minutes, or just until the eggs are set in the center (total bake time will vary). Remove it from the oven and let rest for 5 minutes before slicing and serving."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/how-to-make-a-frittata/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "easy-vegetarian-minestrone",
+    "title": "Easy Minestrone Soup",
+    "description": "This easy Minestrone Soup recipe is a hearty, budget-friendly meal full of vegetables and perfect for meal prep or weeknight dinners.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2021/03/Vegetarian-Minestrone-bowl.jpg",
+    "prepTime": 10,
+    "cookTime": 35,
+    "servings": 6,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "lunch",
+      "main-course",
+      "soup",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 yellow onion ($0.32)",
+      "2 cloves garlic ($0.16)",
+      "4 carrots ($0.32)",
+      "2 Tbsp olive oil ($0.32)",
+      "2 Tbsp tomato paste ($0.10)",
+      "1 28oz. can diced tomatoes ($1.00)",
+      "1 15oz. can kidney beans ($0.75)",
+      "1 15oz. can chickpeas ($1.00)",
+      "1 Tbsp Italian seasoning ($0.30)",
+      "4 cups vegetable broth ($0.52)",
+      "1 zucchini (about 1/2 lb.) ($0.71)",
+      "1 cup frozen green beans ($0.30)",
+      "1 Tbsp lemon juice ($0.06)",
+      "1 Tbsp chopped parsley (optional) ($0.10)"
+    ],
+    "steps": [
+      "Dice the onion, mince the garlic, and slice the carrots. Add the olive oil, onion, garlic, and carrots to a large soup pot. Sauté over medium heat until the onions become soft and translucent (about 5 minutes).",
+      "Add the tomato paste to the pot and continue to sauté for 2-3 minutes more, or until the tomato paste begins to coat the bottom of the pot (do not let it burn).",
+      "Rinse and drain the kidney beans and chickpeas, and then add them to the pot along with the diced tomatoes (with juices), Italian Seasoning, and vegetable broth. Give everything a good stir, place a lid on top, and allow it to come up to a simmer. Allow the soup to simmer for 20 minutes, stirring occasionally.",
+      "While the soup is simmering, slice the zucchini into quarter-rounds. After the soup has simmered for 20 minutes, add the sliced zucchini and frozen green beans (no need to thaw first). Stir and simmer the soup for an additional 5-10 minutes, or until the zucchini just begin to soften.",
+      "Finish the soup by adding lemon juice and chopped parsley. Give it a taste and add extra salt if needed (my soup did not need any extra salt, but it may depending on the type of broth used). Serve hot with crusty bread for dipping!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/easy-vegetarian-minestrone/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "easy-spinach-ricotta-pasta",
+    "title": "Easy Spinach Ricotta Pasta",
+    "description": "This quick and luxurious Spinach Ricotta Pasta boasts a creamy and garlicky spinach sauce made easy with ricotta cheese.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2015/05/Spinach-Ricotta-Pasta-skillet-1.jpg",
+    "prepTime": 10,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1/2 lb. uncooked fettuccine ($0.75)",
+      "2 Tbsp olive oil ($0.32)",
+      "2 cloves garlic ($0.16)",
+      "1/2 cup milk ($0.24)",
+      "1 cup whole milk ricotta ($1.22)",
+      "1/4 tsp salt ($0.02)",
+      "Freshly cracked pepper ($0.05)",
+      "1/4 lb. frozen chopped spinach ($0.40)"
+    ],
+    "steps": [
+      "Place the frozen spinach in a colander to thaw while you work on the pasta and sauce.",
+      "Bring a large pot of water to a boil and then add the pasta. Let the pasta boil until al dente, then drain in a colander. Reserve about 1/2 cup of the pasta cooking water to help loosen the sauce later if needed.",
+      "While the pasta is boiling, prepare the ricotta sauce. Mince the garlic and add it to a large skillet with the olive oil. Cook over medium-low heat for 1-2 minutes, or just until soft and fragrant (but not browned). Add the milk and ricotta, then stir until relatively smooth (the ricotta may be slightly grainy). Allow the sauce to heat through and come to a low simmer. The sauce will thicken slightly as it simmers. Once it's thick enough to coat the spoon (3-5 minutes), season with salt and pepper.",
+      "Squeeze the thawed spinach to remove as much excess water as possible (squeeze it in your fist), then add it to the ricotta sauce. Stir until the spinach is distributed throughout the sauce. Taste and adjust salt or pepper if needed. Turn the heat off.",
+      "Add the cooked and drained pasta to the sauce and toss to coat. If the sauce becomes to thick or dry, add a small amount of the reserved pasta cooking water. Serve warm."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/easy-spinach-ricotta-pasta/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "easy-white-spinach-pizza",
+    "title": "Easy White Spinach Pizza",
+    "description": "This super easy White Spinach Pizza takes minutes to put together and doesn't require a white sauce.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2014/01/Spinach-Pizza-close-1.jpg",
+    "prepTime": 20,
+    "cookTime": 10,
+    "servings": 3,
+    "difficulty": "easy",
+    "tags": [
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 ball prepared pizza dough for 12\" pizza ($0.37)",
+      "1 Tbsp olive oil ($0.16)",
+      "1/2 lb frozen spinach ($0.78)",
+      "1/4 tsp garlic powder ($0.02)",
+      "1/4 tsp salt ($0.02)",
+      "pepper (freshly cracked, $0.03)",
+      "Pinch red pepper (crushed, optional, $0.03)",
+      "1 cup shredded mozzarella ($1.00)",
+      "1/8 medium red onion (optional, $0.07)",
+      "2 oz Chevre, goat cheese ($2.20)"
+    ],
+    "steps": [
+      "Preheat the oven to 450 degrees. Thaw the frozen spinach in the microwave or at room temperature until it is no longer in large clumps. Add the garlic powder, salt, and optional crushed red pepper flakes. Stir to distribute the spices. Add the mozzarella and stir to combine again.",
+      "Prepare a pizza pan with non-stick spray or cornmeal. Stretch the dough out into a 12\" circle and place on the pizza pan. Brush 1 tablespoon of olive oil over the surface. Spread the spinach and cheese mixture over the dough. Thinly slice the red onions and sprinkle over top. Crumble the goat cheese over the pizza.",
+      "Bake the pizza for 10 minutes or until the crust and goat cheese crumbles are lightly browned. Slice into 6 pieces and serve."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/easy-white-spinach-pizza/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "enfrijoladas-tortillas-in-black-bean-sauce",
+    "title": "Enfrijoladas - Tortillas in Black Bean Sauce",
+    "description": "Enfrijoladas are an easy, flavorful, and customizable recipe based on corn tortillas drenched in a spicy black bean sauce.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2017/07/Enfrijoladas-plate.jpg",
+    "prepTime": 20,
+    "cookTime": 15,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "beans",
+      "mexican",
+      "vegetarian",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "2 15oz. cans black beans, drained ($1.98)",
+      "1 chipotle pepper in adobo sauce (optional; omit for a mild sauce) ($0.95)",
+      "1 small sweet onion, divided ($0.50)",
+      "1/2 tsp ground cumin ($0.05)",
+      "1/4 tsp garlic powder ($0.02)",
+      "2 cups chicken or vegetable broth* ($0.26)",
+      "12 corn tortillas ($0.60)",
+      "1/4 bunch cilantro ($0.25)",
+      "4 oz. cheese** ($1.79)"
+    ],
+    "steps": [
+      "To make the black bean sauce, combine the drained black beans, optional chipotle pepper and adobo sauce, 1/4 of the sweet onion (diced), cumin, and garlic in a blender or food processor. Starting with one cup, add the broth as you blend until a smooth, thick sauce forms. Taste and adjust the salt as needed (this will depend on the salt content of the broth you use).",
+      "Preheat the oven to 350ºF. Heat the tortillas by either microwaving the stack for 30 seconds, toasting them in a skillet, or directly on a gas burner until lightly browned. Cover the stacked warmed tortillas with foil to retain the heat and steam.",
+      "Finely dice the rest of the sweet onion. Roughly chop the cilantro leaves, add them to the diced onion along with a pinch of salt, and stir to combine. Set the onion and cilantro mixture aside to marinate.",
+      "Pour a small amount of the black bean sauce into a casserole dish and spread it around to cover the bottom. Pour more sauce into a wide shallow bowl or dish for dipping the tortillas.",
+      "One by one, dip the tortillas in the black bean sauce until both sides are coated in the thick sauce. Sprinkle a little cheese and a little of the onion cilantro mixture over half of the tortilla, fold it closed, then fold in half once more to make a triangle. Place the dipped, filled, and folded tortillas in the prepared casserole dish. Be careful to only place a very small amount of filling in the tortillas to make them easier to fold. More filling will be placed on top after baking.",
+      "Once all the tortillas are dipped, filled, folded, and placed in the casserole dish, pour any remaining black bean sauce over top. Bake the tortillas in the preheated oven for about 15 minutes, or just until heated through. Top with the remaining cheese and onion cilantro mixture after baking, then serve."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/enfrijoladas-tortillas-in-black-bean-sauce/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "garden-vegetable-lasagna-soup",
+    "title": "Garden Vegetable Lasagna Soup",
+    "description": "This Garden Vegetable Lasagna Soup is packed full of vegetables and lasagna flavor, plus a hidden dollop of melty three cheese ricotta blend!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2016/04/Garden-Vegetable-Lasagna-Soup-spoon-1.jpg",
+    "prepTime": 10,
+    "cookTime": 35,
+    "servings": 6,
+    "difficulty": "easy",
+    "tags": [
+      "comfort-food",
+      "vegetable-soup",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 Tbsp olive oil ($0.16)",
+      "1 yellow onion ($0.40)",
+      "4 cloves garlic ($0.32)",
+      "2 carrots ($0.24)",
+      "1 zucchini (1/2 lb.) ($0.77)",
+      "15 oz can diced tomatoes ($0.65)",
+      "15 oz can tomato sauce ($0.70)",
+      "1 Tbsp Italian seasoning blend ($0.30)",
+      "4 cups vegetable broth* ($0.52)",
+      "8 oz lasagna noodles ($0.95)",
+      "1/4 lb frozen spinach ($0.40)",
+      "15 oz ricotta ($2.99)",
+      "1 cup shredded mozzarella, divided ($1.00)",
+      "1/4 cup Parmesan (grated or shredded) ($0.48)",
+      "1/8 tsp salt ($0.01)",
+      "Freshly cracked pepper ($0.03)"
+    ],
+    "steps": [
+      "Dice the onion and mince the garlic. Add both to a large soup pot along with the olive oil. Sauté over medium heat until the onions are soft and transparent (about 3-5 minutes).",
+      "While the onions and garlic are sautéing, peel and slice the carrots. Slice the zucchini and then cut the slices into quarter rounds. Add the carrots and zucchini to the pot and sauté for about 2 minutes more, or just until the zucchini begin to soften.",
+      "Add the diced tomatoes (with juices), tomato sauce, Italian seasoning blend, and vegetable broth to the soup pot. Stir to combine. Place a lid on the pot, turn the heat up to medium-high, and bring the pot to a boil.",
+      "While waiting for the pot to boil, break the lasagna noodles into 1-inch pieces. Once the soup is boiling, add the broken lasagna noodles and continue to boil for 10-12 minutes, or until the noodles are tender.",
+      "While the pasta is boiling in the soup, combine the ricotta cheese, 1/2 cup shredded mozzarella, Parmesan, salt, and freshly cracked pepper in a bowl (save the other half of the mozzarella for topping the soup bowls). Stir until the cheeses and seasonings are well combined.",
+      "Once the pasta is tender, add the frozen spinach and stir until the spinach is thawed and mixed well into the soup.",
+      "To serve, place a dollop of the cheese blend in each bowl, then ladle the hot soup over top. Add a pinch of the remaining shredded mozzarella on top."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/garden-vegetable-lasagna-soup/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "garlicky-kale-and-ricotta-pizza",
+    "title": "Garlicky Kale and Ricotta Pizza",
+    "description": "Garlicky greens and creamy ricotta pair perfectly on this light and fresh Garlicky Kale and Ricotta Pizza. It’s the perfect pizza for summer!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2018/05/Garlicky-Kale-and-Ricotta-Pizza-close.jpg",
+    "prepTime": 15,
+    "cookTime": 15,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "lunch",
+      "main-course",
+      "american",
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 Tbsp olive oil ($0.13)",
+      "1 clove garlic, minced ($0.08)",
+      "6 cups torn kale leaves ($0.50)",
+      "1 large pizza dough* ($0.32)",
+      "1 Tbsp olive oil ($0.13)",
+      "1/4 tsp garlic powder ($0.02)",
+      "1 cup whole milk ricotta ($1.13)",
+      "1 cup shredded mozzarella ($1.25)"
+    ],
+    "steps": [
+      "Preheat your oven to 400ºF. If your kale is still on the stem, pull the leaves from the stems and tear them into 2-inch pieces. Rinse the kale well in a colander.",
+      "Place the minced garlic and olive oil in a large pot and sauté over medium heat for about one minute, or just until the garlic is soft and fragrant. Add the kale and continue to sauté for about 5 minutes, or until it has wilted. Season with a pinch of salt.",
+      "Stretch your pizza dough (about 12-14\") and place it on your pizza pan. In a small dish, combine the olive oil and garlic powder, then brush it onto the surface of the dough. Scatter the sautéed kale over the surface, then top with dollops of ricotta. Finally, sprinkle the shredded mozzarella over top.",
+      "Bake the pizza for 15-20 minutes, or until the crust has browned, the cheese is melted, and the cheese has begun to brown on the edges. Slice the pizza into 8 pieces, and serve."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/garlicky-kale-and-ricotta-pizza/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "greek-turkey-rice-skillet",
+    "title": "Greek Turkey and Rice Skillet",
+    "description": "Greek Turkey and Rice Skillet is an easy and flavorful ground turkey recipe that cooks in one skillet for maximum flavor and minimum effort.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2017/06/Greek-Turkey-and-Rice-Skillet-front.jpg",
+    "prepTime": 5,
+    "cookTime": 30,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "easy-dinner",
+      "one-pot",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 Tbsp olive oil ($0.13)",
+      "2 cloves garlic, minced ($0.16)",
+      "19 oz. Ground turkey, 97% lean ($4.59)",
+      "1 tsp dried oregano ($0.10)",
+      "1/4 tsp salt ($0.02)",
+      "Freshly cracked pepper ($0.03)",
+      "1 cup long grain white rice, uncooked ($0.66)",
+      "1/4 lb frozen cut leaf spinach ($0.42)",
+      "1/3 cup sun dried tomato halves (about 7 pcs), sliced ($1.00)",
+      "1/2 cup kalamata olives, sliced ($1.08)",
+      "1.5 cups chicken broth* ($0.21)",
+      "handful fresh parsley ($0.25)",
+      "1 fresh lemon ($0.75)",
+      "1 oz feta ($0.56)"
+    ],
+    "steps": [
+      "Add the olive oil and garlic to a large deep skillet and sauté over medium heat for 1-2 minutes, or until the garlic is fragrant. Add the ground turkey, oregano, salt, and pepper to the skillet. Continue to sauté until the turkey is cooked through (about 5 minutes).",
+      "While the turkey is cooking, slice the olives and sun dried tomatoes. Once the turkey is cooked through, add the rice, frozen spinach (no need to thaw first), olives, and sun dried tomatoes to the skillet.",
+      "Add the chicken broth and stir until everything is very well combined. Place a lid on the skillet, turn the heat up to medium high, and allow it to come up to a boil. Once it reaches a boil, turn the heat down to low or medium low, and allow it to gently simmer for 15 minutes. Use the lowest level of heat that maintains a steady simmer in the skillet.",
+      "After 15 minutes, give the skillet a brief stir, replace the lid quickly, turn off the heat, and allow it to sit for an additional 10 minutes.",
+      "While the skillet is resting, zest half of the lemon and slice it into wedges. Roughly chop the parsley. Give the skillet a final fluff and stir, then top with lemon zest, parsley, and crumbled feta. Serve with lemon wedges to squeeze over top."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/greek-turkey-rice-skillet/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "herb-roasted-pork-loin",
+    "title": "Herb Roasted Pork Tenderloin",
+    "description": "Herb Roasted Pork Tenderloin is flavorful, simple, and elegant main dish that works just as well for a weeknight dinner as it is for special dinner guests.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2012/02/Herb-Roasted-Pork-Tenderloin-sliced.jpg",
+    "prepTime": 10,
+    "cookTime": 35,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "main-dish",
+      "roasted-pork",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "2 cloves garlic ($0.16)",
+      "1 tsp dried basil ($0.10)",
+      "1 tsp dried thyme ($0.10)",
+      "1 tsp dried rosemary ($0.10)",
+      "freshly cracked black pepper ($0.05)",
+      "1/2 tsp salt ($0.02)",
+      "2 Tbsp olive oil ($0.32)",
+      "1.33 lbs. pork tenderloin ($4.68)"
+    ],
+    "steps": [
+      "Preheat the oven to 400ºF. Mince the garlic. Add the dried basil, thyme, and rosemary to a small dish. Use your hands to crush the dried rosemary slightly. Add the garlic, olive oil, salt, and some freshly cracked black pepper to the bowl and stir to combine.",
+      "Place the pork tenderloin on a baking sheet or baking dish. Rub the oil and herb mix over the entire surface of the pork, including the underside.",
+      "Place the baking dish in the preheated oven and roast the pork for about 35 minutes, or until the internal temperature reads at least 145ºF. Allow the pork to rest at room temperature for 10 minutes before slicing and serving."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/herb-roasted-pork-loin/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "chicken-kale-caesar-wraps",
+    "title": "Kale Chicken Caesar Wraps",
+    "description": "This easy Kale Chicken Caesar Wrap is a great no-cook, no-reheat lunch idea. A big deli-style wrap made at home for a LOT less money.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2015/07/Chicken-Kale-Caesar-Wrap-front-1.jpg",
+    "prepTime": 30,
+    "cookTime": 0,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "caesar-wrap",
+      "lunch-meal-prep",
+      "lunch-recipes",
+      "wrap-recipes",
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 bunch lacinato kale (about 5 cups chopped) ($1.50)",
+      "1 15oz. can chickpeas ($1.15)",
+      "2 carrots ($0.24)",
+      "1/2 rotisserie chicken (2 cups chopped) ($3.50)",
+      "1/4 cup grated Parmesan ($0.41)",
+      "Freshly cracked black pepper ( $0.03)",
+      "1/4 cup creamy Caesar dressing ($0.53)",
+      "4 large tortillas (burrito size) ($1.20)"
+    ],
+    "steps": [
+      "Remove the stems from the kale leaves by running a sharp knife along each side of the stem from top to bottom. Stack the de-stemmed leaves, then cut crosswise into thin strips. Place the chopped kale into a colander and rinse well with cool water. Let as much water drain away as possible. Use a salad spinner of blot with a clean, lint-free towel to remove as much moisture as possible. Place the cleaned and dried kale into a large bowl.",
+      "Drain and rinse the chickpeas. Peel the carrots, then shred them using a large holed cheese grater. Remove the chicken meat from the carcass, then roughly chop into small pieces. Add the chickpeas, carrots, chopped chicken, and Parmesan to the bowl with the kale.",
+      "Add 1/4 cup Caesar dressing to the bowl, then stir until everything is evenly coated. Add one heaping cup of the salad mix to the center of a large tortilla. Add some freshly cracked pepper, if desired. Fold in the sides of the tortilla, then roll it up like a burrito. Serve immediately or refrigerate up to a day."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/chicken-kale-caesar-wraps/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "kale-pesto-pasta",
+    "title": "Kale Pesto Pasta",
+    "description": "Kale makes a great inexpensive and earthy pesto! Dress up this Kale Pesto pasta with add-ins to make it a meal, or keep it simple for the perfect summer side.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2017/07/Kale-Pesto-Pasta-above.jpg",
+    "prepTime": 15,
+    "cookTime": 15,
+    "servings": 6,
+    "difficulty": "easy",
+    "tags": [
+      "easy-dinner",
+      "lunch",
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 lb pasta ($1.49)",
+      "4 cups kale, chopped, loosely packed ($0.50)",
+      "1/3 cup olive oil, or as needed ($0.82)",
+      "1 large lemon (1/4 c juice, 1 Tbsp zest) ($0.75)",
+      "1 clove garlic ($0.08)",
+      "1/4 cup chopped walnuts ($0.57)",
+      "1/3 cup Parmesan, grated ($0.55)",
+      "1/2 tsp salt, or as needed ($0.03)",
+      "Freshly cracked pepper to taste ($0.05)",
+      "4 oz. mozzarella (optional) ($2.00)"
+    ],
+    "steps": [
+      "Bring a large pot of salted water to a boil for the pasta. Once boiling, add the pasta and continue to boil until the pasta is tender. Drain in a colander and let cool.",
+      "While the pasta is cooking, prepare the pesto. Pull the kale leaves from the woody stems, and roughly chop into thin strips. Place the kale in a colander and rinse with cool water. Let the excess water drain away.",
+      "Add the chopped and washed kale to a food processor along with the olive oil, 1/4 cup juice from the lemon, garlic, walnuts, Parmesan, salt, and pepper. Purée the mixture until smooth and bright green. Add more oil if needed to allow the mixture to become a thick, smooth sauce. Taste the pesto and adjust the salt, pepper, or lemon juice to your liking. Set the pesto aside.",
+      "Once the pasta is drained and cooled to the point where it is no longer steaming, transfer it to a large bowl. Add about half of the pesto and stir until the pasta is coated.",
+      "Dice the mozzarella into small cubes, then add it to the pasta along with about 1 Tbsp of the zest from the lemon. Stir to combine with the pesto pasta. Add more pesto until everything is coated in a thick layer. Top with more freshly cracked pepper and serve, or refrigerate until ready to eat."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/kale-pesto-pasta/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "lentils-with-creamy-mushroom-gravy",
+    "title": "Lentils with Creamy Mushroom Gravy",
+    "description": "These Lentils with Creamy Mushroom Gravy are an easy, hearty, and comforting vegan weeknight dinner, perfect for cold winter nights.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2019/12/Lentils-with-Creamy-Mushroom-Gravy-close.jpg",
+    "prepTime": 5,
+    "cookTime": 35,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "main-course",
+      "american",
+      "lentil-recipe",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "2 cloves garlic ($0.16)",
+      "8 oz. mushrooms ($1.69)",
+      "2 Tbsp olive oil ($0.32)",
+      "1 cup brown lentils ($0.50)",
+      "1/2 tsp dried thyme ($0.05)",
+      "3/4 tsp rubbed (dried) sage ($0.07)",
+      "Freshly cracked black pepper ($0.03)",
+      "2 cups vegetable broth ($0.26)",
+      "1 13.5oz. can coconut milk ($1.99)",
+      "salt to taste (about 1/2 tsp) ($0.02)"
+    ],
+    "steps": [
+      "Mince the garlic and slice the mushrooms. Add the olive oil and garlic to a large skillet and sauté for about one minute. Add the sliced mushrooms and continue to sauté until the mushrooms have released all their moisture and begin to brown.",
+      "Add the lentils, sage, thyme, freshly cracked pepper, and vegetable broth to the skillet with the mushrooms. Stir to combine. Place a lid on the skillet, let the broth come up to a boil, then turn the heat down to medium-low. Let the lentils simmer for 20 minutes (with lid), stirring occasionally.",
+      "After simmering for 20 minutes, the lentils should be tender and most of the broth absorbed. Add the coconut milk, stir to combine, turn the heat back up to medium, and let the lentils simmer for about five more minutes (without lid), or until the mixture in the skillet has thickened to a gravy.",
+      "Once the mixture has thickened, turn the heat off. Taste the mixture and add salt to your liking. I added about 1/2 tsp. The salt will help the herbal flavors pop and reduce the sweetness of the coconut milk.",
+      "Serve hot with crusty bread for dipping or over mashed potatoes, rice, or pasta."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/lentils-with-creamy-mushroom-gravy/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "mini-black-bean-turkey-burgers",
+    "title": "Mini Black Bean Turkey Burgers",
+    "description": "These flavorful mini black bean turkey burgers come together quickly and bake in the oven for a fast, no fuss dinner.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2015/08/Turkey-Burger-Patties-1.jpg",
+    "prepTime": 15,
+    "cookTime": 20,
+    "servings": 5,
+    "difficulty": "easy",
+    "tags": [
+      "easy-dinner",
+      "turkey-burgers",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 15oz. can black beans* ($0.60)",
+      "3 green onions ($0.38)",
+      "1/2 Tbsp chili powder** ($0.15)",
+      "1/2 tsp ground cumin ($0.05)",
+      "1/2 tsp garlic powder ($0.02)",
+      "1/8 tsp cayenne pepper (optional, $0.03)",
+      "1/2 tsp salt ($0.04)",
+      "19 oz. lean ground turkey ($4.59)",
+      "1 avocado ($1.00)",
+      "1/2 lime ($0.20)",
+      "1/8 tsp garlic powder ($0.02)",
+      "1/2 tsp salt ($0.02)",
+      "1/2 cup sour cream ($0.75)",
+      "1/2 tsp sugar ($0.01)",
+      "5 pita halves ($0.83)",
+      "2 Roma tomatoes, sliced ($1.12)"
+    ],
+    "steps": [
+      "Preheat the oven to 375ºF. Drain and rinse the black beans. Place the black beans in a large bowl and mash them slightly with your hands or a potato masher. Slice the green onions and add them to the bowl along with the chili powder, cumin, garlic powder, optional cayenne pepper, and salt. Stir until the beans are evenly seasoned.",
+      "Add the ground turkey to the seasoned black beans. Mix well using your hands. Form 10 small patties (about 2-2.5 inches diameter, 1/2 inch thick). Place the patties on a roasting pan or a baking sheet covered with foil and wire cooling racks.",
+      "Bake the patties in the preheated oven for 20 minutes, or until browned on the outside and no longer pink in the center. Alternatively, you can cook the patties in a skillet, on a grill, or using an indoor countertop grill.",
+      "While the patties are baking, prepare the avocado sauce. Add the avocado (diced), juice from half a lime (about 2 Tbsp), garlic powder, salt, sugar, sour cream, and 2-4 Tbsp of water to a blender. Blend the ingredients together, adding the water slowly until a smooth, thick sauce forms.",
+      "Smear some of the sauce inside each pita half, add a couple tomato slices, and two of the turkey patties."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/mini-black-bean-turkey-burgers/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "one-pot-bacon-broccoli-mac-cheese",
+    "title": "One Pot Bacon Broccoli Mac and Cheese",
+    "description": "This One Pot Bacon Broccoli Mac and Cheese is fast, easy, and absolutely fool proof. This sauce stays smooth and creamy!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2017/05/One-Pot-Bacon-Broccoli-Mac-and-Cheese-above.jpg",
+    "prepTime": 10,
+    "cookTime": 35,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1/2 lb. frozen broccoli florets ($1.05)",
+      "4 oz. bacon ($1.43)",
+      "8 oz. medium cheddar ($2.50)",
+      "1/2 lb. pasta ($0.50)",
+      "1 cup evaporated milk ($1.19)",
+      "1/2 tsp smoked paprika ($0.05)",
+      "1/2 tsp hot sauce (optional, $0.05)",
+      "1/2 tsp Dijon mustard ($0.02)",
+      "1/4 tsp salt ($0.02)"
+    ],
+    "steps": [
+      "Prepare the ingredients before beginning because the process goes quickly once it's begun. Thaw the broccoli florets and chop them into small bite-sized pieces. Slice the bacon into small pieces. Shred the cheddar cheese.",
+      "Cook the pasta according to the package directions (boil 7-10 minutes, or until al dente). Drain the pasta in a colander and set it aside.",
+      "Return the pot to the stove, add the bacon, and cook over medium to medium-low heat until the bacon is brown and crispy (about 5 minutes). Use a slotted spoon to remove the bacon from the pot, leaving the grease behind.",
+      "Add the evaporated milk, smoked paprika, Dijon, optional hot sauce, and salt to the pot with the bacon grease. Stir to combine and allow it to heat through (it should heat quickly as the pot will be very hot from cooking the bacon).",
+      "Once the evaporated milk is hot, turn the heat to low and begin whisking in the shredded cheddar, one handful at a time, waiting until the cheese is fully melted before adding the next handful. Once all of the cheese has been melted into the sauce, taste the cheese sauce and adjust the salt or hot sauce if desired. If the sauce becomes too thick, simply stir in one to two tablespoons of the remaining evaporated milk in the can.",
+      "Return the cooked pasta, crispy bacon (crumble into smaller pieces if desired), and chopped broccoli to the pot with the cheese sauce. Stir to combine. Serve immediately."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/one-pot-bacon-broccoli-mac-cheese/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "cheesy-vegetarian-chili-mac",
+    "title": "One Pot Cheesy Vegetarian Chili Mac",
+    "description": "This rich and comforting One Pot Vegetarian Chili Mac and Cheese is the perfect quick and easy weeknight meal. Works great for meal prep!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2016/01/Cheesy-Vegetarian-Chili-Mac-close-1.jpg",
+    "prepTime": 10,
+    "cookTime": 25,
+    "servings": 8,
+    "difficulty": "easy",
+    "tags": [
+      "easy-dinner",
+      "one-pot-meal",
+      "vegetarian-pasta",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 Tbsp olive oil ($0.16)",
+      "1 yellow onion ($0.31)",
+      "2 cloves garlic ($0.16)",
+      "2 Tbsp flour ($0.02)",
+      "2 Tbsp chili powder* ($0.60)",
+      "1 15oz. can diced tomatoes ($0.79)",
+      "1 15oz. can tomato sauce ($0.88)",
+      "1 15oz. can kidney beans ($0.89)",
+      "1 15oz. can black beans ($1.15)",
+      "1 15oz. can pinto beans ($1.49)",
+      "1 cup frozen corn kernels ($0.44)",
+      "2 cups vegetable broth ($0.26)",
+      "2 cups uncooked macaroni noodles ($0.50)",
+      "1 cup shredded sharp cheddar ($1.25)"
+    ],
+    "steps": [
+      "Dice the onion and mince the garlic. Sauté the onion and garlic with olive oil in the bottom of a large pot (5 qt) over medium heat for 2-3 minutes, or until the onions are soft and transparent.",
+      "Add the flour and chili powder to the sautéed onions and garlic. Continue to stir and sauté for about two minutes, or just until the flour and chili powder begin to coat the bottom of the pot.",
+      "Drain and rinse the kidney beans, black beans, and pinto beans. Add the diced tomatoes, tomato sauce, all three beans, corn, and vegetable broth to the pot. Stir to combine and to dissolve any flour and chili powder off the bottom of the pot.",
+      "Add the uncooked macaroni noodles and stir to combine. Place a lid on the pot, turn the heat up to medium high, and let the pot come up to a boil. Stir every other minute or so to loosen the noodles from the bottom of the pot as it heats up.",
+      "When the pot reaches a boil, turn the heat down to low, or just above low, so it continues to gently simmer. Let the pot gently simmer for 12-15 minutes, or until the pasta is tender and the liquid is thick and saucy. Stir frequently as it simmers to make sure the pasta does not stick to the bottom of the pot.",
+      "Once the pasta is tender, add the shredded cheddar and stir it in until melted. Serve hot."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/cheesy-vegetarian-chili-mac/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "lemon-pepper-chicken-with-orzo",
+    "title": "One Pot Lemon Pepper Chicken with Orzo",
+    "description": "Lemon Pepper Chicken with Orzo is a zesty one-pot meal featuring juicy chicken thighs, orzo, feta, and lemon pepper for tons of flavor!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2022/07/One-Pot-Lemon-Pepper-Chicken-and-Orzo-H.jpg",
+    "prepTime": 10,
+    "cookTime": 35,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "main-course",
+      "american",
+      "chicken-and-orzo",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "4 chicken thighs* ($3.74)",
+      "2 Tbsp lemon pepper seasoning ($0.60)",
+      "1 Tbsp cooking oil ($0.04)",
+      "2 cloves garlic ($0.16)",
+      "2 cups chicken broth ($0.26)",
+      "1/4 cup chopped parsley ($0.20)",
+      "1.5 cups orzo ($1.29)",
+      "2 oz. feta, crumbled ($1.25)"
+    ],
+    "steps": [
+      "Blot the chicken thighs dry with a paper towel, then season both sides liberally with lemon pepper seasoning (about 2 Tbsp lemon pepper total).",
+      "Heat a large deep skillet over medium. Once hot, add the cooking oil. Add the seasoned chicken thighs, skin side down, and let them cook undisturbed until browned (about 6-8 minutes for bone-in skin-on thighs). Flip the chicken thighs and cook until browned on the second side. The chicken will be cooked most of the way through at this point but will finish cooking when simmered with the orzo. Remove the chicken to a clean plate.",
+      "While the chicken is browning, roughly chop about 1/4 bunch of parsley and mince two cloves of garlic. After removing the chicken from the skillet, turn the heat down to low, add the minced garlic, and sauté the garlic in the residual fat for about a minute.",
+      "Add 2 cups of chicken broth to the skillet and stir to dissolve the crispy browned bits from the bottom of the pan.",
+      "Add the orzo and half of the chopped parsley. Stir to combine. Finally, return the chicken to the skillet, skin side up.",
+      "Place a lid on the skillet, turn the heat up to high, and let the broth come to a full boil. Once it reaches a boil, turn the heat down to low. Let the skillet simmer on low for about 15 minutes, or until most of the broth has been absorbed. Make sure it’s simmering the whole time. If it stops simmering, increase the heat slightly until it just starts to simmer again.",
+      "After about 15 minutes the orzo should be tender and most of the broth absorbed but there will still be a little sauce in the skillet.",
+      "Fluff the orzo around the chicken a bit with a fork, then top with the remaining parsley and the crumbled feta. Serve and enjoy!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/lemon-pepper-chicken-with-orzo/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "pepperoni-stuffed-chicken",
+    "title": "Pepperoni Stuffed Chicken",
+    "description": "Pepperoni stuffed chicken is an easy way to transform boring chicken breasts into something your family will ask for again and again!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2009/12/Pepperoni20Stuffed20Chicken.jpg",
+    "prepTime": 15,
+    "cookTime": 30,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "main-course",
+      "american",
+      "stuffed-chicken",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 lb boneless, skinless chicken breasts ($1.98)",
+      "2 oz mozzarella cheese ($0.40)",
+      "1 1/4 oz approx. 16 slices pepperoni ($0.54)",
+      "1 large egg ($0.15)",
+      "1/2 cup all purpose flour ($0.14)",
+      "1/2 cup breadcrumbs ($0.18)",
+      "6 Tbsp vegetable oil ($0.22)",
+      "to taste salt and pepper ($0.05)"
+    ],
+    "steps": [
+      "Trim the chicken breasts of any large clumps of fat that may be still attached. Slice each breast in half diagonally to create two diamond-like shaped pieces. Using a small, sharp knife, cut a pocket into the side of each breast piece. This can be slightly tricky on thinner pieces so be careful. Be sure not to cut all the way through the meat but rather just into one side so that the fillings will stay in. See photos below.",
+      "Stuff each piece of chicken with 1/2 oz. of cheese and about 4 slices of pepperoni. Lightly season each piece with salt and pepper. Set the stuffed chicken aside.",
+      "Preheat your oven to 350 degrees and line a baking sheet with aluminum foil. Begin to heat a large skillet with 6 Tbsp of vegetable oil over medium/high heat. Collect three shallow dishes and put the flour in one, the egg in another and the bread crumbs in the third. Beat the egg until it is an even consistency (adding a 1/2 tsp of water helps break it up).",
+      "One by one, coat each piece of chicken in the flour, then the egg then the bread crumbs. Use your hands so that you can keep the open side of the pocket pinched closed and keep the fillings in. The flour helps the egg adhere and the egg keeps the bread crumbs in place. This is a basic bread coating.",
+      "Test the oil in the skillet to see if it is hot enough by dropping a small pinch of bread crumbs in. The bread crumbs should sizzle and dance A LOT. It is very important that the oil is hot enough or else the breading will soak up a lot of oil and you’ll end up with some really greasy chicken!. Place all four pieces of chicken in the skillet and cook until it is golden brown and crispy on each side. This should take no more than 2-3 minutes.",
+      "When you remove the chicken pieces from the skillet, transfer them to the baking sheet and place it in the oven. Finish baking the chicken (to cook the inside) for about 25 minutes (longer if you have larger pieces). Remove from the oven (check to make sure the chicken is cooked through) and serve immediately!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/pepperoni-stuffed-chicken/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "pesto-mozzarella-roll-ups",
+    "title": "Pesto Mozzarella Roll Ups",
+    "description": "Pesto mozzarella roll ups combine melty mozzarella cheese and flavorful basil pesto rolled up in a flour tortilla then baked to perfection!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2022/06/Pesto-Mozzarella-Roll-Ups-stack.jpg",
+    "prepTime": 15,
+    "cookTime": 15,
+    "servings": 8,
+    "difficulty": "easy",
+    "tags": [
+      "appetizer",
+      "snack",
+      "american",
+      "cheese-stick",
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "8 8-inch flour tortillas ($2.23)",
+      "4 Tbsp basil pesto ($1.00)",
+      "4 pieces mozzarella string cheese ($1.00)",
+      "1 Tbsp cooking oil ($0.04)",
+      "1/4 cup mayonnaise ($0.29)",
+      "1 Tbsp tomato paste ($0.07)",
+      "1 clove garlic, minced ($0.08)"
+    ],
+    "steps": [
+      "Preheat the oven to 400ºF. Stack the tortillas on a plate and cover with a damp paper towel. Microwave for 30 seconds to soften the tortillas.",
+      "Slice the string cheese in half length-wise. Spread ½ Tbsp pesto over the lower half of each tortilla, staying away from the edges. Place one piece of mozzarella on top of each.",
+      "Fold the sides of the tortilla in on top of the cheese, then begin rolling up from the bottom until the cheese is completely rolled up in the tortilla.",
+      "Place the roll ups on a parchment-lined baking sheet, seam side down. Brush the roll ups with a light coating of cooking oil.",
+      "Bake the roll ups in the preheated oven for about 13 minutes, or until they re lightly golden brown on the edges and the cheese is melted.",
+      "While the roll ups are in the oven, prepare the creamy tomato dip. Stir together the mayonnaise, tomato paste, and minced garlic.",
+      "Let the roll ups cool just enough to handle, then serve with the creamy tomato dip."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/pesto-mozzarella-roll-ups/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "pinchos-de-pollo-puerto-rican-chicken-skewers",
+    "title": "Pinchos De Pollo",
+    "description": "Smoky, mouth-watering Pinchos De Pollo, AKA Puerto Rican Chicken Skewers, are a beloved island street food that s easy to make at home! Get ready for a little piece of heaven!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2023/08/Pinchos-overhead.jpg",
+    "prepTime": 15,
+    "cookTime": 20,
+    "servings": 6,
+    "difficulty": "easy",
+    "tags": [
+      "appetizer",
+      "latin",
+      "puerto-rican",
+      "bbq-chicken",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "3 lbs boneless and skinless chicken thighs, about 5 to 6 ($5.97)",
+      "2 tsp adobo* ($0.10)",
+      "1 1/2 tsp sazón** ($0.19)",
+      "2 tsp salt ($0.16)",
+      "2 Tbsp cooking oil, plus a touch more for greasing ($0.09)",
+      "1 cup BBQ Sauce ($1.16)"
+    ],
+    "steps": [
+      "Pat chicken thighs dry with a paper towel. Then chop the chicken into bite-size pieces (about 5 to 6 pieces per thigh).",
+      "Add the adobo, sazón, and salt to a large bowl and mix.",
+      "Add the chopped chicken thighs to the bowl along with the cooking oil and mix until the chicken is thoroughly covered. Cover with plastic wrap or parchment directly on the surface of the chicken and marinate for at least an hour, but preferably overnight.",
+      "Half an hour before you pull the chicken, soak at least 6 wood skewers in water so they don t burn. It s best to soak a few extra skewers just in case one of them breaks.",
+      "When you re ready to cook, preheat a grill pan on high. Then thread a thigh s worth of chicken pieces on each skewer, about 5 or 6 chunks. You want the chicken chunks close but not pressed tightly against each other. Brush both sides of each skewer with BBQ sauce, about 1/2 cup total.",
+      "When the grill pan is smoking hot, brush it with a touch of cooking oil. Then, place the skewers on the grill pan, making sure not to crowd the pan or place the skewers too close to each other.",
+      "After 5 minutes, brush 1/4 cup of BBQ sauce on the top surface of the chicken. Next, flip the chicken, and brush another 1/4 cup of BBQ sauce on the top layer. Cook for 5 more minutes, until char develops and the internal temperature of the chicken registers at 160°F. Now all you have left to do is eat! Buen provecho!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/pinchos-de-pollo-puerto-rican-chicken-skewers/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "quinoa-black-bean-tacos",
+    "title": "Quinoa Black Bean Tacos",
+    "description": "Quinoa and black bean tacos - a hearty, flavorful, vegan alternative to meat tacos.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2013/01/QuinoaBlackBeanTacosclose.jpg",
+    "prepTime": 10,
+    "cookTime": 20,
+    "servings": 8,
+    "difficulty": "easy",
+    "tags": [
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 cup uncooked quinoa ($2.00)",
+      "1 clove garlic ($0.08)",
+      "1/2 tsp salt ($0.03)",
+      "1/2 Tbsp chili powder ($0.07)",
+      "1/4 tsp ground cumin ($0.02)",
+      "1/4 tsp dried oregano ($0.02)",
+      "1/4 tsp smoked paprika ($0.02)",
+      "2 cups cooked black beans (* , $0.42)",
+      "1 recipe pico de gallo ($1.91)",
+      "1 avocado ($1.00)",
+      "16 small corn tortillas ($1.94)",
+      "1/4 bunch fresh cilantro ($0.20)"
+    ],
+    "steps": [
+      "Use a wire mesh sieve to rinse the quinoa very, very well (this removes the bitter taste). If you don’t have a wire mesh sieve, you can put the quinoa in a bowl with water, swish it around and carefully pour off the water. Repeat this process until the water is fairly clear.",
+      "Put the rinsed quinoa in a medium pot along with the clove of garlic (minced), salt, chili powder, cumin, oregano, smoked paprika, and 1.5 cups of water. Stir to combine. Put a lid on the pot, turn the heat on to high, and bring it up to a boil. As soon as it reaches a boil, turn the heat down to low and let simmer for 15 minutes. After 15 minutes, turn the heat off and let it sit (with the lid in place) for an additional 10 minutes.",
+      "While the quinoa is cooking, prepare the pico de gallo according to these directions (it’s as easy as chop and stir). Rinse the black beans well in a colander and allow the excess water to drain off.",
+      "When the quinoa has finished cooking, remove the lid and fluff with a fork. Add the drained black beans and stir to combine.",
+      "Lightly toast the tortillas in a skillet over medium heat until each side is just slightly golden brown (tortillas should still be pliable). To make each taco, place about 1/4 cup of the quinoa/black bean mixture in the center of a tortilla. Add about 1-2 tablespoons of pico de gallo, one slice of avocado, and a few sprigs of cilantro. Fold and eat!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/quinoa-black-bean-tacos/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "roasted-red-pepper-and-feta-frittata",
+    "title": "Roasted Red Pepper and Feta Frittata",
+    "description": "Use leftover ingredients to make a frittata, like this Roasted Red Pepper and Feta Frittata. Great for breakfast, brunch or even dinner!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2015/08/Roasted-Red-Pepper-and-Feta-Frittata-above-1.jpg",
+    "prepTime": 10,
+    "cookTime": 35,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "baked-eggs",
+      "brunch-recipes",
+      "egg-recipes",
+      "frittata",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 Tbsp cooking oil ($0.04)",
+      "2 cloves garlic ($0.16)",
+      "3-4 cups baby spinach ($1.25)",
+      "1/2 12oz. jar roasted red peppers ($1.25)",
+      "2 oz. feta ($1.12)",
+      "Salt and pepper to taste ($0.05)",
+      "1 pinch crushed red pepper (optional) ($0.05)",
+      "6 large eggs ($1.62)",
+      "1/4 cup whole milk or cream ($0.16)"
+    ],
+    "steps": [
+      "Preheat the oven to 350ºF. Mince the garlic and add it to a 10-inch oven safe skillet, along with the cooking oil. Sauté over medium heat for 1-2 minutes, or just until the garlic is soft and fragrant. Fill the skillet with fresh spinach (about 3-4 cups packed) and continue to sauté until it has wilted (1-2 minutes).",
+      "Remove the peppers from the jar and slice them into thin strips. Add the sliced peppers to the skillet and sauté for 1-2 minutes more. Season the vegetables with salt, pepper, and a pinch of red pepper flakes if desired. Remove from the heat and crumble the feta over top.",
+      "Whisk together the eggs and milk, adding a pinch of salt and pepper. Pour the eggs over the vegetables in the skillet, then transfer the skillet to the fully preheated oven.",
+      "Bake the frittata for 20-25 minutes, or until the center is puffed and the top is light golden brown. If more browning is desired, place the frittata under the broiler for 1-2 minutes. This will quickly brown the top without over cooking the egg inside. Slice into 6-8 pieces and serve (1-2 pieces per person depending on size and appetite)."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/roasted-red-pepper-and-feta-frittata/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "sausage-pepper-pasta",
+    "title": "Sausage & Pepper Pasta",
+    "description": "This rich and flavorful Sausage & Pepper Pasta will fill you up, feed a crowd, and save you a dollar.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2013/07/Sausage-Pepper-Pasta-above-1.jpg",
+    "prepTime": 15,
+    "cookTime": 30,
+    "servings": 8,
+    "difficulty": "easy",
+    "tags": [
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "10 oz. Italian sausage (hot, sweet, or mild) ($1.99)",
+      "1 Tbsp vegetable oil ($0.02)",
+      "2 green bell peppers ($1.50)",
+      "1 red bell pepper ($1.50)",
+      "1 yellow bell pepper ($1.50)",
+      "1 yellow onion ($0.85)",
+      "2 cloves garlic ($0.16)",
+      "1 28oz. can petite diced tomatoes ($1.69)",
+      "1/2 Tbsp dried basil ($0.07)",
+      "1/2 Tbsp dried oregano ($0.07)",
+      "1/4 tsp crushed red pepper (optional) ($0.03)",
+      "1 tsp salt or to taste ($0.05)",
+      "3/4 lb. pasta (rigatoni or your favorite shape) ($1.32)"
+    ],
+    "steps": [
+      "Add the vegetable oil and sausage links (unsliced) to a large pot and cook over medium heat until the sausage is browned and firm enough to slice. It doesn't have to be cooked through at this point.",
+      "While the sausage is cooking, thinly slice the bell peppers and onions, and mince the garlic. Once the sausage is browned, remove it from the pot and add the peppers, onions, and garlic. Let them cook while you slice the sausage into thin medallions.",
+      "After the peppers and onions have softened, return the sliced sausage to the pot along with the diced tomatoes, basil, oregano, and crushed red pepper. Stir to combine and continue to cook over medium heat.",
+      "Meanwhile, bring a large pot of water to a boil and cook the pasta for about 7 minutes, or just until tender, but still firm. Slightly undercook the pasta as it will continue to cook and soak up liquid once added to the pot with the sausage and peppers.",
+      "Once the pasta is finished cooking, drain it in a colander and then add it to the pot with the sausage and peppers. Stir to combine, place a lid on top, and allow the pasta to cook in the pepper sauce for about 5 more minutes, or until it has absorbed most of the liquid in the pot. Add about a half teaspoon of salt, taste, and add more if needed."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/sausage-pepper-pasta/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "sausage-tortellini-soup",
+    "title": "Sausage and Tortellini Soup",
+    "description": "This light but filling vegetable packed Sausage and Tortellini soup is the perfect lunch for fall. Pair with crusty bread for dipping!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2017/10/Sausage-and-Tortelloni-Soup-finished.jpg",
+    "prepTime": 10,
+    "cookTime": 25,
+    "servings": 6,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "soup",
+      "american",
+      "italian",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 Tbsp olive oil ($0.13)",
+      "1/2 lb. Italian sausage ($1.75)",
+      "1 yellow onion ($0.28)",
+      "2 cloves garlic ($0.16)",
+      "1/2 lb. carrots (about 3-4) ($0.45)",
+      "1 15oz. can stewed tomatoes* ($0.49)",
+      "1/2 tsp dried basil ($0.05)",
+      "1/2 tsp dried oregano ($0.05)",
+      "Freshly cracked black pepper ($0.03)",
+      "3 cups vegetable broth ($0.39)",
+      "3 cups water ($0.0)",
+      "8 oz. cheese tortellini ($1.49)",
+      "1/4 lb. fresh spinach ($.75)"
+    ],
+    "steps": [
+      "Add the olive oil and sausage to a large soup pot (if your sausage is in casings, squeeze it out of the casing). Sauté the sausage over medium heat, breaking it up into pieces as you stir, until it is browned and cooked through.",
+      "While the sausage is cooking, dice the onion and mince the garlic. Add the onion and garlic to the pot and continue to sauté until the onions are soft and transparent.",
+      "While the onions are sautéing, peel and slice the carrots. Add the carrots to the pot and sauté for just a few minutes more.",
+      "Finally, add the stewed tomatoes (with all the juices from the can), basil, oregano, and some freshly cracked pepper. Use your spoon to break the tomatoes into smaller pieces.",
+      "Add the vegetable broth and water to the pot. Place a lid on top, turn the heat up to high, and bring it up to a rolling boil. Once boiling, add the tortellini, and continue to boil until the tortellini is tender (about 8 minutes).",
+      "Turn the heat off, add the spinach, and stir until the spinach has wilted. Taste the soup and add salt if needed (I did not add any, but it will depend on the salt content of the broth you use)."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/sausage-tortellini-soup/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "sausage-kebabs",
+    "title": "Sausage Kebabs",
+    "description": "With just a few simple ingredients, Sausage Kebabs are a fast, easy, and delicious way to enjoy summer grilling.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2023/06/Sausage-Kebabs-Close.jpg",
+    "prepTime": 20,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "main-course",
+      "american",
+      "kebabs",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "14 oz. smoked sausage ($4.29)",
+      "1 red onion ($0.43)",
+      "3 bell peppers (any color) ($3.77)",
+      "2 Tbsp cooking oil ($0.08)",
+      "1 tsp smoked paprika ($0.10)",
+      "1/2 tsp garlic powder ($0.05)",
+      "1/4 tsp salt ($0.02)",
+      "1/4 tsp freshly cracked pepper ($0.02)",
+      "1/2 cup BBQ sauce ($0.33)"
+    ],
+    "steps": [
+      "Slice the sausage into ½-inch thick rounds. Chop the onions and bell peppers into 1-inch pieces.",
+      "Place the sausage and vegetables in a large bowl. Drizzle the cooking oil over top. Combine the smoked paprika, garlic powder, salt, and pepper in a small bowl, then sprinkle over the sausage and vegetables.",
+      "Toss the sausage and vegetables until well coated in oil and spices.",
+      "Build the kebabs by skewering the sausage and vegetables in an alternating sequence. You should get about eight kebabs, depending on the size of your skewers and vegetables.",
+      "Cook the kebabs over a hot grill, on a hot cast iron grill pan (preheated well over medium-high heat), or under your oven s broiler (about 5-6 inches from the broiler) until the kebabs are slightly charred on one side.",
+      "Flip the kebabs and continue to cook until charred on a second side. Brush a light coating of BBQ sauce over the side that has already been charred. Continue to cook, turn, and brush on BBQ sauce until the kebabs are charred on all sides and the BBQ sauce is slightly caramelized. Serve hot and enjoy!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/sausage-kebabs/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "sausage-meatballs-and-kale-sheet-pan-meal",
+    "title": "Sausage Meatball and Kale Sheet Pan Meal",
+    "description": "This hearty Italian Sausage Meatballs and Kale Sheet Pan Meal is chock full of deep, tangy flavors and succulent textures! It s perfect for those days when you don t feel like cook…",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2023/06/Sausage-Kale-Sheet-Pan-Plated.jpg",
+    "prepTime": 15,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "brunch",
+      "dinner",
+      "lunch",
+      "american",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 lb red potatoes, quartered ($1.25)",
+      "3/4 cup olive oil, divided ($1.44)",
+      "1 tsp smoked paprika ($0.10)",
+      "3 1/2 tsp kosher salt, divided ($0.28)",
+      "1/4 tsp black pepper ($0.02)",
+      "1/4 tsp red pepper flakes (optional, $0.08)",
+      "1 pint cherry or grape tomatoes ($1.89)",
+      "1/2 cup panko breadcrumbs ($0.50)",
+      "1/4 cup milk ($0.06)",
+      "1 lb Italian Ground Sausage ($4.99)",
+      "1 large egg, beaten ($0.17)",
+      "1 lb kale, chopped ($2.49)",
+      "3 Tbsp red wine vinegar ($0.42)",
+      "2 tsp Dijon mustard ($0.06)",
+      "1 tsp brown sugar ($0.02)",
+      "1/2 tsp garlic powder ($0.08)"
+    ],
+    "steps": [
+      "Preheat oven to 450°F. Place quartered red potatoes in a large bowl and drizzle with 1/4 cup olive oil. Mix smoked paprika, 2 teaspoons of salt, black pepper, and optional chili flakes. Sprinkle over the potatoes and toss. Place the potatoes in a sheet pan.",
+      "In the same bowl, add the tomatoes and sprinkle with 1/4 teaspoon salt. Scatter them over the potatoes.",
+      "Soak the breadcrumbs in milk. Break up Italian sausage in a large bowl. Mix in breadcrumbs and egg. Wet your fingers with a bit of leftover oil from the bowl the tomatoes were in. Roll 16 meatballs and place them on the sheet pan between the potatoes and tomatoes.",
+      "Bake for 10 minutes, then turn the meatballs and bake for another 10 minutes.",
+      "While the meatballs bake, add 1/2 lb of the kale to the same bowl the potatoes and tomatoes were in. Mix red wine vinegar, 1/2 cup olive oil, Dijon mustard, brown sugar, garlic powder, and 1/4 teaspoon salt. Toss the kale in the dressing, massaging it into the leaves.",
+      "Remove the sheet pan from the oven, and scatter kale all over.",
+      "Roast for 3 to 4 minutes until the kale has charred in spots. To serve, split raw kale between 4 bowls. Top with charred kale and tomatoes and mix. Finally, top with meatballs and potatoes."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/sausage-meatballs-and-kale-sheet-pan-meal/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "sauteed-beef-cabbage-and-rice",
+    "title": "Sautéed Beef, Cabbage, and Rice",
+    "description": "Sautéed Beef, Cabbage, and Rice is a simple yet delicious comfort food that will keep you full without draining your wallet.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2022/06/Sautéed-Cabbage-Beef-and-Rice.jpg",
+    "prepTime": 10,
+    "cookTime": 25,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "main-course",
+      "american",
+      "beef-and-cabbage",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 yellow onion ($0.32)",
+      "1/2 head green cabbage (5 cups chopped) ($1.08)",
+      "1 Tbsp cooking oil ($0.04)",
+      "1/2 lb. ground beef ($3.50)",
+      "1 Tbsp steak seasoning ($0.30)",
+      "1/4 cup water ($0.00)",
+      "2 cups cooked rice* ($0.41)",
+      "2 Tbsp butter ($0.41)",
+      "1/2 Tbsp soy sauce ($0.03)"
+    ],
+    "steps": [
+      "Dice the onion and chop the cabbage into ½-inch pieces.",
+      "Add the onion and cooking oil to a large skillet and sauté over medium heat until the onions are soft.",
+      "Add the ground beef and steak seasoning to the skillet and continue to sauté until the beef is fully cooked. If using a higher fat content beef, drain the excess fat from the skillet.",
+      "Add the chopped cabbage and water to the skillet. Continue to sauté until the cabbage has softened to your desired level of tenderness.",
+      "Add the cooked rice and butter to the skillet. Fold the rice and butter into the beef and cabbage until the butter has melted, everything is evenly combined, and the rice is heated through.",
+      "Finally, season the skillet with soy sauce to taste. Start with 1 tsp and add more to your liking (I added ½ Tbsp, or 1.5 tsp). Serve hot and enjoy!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/sauteed-beef-cabbage-and-rice/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "southwest-tortilla-baked-eggs",
+    "title": "Southwest Tortilla Baked Eggs",
+    "description": "These southwest inspired tortilla baked eggs make an easy and delicious weekend breakfast with plenty of room for customization!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2021/05/Southwest-Tortilla-Baked-Eggs-single.jpg",
+    "prepTime": 10,
+    "cookTime": 20,
+    "servings": 2,
+    "difficulty": "easy",
+    "tags": [
+      "breakfast",
+      "brunch",
+      "american",
+      "baked-eggs",
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1/2 Tbsp olive oil ($0.09)",
+      "1 8 flour tortilla ($0.14)",
+      "1/2 cup shredded cheddar cheese ($0.50)",
+      "1/4 red bell pepper ($0.28)",
+      "2 Tbsp diced green chiles ($0.25)",
+      "4 large eggs ($0.92)",
+      "1/8 tsp salt ($0.02)",
+      "1/8 tsp pepper ($0.02)",
+      "2 Tbsp salsa ($0.13)",
+      "1 green onion, sliced ($0.06)"
+    ],
+    "steps": [
+      "Preheat the oven to 350ºF. Brush the olive oil over the inside surface of a circular baking dish.",
+      "Press the tortilla down into the baking dish so that the edges fold up the sides of the dish. It may help to microwave the tortilla for a few seconds first to make it more pliable.",
+      "Sprinkle 1/2 of the shredded cheddar into the bottom of the tortilla. Dice the bell pepper and add it on top of the cheese along with the diced green chiles.",
+      "Crack four eggs into the dish on top of the vegetables and cheese. Season with a pinch fo salt and pepper.",
+      "Top with the remaining shredded cheese.",
+      "Bake the eggs for about 20 minutes, or until the whites are set and the yolks are still a bit liquid. You can shake the dish a bit to easily see how much the eggs are set.",
+      "After baking, spoon a couple tablespoons of salsa over the tortilla baked eggs and sprinkle the sliced green onion over top.",
+      "Loosen the tortilla by sliding a knife around the edge between the tortilla and dish, then slide the tortilla baked eggs out of the dish and use a large knife to cut it into quarters. Serve hot and enjoy!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/southwest-tortilla-baked-eggs/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "spinach-and-mushroom-quesadillas",
+    "title": "Spinach and Mushroom Quesadillas",
+    "description": "These Spinach and Mushroom Quesadillas are filled with melty, creamy cheese, sautéed mushrooms, and a healthy dose of spinach.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2022/02/Spinach-and-Mushroom-Quesadillas-stack.jpg",
+    "prepTime": 10,
+    "cookTime": 20,
+    "servings": 5,
+    "difficulty": "easy",
+    "tags": [
+      "lunch",
+      "main-course",
+      "snack",
+      "american",
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "8 oz. mushrooms ($1.69)",
+      "1 Tbsp cooking oil ($0.04)",
+      "1/4 tsp garlic powder ($0.02)",
+      "1/4 tsp salt, divided ($0.02)",
+      "1/4 tsp freshly cracked pepper, divided ($0.02)",
+      "1/8 tsp crushed red pepper ($0.02)",
+      "1/2 lb. frozen chopped spinach ($0.84)",
+      "8 oz. mozzarella*, shredded ($1.85)",
+      "1/4 cup sour cream ($0.29)",
+      "5 7-inch flour tortillas ($0.94)"
+    ],
+    "steps": [
+      "Slice the mushrooms and add them to a skillet with the cooking oil, garlic powder, crushed red pepper, and half of the salt and pepper. Sauté over medium until the mushrooms have release all of their water and it has evaporated out of the skillet. Set the mushrooms aside.",
+      "While the mushrooms are cooking, thaw the frozen spinach then squeeze out as much of the water as possible. You should have about one cup of spinach (loosely packed) once squeezed.",
+      "Add the mushrooms, spinach, shredded mozzarella, sour cream, and another ⅛ tsp each of salt and pepper to a bowl, then stir to combine.",
+      "Add about ½ cup of the cheesy spinach mushroom mixture to each tortilla, spread it out to cover one side of the tortilla, then fold to close.",
+      "Cook the quesadillas in a skillet over medium heat until brown and crispy on the outside and melty on the inside (I do not use butter or oil in the skillet, but can if you want a more fried texture).",
+      "Slice the quesadillas and serve!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/spinach-and-mushroom-quesadillas/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "sweet-corn-risotto",
+    "title": "Sweet Corn Risotto",
+    "description": "This Sweet Corn Risotto is infused with the flavors of summer! It s comforting, simple, and budget-friendly cooking at its finest.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2024/07/Summer-Corn-Risotto-Plated.jpg",
+    "prepTime": 10,
+    "cookTime": 35,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "main-course",
+      "italian",
+      "sweet-corn-risotto",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "3 corn cobs ($0.99)",
+      "½ small sweet onion ($0.94)",
+      "3 Tbsp salted butter, divided ($0.42)",
+      "1 ½ cups arborio rice ($2.28)",
+      "¼ cup vegetable broth",
+      "5 cups vegetable broth ($1.45)",
+      "½ cup shredded Parmesan cheese ($2.71)"
+    ],
+    "steps": [
+      "Cut corn from cobs and chop the bare cobs in half. Dice the onion, and gather the vegetable broth, shredded Parmesan cheese, butter, and arborio rice.",
+      "Add bare cobs and veggie broth to a pot and bring to a simmer on low heat while you prepare the risotto:",
+      "Melt 2 Tbsp butter in a skillet over medium-high heat and cook the onion down until glossy.",
+      "Add arborio rice to butter and onion and toast for 1-2 minutes.",
+      "Add corn, cook for an additional minute.",
+      "Add ¼ cup vegetable broth and cook until mostly absorbed.",
+      "Add one ladle full of corn veggie broth and stir constantly. Wait until the broth is around 75% absorbed by the rice before adding the next ladle. Keep adding ladles of broth until all the stock is used and the risotto is creamy and complete. This step will take about 20 minutes in total.",
+      "Stir in 1 Tbsp butter and the Parmesan cheese. Serve with parsley or other fresh herbs (optional)."
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/sweet-corn-risotto/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "sweet-potato-enchiladas",
+    "title": "Sweet Potato Enchiladas",
+    "description": "Sweet potatoes and poblano peppers come together to make these flavorful and hearty enchiladas.",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2010/01/Sweet-Potato-Enchiladas-OLD.jpg",
+    "prepTime": 10,
+    "cookTime": 30,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "main-course",
+      "southwest",
+      "enchiladas",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "2 cups Roasted Poblano and Sweet Potato Salad ($1.52)",
+      "4 fajita size flour tortillas ($0.32)",
+      "10 oz can enchilada sauce ($1.00)",
+      "1 cup shredded cheddar ($0.99)"
+    ],
+    "steps": [
+      "Preheat your oven to 350 degrees. Spray a baking dish lightly with non-stick spray. Using a fork, slightly mash the Roasted Poblano and Sweet Potato Salad.",
+      "Lay out your tortillas and divide the mashed up sweet potato mixture evenly between all four (about 1/2 cup each). Sprinkle a little bit (about 2 Tbsp) of shredded cheddar in each tortilla as well. Gently fold the sides of the tortillas in toward the center, one side over the other, until they look like fat cigars.",
+      "Pour a little bit of enchilada sauce in the bottom of your baking dish. Place the rolled enchiladas in the baking dish, seam side down. Top the enchiladas with the rest of the sauce and the rest of the shredded cheese.",
+      "Bake the enchiladas at 350 degrees for about 30 minutes. Enjoy!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/sweet-potato-enchiladas/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "roasted-red-pepper-tomato-soup",
+    "title": "Tomato & Roasted Red Pepper Soup",
+    "description": "Smoky roasted red peppers, tangy tomatoes, plus a simple roux turn this simple roasted red pepper soup into a rich and flavorful soup!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2022/02/Roasted-Red-Pepper-Soup-ladle.jpg",
+    "prepTime": 15,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "lunch",
+      "soup",
+      "american",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 yellow onion ($0.32)",
+      "4 cloves garlic ($0.32)",
+      "2 Tbsp butter ($0.22)",
+      "2 Tbsp all-purpose flour ($0.02)",
+      "1 12oz. jar roasted red peppers, drained ($1.99)",
+      "1 28oz. can crushed tomatoes ($1.19)",
+      "1/2 tsp dried basil ($0.05)",
+      "1/4 tsp dried thyme ($0.02)",
+      "1/4 tsp freshly cracked black pepper ($0.02)",
+      "2 cups vegetable broth ($0.26)"
+    ],
+    "steps": [
+      "Dice the onion and mince the garlic. Add the onion and garlic to a soup pot with the butter and sauté over medium heat until the onions have softened.",
+      "Add the flour to the pot with the onions and garlic. Continue to sauté for about two minutes.",
+      "Transfer the onion mixture to a blender and add the roasted red peppers (drained). Purée until smooth.",
+      "Transfer the red pepper purée back to the soup pot. Add the crushed tomatoes, basil, thyme, pepper, and vegetable broth. Stir to combine and dissolve any flour left on the bottom of the pot.",
+      "Heat the soup over medium and allow it to come up to a simmer. Simmer the soup, stirring occasionally, for 15 minutes.",
+      "Taste the soup and add salt or other seasonings to your liking. The amount of salt needed will depend on the salt content of your broth. I did not add any additional salt. Serve and enjoy!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/roasted-red-pepper-tomato-soup/",
+    "sourceName": "Budget Bytes"
+  },
+  {
+    "id": "turkey-taco-salad",
+    "title": "Turkey Taco Salad",
+    "description": "This Turkey Taco Salad is an easy, light, and fresh dinner that s flexible enough to feed all your family members, no matter how picky!",
+    "image": "https://www.budgetbytes.com/wp-content/uploads/2021/01/Turkey-Taco-Salad-overhead.jpg",
+    "prepTime": 20,
+    "cookTime": 10,
+    "servings": 4,
+    "difficulty": "easy",
+    "tags": [
+      "dinner",
+      "lunch",
+      "main-course",
+      "american",
+      "quick",
+      "kid-friendly"
+    ],
+    "ingredients": [
+      "1 avocado ($0.89)",
+      "1/2 cup sour cream ($0.24)",
+      "1 clove garlic ($0.08)",
+      "1/4 tsp salt ($0.02)",
+      "2 Tbsp fresh lime juice ($0.50)",
+      "1/4 bunch fresh cilantro ($0.20)",
+      "1/4 cup water ($0.00)",
+      "1/2 Tbsp olive oil ($0.08)",
+      "1 lb. ground turkey ($3.49)",
+      "2 Tbsp taco seasoning* ($0.67)",
+      "1 head romaine lettuce ($0.86)",
+      "1 cup frozen corn ($0.35)",
+      "1 15oz. can black beans ($0.89)",
+      "1 pint grape tomatoes ($1.99)",
+      "1 jalapeño (optional) ($0.18)",
+      "2 oz. shredded cheddar ($0.85)"
+    ],
+    "steps": [
+      "Make the salad dressing first so the flavors have time to blend. Peel the avocado and remove the pit. Add the avocado to a food processor or blender along with the sour cream, garlic (minced), salt, lime juice, cilantro, and water. Purée until smooth. Refrigerate the dressing until ready to use.",
+      "Next, cook the taco seasoned turkey. Add the olive oil to a large skillet and heat over medium. Once hot, add the ground turkey and cook, breaking it into pieces as you stir. When it s about half-way cooked, add the taco seasoning and continue to stir and cook until the turkey is cooked through.",
+      "Thaw the frozen corn (I use the microwave). Wash and chop the romaine lettuce, rinse and drain the black beans, slice the grape tomatoes in half, slice the optional jalapeño if using, and shred the cheddar cheese.",
+      "To build the salad, lay a bed of the chopped lettuce in each bowl, top with beans, corn, tomatoes, cheese, seasoned turkey, and optional jalapeño slices. Drizzle the creamy avocado dressing over top and enjoy!"
+    ],
+    "sourceUrl": "https://www.budgetbytes.com/turkey-taco-salad/",
+    "sourceName": "Budget Bytes"
   }
 ];
