@@ -1,6 +1,11 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { recipes } from '../data/recipes';
+import { lunchboxRecipes } from '../data/lunchboxRecipes';
+
+// Every recipe across all collections, used wherever a stored ID needs to
+// resolve (planner, grocery list, detail lookup).
+const allRecipes = [...recipes, ...lunchboxRecipes];
 
 // Get start of current week (Sunday)
 function getWeekStart(date = new Date()) {
@@ -113,9 +118,9 @@ export const useAppStore = create(
 
 
 
-      // Get recipe by ID
+      // Get recipe by ID (searches every collection)
       getRecipeById: (id) => {
-        return recipes.find(r => r.id === id);
+        return allRecipes.find(r => r.id === id);
       },
 
       // Get meals for a specific week
@@ -126,7 +131,7 @@ export const useAppStore = create(
 
         for (let day = 0; day < 7; day++) {
           const recipeIds = weekPlan[day] || [];
-          meals[day] = recipeIds.map(id => recipes.find(r => r.id === id)).filter(Boolean);
+          meals[day] = recipeIds.map(id => allRecipes.find(r => r.id === id)).filter(Boolean);
         }
 
         return meals;

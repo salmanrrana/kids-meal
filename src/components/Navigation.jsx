@@ -36,6 +36,17 @@ const NAV_ITEMS = [
     ),
   },
   {
+    to: '/lunchbox',
+    label: 'Lunchbox',
+    icon: (active) => (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="3" y="8" width="18" height="13" rx="2" ry="2" fill={active ? 'currentColor' : 'none'} />
+        <path d="M3 12h18" stroke={active ? 'var(--surface)' : 'currentColor'} />
+        <path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+      </svg>
+    ),
+  },
+  {
     to: '/grocery',
     label: 'Grocery',
     icon: () => (

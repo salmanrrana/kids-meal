@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from '@tanstack/react-router';
 import { useAppStore } from '../store/appStore';
 import { recipes } from '../data/recipes';
+import { lunchboxRecipes } from '../data/lunchboxRecipes';
 import './RecipeDetailPage.css';
 
 const TABS = [
@@ -20,7 +21,8 @@ export function RecipeDetailPage() {
 
   useEffect(() => () => clearTimeout(toastTimer.current), []);
 
-  const recipe = recipes.find(r => r.id === recipeId);
+  const allRecipes = [...recipes, ...lunchboxRecipes];
+  const recipe = allRecipes.find(r => r.id === recipeId);
   const isLiked = likedRecipes.some(r => r.id === recipeId);
 
   if (!recipe) {
@@ -143,6 +145,12 @@ export function RecipeDetailPage() {
                   <span className="time-value">{totalTime} min</span>
                 </div>
               </div>
+
+              {recipe.lunchboxTip && (
+                <div className="lunchbox-tip">
+                  <strong>Packing tip:</strong> {recipe.lunchboxTip}
+                </div>
+              )}
 
               {recipe.sourceUrl && (
                 <p className="source-info">

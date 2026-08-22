@@ -16,6 +16,7 @@ import { LikedPage } from './pages/LikedPage';
 import { RecipeDetailPage } from './pages/RecipeDetailPage';
 import { PlannerPage } from './pages/PlannerPage';
 import { GroceryPage } from './pages/GroceryPage';
+import { LunchboxPage } from './pages/LunchboxPage';
 
 // Components
 import { Navigation } from './components/Navigation';
@@ -63,6 +64,12 @@ const groceryRoute = createRoute({
   component: GroceryPage,
 });
 
+const lunchboxRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/lunchbox',
+  component: LunchboxPage,
+});
+
 // Build route tree
 const routeTree = rootRoute.addChildren([
   indexRoute,
@@ -70,6 +77,7 @@ const routeTree = rootRoute.addChildren([
   recipeRoute,
   plannerRoute,
   groceryRoute,
+  lunchboxRoute,
 ]);
 
 // Create router
