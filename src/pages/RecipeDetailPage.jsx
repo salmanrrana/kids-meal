@@ -3,6 +3,7 @@ import { useParams, useNavigate } from '@tanstack/react-router';
 import { useAppStore } from '../store/appStore';
 import { recipes } from '../data/recipes';
 import { lunchboxRecipes } from '../data/lunchboxRecipes';
+import { lunchRecipes } from '../data/lunchRecipes';
 import './RecipeDetailPage.css';
 
 const TABS = [
@@ -21,7 +22,7 @@ export function RecipeDetailPage() {
 
   useEffect(() => () => clearTimeout(toastTimer.current), []);
 
-  const allRecipes = [...recipes, ...lunchboxRecipes];
+  const allRecipes = [...recipes, ...lunchboxRecipes, ...lunchRecipes];
   const recipe = allRecipes.find(r => r.id === recipeId);
   const isLiked = likedRecipes.some(r => r.id === recipeId);
 

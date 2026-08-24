@@ -2,10 +2,14 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { recipes } from '../data/recipes';
 import { lunchboxRecipes } from '../data/lunchboxRecipes';
+import { lunchRecipes } from '../data/lunchRecipes';
 
 // Every recipe across all collections, used wherever a stored ID needs to
 // resolve (planner, grocery list, detail lookup).
-const allRecipes = [...recipes, ...lunchboxRecipes];
+const allRecipes = [...recipes, ...lunchboxRecipes, ...lunchRecipes];
+
+// Shared lookup for pages that need the full pool (grocery list).
+export const ALL_RECIPES = allRecipes;
 
 // Get start of current week (Sunday)
 function getWeekStart(date = new Date()) {

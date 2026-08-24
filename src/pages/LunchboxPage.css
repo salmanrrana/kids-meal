@@ -1,0 +1,37 @@
+.mode-toggle {
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  margin-bottom: 16px;
+}
+
+.mode-toggle-btn {
+  padding: 8px 20px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: transparent;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--t-fast), background-color var(--t-fast);
+}
+
+.mode-toggle-btn:hover {
+  color: var(--ink);
+}
+
+.mode-toggle-btn.active {
+  background: var(--gold-soft);
+  color: var(--gold);
+}
+
+.mode-note {
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+  margin: -8px 0 12px;
+}

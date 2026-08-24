@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from '@tanstack/react-router';
 import { useAppStore } from '../store/appStore';
-import { recipes } from '../data/recipes';
+import { ALL_RECIPES } from '../store/appStore';
 import './GroceryPage.css';
 
 // Category definitions with keywords for matching
@@ -18,7 +18,8 @@ const CATEGORIES = {
       'pineapple', 'melon', 'watermelon', 'peach', 'pear', 'cilantro', 'parsley',
       'basil', 'mint', 'dill', 'chives', 'scallion', 'green onion', 'shallot', 'leek',
       'radish', 'beet', 'turnip', 'eggplant', 'artichoke', 'brussels sprout',
-      'bok choy', 'fennel', 'jicama', 'plantain', 'snap pea', 'snow pea'
+      'bok choy', 'fennel', 'jicama', 'plantain', 'snap pea', 'snow pea',
+      'berries', 'kiwi', 'clementine'
     ]
   },
   meat: {
@@ -64,7 +65,8 @@ const CATEGORIES = {
       'vanilla', 'extract', 'almond', 'walnut', 'pecan', 'cashew', 'peanut',
       'pistachio', 'macadamia', 'hazelnut', 'pine nut', 'seed', 'sunflower',
       'pumpkin seed', 'sesame seed', 'chia', 'flax', 'raisin', 'cranberry',
-      'date', 'fig', 'apricot', 'prune', 'coconut flake', 'shredded coconut'
+      'date', 'fig', 'apricot', 'prune', 'coconut flake', 'shredded coconut',
+      'dressing', 'pickle', 'olive', 'dough', 'rolls'
     ]
   },
   spices: {
@@ -80,7 +82,8 @@ const CATEGORIES = {
       'old bay', 'cajun', 'creole', 'taco seasoning', 'ranch seasoning',
       'everything bagel', 'sesame', 'poppy seed', 'mustard seed', 'celery seed',
       'fennel seed', 'caraway', 'anise', 'star anise', 'saffron', 'sumac',
-      'za\'atar', 'chinese five spice', 'red pepper flake', 'crushed red pepper'
+      'za\'atar', 'chinese five spice', 'red pepper flake', 'crushed red pepper',
+      'herbs', 'seasoning'
     ]
   },
   frozen: {
@@ -130,7 +133,8 @@ export function GroceryPage() {
     for (let day = 0; day < 7; day++) {
       const recipeIds = weekPlan[day] || [];
       recipeIds.forEach(id => {
-        const recipe = recipes.find(r => r.id === id);
+        // Search every collection so planned lunches show up here too
+        const recipe = ALL_RECIPES.find(r => r.id === id);
         if (recipe) meals.push(recipe);
       });
     }
