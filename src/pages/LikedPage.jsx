@@ -8,13 +8,33 @@ import './LikedPage.css';
 const getTodayIndex = () => new Date().getDay();
 
 // Liked recipe card with quick-add actions
-function LikedRecipeCard({ recipe, onQuickAdd, onOpenPicker, showSuccess, ...props }) {
+function LikedRecipeCard({
+  recipe,
+  isLiked,
+  onClick,
+  onLikeToggle,
+  onQuickAdd,
+  onOpenPicker,
+  showSuccess,
+}) {
   return (
     <div className="liked-recipe-card-wrapper">
-      <RecipeCard {...props} recipe={recipe} />
+      <RecipeCard
+        recipe={recipe}
+        isLiked={isLiked}
+        onClick={onClick}
+        onLikeToggle={onLikeToggle}
+      />
       {showSuccess && (
         <div className="success-message" role="status">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
           <span>Added to today's plan</span>

@@ -7,6 +7,8 @@ import './PlannerPage.css';
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 const DAYS_FULL = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
+/** @typedef {typeof recipes[number]} Recipe */
+
 function formatWeekRange(weekStart) {
   const start = new Date(weekStart);
   const end = new Date(start);
@@ -30,8 +32,12 @@ export function PlannerPage() {
     likedRecipes,
   } = useAppStore();
 
-  const [draggedMeal, setDraggedMeal] = useState(null);
-  const [showAddModal, setShowAddModal] = useState(null); // day index
+  const [draggedMeal, setDraggedMeal] = useState(
+    /** @type {{ recipe: Recipe, fromDay: number } | null} */ (null),
+  );
+  const [showAddModal, setShowAddModal] = useState(
+    /** @type {number | null} */ (null),
+  );
 
   const weekPlan = mealPlans[currentWeek] || {};
 
@@ -77,7 +83,7 @@ export function PlannerPage() {
 
   const availableRecipes = likedRecipes.filter(recipe => {
     // Show recipes not already added to this day
-    const dayMeals = weekPlan[showAddModal] || [];
+    const dayMeals = showAddModal === null ? [] : weekPlan[showAddModal] || [];
     return !dayMeals.includes(recipe.id);
   });
 

@@ -18,7 +18,9 @@ export function RecipeDetailPage() {
   const { likedRecipes, toggleLike, addToMealPlan, currentWeek } = useAppStore();
   const [activeTab, setActiveTab] = useState('overview');
   const [showAddedToast, setShowAddedToast] = useState(false);
-  const toastTimer = useRef(null);
+  const toastTimer = useRef(
+    /** @type {ReturnType<typeof setTimeout> | undefined} */ (undefined),
+  );
 
   useEffect(() => () => clearTimeout(toastTimer.current), []);
 

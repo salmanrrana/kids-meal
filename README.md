@@ -25,7 +25,15 @@ npm install
 
 # Start development server
 npm run dev
+
+# Lint, type-check the JavaScript, and run focused tests
+npm run check:fast
 ```
+
+`npm install` configures an executable pre-commit hook. It checks an isolated
+snapshot of staged source/configuration with Oxlint and Prettier, then runs the
+project JavaScript typecheck and tests for changes that can affect them. Source
+deletions trigger project checks, and unstaged edits are left alone.
 
 The app runs at http://localhost:3000
 

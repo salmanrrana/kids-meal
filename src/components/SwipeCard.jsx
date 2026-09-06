@@ -5,7 +5,9 @@ import './SwipeCard.css';
 
 export function SwipeCard({ recipe, onSwipeLeft, onSwipeRight, onTap }) {
   const [gone, setGone] = useState(false);
-  const [direction, setDirection] = useState(null);
+  const [direction, setDirection] = useState(
+    /** @type {'left' | 'right' | null} */ (null),
+  );
 
   const [{ x, y, rotate, scale, opacity }, api] = useSpring(() => ({
     x: 0,
