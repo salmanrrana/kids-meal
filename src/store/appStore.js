@@ -10,7 +10,9 @@ import { getWeekStart, shiftWeek } from '../lib/week';
 export const ALL_RECIPES = [...recipes, ...lunchboxRecipes, ...lunchRecipes];
 
 const recipesById = new Map(ALL_RECIPES.map((r) => [r.id, r]));
-const lunchIds = new Set([...lunchboxRecipes, ...lunchRecipes].map((r) => r.id));
+const lunchIds = new Set(
+  [...lunchboxRecipes, ...lunchRecipes].map((r) => r.id),
+);
 
 /** Looks up a recipe from any collection. */
 export function findRecipe(id) {
@@ -40,11 +42,15 @@ export const useAppStore = create(
       // Actions
       toggleLike: (recipe) => {
         const state = get();
-        const isLiked = state.likedRecipes.some(liked => liked.id === recipe.id);
+        const isLiked = state.likedRecipes.some(
+          (liked) => liked.id === recipe.id,
+        );
 
         if (isLiked) {
           set({
-            likedRecipes: state.likedRecipes.filter(liked => liked.id !== recipe.id),
+            likedRecipes: state.likedRecipes.filter(
+              (liked) => liked.id !== recipe.id,
+            ),
           });
         } else {
           set({
@@ -55,14 +61,14 @@ export const useAppStore = create(
 
       // Remove from liked recipes
       unlikeRecipe: (recipeId) => {
-        set(state => ({
-          likedRecipes: state.likedRecipes.filter(r => r.id !== recipeId),
+        set((state) => ({
+          likedRecipes: state.likedRecipes.filter((r) => r.id !== recipeId),
         }));
       },
 
       // Weekly planner actions
       addToMealPlan: (recipeId, weekStart, dayIndex) => {
-        set(state => {
+        set((state) => {
           const weekPlan = state.mealPlans[weekStart] || {};
           const dayMeals = weekPlan[dayIndex] || [];
 
@@ -79,7 +85,7 @@ export const useAppStore = create(
       },
 
       removeFromMealPlan: (recipeId, weekStart, dayIndex) => {
-        set(state => {
+        set((state) => {
           const weekPlan = state.mealPlans[weekStart] || {};
           const dayMeals = weekPlan[dayIndex] || [];
 
@@ -113,7 +119,9 @@ export const useAppStore = create(
       },
 
       navigateWeek: (direction) => {
-        set(state => ({ currentWeek: shiftWeek(state.currentWeek, direction) }));
+        set((state) => ({
+          currentWeek: shiftWeek(state.currentWeek, direction),
+        }));
       },
     }),
     {
@@ -125,9 +133,10 @@ export const useAppStore = create(
       }),
       // Older saves included currentWeek; ignore it so it can't pin a stale week.
       merge: (persisted, current) => {
-        const { currentWeek: _stale, ...saved } = persisted ?? {};
+        const { currentWeek: _stale, ...saved } =
+          /** @type {Record<string, unknown>} */ (persisted ?? {});
         return { ...current, ...saved };
       },
-    }
-  )
+    },
+  ),
 );

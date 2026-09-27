@@ -8,21 +8,39 @@ import './DiscoverPage.css';
 const THEMES = [
   { id: 'all', name: 'All Recipes' },
   { id: 'quick', name: 'Quick & Easy', tags: ['quick'] },
-  { id: 'family', name: 'Family Favorites', tags: ['kid-favorite', 'family-friendly'] },
-  { id: 'healthy', name: 'Healthy & Light', tags: ['healthy', 'light', 'nutritious'] },
-  { id: 'comfort', name: 'Comfort Classics', tags: ['comfort-food', 'warming', 'traditional'] },
-  { id: 'one-pan', name: 'One-Pan Wonders', tags: ['one-pan', 'sheet-pan', 'skillet'] },
+  {
+    id: 'family',
+    name: 'Family Favorites',
+    tags: ['kid-favorite', 'family-friendly'],
+  },
+  {
+    id: 'healthy',
+    name: 'Healthy & Light',
+    tags: ['healthy', 'light', 'nutritious'],
+  },
+  {
+    id: 'comfort',
+    name: 'Comfort Classics',
+    tags: ['comfort-food', 'warming', 'traditional'],
+  },
+  {
+    id: 'one-pan',
+    name: 'One-Pan Wonders',
+    tags: ['one-pan', 'sheet-pan', 'skillet'],
+  },
 ];
 
 export function DiscoverPage() {
   const { recipes: allRecipes, likedRecipes, toggleLike } = useAppStore();
   const [activeThemeId, setActiveThemeId] = useState('all');
-  const activeTheme = THEMES.find((theme) => theme.id === activeThemeId);
+  const activeTheme =
+    THEMES.find((theme) => theme.id === activeThemeId) ?? THEMES[0];
 
   const recipes = useMemo(() => {
-    if (!activeTheme.tags) return allRecipes;
+    const themeTags = activeTheme.tags;
+    if (!themeTags) return allRecipes;
     return allRecipes.filter((recipe) =>
-      recipe.tags.some((tag) => activeTheme.tags.includes(tag))
+      recipe.tags.some((tag) => themeTags.includes(tag)),
     );
   }, [allRecipes, activeTheme]);
 
@@ -51,21 +69,32 @@ export function DiscoverPage() {
               <RecipeCard
                 key={recipe.id}
                 recipe={recipe}
-                isLiked={likedRecipes.some(liked => liked.id === recipe.id)}
+                isLiked={likedRecipes.some((liked) => liked.id === recipe.id)}
                 onLikeToggle={() => toggleLike(recipe)}
               />
             ))}
           </div>
         ) : (
           <div className="empty-state">
-            <svg className="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true">
+            <svg
+              className="empty-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinecap="round"
+              aria-hidden="true"
+            >
               <circle cx="12" cy="12" r="9" />
               <path d="M8.5 10.5h.01M15.5 10.5h.01" />
               <path d="M9 15h6" />
             </svg>
             <h2>Nothing in this collection yet</h2>
             <p>Try another collection, or browse all recipes.</p>
-            <button className="btn btn-secondary" onClick={() => setActiveThemeId('all')}>
+            <button
+              className="btn btn-secondary"
+              onClick={() => setActiveThemeId('all')}
+            >
               Show all recipes
             </button>
           </div>
