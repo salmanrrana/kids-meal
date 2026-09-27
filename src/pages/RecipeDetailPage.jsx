@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from '@tanstack/react-router';
 import { useAppStore } from '../store/appStore';
 import { recipes } from '../data/recipes';
-import { lunchboxRecipes } from '../data/lunchboxRecipes';
 import { lunchRecipes } from '../data/lunchRecipes';
 import { getWeekStart } from '../lib/week';
 import './RecipeDetailPage.css';
@@ -61,7 +60,7 @@ export function RecipeDetailPage() {
     return () => document.removeEventListener('keydown', onKeyDown);
   }, [pickerOpen]);
 
-  const allRecipes = [...recipes, ...lunchboxRecipes, ...lunchRecipes];
+  const allRecipes = [...recipes, ...lunchRecipes];
   const recipe = allRecipes.find((r) => r.id === recipeId);
   const isLiked = likedRecipes.some((r) => r.id === recipeId);
 

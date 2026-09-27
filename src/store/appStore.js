@@ -1,25 +1,22 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { recipes } from '../data/recipes';
-import { lunchboxRecipes } from '../data/lunchboxRecipes';
 import { lunchRecipes } from '../data/lunchRecipes';
 import { getWeekStart, shiftWeek } from '../lib/week';
 
 // Every recipe across all collections. Anything that resolves a stored ID
 // (planner, grocery list, detail page) must look here, not just `recipes`.
-export const ALL_RECIPES = [...recipes, ...lunchboxRecipes, ...lunchRecipes];
+export const ALL_RECIPES = [...recipes, ...lunchRecipes];
 
 const recipesById = new Map(ALL_RECIPES.map((r) => [r.id, r]));
-const lunchIds = new Set(
-  [...lunchboxRecipes, ...lunchRecipes].map((r) => r.id),
-);
+const lunchIds = new Set(lunchRecipes.map((r) => r.id));
 
 /** Looks up a recipe from any collection. */
 export function findRecipe(id) {
   return recipesById.get(id);
 }
 
-/** Lunch recipes (both lunchbox collections) vs. everything else (dinners). */
+/** Lunch recipes (the lunchbox collection) vs. everything else (dinners). */
 export function getMealKind(recipeId) {
   return lunchIds.has(recipeId) ? 'lunch' : 'dinner';
 }
