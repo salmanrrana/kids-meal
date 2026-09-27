@@ -3,21 +3,23 @@ import { persist } from 'zustand/middleware';
 import { recipes } from '../data/recipes';
 import { lunchboxRecipes } from '../data/lunchboxRecipes';
 import { lunchRecipes } from '../data/lunchRecipes';
+import { getWeekStart, shiftWeek } from '../lib/week';
 
-// Every recipe across all collections, used wherever a stored ID needs to
-// resolve (planner, grocery list, detail lookup).
-const allRecipes = [...recipes, ...lunchboxRecipes, ...lunchRecipes];
+// Every recipe across all collections. Anything that resolves a stored ID
+// (planner, grocery list, detail page) must look here, not just `recipes`.
+export const ALL_RECIPES = [...recipes, ...lunchboxRecipes, ...lunchRecipes];
 
-// Shared lookup for pages that need the full pool (grocery list).
-export const ALL_RECIPES = allRecipes;
+const recipesById = new Map(ALL_RECIPES.map((r) => [r.id, r]));
+const lunchIds = new Set([...lunchboxRecipes, ...lunchRecipes].map((r) => r.id));
 
-// Get start of current week (Sunday)
-function getWeekStart(date = new Date()) {
-  const d = new Date(date);
-  const day = d.getDay();
-  d.setDate(d.getDate() - day);
-  d.setHours(0, 0, 0, 0);
-  return d.toISOString().split('T')[0];
+/** Looks up a recipe from any collection. */
+export function findRecipe(id) {
+  return recipesById.get(id);
+}
+
+/** Lunch recipes (both lunchbox collections) vs. everything else (dinners). */
+export function getMealKind(recipeId) {
+  return lunchIds.has(recipeId) ? 'lunch' : 'dinner';
 }
 
 export const useAppStore = create(
@@ -111,43 +113,21 @@ export const useAppStore = create(
       },
 
       navigateWeek: (direction) => {
-        set(state => {
-          // Parse date parts to avoid timezone issues
-          const [year, month, day] = state.currentWeek.split('-').map(Number);
-          const current = new Date(year, month - 1, day);
-          current.setDate(current.getDate() + (direction * 7));
-          return { currentWeek: getWeekStart(current) };
-        });
-      },
-
-
-
-      // Get recipe by ID (searches every collection)
-      getRecipeById: (id) => {
-        return allRecipes.find(r => r.id === id);
-      },
-
-      // Get meals for a specific week
-      getWeekMeals: (weekStart) => {
-        const state = get();
-        const weekPlan = state.mealPlans[weekStart] || {};
-        const meals = {};
-
-        for (let day = 0; day < 7; day++) {
-          const recipeIds = weekPlan[day] || [];
-          meals[day] = recipeIds.map(id => allRecipes.find(r => r.id === id)).filter(Boolean);
-        }
-
-        return meals;
+        set(state => ({ currentWeek: shiftWeek(state.currentWeek, direction) }));
       },
     }),
     {
       name: 'kids-meal-storage',
+      // The viewed week isn't saved: the app always opens on this week.
       partialize: (state) => ({
         likedRecipes: state.likedRecipes,
         mealPlans: state.mealPlans,
-        currentWeek: state.currentWeek,
       }),
+      // Older saves included currentWeek; ignore it so it can't pin a stale week.
+      merge: (persisted, current) => {
+        const { currentWeek: _stale, ...saved } = persisted ?? {};
+        return { ...current, ...saved };
+      },
     }
   )
 );

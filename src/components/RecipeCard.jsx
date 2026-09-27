@@ -1,41 +1,43 @@
 import { useState } from 'react';
+import { Link } from '@tanstack/react-router';
 import './RecipeCard.css';
 
-export function RecipeCard({ recipe, isLiked, onClick, onLikeToggle }) {
-  const [imageLoaded, setImageLoaded] = useState(false);
+// Photo-forward recipe card used on the browse grids. The title is a real link
+// stretched over the whole card, so the card works with keyboard, middle-click
+// and "open in new tab". The heart sits above that link and never navigates.
+export function RecipeCard({ recipe, isLiked, onLikeToggle }) {
+  const [imageStatus, setImageStatus] = useState('loading');
 
   const totalTime = recipe.prepTime + recipe.cookTime;
 
-  const handleCardClick = (e) => {
-    // Prevent card click when clicking the heart button
-    if (e.target.closest('.like-button')) {
-      return;
-    }
-    onClick();
-  };
-
-  const handleLikeClick = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onLikeToggle(e);
-  };
-
   return (
-    <article className="recipe-card" onClick={handleCardClick}>
+    <article className="recipe-card">
       <div className="card-image-container">
-        <img
-          src={recipe.image}
-          alt={recipe.title}
-          loading="lazy"
-          className={`card-image ${imageLoaded ? 'loaded' : ''}`}
-          onLoad={() => setImageLoaded(true)}
-        />
-        {!imageLoaded && <div className="image-placeholder" />}
+        {imageStatus !== 'error' && (
+          <img
+            src={recipe.image}
+            alt=""
+            loading="lazy"
+            className={`card-image ${imageStatus === 'loaded' ? 'loaded' : ''}`}
+            onLoad={() => setImageStatus('loaded')}
+            onError={() => setImageStatus('error')}
+          />
+        )}
+        {imageStatus === 'loading' && <div className="image-placeholder" />}
+        {imageStatus === 'error' && (
+          <div className="image-fallback" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="8" />
+              <circle cx="12" cy="12" r="4.5" />
+            </svg>
+          </div>
+        )}
 
         <button
+          type="button"
           className={`like-button ${isLiked ? 'liked' : ''}`}
-          onClick={handleLikeClick}
-          aria-label={isLiked ? 'Remove from favorites' : 'Add to favorites'}
+          onClick={onLikeToggle}
+          aria-label={isLiked ? `Remove ${recipe.title} from favorites` : `Add ${recipe.title} to favorites`}
           aria-pressed={isLiked}
         >
           <svg viewBox="0 0 24 24" className="heart-icon" aria-hidden="true">
@@ -52,7 +54,15 @@ export function RecipeCard({ recipe, isLiked, onClick, onLikeToggle }) {
       </div>
 
       <div className="card-content">
-        <h3 className="recipe-title">{recipe.title}</h3>
+        <h3 className="recipe-title">
+          <Link
+            to="/recipe/$recipeId"
+            params={{ recipeId: recipe.id }}
+            className="card-link"
+          >
+            {recipe.title}
+          </Link>
+        </h3>
         <p className="recipe-description">{recipe.description}</p>
 
         <div className="recipe-tags">

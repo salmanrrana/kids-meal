@@ -2,44 +2,29 @@ import { useState, useMemo } from 'react';
 import { useAppStore } from '../store/appStore';
 import { RecipeCard } from '../components/RecipeCard';
 import { ThemeFilters } from '../components/ThemeFilters';
-import { useNavigate } from '@tanstack/react-router';
 import './DiscoverPage.css';
 
-const THEME_NAMES = {
-  all: 'All Recipes',
-  quick: 'Quick & Easy',
-  family: 'Family Favorites',
-  healthy: 'Healthy & Light',
-  comfort: 'Comfort Classics',
-  'one-pan': 'One-Pan Wonders',
-};
+// Collections shown as chips. A recipe is in a collection if it has any of its tags.
+const THEMES = [
+  { id: 'all', name: 'All Recipes' },
+  { id: 'quick', name: 'Quick & Easy', tags: ['quick'] },
+  { id: 'family', name: 'Family Favorites', tags: ['kid-favorite', 'family-friendly'] },
+  { id: 'healthy', name: 'Healthy & Light', tags: ['healthy', 'light', 'nutritious'] },
+  { id: 'comfort', name: 'Comfort Classics', tags: ['comfort-food', 'warming', 'traditional'] },
+  { id: 'one-pan', name: 'One-Pan Wonders', tags: ['one-pan', 'sheet-pan', 'skillet'] },
+];
 
 export function DiscoverPage() {
-  const navigate = useNavigate();
   const { recipes: allRecipes, likedRecipes, toggleLike } = useAppStore();
-  const [activeTheme, setActiveTheme] = useState('all');
+  const [activeThemeId, setActiveThemeId] = useState('all');
+  const activeTheme = THEMES.find((theme) => theme.id === activeThemeId);
 
-  // Filter recipes based on active theme
   const recipes = useMemo(() => {
-    if (activeTheme === 'all') return allRecipes;
-
-    const themeFilters = {
-      quick: ['quick'],
-      family: ['kid-favorite', 'family-friendly'],
-      healthy: ['healthy', 'light', 'nutritious'],
-      comfort: ['comfort-food', 'warming', 'traditional'],
-      'one-pan': ['one-pan', 'sheet-pan', 'skillet'],
-    };
-
-    const filterTags = themeFilters[activeTheme] || [];
-    return allRecipes.filter(recipe =>
-      filterTags.some(tag => recipe.tags.includes(tag))
+    if (!activeTheme.tags) return allRecipes;
+    return allRecipes.filter((recipe) =>
+      recipe.tags.some((tag) => activeTheme.tags.includes(tag))
     );
   }, [allRecipes, activeTheme]);
-
-  const handleRecipeClick = (recipe) => {
-    navigate({ to: '/recipe/$recipeId', params: { recipeId: recipe.id } });
-  };
 
   return (
     <div className="discover-page page-with-nav">
@@ -47,13 +32,18 @@ export function DiscoverPage() {
         <header className="page-header">
           <h1 className="page-title">Tonight's table</h1>
           <p className="page-subtitle">
-            {activeTheme === 'all'
-              ? `${recipes.length} family meals, all ready in 30 minutes or less`
-              : `${recipes.length} ${THEME_NAMES[activeTheme].toLowerCase()} ${recipes.length === 1 ? 'recipe' : 'recipes'}`}
+            {activeTheme.tags
+              ? `${recipes.length} ${activeTheme.name.toLowerCase()} ${recipes.length === 1 ? 'recipe' : 'recipes'}`
+              : `${recipes.length} family meals, all ready in 30 minutes or less`}
           </p>
         </header>
 
-        <ThemeFilters activeTheme={activeTheme} onThemeChange={setActiveTheme} />
+        <ThemeFilters
+          options={THEMES}
+          activeId={activeThemeId}
+          onChange={setActiveThemeId}
+          label="Recipe collections"
+        />
 
         {recipes.length > 0 ? (
           <div className="recipes-grid">
@@ -62,7 +52,6 @@ export function DiscoverPage() {
                 key={recipe.id}
                 recipe={recipe}
                 isLiked={likedRecipes.some(liked => liked.id === recipe.id)}
-                onClick={() => handleRecipeClick(recipe)}
                 onLikeToggle={() => toggleLike(recipe)}
               />
             ))}
@@ -76,7 +65,7 @@ export function DiscoverPage() {
             </svg>
             <h2>Nothing in this collection yet</h2>
             <p>Try another collection, or browse all recipes.</p>
-            <button className="btn btn-secondary" onClick={() => setActiveTheme('all')}>
+            <button className="btn btn-secondary" onClick={() => setActiveThemeId('all')}>
               Show all recipes
             </button>
           </div>

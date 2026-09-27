@@ -1,26 +1,20 @@
 import './ThemeFilters.css';
 
-const THEMES = [
-  { id: 'all', name: 'All Recipes' },
-  { id: 'quick', name: 'Quick & Easy' },
-  { id: 'family', name: 'Family Favorites' },
-  { id: 'healthy', name: 'Healthy & Light' },
-  { id: 'comfort', name: 'Comfort Classics' },
-  { id: 'one-pan', name: 'One-Pan Wonders' },
-];
-
-export function ThemeFilters({ activeTheme, onThemeChange }) {
+// Row of collection chips. Scrolls sideways on phones, wraps on wider screens.
+// `options` is a list of { id, name }; the active chip is picked by `activeId`.
+export function ThemeFilters({ options, activeId, onChange, label }) {
   return (
-    <nav className="theme-filters" aria-label="Recipe collections">
+    <nav className="theme-filters" aria-label={label}>
       <div className="theme-filters-container">
-        {THEMES.map((theme) => (
+        {options.map((option) => (
           <button
-            key={theme.id}
-            className={`theme-filter ${activeTheme === theme.id ? 'active' : ''}`}
-            aria-pressed={activeTheme === theme.id}
-            onClick={() => onThemeChange(theme.id)}
+            type="button"
+            key={option.id}
+            className={`theme-filter ${activeId === option.id ? 'active' : ''}`}
+            aria-pressed={activeId === option.id}
+            onClick={() => onChange(option.id)}
           >
-            {theme.name}
+            {option.name}
           </button>
         ))}
       </div>

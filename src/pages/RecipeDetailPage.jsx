@@ -4,6 +4,7 @@ import { useAppStore } from '../store/appStore';
 import { recipes } from '../data/recipes';
 import { lunchboxRecipes } from '../data/lunchboxRecipes';
 import { lunchRecipes } from '../data/lunchRecipes';
+import { getWeekStart } from '../lib/week';
 import './RecipeDetailPage.css';
 
 const TABS = [
@@ -12,15 +13,45 @@ const TABS = [
   { id: 'steps', label: 'Steps' },
 ];
 
+// The next 7 days starting today, as options for the "Add to plan" picker.
+// `label` names the day ("Today", "Tomorrow", "Mon, Sep 28"); `date` is local midnight.
+function getUpcomingDays() {
+  const now = new Date();
+  return Array.from({ length: 7 }, (_, i) => {
+    const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() + i);
+    const dateLabel = date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+    const label = i === 0 ? 'Today' : i === 1 ? 'Tomorrow' : dateLabel;
+    return { date, label, dateLabel };
+  });
+}
+
 export function RecipeDetailPage() {
   const { recipeId } = useParams({ from: '/recipe/$recipeId' });
   const navigate = useNavigate();
-  const { likedRecipes, toggleLike, addToMealPlan, currentWeek } = useAppStore();
+  const { likedRecipes, toggleLike, addToMealPlan } = useAppStore();
   const [activeTab, setActiveTab] = useState('overview');
-  const [showAddedToast, setShowAddedToast] = useState(false);
+  const [pickerOpen, setPickerOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState(null);
   const toastTimer = useRef(null);
+  const addButtonRef = useRef(null);
 
   useEffect(() => () => clearTimeout(toastTimer.current), []);
+
+  // Closing returns focus to the button that opened the picker
+  const closePicker = () => {
+    setPickerOpen(false);
+    addButtonRef.current?.focus();
+  };
+
+  // Escape closes the picker
+  useEffect(() => {
+    if (!pickerOpen) return;
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') closePicker();
+    };
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [pickerOpen]);
 
   const allRecipes = [...recipes, ...lunchboxRecipes, ...lunchRecipes];
   const recipe = allRecipes.find(r => r.id === recipeId);
@@ -48,12 +79,12 @@ export function RecipeDetailPage() {
 
   const totalTime = recipe.prepTime + recipe.cookTime;
 
-  const handleAddToWeek = () => {
-    const today = new Date().getDay();
-    addToMealPlan(recipe.id, currentWeek, today);
-    setShowAddedToast(true);
+  const handlePickDay = ({ date, label }) => {
+    addToMealPlan(recipe.id, getWeekStart(date), date.getDay());
+    closePicker();
+    setToastMessage(`Added to ${label}`);
     clearTimeout(toastTimer.current);
-    toastTimer.current = setTimeout(() => setShowAddedToast(false), 2200);
+    toastTimer.current = setTimeout(() => setToastMessage(null), 2200);
   };
 
   return (
@@ -84,8 +115,17 @@ export function RecipeDetailPage() {
       <div className="page-container recipe-info">
         <div className="recipe-title-row">
           <h1 className="detail-title">{recipe.title}</h1>
-          <button className="btn btn-primary btn-sm add-week-btn" onClick={handleAddToWeek}>
-            Add to this week
+          <button
+            ref={addButtonRef}
+            className="btn btn-primary add-plan-btn"
+            onClick={() => setPickerOpen(true)}
+            aria-haspopup="dialog"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <line x1="12" y1="5" x2="12" y2="19" />
+              <line x1="5" y1="12" x2="19" y2="12" />
+            </svg>
+            Add to plan
           </button>
         </div>
 
@@ -158,6 +198,7 @@ export function RecipeDetailPage() {
                   Recipe from{' '}
                   <a href={recipe.sourceUrl} target="_blank" rel="noopener noreferrer">
                     {recipe.sourceName}
+                    <span className="sr-only"> (opens in a new tab)</span>
                   </a>
                 </p>
               )}
@@ -187,12 +228,52 @@ export function RecipeDetailPage() {
         </div>
       </div>
 
-      {showAddedToast && (
+      {/* Day picker: bottom sheet on phones, small modal on wider screens */}
+      {pickerOpen && (
+        <div className="modal-overlay add-plan-overlay" onClick={closePicker}>
+          <div
+            className="modal add-plan-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="add-plan-title"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="modal-header">
+              <h2 id="add-plan-title">Add to plan</h2>
+              <button type="button" className="icon-btn" onClick={closePicker} aria-label="Close">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            <ul className="add-plan-days">
+              {getUpcomingDays().map((day, i) => (
+                <li key={day.dateLabel}>
+                  <button
+                    type="button"
+                    className="add-plan-day"
+                    onClick={() => handlePickDay(day)}
+                    autoFocus={i === 0}
+                  >
+                    <span className="add-plan-day-label">{day.label}</span>
+                    {day.label !== day.dateLabel && (
+                      <span className="add-plan-day-date">{day.dateLabel}</span>
+                    )}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+
+      {toastMessage && (
         <div className="toast" role="status">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16" style={{ color: 'var(--success)' }}>
             <polyline points="20 6 9 17 4 12"></polyline>
           </svg>
-          Added to today's plan
+          {toastMessage}
         </div>
       )}
     </div>

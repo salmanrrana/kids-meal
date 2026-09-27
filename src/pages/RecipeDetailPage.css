@@ -29,7 +29,7 @@
 
 .hero-controls {
   position: absolute;
-  top: 16px;
+  top: max(16px, env(safe-area-inset-top));
   left: 0;
   right: 0;
   display: flex;
@@ -38,6 +38,8 @@
 }
 
 .hero-btn {
+  width: 44px;
+  height: 44px;
   background: var(--scrim);
   border-color: transparent;
   color: var(--scrim-ink);
@@ -77,9 +79,10 @@
   max-width: 24ch;
 }
 
-.add-week-btn {
+.add-plan-btn {
   flex-shrink: 0;
-  margin-top: 6px;
+  min-height: 44px;
+  margin-top: 2px;
 }
 
 .recipe-meta {
@@ -146,6 +149,12 @@
   color: var(--on-gold);
 }
 
+@media (pointer: coarse) {
+  .tab {
+    min-height: 44px;
+  }
+}
+
 /* Tab content */
 .tab-content {
   padding-bottom: 32px;
@@ -198,6 +207,7 @@
   background: var(--surface-2, var(--surface));
   font-size: var(--text-sm);
   color: var(--ink-2);
+  margin-bottom: 20px;
 }
 
 .lunchbox-tip strong {
@@ -209,7 +219,11 @@
   color: var(--ink-3);
 }
 
+/* Padding grows the tap area without moving the text */
 .source-info a {
+  display: inline-block;
+  padding: 12px 0;
+  margin: -12px 0;
   color: var(--gold);
   text-decoration: underline;
   text-underline-offset: 2px;
@@ -286,5 +300,68 @@
   .time-breakdown .time-item {
     max-width: none;
     padding: 10px 12px;
+  }
+}
+
+/* Add to plan picker (uses .modal / .modal-overlay from styles.css) */
+.add-plan-modal {
+  max-width: 360px;
+}
+
+.add-plan-days {
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  overflow-y: auto;
+}
+
+.add-plan-day {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  padding: 10px 14px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--ink);
+  font-size: var(--text-base);
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--t-fast);
+}
+
+.add-plan-day:hover {
+  background: var(--surface-2);
+}
+
+.add-plan-day-date {
+  color: var(--ink-3);
+  font-size: var(--text-sm);
+  font-weight: 400;
+}
+
+/* Phones: bottom sheet above the home bar */
+@media (max-width: 480px) {
+  .add-plan-overlay {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .add-plan-modal {
+    max-width: none;
+    border-bottom: none;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding-bottom: env(safe-area-inset-bottom);
+    animation-name: sheet-in;
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    transform: translateY(100%);
   }
 }

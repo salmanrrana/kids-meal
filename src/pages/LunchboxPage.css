@@ -1,3 +1,5 @@
+/* Lunchbox page: source toggle above the collection chips */
+
 .mode-toggle {
   display: inline-flex;
   gap: 4px;
@@ -9,6 +11,7 @@
 }
 
 .mode-toggle-btn {
+  min-height: 44px;
   padding: 8px 20px;
   border-radius: var(--radius-full);
   border: none;
@@ -23,6 +26,10 @@
 
 .mode-toggle-btn:hover {
   color: var(--ink);
+}
+
+.mode-toggle-btn:focus-visible {
+  border-radius: var(--radius-full);
 }
 
 .mode-toggle-btn.active {

@@ -47,7 +47,7 @@ Strategy: **Restrained**. Gold carries ≤10% of any screen. Recipe photography 
 - **Buttons**: pill. Primary = gold fill + `--on-gold` text. Secondary = `--surface-2` fill + `--ink`. Ghost = transparent + `--ink-2`. All have hover / focus-visible (2px gold ring, 2px offset) / active / disabled.
 - **Recipe card**: photo top (4:3), surface body, Fraunces title, 2-line clamped description, time chip overlaid on photo (solid dark scrim, white text). Heart button: dark scrim circle; liked = gold fill.
 - **Chips/filters**: pill, `--surface-2`; active = `--gold-soft` bg + gold text + gold border.
-- **Bottom nav**: fixed, `--surface` with hairline top border. 4 items (Discover, Favorites, Plan, Grocery). Active = gold icon + label.
+- **Bottom nav**: fixed, `--surface` with hairline top border. 5 equal-width items (Discover, Favorites, Plan, Lunchbox, Grocery). Active = gold icon + label. Labels go title case at ≤480px so five fit on a phone.
 - **Modals**: centered panel on 60% black backdrop, `--surface`, radius 14.
 - **Toast**: bottom-centered pill above nav, `--surface-2`, gold check.
 - **Empty states**: inline SVG line icon (1.5px stroke, `--ink-3`), Fraunces heading, one sentence, one primary action.
@@ -63,4 +63,4 @@ Strategy: **Restrained**. Gold carries ≤10% of any screen. Recipe photography 
 - Page container: max-width 1100px, 20px side padding (16px <480px).
 - Bottom nav clearance: `padding-bottom: 96px` on pages.
 - Recipe grids: `repeat(auto-fill, minmax(240px, 1fr))`.
-- Planner: 7-column grid ≥1024px, horizontal scroll-snap columns below.
+- Planner: a list of day cards (date rail + Lunch/Dinner slots) with a 7-day jump strip. Slots stack on phones, sit side by side ≥640px; ≥1024px the header, strip, and grocery button move into a sticky left sidebar.

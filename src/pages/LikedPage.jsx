@@ -1,27 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppStore } from '../store/appStore';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 import { RecipeCard } from '../components/RecipeCard';
+import { getWeekStart, shiftWeek, getWeekDates, formatWeekRange } from '../lib/week';
 import './LikedPage.css';
 
-// Get today's date for quick add functionality
-const getTodayIndex = () => new Date().getDay();
+const DAYS_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-// Liked recipe card with quick-add actions
+// Liked recipe card with quick-add actions. The confirmation covers the
+// action buttons briefly after "Add today".
 function LikedRecipeCard({ recipe, onQuickAdd, onOpenPicker, showSuccess, ...props }) {
   return (
     <div className="liked-recipe-card-wrapper">
       <RecipeCard {...props} recipe={recipe} />
-      {showSuccess && (
-        <div className="success-message" role="status">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          <span>Added to today's plan</span>
-        </div>
-      )}
       <div className="quick-actions">
         <button
+          type="button"
           className="quick-add-btn"
           onClick={() => onQuickAdd(recipe.id)}
           title="Add to today's meal plan"
@@ -29,97 +23,67 @@ function LikedRecipeCard({ recipe, onQuickAdd, onOpenPicker, showSuccess, ...pro
           Add today
         </button>
         <button
+          type="button"
           className="quick-add-btn secondary"
           onClick={() => onOpenPicker(recipe.id)}
           title="Choose a day for this meal"
         >
           Pick a day
         </button>
+        {showSuccess && (
+          <div className="success-message" role="status">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>Added to today</span>
+          </div>
+        )}
       </div>
     </div>
   );
 }
 
-const DAYS_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-function getWeekDates(weekStart) {
-  const [year, month, day] = weekStart.split('-').map(Number);
-  const start = new Date(year, month - 1, day);
-
-  return DAYS_SHORT.map((dayName, index) => {
-    const date = new Date(start);
-    date.setDate(start.getDate() + index);
-    return {
-      dayName,
-      dayIndex: index,
-      dateNum: date.getDate(),
-      month: date.toLocaleDateString('en-US', { month: 'short' }),
-      isToday: new Date().toDateString() === date.toDateString(),
-    };
-  });
-}
-
-function formatWeekLabel(weekStart) {
-  const [year, month, day] = weekStart.split('-').map(Number);
-  const start = new Date(year, month - 1, day);
-  const end = new Date(start);
-  end.setDate(end.getDate() + 6);
-
-  const formatDate = (d) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  return `${formatDate(start)} - ${formatDate(end)}`;
-}
-
-function getNextWeekStart(weekStart, direction) {
-  const [year, month, day] = weekStart.split('-').map(Number);
-  const current = new Date(year, month - 1, day);
-  current.setDate(current.getDate() + (direction * 7));
-  const d = current.getDay();
-  current.setDate(current.getDate() - d);
-  return current.toISOString().split('T')[0];
-}
-
 export function LikedPage() {
-  const navigate = useNavigate();
-  const { likedRecipes, unlikeRecipe, addToMealPlan, currentWeek } = useAppStore();
+  const { likedRecipes, unlikeRecipe, addToMealPlan } = useAppStore();
   const [openPicker, setOpenPicker] = useState(null);
-  const [pickerWeek, setPickerWeek] = useState(currentWeek);
+  // The picker always opens on the real current week, not the planner's view.
+  const [pickerWeek, setPickerWeek] = useState(() => getWeekStart());
   const [showSuccess, setShowSuccess] = useState(null);
 
+  const todayKey = new Date().toDateString();
   const weekDates = getWeekDates(pickerWeek);
 
-  const handleAddToDay = (recipeId, dayIndex) => {
-    addToMealPlan(recipeId, pickerWeek, dayIndex);
-    setOpenPicker(null);
-    setPickerWeek(currentWeek);
-  };
-
-  const handleQuickAddToday = (recipeId) => {
-    addToMealPlan(recipeId, currentWeek, getTodayIndex());
-    setShowSuccess(recipeId);
-    setTimeout(() => setShowSuccess(null), 2000);
-  };
-
-  const closePicker = () => {
-    setOpenPicker(null);
-    setPickerWeek(currentWeek);
-  };
+  const closePicker = () => setOpenPicker(null);
 
   const openPickerFor = (recipeId) => {
     setOpenPicker(recipeId);
-    setPickerWeek(currentWeek);
+    setPickerWeek(getWeekStart());
   };
 
-  const navigatePickerWeek = (e, direction) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setPickerWeek(getNextWeekStart(pickerWeek, direction));
+  const handleAddToDay = (recipeId, dayIndex) => {
+    addToMealPlan(recipeId, pickerWeek, dayIndex);
+    closePicker();
   };
 
-  const handleDayClick = (e, recipeId, dayIndex) => {
-    e.preventDefault();
-    e.stopPropagation();
-    handleAddToDay(recipeId, dayIndex);
+  const handleQuickAddToday = (recipeId) => {
+    addToMealPlan(recipeId, getWeekStart(), new Date().getDay());
+    setShowSuccess(recipeId);
   };
+
+  // Hide the "added" confirmation after 2s
+  useEffect(() => {
+    if (!showSuccess) return;
+    const timer = setTimeout(() => setShowSuccess(null), 2000);
+    return () => clearTimeout(timer);
+  }, [showSuccess]);
+
+  // Escape closes the day picker
+  useEffect(() => {
+    if (!openPicker) return;
+    const onKey = (e) => e.key === 'Escape' && setOpenPicker(null);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [openPicker]);
 
   if (likedRecipes.length === 0) {
     return (
@@ -159,7 +123,6 @@ export function LikedPage() {
               key={recipe.id}
               recipe={recipe}
               isLiked={true}
-              onClick={() => navigate({ to: '/recipe/$recipeId', params: { recipeId: recipe.id } })}
               onLikeToggle={() => unlikeRecipe(recipe.id)}
               onQuickAdd={handleQuickAddToday}
               onOpenPicker={openPickerFor}
@@ -191,13 +154,13 @@ export function LikedPage() {
 
             <div className="modal-content">
               <div className="week-navigator">
-                <button type="button" className="icon-btn" onClick={(e) => navigatePickerWeek(e, -1)} aria-label="Previous week">
+                <button type="button" className="icon-btn" onClick={() => setPickerWeek(shiftWeek(pickerWeek, -1))} aria-label="Previous week">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="15 18 9 12 15 6"></polyline>
                   </svg>
                 </button>
-                <span className="week-label">{formatWeekLabel(pickerWeek)}</span>
-                <button type="button" className="icon-btn" onClick={(e) => navigatePickerWeek(e, 1)} aria-label="Next week">
+                <span className="week-label">{formatWeekRange(pickerWeek)}</span>
+                <button type="button" className="icon-btn" onClick={() => setPickerWeek(shiftWeek(pickerWeek, 1))} aria-label="Next week">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                   </svg>
@@ -205,17 +168,21 @@ export function LikedPage() {
               </div>
 
               <div className="picker-days">
-                {weekDates.map(({ dayName, dayIndex, dateNum, isToday }) => (
-                  <button
-                    type="button"
-                    key={dayIndex}
-                    className={`picker-day ${isToday ? 'today' : ''}`}
-                    onClick={(e) => handleDayClick(e, openPicker, dayIndex)}
-                  >
-                    <span className="day-label">{dayName}</span>
-                    <span className="day-date">{dateNum}</span>
-                  </button>
-                ))}
+                {weekDates.map((date, dayIndex) => {
+                  const isToday = date.toDateString() === todayKey;
+                  return (
+                    <button
+                      type="button"
+                      key={dayIndex}
+                      className={`picker-day ${isToday ? 'today' : ''}`}
+                      onClick={() => handleAddToDay(openPicker, dayIndex)}
+                      aria-label={date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
+                    >
+                      <span className="day-label">{DAYS_SHORT[dayIndex]}</span>
+                      <span className="day-date">{date.getDate()}</span>
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>

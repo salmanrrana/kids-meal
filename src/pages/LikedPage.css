@@ -22,19 +22,27 @@
 
 /* Card wrapper with quick actions */
 .liked-recipe-card-wrapper {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
 .quick-actions {
+  position: relative;
   display: flex;
   gap: 8px;
 }
 
+/* Two-up cards on phones are too narrow for side-by-side buttons */
+@media (min-width: 381px) and (max-width: 540px) {
+  .quick-actions {
+    flex-direction: column;
+  }
+}
+
 .quick-add-btn {
   flex: 1;
+  min-height: 44px;
   padding: 9px 12px;
   border-radius: var(--radius-full);
   border: 1px solid transparent;
@@ -45,11 +53,19 @@
   line-height: 1.2;
   cursor: pointer;
   transition: background-color var(--t-fast), border-color var(--t-fast),
-    color var(--t-fast);
+    color var(--t-fast), transform var(--t-fast);
 }
 
 .quick-add-btn:hover {
   background: var(--gold-strong);
+}
+
+.quick-add-btn:active {
+  transform: translateY(1px);
+}
+
+.quick-add-btn:focus-visible {
+  border-radius: var(--radius-full);
 }
 
 .quick-add-btn.secondary {
@@ -64,19 +80,21 @@
   background: var(--surface-2);
 }
 
-/* Quick-add confirmation */
+/* Quick-add confirmation: briefly covers the action buttons */
 .success-message {
   position: absolute;
-  top: 10px;
-  left: 10px;
-  right: 56px;
+  inset: 0;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 8px 14px;
-  border-radius: var(--radius-full);
-  background: var(--scrim);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: var(--surface-2);
   color: var(--success);
+  text-align: center;
+  line-height: 1.3;
   font-size: var(--text-sm);
   font-weight: 500;
   z-index: 2;
@@ -90,13 +108,13 @@
 }
 
 .success-message span {
-  color: var(--scrim-ink);
+  color: var(--ink);
 }
 
 @keyframes success-in {
   from {
     opacity: 0;
-    transform: translateY(-6px);
+    transform: translateY(4px);
   }
 }
 
@@ -132,6 +150,10 @@
   background: var(--surface-2);
   cursor: pointer;
   transition: border-color var(--t-fast), background-color var(--t-fast);
+}
+
+.picker-day:focus-visible {
+  border-radius: var(--radius-md);
 }
 
 .picker-day:hover {
