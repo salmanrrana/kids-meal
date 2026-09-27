@@ -5,6 +5,7 @@ import {
   ALL_RECIPES,
   findRecipe,
   getMealKind,
+  getPlannedMeal,
 } from '../store/appStore';
 import {
   formatWeekRange,
@@ -24,19 +25,13 @@ const DAYS_FULL = [
   'Saturday',
 ];
 
-// Each day has a lunch and a dinner slot. A meal's slot comes from which
-// collection its recipe lives in, so the saved plan stays a flat list per day.
-/** @typedef {{ kind: 'lunch' | 'dinner', label: string, allLabel: string }} Slot */
+// Each day has a lunch and a dinner slot. The person planning chooses the slot.
+/** @typedef {{ kind: 'lunch' | 'dinner', label: string }} Slot */
 /** @type {Slot[]} */
 const SLOTS = [
-  { kind: 'lunch', label: 'Lunch', allLabel: 'All lunches' },
-  { kind: 'dinner', label: 'Dinner', allLabel: 'All dinners' },
+  { kind: 'lunch', label: 'Lunch' },
+  { kind: 'dinner', label: 'Dinner' },
 ];
-
-const RECIPES_BY_KIND = {
-  lunch: ALL_RECIPES.filter((r) => getMealKind(r.id) === 'lunch'),
-  dinner: ALL_RECIPES.filter((r) => getMealKind(r.id) === 'dinner'),
-};
 
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -77,7 +72,9 @@ export function PlannerPage() {
     /** @type {{ dayIndex: number, slot: Slot } | null} */ (null),
   );
   const [dragged, setDragged] = useState(
-    /** @type {{ recipeId: string, fromDay: number } | null} */ (null),
+    /** @type {{ recipeId: string, kind: 'lunch' | 'dinner', fromDay: number } | null} */ (
+      null
+    ),
   );
   const [dropDay, setDropDay] = useState(/** @type {number | null} */ (null));
 
@@ -89,10 +86,17 @@ export function PlannerPage() {
 
   // Resolved meals per day, split into slots: days[dayIndex][kind] = recipes
   const days = weekDates.map((_, dayIndex) => {
-    const meals = (weekPlan[dayIndex] || []).map(findRecipe).filter(Boolean);
+    const meals = (weekPlan[dayIndex] || [])
+      .map(getPlannedMeal)
+      .map((entry) => ({ ...entry, recipe: findRecipe(entry.recipeId) }))
+      .filter((entry) => entry.recipe);
     return {
-      lunch: meals.filter((r) => getMealKind(r.id) === 'lunch'),
-      dinner: meals.filter((r) => getMealKind(r.id) === 'dinner'),
+      lunch: meals
+        .filter((entry) => entry.kind === 'lunch')
+        .map((entry) => entry.recipe),
+      dinner: meals
+        .filter((entry) => entry.kind === 'dinner')
+        .map((entry) => entry.recipe),
     };
   });
 
@@ -124,6 +128,7 @@ export function PlannerPage() {
     if (dragged && dragged.fromDay !== toDay) {
       moveMeal(
         dragged.recipeId,
+        dragged.kind,
         currentWeek,
         dragged.fromDay,
         currentWeek,
@@ -280,10 +285,19 @@ export function PlannerPage() {
                       meals={days[dayIndex][slot.kind]}
                       onAdd={() => setAdding({ dayIndex, slot })}
                       onRemove={(recipeId) =>
-                        removeFromMealPlan(recipeId, currentWeek, dayIndex)
+                        removeFromMealPlan(
+                          recipeId,
+                          currentWeek,
+                          dayIndex,
+                          slot.kind,
+                        )
                       }
                       onDragStart={(recipeId) =>
-                        setDragged({ recipeId, fromDay: dayIndex })
+                        setDragged({
+                          recipeId,
+                          kind: slot.kind,
+                          fromDay: dayIndex,
+                        })
                       }
                       onDragEnd={() => {
                         setDragged(null);
@@ -302,9 +316,14 @@ export function PlannerPage() {
         <AddMealSheet
           slot={adding.slot}
           date={weekDates[adding.dayIndex]}
-          plannedIds={weekPlan[adding.dayIndex] || []}
+          plannedMeals={weekPlan[adding.dayIndex] || []}
           onAdd={(recipeId) => {
-            addToMealPlan(recipeId, currentWeek, adding.dayIndex);
+            addToMealPlan(
+              recipeId,
+              currentWeek,
+              adding.dayIndex,
+              adding.slot.kind,
+            );
             setAdding(null);
           }}
           onClose={() => setAdding(null)}
@@ -402,25 +421,32 @@ function MealSlot({
   );
 }
 
-// Picker for adding a lunch or dinner to a day. Starts on favorites of that
-// kind when there are any, otherwise the full collection; search narrows both.
-function AddMealSheet({ slot, date, plannedIds, onAdd, onClose }) {
+// The chosen slot stays fixed, but any recipe can fill it. Familiar choices
+// appear first, with the rest still searchable in the same list.
+function AddMealSheet({ slot, date, plannedMeals, onAdd, onClose }) {
   const likedRecipes = useAppStore((s) => s.likedRecipes);
   const { kind } = slot;
 
-  // Liked entries are saved snapshots, so re-resolve them to current data.
   const favorites = useMemo(
-    () =>
-      likedRecipes
-        .map((r) => findRecipe(r.id))
-        .filter((r) => r && getMealKind(r.id) === kind),
-    [likedRecipes, kind],
+    () => likedRecipes.map((r) => findRecipe(r.id)).filter(Boolean),
+    [likedRecipes],
   );
+  const allRecipes = useMemo(() => {
+    const knownIds = new Set(ALL_RECIPES.map((recipe) => recipe.id));
+    const available = [
+      ...ALL_RECIPES,
+      ...favorites.filter((recipe) => !knownIds.has(recipe.id)),
+    ];
+    return [
+      ...available.filter((recipe) => getMealKind(recipe.id) === kind),
+      ...available.filter((recipe) => getMealKind(recipe.id) !== kind),
+    ];
+  }, [favorites, kind]);
   const [tab, setTab] = useState(favorites.length > 0 ? 'favorites' : 'all');
   const [query, setQuery] = useState('');
 
   const q = query.trim().toLowerCase();
-  const source = tab === 'favorites' ? favorites : RECIPES_BY_KIND[kind];
+  const source = tab === 'favorites' ? favorites : allRecipes;
   const results = q
     ? source.filter((r) => r.title.toLowerCase().includes(q))
     : source;
@@ -475,7 +501,7 @@ function AddMealSheet({ slot, date, plannedIds, onAdd, onClose }) {
           <div className="sheet-tabs" role="tablist" aria-label="Recipe source">
             {[
               { id: 'favorites', label: `Favorites (${favorites.length})` },
-              { id: 'all', label: slot.allLabel },
+              { id: 'all', label: 'All recipes' },
             ].map((t) => (
               <button
                 key={t.id}
@@ -491,7 +517,7 @@ function AddMealSheet({ slot, date, plannedIds, onAdd, onClose }) {
           <input
             type="search"
             className="sheet-search"
-            placeholder={`Search ${slot.allLabel.toLowerCase()}…`}
+            placeholder="Search recipes…"
             aria-label="Search recipes"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
@@ -502,17 +528,15 @@ function AddMealSheet({ slot, date, plannedIds, onAdd, onClose }) {
           {results.length === 0 ? (
             <div className="sheet-empty">
               {q ? (
-                <p>
-                  No {slot.label.toLowerCase()}s match “{query.trim()}”.
-                </p>
+                <p>No recipes match “{query.trim()}”.</p>
               ) : (
                 <>
-                  <p>No favorite {slot.label.toLowerCase()}s yet.</p>
+                  <p>No favorites yet.</p>
                   <button
                     className="btn btn-secondary btn-sm"
                     onClick={() => setTab('all')}
                   >
-                    Browse {slot.allLabel.toLowerCase()}
+                    Browse all recipes
                   </button>
                 </>
               )}
@@ -520,7 +544,10 @@ function AddMealSheet({ slot, date, plannedIds, onAdd, onClose }) {
           ) : (
             <ul className="pick-list">
               {results.map((recipe) => {
-                const added = plannedIds.includes(recipe.id);
+                const added = plannedMeals.some((entry) => {
+                  const meal = getPlannedMeal(entry);
+                  return meal.recipeId === recipe.id && meal.kind === kind;
+                });
                 return (
                   <li key={recipe.id}>
                     <button

@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { useParams, useNavigate } from '@tanstack/react-router';
-import { useAppStore } from '../store/appStore';
-import { recipes } from '../data/recipes';
-import { lunchRecipes } from '../data/lunchRecipes';
+import { findRecipe, getMealKind, useAppStore } from '../store/appStore';
 import { getWeekStart } from '../lib/week';
 import './RecipeDetailPage.css';
 
@@ -34,6 +32,9 @@ export function RecipeDetailPage() {
   const { likedRecipes, toggleLike, addToMealPlan } = useAppStore();
   const [activeTab, setActiveTab] = useState('overview');
   const [pickerOpen, setPickerOpen] = useState(false);
+  const [mealKind, setMealKind] = useState(
+    /** @type {'lunch' | 'dinner'} */ ('dinner'),
+  );
   const [toastMessage, setToastMessage] = useState(
     /** @type {string | null} */ (null),
   );
@@ -60,8 +61,7 @@ export function RecipeDetailPage() {
     return () => document.removeEventListener('keydown', onKeyDown);
   }, [pickerOpen]);
 
-  const allRecipes = [...recipes, ...lunchRecipes];
-  const recipe = allRecipes.find((r) => r.id === recipeId);
+  const recipe = findRecipe(recipeId);
   const isLiked = likedRecipes.some((r) => r.id === recipeId);
 
   if (!recipe) {
@@ -98,9 +98,9 @@ export function RecipeDetailPage() {
   const totalTime = recipe.prepTime + recipe.cookTime;
 
   const handlePickDay = ({ date, label }) => {
-    addToMealPlan(recipe.id, getWeekStart(date), date.getDay());
+    addToMealPlan(recipe.id, getWeekStart(date), date.getDay(), mealKind);
     closePicker();
-    setToastMessage(`Added to ${label}`);
+    setToastMessage(`Added to ${mealKind} on ${label}`);
     clearTimeout(toastTimer.current);
     toastTimer.current = setTimeout(() => setToastMessage(null), 2200);
   };
@@ -154,7 +154,10 @@ export function RecipeDetailPage() {
           <button
             ref={addButtonRef}
             className="btn btn-primary add-plan-btn"
-            onClick={() => setPickerOpen(true)}
+            onClick={() => {
+              setMealKind(getMealKind(recipe.id));
+              setPickerOpen(true);
+            }}
             aria-haspopup="dialog"
           >
             <svg
@@ -322,6 +325,29 @@ export function RecipeDetailPage() {
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
+              </button>
+            </div>
+            <div
+              className="meal-kind-options"
+              role="group"
+              aria-label="Plan for"
+            >
+              <span>Plan for</span>
+              <button
+                type="button"
+                className={mealKind === 'lunch' ? 'selected' : ''}
+                aria-pressed={mealKind === 'lunch'}
+                onClick={() => setMealKind('lunch')}
+              >
+                Lunch
+              </button>
+              <button
+                type="button"
+                className={mealKind === 'dinner' ? 'selected' : ''}
+                aria-pressed={mealKind === 'dinner'}
+                onClick={() => setMealKind('dinner')}
+              >
+                Dinner
               </button>
             </div>
             <ul className="add-plan-days">

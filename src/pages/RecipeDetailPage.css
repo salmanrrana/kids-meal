@@ -137,7 +137,9 @@
   font-size: var(--text-sm);
   font-weight: 500;
   cursor: pointer;
-  transition: color var(--t-fast), background-color var(--t-fast);
+  transition:
+    color var(--t-fast),
+    background-color var(--t-fast);
 }
 
 .tab:hover {
@@ -306,6 +308,11 @@
 /* Add to plan picker (uses .modal / .modal-overlay from styles.css) */
 .add-plan-modal {
   max-width: 360px;
+}
+
+.add-plan-modal > .meal-kind-options {
+  padding: 16px 20px 0;
+  margin-bottom: 4px;
 }
 
 .add-plan-days {

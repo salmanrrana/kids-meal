@@ -9,18 +9,12 @@
 
 @media (max-width: 540px) {
   .liked-page .recipe-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 12px;
   }
 }
 
-@media (max-width: 380px) {
-  .liked-page .recipe-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* Card wrapper with quick actions */
+/* Card wrapper with plan action */
 .liked-recipe-card-wrapper {
   display: flex;
   flex-direction: column;
@@ -31,13 +25,6 @@
   position: relative;
   display: flex;
   gap: 8px;
-}
-
-/* Two-up cards on phones are too narrow for side-by-side buttons */
-@media (min-width: 381px) and (max-width: 540px) {
-  .quick-actions {
-    flex-direction: column;
-  }
 }
 
 .quick-add-btn {
@@ -52,8 +39,11 @@
   font-weight: 500;
   line-height: 1.2;
   cursor: pointer;
-  transition: background-color var(--t-fast), border-color var(--t-fast),
-    color var(--t-fast), transform var(--t-fast);
+  transition:
+    background-color var(--t-fast),
+    border-color var(--t-fast),
+    color var(--t-fast),
+    transform var(--t-fast);
 }
 
 .quick-add-btn:hover {
@@ -68,19 +58,7 @@
   border-radius: var(--radius-full);
 }
 
-.quick-add-btn.secondary {
-  background: var(--surface);
-  border-color: var(--line);
-  color: var(--ink-2);
-}
-
-.quick-add-btn.secondary:hover {
-  border-color: var(--line-strong);
-  color: var(--ink);
-  background: var(--surface-2);
-}
-
-/* Quick-add confirmation: briefly covers the action buttons */
+/* Confirmation briefly covers the action button */
 .success-message {
   position: absolute;
   inset: 0;
@@ -149,7 +127,9 @@
   border: 1px solid var(--line);
   background: var(--surface-2);
   cursor: pointer;
-  transition: border-color var(--t-fast), background-color var(--t-fast);
+  transition:
+    border-color var(--t-fast),
+    background-color var(--t-fast);
 }
 
 .picker-day:focus-visible {

@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import { useAppStore, ALL_RECIPES } from '../store/appStore';
+import { useAppStore, findRecipe, getPlannedMeal } from '../store/appStore';
 import { formatWeekRange } from '../lib/week';
 import './GroceryPage.css';
 
@@ -124,10 +124,9 @@ export function GroceryPage() {
     const meals = [];
 
     for (let day = 0; day < 7; day++) {
-      const recipeIds = weekPlan[day] || [];
-      recipeIds.forEach(id => {
-        // Search every collection so planned lunches show up here too
-        const recipe = ALL_RECIPES.find(r => r.id === id);
+      const entries = weekPlan[day] || [];
+      entries.forEach((entry) => {
+        const recipe = findRecipe(getPlannedMeal(entry).recipeId);
         if (recipe) meals.push(recipe);
       });
     }

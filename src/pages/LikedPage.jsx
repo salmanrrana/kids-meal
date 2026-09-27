@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAppStore } from '../store/appStore';
+import { getMealKind, useAppStore } from '../store/appStore';
 import { Link } from '@tanstack/react-router';
 import { RecipeCard } from '../components/RecipeCard';
 import {
@@ -12,13 +12,11 @@ import './LikedPage.css';
 
 const DAYS_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-// Liked recipe card with quick-add actions. The confirmation covers the
-// action buttons briefly after "Add today".
+// Saved recipe with a single path into the day and meal-slot picker.
 function LikedRecipeCard({
   recipe,
   isLiked,
   onLikeToggle,
-  onQuickAdd,
   onOpenPicker,
   showSuccess,
 }) {
@@ -33,18 +31,9 @@ function LikedRecipeCard({
         <button
           type="button"
           className="quick-add-btn"
-          onClick={() => onQuickAdd(recipe.id)}
-          title="Add to today's meal plan"
-        >
-          Add today
-        </button>
-        <button
-          type="button"
-          className="quick-add-btn secondary"
           onClick={() => onOpenPicker(recipe.id)}
-          title="Choose a day for this meal"
         >
-          Pick a day
+          Add to plan
         </button>
         {showSuccess && (
           <div className="success-message" role="status">
@@ -59,7 +48,7 @@ function LikedRecipeCard({
             >
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
-            <span>Added to today</span>
+            <span>{showSuccess}</span>
           </div>
         )}
       </div>
@@ -70,9 +59,12 @@ function LikedRecipeCard({
 export function LikedPage() {
   const { likedRecipes, unlikeRecipe, addToMealPlan } = useAppStore();
   const [openPicker, setOpenPicker] = useState(null);
+  const [mealKind, setMealKind] = useState('dinner');
   // The picker always opens on the real current week, not the planner's view.
   const [pickerWeek, setPickerWeek] = useState(() => getWeekStart());
-  const [showSuccess, setShowSuccess] = useState(null);
+  const [showSuccess, setShowSuccess] = useState(
+    /** @type {{ recipeId: string, message: string } | null} */ (null),
+  );
 
   const todayKey = new Date().toDateString();
   const weekDates = getWeekDates(pickerWeek);
@@ -81,17 +73,17 @@ export function LikedPage() {
 
   const openPickerFor = (recipeId) => {
     setOpenPicker(recipeId);
+    setMealKind(getMealKind(recipeId));
     setPickerWeek(getWeekStart());
   };
 
   const handleAddToDay = (recipeId, dayIndex) => {
-    addToMealPlan(recipeId, pickerWeek, dayIndex);
+    addToMealPlan(recipeId, pickerWeek, dayIndex, mealKind);
+    setShowSuccess({
+      recipeId,
+      message: `Added to ${mealKind} on ${DAYS_SHORT[dayIndex]}`,
+    });
     closePicker();
-  };
-
-  const handleQuickAddToday = (recipeId) => {
-    addToMealPlan(recipeId, getWeekStart(), new Date().getDay());
-    setShowSuccess(recipeId);
   };
 
   // Hide the "added" confirmation after 2s
@@ -161,9 +153,12 @@ export function LikedPage() {
               recipe={recipe}
               isLiked={true}
               onLikeToggle={() => unlikeRecipe(recipe.id)}
-              onQuickAdd={handleQuickAddToday}
               onOpenPicker={openPickerFor}
-              showSuccess={showSuccess === recipe.id}
+              showSuccess={
+                showSuccess?.recipeId === recipe.id
+                  ? showSuccess?.message
+                  : null
+              }
             />
           ))}
         </div>
@@ -180,7 +175,7 @@ export function LikedPage() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="modal-header">
-              <h3>Add to meal plan</h3>
+              <h3>Add to plan</h3>
               <button
                 type="button"
                 className="icon-btn"
@@ -201,6 +196,29 @@ export function LikedPage() {
             </div>
 
             <div className="modal-content">
+              <div
+                className="meal-kind-options"
+                role="group"
+                aria-label="Plan for"
+              >
+                <span>Plan for</span>
+                <button
+                  type="button"
+                  className={mealKind === 'lunch' ? 'selected' : ''}
+                  aria-pressed={mealKind === 'lunch'}
+                  onClick={() => setMealKind('lunch')}
+                >
+                  Lunch
+                </button>
+                <button
+                  type="button"
+                  className={mealKind === 'dinner' ? 'selected' : ''}
+                  aria-pressed={mealKind === 'dinner'}
+                  onClick={() => setMealKind('dinner')}
+                >
+                  Dinner
+                </button>
+              </div>
               <div className="week-navigator">
                 <button
                   type="button"
