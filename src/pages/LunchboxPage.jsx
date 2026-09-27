@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
-import { useNavigate } from '@tanstack/react-router';
 import { useAppStore } from '../store/appStore';
 import { RecipeCard } from '../components/RecipeCard';
+import { ThemeFilters } from '../components/ThemeFilters';
 import { lunchboxRecipes } from '../data/lunchboxRecipes';
 import { lunchRecipes } from '../data/lunchRecipes';
 import './DiscoverPage.css';
@@ -44,7 +44,6 @@ const COLLECTIONS = {
 };
 
 export function LunchboxPage() {
-  const navigate = useNavigate();
   const { likedRecipes, toggleLike } = useAppStore();
   const [mode, setMode] = useState('ideas');
   const [activeCollectionId, setActiveCollection] = useState('all');
@@ -62,10 +61,6 @@ export function LunchboxPage() {
   }, [activeMode, activeCollectionId, collections]);
 
   const activeCollection = collections.find((c) => c.id === activeCollectionId);
-
-  const handleRecipeClick = (recipe) => {
-    navigate({ to: '/recipe/$recipeId', params: { recipeId: recipe.id } });
-  };
 
   const switchMode = (nextMode) => {
     setMode(nextMode);
@@ -88,6 +83,7 @@ export function LunchboxPage() {
         <div className="mode-toggle" role="tablist" aria-label="Lunchbox source">
           {Object.entries(MODES).map(([id, m]) => (
             <button
+              type="button"
               key={id}
               role="tab"
               aria-selected={mode === id}
@@ -100,20 +96,12 @@ export function LunchboxPage() {
         </div>
         <p className="mode-note">{activeMode.note}</p>
 
-        <nav className="theme-filters" aria-label="Lunchbox collections">
-          <div className="theme-filters-container">
-            {collections.map((collection) => (
-              <button
-                key={collection.id}
-                className={`theme-filter ${activeCollectionId === collection.id ? 'active' : ''}`}
-                aria-pressed={activeCollectionId === collection.id}
-                onClick={() => setActiveCollection(collection.id)}
-              >
-                {collection.name}
-              </button>
-            ))}
-          </div>
-        </nav>
+        <ThemeFilters
+          options={collections}
+          activeId={activeCollectionId}
+          onChange={setActiveCollection}
+          label="Lunchbox collections"
+        />
 
         {recipes.length > 0 ? (
           <div className="recipes-grid">
@@ -122,7 +110,6 @@ export function LunchboxPage() {
                 key={recipe.id}
                 recipe={recipe}
                 isLiked={likedRecipes.some(liked => liked.id === recipe.id)}
-                onClick={() => handleRecipeClick(recipe)}
                 onLikeToggle={() => toggleLike(recipe)}
               />
             ))}

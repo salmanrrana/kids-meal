@@ -642,7 +642,7 @@ export const lunchRecipes = [
     "sourceName": "Budget Bytes"
   },
   {
-    "id": "rainbow-fruit-kabobs",
+    "id": "rainbow-fruit-kabobs-super-healthy-kids",
     "title": "Rainbow Fruit Kabobs",
     "description": "Rainbow fruit kabobs are a fun and festive way to eat fruit and a great source of vitamins and minerals for adults and kids!",
     "image": "https://www.superhealthykids.com/wp-content/uploads/2023/02/Rainbow-Fruit-Kebabs.jpg",
@@ -1730,7 +1730,7 @@ export const lunchRecipes = [
     "sourceName": "Two Peas & Their Pod"
   },
   {
-    "id": "mac-and-cheese-cups",
+    "id": "mac-and-cheese-muffins",
     "title": "Mac & Cheese Muffins",
     "description": "Bake mac & cheese into a muffin that everyone will love! They are cheesy and moist on the inside with a nice crust on top and the perfect ratio of muffin to mac.",
     "image": "https://thebakermama.com/wp-content/uploads/2020/04/MAC-CHEESE-MUFFINS-300x199-1.jpg",

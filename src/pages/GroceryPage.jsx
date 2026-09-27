@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useNavigate } from '@tanstack/react-router';
-import { useAppStore } from '../store/appStore';
-import { ALL_RECIPES } from '../store/appStore';
+import { useAppStore, ALL_RECIPES } from '../store/appStore';
+import { formatWeekRange } from '../lib/week';
 import './GroceryPage.css';
 
 // Category definitions with keywords for matching
@@ -12,7 +12,7 @@ const CATEGORIES = {
     keywords: [
       'lettuce', 'spinach', 'kale', 'arugula', 'cabbage', 'broccoli', 'cauliflower',
       'carrot', 'celery', 'onion', 'garlic', 'ginger', 'potato', 'sweet potato',
-      'tomato', 'pepper', 'bell pepper', 'jalapeño', 'cucumber', 'zucchini', 'squash',
+      'tomato', 'bell pepper', 'green pepper', 'red pepper', 'yellow pepper', 'jalapeño', 'cucumber', 'zucchini', 'squash',
       'mushroom', 'corn', 'peas', 'green bean', 'asparagus', 'avocado', 'lemon', 'lime',
       'orange', 'apple', 'banana', 'berry', 'strawberry', 'blueberry', 'grape', 'mango',
       'pineapple', 'melon', 'watermelon', 'peach', 'pear', 'cilantro', 'parsley',
@@ -41,7 +41,7 @@ const CATEGORIES = {
     keywords: [
       'milk', 'cream', 'half and half', 'butter', 'cheese', 'cheddar', 'mozzarella',
       'parmesan', 'feta', 'goat cheese', 'cream cheese', 'ricotta', 'cottage cheese',
-      'sour cream', 'yogurt', 'greek yogurt', 'whipped cream', 'heavy cream',
+      'sour cream', 'yogurt', 'greek yogurt', 'vanilla yogurt', 'whipped cream', 'heavy cream',
       'buttermilk', 'evaporated milk', 'condensed milk', 'ghee', 'brie', 'gouda',
       'swiss', 'provolone', 'jack cheese', 'colby', 'american cheese', 'queso'
     ]
@@ -96,28 +96,21 @@ const CATEGORIES = {
   }
 };
 
-// Categorize an ingredient based on keywords
+// Categorize an ingredient by keyword. The longest (most specific) match wins,
+// so "onion powder" lands in spices rather than produce via "onion".
 function categorizeIngredient(ingredient) {
   const lower = ingredient.toLowerCase();
+  let best = { category: 'other', length: 0 };
 
   for (const [category, { keywords }] of Object.entries(CATEGORIES)) {
     for (const keyword of keywords) {
-      if (lower.includes(keyword)) {
-        return category;
+      if (keyword.length > best.length && lower.includes(keyword)) {
+        best = { category, length: keyword.length };
       }
     }
   }
 
-  return 'other';
-}
-
-function formatWeekRange(weekStart) {
-  const start = new Date(weekStart);
-  const end = new Date(start);
-  end.setDate(end.getDate() + 6);
-
-  const formatDate = (d) => d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-  return `${formatDate(start)} - ${formatDate(end)}`;
+  return best.category;
 }
 
 export function GroceryPage() {
