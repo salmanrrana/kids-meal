@@ -1,0 +1,244 @@
+/* RecipeBrowser: Discover and Lunchbox. Header, search, group chips, then
+   shelves (default) or a results grid (when filtering). */
+
+.browse-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.surprise-btn {
+  flex-shrink: 0;
+}
+
+/* Search */
+.browse-search {
+  position: relative;
+  margin-bottom: 12px;
+}
+
+.browse-search-icon {
+  position: absolute;
+  top: 50%;
+  left: 16px;
+  width: 18px;
+  height: 18px;
+  color: var(--ink-3);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.browse-search-input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px 0 44px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 16px; /* 16px stops iOS zooming in on focus */
+  transition:
+    border-color var(--t-fast),
+    background-color var(--t-fast);
+}
+
+.browse-search-input::placeholder {
+  color: var(--ink-3);
+}
+
+.browse-search-input:hover {
+  border-color: var(--line-strong);
+}
+
+.browse-search-input:focus-visible {
+  outline: none;
+  border-color: var(--gold);
+  background: var(--surface-2);
+}
+
+/* Count + quick filters */
+.browse-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 4px 0 16px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 24px;
+}
+
+.browse-count {
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.quick-filters {
+  display: flex;
+  gap: 6px;
+}
+
+.quick-filter {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  padding: 4px 12px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    color var(--t-fast),
+    border-color var(--t-fast),
+    background-color var(--t-fast);
+}
+
+.quick-filter::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border: 1.5px solid currentColor;
+  border-radius: var(--radius-full);
+}
+
+.quick-filter:hover {
+  color: var(--ink);
+  background: var(--surface-2);
+}
+
+.quick-filter.active {
+  color: var(--gold);
+  border-color: var(--gold);
+  background: var(--gold-soft);
+}
+
+.quick-filter.active::before {
+  background: currentColor;
+}
+
+.quick-filter:focus-visible {
+  border-radius: var(--radius-full);
+}
+
+@media (pointer: coarse) {
+  .quick-filter {
+    min-height: 40px;
+  }
+}
+
+/* Shelves: one row per group, scrolls sideways */
+.shelf {
+  margin-bottom: 32px;
+}
+
+.shelf-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.shelf-title {
+  font-size: var(--text-lg);
+}
+
+.shelf-more {
+  padding: 6px 2px;
+  border: none;
+  background: none;
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color var(--t-fast);
+}
+
+.shelf-more::after {
+  content: ' →';
+}
+
+.shelf-more:hover {
+  color: var(--gold);
+}
+
+.shelf-track {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 240px;
+  gap: 16px;
+  overflow-x: auto;
+  padding: 2px 0 12px;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+.shelf-track > * {
+  scroll-snap-align: start;
+}
+
+/* Shelf cards stay compact: title and tags, no description */
+.shelf-track .recipe-description {
+  display: none;
+}
+
+/* Results grid */
+.recipes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+  padding-bottom: 32px;
+}
+
+@media (max-width: 640px) {
+  /* Shelves run to the screen edges; padding keeps the first card aligned */
+  .shelf-track {
+    grid-auto-columns: 62%;
+    gap: 12px;
+    margin: 0 -20px;
+    padding: 2px 20px 12px;
+    scroll-padding-inline: 20px;
+    scrollbar-width: none;
+  }
+
+  .shelf-track::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .recipes-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .browse-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .shelf-track {
+    margin: 0 -16px;
+    padding: 2px 16px 12px;
+    scroll-padding-inline: 16px;
+  }
+}
+
+@media (max-width: 380px) {
+  .recipes-grid {
+    grid-template-columns: 1fr;
+  }
+}

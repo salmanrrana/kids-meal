@@ -9,14 +9,16 @@ import {
 } from '@tanstack/react-router';
 import { LunchboxPage } from './pages/LunchboxPage';
 import { lunchRecipes } from './data/lunchRecipes';
+import { LUNCH_BROWSE, browseSearchValidator } from './lib/browse';
 
-function renderWithRouter(ui) {
-  const rootRoute = createRootRoute({ component: () => ui });
+function renderLunchbox() {
+  const rootRoute = createRootRoute();
   const routeTree = rootRoute.addChildren([
     createRoute({
       getParentRoute: () => rootRoute,
-      path: '/',
-      component: () => null,
+      path: '/lunchbox',
+      validateSearch: browseSearchValidator(LUNCH_BROWSE),
+      component: LunchboxPage,
     }),
   ]);
   const router = createRouter({
@@ -29,20 +31,28 @@ function renderWithRouter(ui) {
 describe('LunchboxPage', () => {
   afterEach(cleanup);
 
-  test('collection filters narrow and restore the grid', async () => {
-    renderWithRouter(<LunchboxPage />);
-    await screen.findByText('Lunchbox ideas');
-    expect(await screen.findAllByRole('article')).toHaveLength(
-      lunchRecipes.length,
+  test('shelves switch to a filtered grid and back', async () => {
+    renderLunchbox();
+    expect(await screen.findAllByRole('region')).toHaveLength(
+      LUNCH_BROWSE.groups.length,
     );
 
-    fireEvent.click(screen.getByRole('button', { name: 'Pasta Salads' }));
-    const pastaCount = screen.getAllByRole('article').length;
-    expect(pastaCount).toBeGreaterThan(0);
-    expect(pastaCount).toBeLessThan(lunchRecipes.length);
+    const pastaCount = lunchRecipes.filter(
+      (r) => LUNCH_BROWSE.groupOf(r) === 'pasta',
+    ).length;
+    fireEvent.click(
+      screen.getByRole('button', { name: `See all ${pastaCount}` }),
+    );
+    expect(
+      await screen.findByText(`${pastaCount} matches in pasta salads`),
+    ).toBeTruthy();
+    expect(screen.getAllByRole('article')).toHaveLength(pastaCount);
+    expect(screen.queryAllByRole('region')).toHaveLength(0);
 
-    fireEvent.click(screen.getByRole('button', { name: 'All Recipes' }));
-    expect(screen.getAllByRole('article')).toHaveLength(lunchRecipes.length);
+    fireEvent.click(screen.getByRole('button', { name: /^All/ }));
+    expect(await screen.findAllByRole('region')).toHaveLength(
+      LUNCH_BROWSE.groups.length,
+    );
   });
 
   test('every recipe keeps its source attribution data', () => {
