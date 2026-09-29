@@ -20,6 +20,11 @@ import { LunchboxPage } from './pages/LunchboxPage';
 
 // Components
 import { Navigation } from './components/Navigation';
+import {
+  DINNER_BROWSE,
+  LUNCH_BROWSE,
+  browseSearchValidator,
+} from './lib/browse';
 
 // Root layout with bottom navigation
 const rootRoute = createRootRoute({
@@ -37,6 +42,7 @@ const rootRoute = createRootRoute({
 const indexRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
+  validateSearch: browseSearchValidator(DINNER_BROWSE),
   component: DiscoverPage,
 });
 
@@ -67,6 +73,7 @@ const groceryRoute = createRoute({
 const lunchboxRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/lunchbox',
+  validateSearch: browseSearchValidator(LUNCH_BROWSE),
   component: LunchboxPage,
 });
 

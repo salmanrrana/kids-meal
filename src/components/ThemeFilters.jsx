@@ -1,7 +1,7 @@
 import './ThemeFilters.css';
 
-// Row of collection chips. Scrolls sideways on phones, wraps on wider screens.
-// `options` is a list of { id, name }; the active chip is picked by `activeId`.
+// Row of group chips. Scrolls sideways on phones, wraps on wider screens.
+// `options` is a list of { id, name, count? }; the active chip is picked by `activeId`.
 export function ThemeFilters({ options, activeId, onChange, label }) {
   return (
     <nav className="theme-filters" aria-label={label}>
@@ -14,7 +14,10 @@ export function ThemeFilters({ options, activeId, onChange, label }) {
             aria-pressed={activeId === option.id}
             onClick={() => onChange(option.id)}
           >
-            {option.name}
+            {option.name}{' '}
+            {option.count !== undefined && (
+              <span className="theme-filter-count">{option.count}</span>
+            )}
           </button>
         ))}
       </div>

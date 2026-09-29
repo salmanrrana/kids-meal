@@ -10,22 +10,22 @@ Dark only. Warm-tinted near-black (hue ~75–85 in OKLCH, toward the gold accent
 
 All tokens in OKLCH, defined in `src/styles.css`.
 
-| Token | Value | Role |
-|---|---|---|
-| `--bg` | `oklch(0.17 0.01 80)` | App background |
-| `--surface` | `oklch(0.21 0.012 80)` | Cards, nav, panels |
-| `--surface-2` | `oklch(0.25 0.014 80)` | Hover, raised elements, inputs |
-| `--line` | `oklch(0.31 0.015 80)` | Hairline borders |
-| `--line-strong` | `oklch(0.4 0.018 80)` | Hover borders, dividers |
-| `--ink` | `oklch(0.95 0.012 85)` | Primary text |
-| `--ink-2` | `oklch(0.78 0.015 85)` | Secondary text |
-| `--ink-3` | `oklch(0.66 0.015 85)` | Tertiary text (≥4.5:1 on bg/surface) |
-| `--gold` | `oklch(0.8 0.13 90)` | Accent: primary actions, active states only |
-| `--gold-strong` | `oklch(0.86 0.14 92)` | Accent hover |
-| `--gold-soft` | gold @ 12% alpha | Selected-state tint |
-| `--on-gold` | `oklch(0.22 0.03 80)` | Text/icons on gold fills |
-| `--danger` | `oklch(0.7 0.19 25)` | Destructive, "pass" |
-| `--success` | `oklch(0.78 0.17 150)` | Confirmation |
+| Token           | Value                  | Role                                        |
+| --------------- | ---------------------- | ------------------------------------------- |
+| `--bg`          | `oklch(0.17 0.01 80)`  | App background                              |
+| `--surface`     | `oklch(0.21 0.012 80)` | Cards, nav, panels                          |
+| `--surface-2`   | `oklch(0.25 0.014 80)` | Hover, raised elements, inputs              |
+| `--line`        | `oklch(0.31 0.015 80)` | Hairline borders                            |
+| `--line-strong` | `oklch(0.4 0.018 80)`  | Hover borders, dividers                     |
+| `--ink`         | `oklch(0.95 0.012 85)` | Primary text                                |
+| `--ink-2`       | `oklch(0.78 0.015 85)` | Secondary text                              |
+| `--ink-3`       | `oklch(0.66 0.015 85)` | Tertiary text (≥4.5:1 on bg/surface)        |
+| `--gold`        | `oklch(0.8 0.13 90)`   | Accent: primary actions, active states only |
+| `--gold-strong` | `oklch(0.86 0.14 92)`  | Accent hover                                |
+| `--gold-soft`   | gold @ 12% alpha       | Selected-state tint                         |
+| `--on-gold`     | `oklch(0.22 0.03 80)`  | Text/icons on gold fills                    |
+| `--danger`      | `oklch(0.7 0.19 25)`   | Destructive, "pass"                         |
+| `--success`     | `oklch(0.78 0.17 150)` | Confirmation                                |
 
 Strategy: **Restrained**. Gold carries ≤10% of any screen. Recipe photography supplies all other color.
 
@@ -63,4 +63,5 @@ Strategy: **Restrained**. Gold carries ≤10% of any screen. Recipe photography 
 - Page container: max-width 1100px, 20px side padding (16px <480px).
 - Bottom nav clearance: `padding-bottom: 96px` on pages.
 - Recipe grids: `repeat(auto-fill, minmax(240px, 1fr))`.
+- Discover / Lunchbox (`RecipeBrowser`): header with "Surprise me", a search field (matches titles and ingredients), group chips with counts, then a bar with the result count and quick filters (time for dinners; no-cook / make-ahead for lunches). With no filters the page shows one sideways-scrolling shelf per group; any filter switches to the grid. Filters live in the URL so Back from a recipe keeps them.
 - Planner: a list of day cards (date rail + Lunch/Dinner slots) with a 7-day jump strip. Slots stack on phones, sit side by side ≥640px; ≥1024px the header, strip, and grocery button move into a sticky left sidebar.
