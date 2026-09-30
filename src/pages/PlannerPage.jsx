@@ -1,11 +1,12 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate } from '@tanstack/react-router';
+import { useMemo, useRef, useState, useSyncExternalStore } from 'react';
+import { Link } from '@tanstack/react-router';
 import {
-  useAppStore,
   ALL_RECIPES,
+  MEAL_KINDS,
   findRecipe,
   getMealKind,
   getPlannedMeal,
+  useAppStore,
 } from '../store/appStore';
 import {
   formatWeekRange,
@@ -13,9 +14,30 @@ import {
   getWeekDates,
   getWeekStart,
 } from '../lib/week';
+import { Icon } from '../components/Icon';
+import { RecipePickRow, RecipeRow } from '../components/RecipeRow';
+import { RecipeTile } from '../components/RecipeTile';
+import { Sheet } from '../components/Sheet';
+import { Tabs } from '../components/Tabs';
 import './PlannerPage.css';
 
-const DAYS_FULL = [
+/** @typedef {import('../store/appStore').Recipe} Recipe */
+/** @typedef {import('../store/appStore').MealKind} MealKind */
+
+/**
+ * @typedef {{
+ *   index: number,
+ *   date: Date,
+ *   name: string,
+ *   isToday: boolean,
+ *   isPast: boolean,
+ *   lunch: Recipe[],
+ *   dinner: Recipe[],
+ * }} PlanDay
+ */
+
+// Indexed by Date#getDay(); weeks start on Sunday.
+const DAY_NAMES = [
   'Sunday',
   'Monday',
   'Tuesday',
@@ -25,17 +47,34 @@ const DAYS_FULL = [
   'Saturday',
 ];
 
-// Each day has a lunch and a dinner slot. The person planning chooses the slot.
-/** @typedef {{ kind: 'lunch' | 'dinner', label: string }} Slot */
-/** @type {Slot[]} */
-const SLOTS = [
-  { kind: 'lunch', label: 'Lunch' },
-  { kind: 'dinner', label: 'Dinner' },
-];
+// "Sep 30"
+const MONTH_DAY = new Intl.DateTimeFormat('en-US', {
+  month: 'short',
+  day: 'numeric',
+});
 
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 
-// "This week", "Next week", "In 3 weeks", "2 weeks ago"…
+// Seven columns need about 120px each, so below this width the week is a day
+// list. PlannerPage.css styles the grid off the `planner--grid` class set from
+// this query, so the breakpoint lives only here.
+const GRID_QUERY = '(min-width: 1024px)';
+
+/**
+ * Subscribes to GRID_QUERY for useSyncExternalStore.
+ * @param {() => void} onChange
+ */
+function watchGridQuery(onChange) {
+  const query = window.matchMedia(GRID_QUERY);
+  query.addEventListener('change', onChange);
+  return () => query.removeEventListener('change', onChange);
+}
+
+/**
+ * "This week", "Next week", "In 3 weeks", "2 weeks ago"…
+ * @param {string} weekStart
+ * @param {string} thisWeek
+ */
 function relativeWeekLabel(weekStart, thisWeek) {
   const diff = Math.round(
     (fromDateKey(weekStart).getTime() - fromDateKey(thisWeek).getTime()) /
@@ -47,283 +86,347 @@ function relativeWeekLabel(weekStart, thisWeek) {
   return diff > 0 ? `In ${diff} weeks` : `${-diff} weeks ago`;
 }
 
-function countLabel(n, word) {
-  return `${n} ${word}${n === 1 ? '' : 's'}`;
+/**
+ * "1 lunch", "2 lunches"
+ * @param {number} n
+ * @param {string} one
+ * @param {string} many
+ */
+function countLabel(n, one, many) {
+  return `${n} ${n === 1 ? one : many}`;
 }
 
-function totalMinutes(recipe) {
-  return recipe.prepTime + recipe.cookTime;
-}
-
+/**
+ * The weekly planner. Below 1024px: a sticky 7-day strip that jumps to a day,
+ * then the days stacked, each with Lunch and Dinner rows. From 1024px: a
+ * 7-column week grid where meals can be dragged to another day. Each day has a
+ * lunch and a dinner slot, and any recipe can go in either; "+ Add" on a slot
+ * opens the add sheet.
+ */
 export function PlannerPage() {
-  const navigate = useNavigate();
-  const {
-    currentWeek,
-    navigateWeek,
-    setCurrentWeek,
-    mealPlans,
-    addToMealPlan,
-    removeFromMealPlan,
-    moveMeal,
-  } = useAppStore();
+  const currentWeek = useAppStore((state) => state.currentWeek);
+  const mealPlans = useAppStore((state) => state.mealPlans);
+  const navigateWeek = useAppStore((state) => state.navigateWeek);
+  const setCurrentWeek = useAppStore((state) => state.setCurrentWeek);
+  const addToMealPlan = useAppStore((state) => state.addToMealPlan);
+  const removeFromMealPlan = useAppStore((state) => state.removeFromMealPlan);
+  const moveMeal = useAppStore((state) => state.moveMeal);
 
-  // Where the add sheet is pointed, or null when closed.
-  const [adding, setAdding] = useState(
-    /** @type {{ dayIndex: number, slot: Slot } | null} */ (null),
+  const isGrid = useSyncExternalStore(
+    watchGridQuery,
+    () => window.matchMedia(GRID_QUERY).matches,
   );
+  // The slot the add sheet is filling, or null while it's closed.
+  const [adding, setAdding] = useState(
+    /** @type {{ day: number, kind: MealKind } | null} */ (null),
+  );
+  // Week grid drag and drop: the meal being dragged, and the day under it.
   const [dragged, setDragged] = useState(
-    /** @type {{ recipeId: string, kind: 'lunch' | 'dinner', fromDay: number } | null} */ (
+    /** @type {{ day: number, kind: MealKind, index: number, recipeId: string } | null} */ (
       null
     ),
   );
   const [dropDay, setDropDay] = useState(/** @type {number | null} */ (null));
+  const titleRef = useRef(/** @type {HTMLHeadingElement | null} */ (null));
 
   const thisWeek = getWeekStart();
   const isThisWeek = currentWeek === thisWeek;
   const todayIndex = new Date().getDay();
-  const weekDates = getWeekDates(currentWeek);
-  const weekPlan = mealPlans[currentWeek] || {};
+  const weekPlan = mealPlans[currentWeek] ?? {};
 
-  // Resolved meals per day, split into slots: days[dayIndex][kind] = recipes
-  const days = weekDates.map((_, dayIndex) => {
-    const meals = (weekPlan[dayIndex] || [])
-      .map(getPlannedMeal)
-      .map((entry) => ({ ...entry, recipe: findRecipe(entry.recipeId) }))
-      .filter((entry) => entry.recipe);
+  /** @type {PlanDay[]} */
+  const days = getWeekDates(currentWeek).map((date, index) => {
+    const meals = (weekPlan[index] ?? []).map(getPlannedMeal);
+    /** @param {MealKind} kind */
+    const recipesIn = (kind) =>
+      meals
+        .filter((meal) => meal.kind === kind)
+        .map((meal) => findRecipe(meal.recipeId))
+        .filter((recipe) => recipe !== undefined);
     return {
-      lunch: meals
-        .filter((entry) => entry.kind === 'lunch')
-        .map((entry) => entry.recipe),
-      dinner: meals
-        .filter((entry) => entry.kind === 'dinner')
-        .map((entry) => entry.recipe),
+      index,
+      date,
+      name: DAY_NAMES[index],
+      isToday: isThisWeek && index === todayIndex,
+      isPast: currentWeek < thisWeek || (isThisWeek && index < todayIndex),
+      lunch: recipesIn('lunch'),
+      dinner: recipesIn('dinner'),
     };
   });
 
-  const lunchCount = days.reduce((n, d) => n + d.lunch.length, 0);
-  const dinnerCount = days.reduce((n, d) => n + d.dinner.length, 0);
+  const lunches = days.reduce((n, day) => n + day.lunch.length, 0);
+  const dinners = days.reduce((n, day) => n + day.dinner.length, 0);
   const summary =
-    lunchCount + dinnerCount === 0
+    lunches + dinners === 0
       ? 'Nothing planned yet'
       : [
-          dinnerCount && countLabel(dinnerCount, 'dinner'),
-          lunchCount && countLabel(lunchCount, 'lunch'),
+          dinners > 0 && countLabel(dinners, 'dinner', 'dinners'),
+          lunches > 0 && countLabel(lunches, 'lunch', 'lunches'),
         ]
           .filter(Boolean)
           .join(' · ');
 
-  const dayState = (dayIndex) => ({
-    isToday: isThisWeek && dayIndex === todayIndex,
-    isPast: currentWeek < thisWeek || (isThisWeek && dayIndex < todayIndex),
-  });
-
-  const scrollToDay = (dayIndex) => {
-    document
-      .getElementById(`plan-day-${dayIndex}`)
-      ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  /** @param {number} index */
+  const jumpToDay = (index) => {
+    const reduceMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)',
+    ).matches;
+    document.getElementById(`planner-day-${index}`)?.scrollIntoView({
+      behavior: reduceMotion ? 'auto' : 'smooth',
+      block: 'start',
+    });
   };
 
-  // Desktop drag-and-drop: drop a meal on any day to move it there.
-  const handleDrop = (toDay) => {
-    if (dragged && dragged.fromDay !== toDay) {
-      moveMeal(
-        dragged.recipeId,
-        dragged.kind,
-        currentWeek,
-        dragged.fromDay,
-        currentWeek,
-        toDay,
-      );
-    }
+  const endDrag = () => {
     setDragged(null);
     setDropDay(null);
   };
 
+  // The button disappears once it's used, so focus goes to the title, which
+  // now reads "This week".
+  const backToThisWeek = !isThisWeek && (
+    <button
+      type="button"
+      className="text-btn"
+      onClick={() => {
+        setCurrentWeek(thisWeek);
+        titleRef.current?.focus();
+      }}
+    >
+      This week
+    </button>
+  );
+  const groceryButton = lunches + dinners > 0 && (
+    <Link
+      to="/grocery"
+      className={`btn btn-primary ${isGrid ? '' : 'btn-block planner-grocery'}`}
+    >
+      <Icon name="bag" />
+      Build grocery list
+    </Link>
+  );
+
   return (
-    <div className="planner-page page-with-nav">
-      <div className="page-container planner-layout">
-        {/* Desktop: sticky sidebar. Mobile: its children flow into the page. */}
-        <aside className="planner-side">
-          <header className="page-header planner-header">
-            <h1 className="page-title">
-              {relativeWeekLabel(currentWeek, thisWeek)}
-            </h1>
-            <p className="page-subtitle">
-              {formatWeekRange(currentWeek)} · {summary}
-            </p>
-            <div className="week-nav">
-              <button
-                className="icon-btn"
-                onClick={() => navigateWeek(-1)}
-                aria-label="Previous week"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.75"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="15 18 9 12 15 6"></polyline>
-                </svg>
-              </button>
-              {!isThisWeek && (
-                <button
-                  className="btn btn-ghost btn-sm week-today-btn"
-                  onClick={() => setCurrentWeek(thisWeek)}
-                >
-                  This week
-                </button>
-              )}
-              <button
-                className="icon-btn"
-                onClick={() => navigateWeek(1)}
-                aria-label="Next week"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.75"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
-            </div>
-          </header>
+    <div className={`page planner ${isGrid ? 'planner--grid' : ''}`}>
+      <header className="page-header">
+        <div className="page-heading">
+          <h1 ref={titleRef} className="page-title" tabIndex={-1}>
+            {relativeWeekLabel(currentWeek, thisWeek)}
+          </h1>
+          <p className="page-subtitle">
+            {formatWeekRange(currentWeek)} · {summary}
+          </p>
+          {!isGrid && backToThisWeek && (
+            <p className="planner-back">{backToThisWeek}</p>
+          )}
+        </div>
+        <div className="page-actions">
+          <button
+            type="button"
+            className="icon-btn"
+            aria-label="Previous week"
+            onClick={() => navigateWeek(-1)}
+          >
+            <Icon name="chevron-left" />
+          </button>
+          <button
+            type="button"
+            className="icon-btn"
+            aria-label="Next week"
+            onClick={() => navigateWeek(1)}
+          >
+            <Icon name="chevron-right" />
+          </button>
+          {isGrid && backToThisWeek}
+          {isGrid && groceryButton}
+        </div>
+      </header>
 
-          <nav className="week-strip" aria-label="Jump to day">
-            {weekDates.map((date, dayIndex) => {
-              const { isToday, isPast } = dayState(dayIndex);
-              const planned =
-                days[dayIndex].lunch.length + days[dayIndex].dinner.length;
-              return (
-                <button
-                  key={dayIndex}
-                  className={`strip-day ${isToday ? 'today' : ''} ${isPast ? 'past' : ''}`}
-                  onClick={() => scrollToDay(dayIndex)}
-                  aria-label={`${DAYS_FULL[dayIndex]} ${date.getDate()}, ${countLabel(planned, 'meal')}${isToday ? ', today' : ''}`}
-                  aria-current={isToday ? 'date' : undefined}
-                >
-                  <span className="strip-dow">
-                    {DAYS_FULL[dayIndex].slice(0, 3)}
-                  </span>
-                  <span className="strip-date">{date.getDate()}</span>
-                  <span className="strip-dots" aria-hidden="true">
-                    {Array.from({ length: Math.min(planned, 3) }, (_, i) => (
-                      <i key={i} />
-                    ))}
-                  </span>
-                </button>
-              );
-            })}
-          </nav>
-
-          <div className="planner-cta">
-            <button
-              className="btn btn-primary"
-              onClick={() => navigate({ to: '/grocery' })}
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <path d="M16 10a4 4 0 0 1-8 0"></path>
-              </svg>
-              Build grocery list
-            </button>
-          </div>
-        </aside>
-
-        <div className="planner-days">
-          {weekDates.map((date, dayIndex) => {
-            const { isToday, isPast } = dayState(dayIndex);
+      {!isGrid && (
+        <nav className="planner-strip" aria-label="Jump to day">
+          {days.map((day) => {
+            const planned = day.lunch.length + day.dinner.length;
             return (
-              <section
-                key={dayIndex}
-                id={`plan-day-${dayIndex}`}
-                className={`day-card ${isToday ? 'today' : ''} ${isPast ? 'past' : ''} ${dropDay === dayIndex ? 'drop-target' : ''}`}
-                aria-label={`${DAYS_FULL[dayIndex]}, ${date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })}`}
-                onDragOver={(e) => {
-                  if (!dragged) return;
-                  e.preventDefault();
-                  setDropDay(dayIndex);
-                }}
-                onDragLeave={(e) => {
-                  const to = e.relatedTarget;
-                  if (!(to instanceof Node) || !e.currentTarget.contains(to))
-                    setDropDay(null);
-                }}
-                onDrop={(e) => {
-                  e.preventDefault();
-                  handleDrop(dayIndex);
-                }}
+              <button
+                key={day.index}
+                type="button"
+                className={`planner-strip-day ${day.isPast ? 'planner-strip-day--past' : ''}`}
+                aria-current={day.isToday ? 'date' : undefined}
+                aria-label={`${day.name} ${day.date.getDate()}, ${countLabel(planned, 'meal', 'meals')}`}
+                onClick={() => jumpToDay(day.index)}
               >
-                <div className="day-rail">
-                  <span className="day-dow">
-                    {DAYS_FULL[dayIndex].slice(0, 3)}
-                  </span>
-                  <span className="day-num">{date.getDate()}</span>
-                  {isToday && <span className="today-badge">Today</span>}
-                </div>
-
-                <div className="day-slots">
-                  {SLOTS.map((slot) => (
-                    <MealSlot
-                      key={slot.kind}
-                      label={slot.label}
-                      dayName={DAYS_FULL[dayIndex]}
-                      meals={days[dayIndex][slot.kind]}
-                      onAdd={() => setAdding({ dayIndex, slot })}
-                      onRemove={(recipeId) =>
-                        removeFromMealPlan(
-                          recipeId,
-                          currentWeek,
-                          dayIndex,
-                          slot.kind,
-                        )
-                      }
-                      onDragStart={(recipeId) =>
-                        setDragged({
-                          recipeId,
-                          kind: slot.kind,
-                          fromDay: dayIndex,
-                        })
-                      }
-                      onDragEnd={() => {
-                        setDragged(null);
-                        setDropDay(null);
-                      }}
-                    />
+                <span className="planner-strip-dow">
+                  {day.name.slice(0, 3)}
+                </span>
+                <span className="planner-strip-date">{day.date.getDate()}</span>
+                <span className="planner-strip-dots" aria-hidden="true">
+                  {Array.from({ length: Math.min(planned, 3) }, (_, i) => (
+                    <span key={i} />
                   ))}
-                </div>
-              </section>
+                </span>
+              </button>
             );
           })}
-        </div>
+        </nav>
+      )}
+
+      <div className="planner-week">
+        {days.map((day) => (
+          <section
+            key={day.index}
+            id={`planner-day-${day.index}`}
+            aria-labelledby={`planner-day-${day.index}-title`}
+            className={[
+              'planner-day',
+              day.isToday && 'planner-day--today',
+              day.isPast && 'planner-day--past',
+              dropDay === day.index && 'planner-day--drop',
+            ]
+              .filter(Boolean)
+              .join(' ')}
+            onDragOver={(e) => {
+              // Only meals from another day can land here.
+              if (!dragged || dragged.day === day.index) return;
+              e.preventDefault();
+              setDropDay(day.index);
+            }}
+            onDragLeave={(e) => {
+              const to = e.relatedTarget;
+              if (!(to instanceof Node && e.currentTarget.contains(to))) {
+                setDropDay(null);
+              }
+            }}
+            onDrop={(e) => {
+              e.preventDefault();
+              if (dragged) {
+                moveMeal(
+                  dragged.recipeId,
+                  dragged.kind,
+                  currentWeek,
+                  dragged.day,
+                  currentWeek,
+                  day.index,
+                );
+              }
+              endDrag();
+            }}
+          >
+            <header className="section-header planner-day-header">
+              <h2
+                id={`planner-day-${day.index}-title`}
+                className="section-title planner-day-title"
+              >
+                <span className="planner-day-dow">{day.name.slice(0, 3)}</span>{' '}
+                <span className="planner-day-date">{day.date.getDate()}</span>
+                {day.isToday && (
+                  <span className={isGrid ? 'sr-only' : 'planner-day-today'}>
+                    {' '}
+                    Today
+                  </span>
+                )}
+              </h2>
+            </header>
+
+            {MEAL_KINDS.map(({ id: kind, label }) => (
+              <div key={kind} className={`planner-slot planner-slot--${kind}`}>
+                <div className="planner-slot-head">
+                  <h3 className="label">{label}</h3>
+                  <button
+                    type="button"
+                    className="text-btn"
+                    aria-label={`Add ${kind} on ${day.name}`}
+                    onClick={() => setAdding({ day: day.index, kind })}
+                  >
+                    + Add
+                  </button>
+                </div>
+                {day[kind].length > 0 && (
+                  <ul className="planner-meals">
+                    {day[kind].map((recipe, i) => {
+                      const key = `${recipe.id}-${i}`;
+                      const remove = (
+                        <button
+                          type="button"
+                          className="icon-btn"
+                          aria-label={`Remove ${recipe.title} from ${day.name} ${kind}`}
+                          onClick={(e) => {
+                            // This meal is about to go; keep focus in its
+                            // slot, on "+ Add". Only keyboard users need the
+                            // page scrolled to it; for a mouse it's a jump.
+                            e.currentTarget
+                              .closest('.planner-slot')
+                              ?.querySelector('button')
+                              ?.focus({
+                                preventScroll:
+                                  !e.currentTarget.matches(':focus-visible'),
+                              });
+                            removeFromMealPlan(
+                              recipe.id,
+                              currentWeek,
+                              day.index,
+                              kind,
+                            );
+                          }}
+                        >
+                          <Icon name="close" />
+                        </button>
+                      );
+                      if (!isGrid) {
+                        return (
+                          <RecipeRow
+                            key={key}
+                            recipe={recipe}
+                            actions={remove}
+                          />
+                        );
+                      }
+                      const isDragged =
+                        dragged?.day === day.index &&
+                        dragged.kind === kind &&
+                        dragged.index === i;
+                      return (
+                        <li key={key}>
+                          <RecipeTile
+                            compact
+                            recipe={recipe}
+                            action={remove}
+                            className={isDragged ? 'planner-dragged' : ''}
+                            draggable
+                            onDragStart={(e) => {
+                              e.dataTransfer.effectAllowed = 'move';
+                              // Firefox only starts a drag that carries data.
+                              e.dataTransfer.setData(
+                                'text/plain',
+                                recipe.title,
+                              );
+                              setDragged({
+                                day: day.index,
+                                kind,
+                                index: i,
+                                recipeId: recipe.id,
+                              });
+                            }}
+                            onDragEnd={endDrag}
+                          />
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </section>
+        ))}
       </div>
+
+      {!isGrid && groceryButton}
 
       {adding && (
         <AddMealSheet
-          slot={adding.slot}
-          date={weekDates[adding.dayIndex]}
-          plannedMeals={weekPlan[adding.dayIndex] || []}
-          onAdd={(recipeId) => {
-            addToMealPlan(
-              recipeId,
-              currentWeek,
-              adding.dayIndex,
-              adding.slot.kind,
-            );
+          day={days[adding.day]}
+          kind={adding.kind}
+          onPick={(recipeId) => {
+            addToMealPlan(recipeId, currentWeek, adding.day, adding.kind);
             setAdding(null);
           }}
           onClose={() => setAdding(null)}
@@ -333,250 +436,116 @@ export function PlannerPage() {
   );
 }
 
-// One lunch or dinner slot inside a day card.
-function MealSlot({
-  label,
-  dayName,
-  meals,
-  onAdd,
-  onRemove,
-  onDragStart,
-  onDragEnd,
-}) {
-  return (
-    <div className="meal-slot">
-      <div className="slot-head">
-        <span className="slot-label">{label}</span>
-        <button
-          className="slot-add"
-          onClick={onAdd}
-          aria-label={`Add ${label.toLowerCase()} on ${dayName}`}
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            strokeLinecap="round"
-            aria-hidden="true"
-          >
-            <line x1="12" y1="5" x2="12" y2="19"></line>
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-          </svg>
-          Add
-        </button>
-      </div>
-
-      {meals.length > 0 && (
-        <ul className="slot-meals">
-          {meals.map((meal, i) => (
-            <li
-              key={`${meal.id}-${i}`}
-              className="meal-item"
-              draggable
-              onDragStart={(e) => {
-                e.dataTransfer.effectAllowed = 'move';
-                e.dataTransfer.setData('text/plain', meal.id);
-                onDragStart(meal.id);
-              }}
-              onDragEnd={onDragEnd}
-            >
-              <Link
-                to="/recipe/$recipeId"
-                params={{ recipeId: meal.id }}
-                className="meal-link"
-              >
-                <img
-                  src={meal.image}
-                  alt=""
-                  className="meal-thumb"
-                  loading="lazy"
-                />
-                <span className="meal-text">
-                  <span className="meal-title">{meal.title}</span>
-                  <span className="meal-meta">{totalMinutes(meal)} min</span>
-                </span>
-              </Link>
-              <button
-                className="meal-remove"
-                onClick={() => onRemove(meal.id)}
-                aria-label={`Remove ${meal.title}`}
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.75"
-                  strokeLinecap="round"
-                >
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
-// The chosen slot stays fixed, but any recipe can fill it. Familiar choices
-// appear first, with the rest still searchable in the same list.
-function AddMealSheet({ slot, date, plannedMeals, onAdd, onClose }) {
-  const likedRecipes = useAppStore((s) => s.likedRecipes);
-  const { kind } = slot;
-
-  const favorites = useMemo(
-    () => likedRecipes.map((r) => findRecipe(r.id)).filter(Boolean),
-    [likedRecipes],
-  );
+/**
+ * "Add lunch" / "Add dinner" sheet for one day's slot. Tabs switch between
+ * Favorites and every recipe (the slot's usual kind first); the search filters
+ * whichever is showing. Recipes already in the slot are disabled as "Added".
+ * Picking one calls `onPick`; the page saves it and closes the sheet.
+ *
+ * @param {{
+ *   day: PlanDay,
+ *   kind: MealKind,
+ *   onPick: (recipeId: string) => void,
+ *   onClose: () => void,
+ * }} props
+ */
+function AddMealSheet({ day, kind, onPick, onClose }) {
+  const favorites = useAppStore((state) => state.likedRecipes);
   const allRecipes = useMemo(() => {
-    const knownIds = new Set(ALL_RECIPES.map((recipe) => recipe.id));
-    const available = [
+    const known = new Set(ALL_RECIPES.map((recipe) => recipe.id));
+    // Favorites from a removed collection still count as recipes.
+    const everything = [
       ...ALL_RECIPES,
-      ...favorites.filter((recipe) => !knownIds.has(recipe.id)),
+      ...favorites.filter((recipe) => !known.has(recipe.id)),
     ];
     return [
-      ...available.filter((recipe) => getMealKind(recipe.id) === kind),
-      ...available.filter((recipe) => getMealKind(recipe.id) !== kind),
+      ...everything.filter((recipe) => getMealKind(recipe.id) === kind),
+      ...everything.filter((recipe) => getMealKind(recipe.id) !== kind),
     ];
   }, [favorites, kind]);
-  const [tab, setTab] = useState(favorites.length > 0 ? 'favorites' : 'all');
+
+  /** @type {import('../components/Tabs').TabOption<'favorites' | 'all'>[]} */
+  const tabs = [
+    { id: 'favorites', label: 'Favorites', count: favorites.length },
+    { id: 'all', label: 'All recipes' },
+  ];
+  const [tab, setTab] = useState(
+    /** @type {'favorites' | 'all'} */ (
+      favorites.length > 0 ? 'favorites' : 'all'
+    ),
+  );
   const [query, setQuery] = useState('');
+  const searchRef = useRef(/** @type {HTMLInputElement | null} */ (null));
 
   const q = query.trim().toLowerCase();
   const source = tab === 'favorites' ? favorites : allRecipes;
   const results = q
-    ? source.filter((r) => r.title.toLowerCase().includes(q))
+    ? source.filter((recipe) => recipe.title.toLowerCase().includes(q))
     : source;
 
-  // Close on Escape and keep the page behind from scrolling.
-  useEffect(() => {
-    const onKey = (e) => e.key === 'Escape' && onClose();
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', onKey);
-    return () => {
-      document.body.style.overflow = prevOverflow;
-      window.removeEventListener('keydown', onKey);
-    };
-  }, [onClose]);
-
-  const dayLabel = date.toLocaleDateString('en-US', {
-    weekday: 'long',
-    month: 'short',
-    day: 'numeric',
-  });
-
   return (
-    <div className="modal-overlay planner-sheet-overlay" onClick={onClose}>
-      <div
-        className="modal planner-sheet"
-        role="dialog"
-        aria-modal="true"
-        aria-label={`Add ${slot.label.toLowerCase()} to ${dayLabel}`}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="modal-header">
-          <div>
-            <h2>Add {slot.label.toLowerCase()}</h2>
-            <p className="sheet-day">{dayLabel}</p>
-          </div>
-          <button className="icon-btn" onClick={onClose} aria-label="Close">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.75"
-              strokeLinecap="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
-          </button>
-        </div>
-
-        <div className="sheet-tools">
-          <div className="sheet-tabs" role="tablist" aria-label="Recipe source">
-            {[
-              { id: 'favorites', label: `Favorites (${favorites.length})` },
-              { id: 'all', label: 'All recipes' },
-            ].map((t) => (
-              <button
-                key={t.id}
-                role="tab"
-                aria-selected={tab === t.id}
-                className={`sheet-tab ${tab === t.id ? 'active' : ''}`}
-                onClick={() => setTab(t.id)}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
-          <input
-            type="search"
-            className="sheet-search"
-            placeholder="Search recipes…"
-            aria-label="Search recipes"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
+    <Sheet
+      title={`Add ${kind}`}
+      subline={`${day.name}, ${MONTH_DAY.format(day.date)}`}
+      tall
+      onClose={onClose}
+      tools={
+        <>
+          <Tabs
+            label="Recipe source"
+            options={tabs}
+            activeId={tab}
+            onChange={setTab}
           />
-        </div>
-
-        <div className="modal-content">
-          {results.length === 0 ? (
-            <div className="sheet-empty">
-              {q ? (
-                <p>No recipes match “{query.trim()}”.</p>
-              ) : (
-                <>
-                  <p>No favorites yet.</p>
-                  <button
-                    className="btn btn-secondary btn-sm"
-                    onClick={() => setTab('all')}
-                  >
-                    Browse all recipes
-                  </button>
-                </>
-              )}
-            </div>
+          <div className="search-field">
+            <Icon name="search" />
+            <input
+              ref={searchRef}
+              type="search"
+              placeholder="Search recipes…"
+              aria-label="Search recipes"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+            />
+          </div>
+        </>
+      }
+    >
+      {results.length > 0 ? (
+        <ul>
+          {results.map((recipe) => (
+            <RecipePickRow
+              key={recipe.id}
+              recipe={recipe}
+              meta={recipe.sourceName}
+              added={day[kind].some((planned) => planned.id === recipe.id)}
+              onPick={() => onPick(recipe.id)}
+            />
+          ))}
+        </ul>
+      ) : (
+        <p className="planner-sheet-empty">
+          {q ? (
+            <>No recipes match “{query.trim()}”.</>
           ) : (
-            <ul className="pick-list">
-              {results.map((recipe) => {
-                const added = plannedMeals.some((entry) => {
-                  const meal = getPlannedMeal(entry);
-                  return meal.recipeId === recipe.id && meal.kind === kind;
-                });
-                return (
-                  <li key={recipe.id}>
-                    <button
-                      className="pick-item"
-                      onClick={() => onAdd(recipe.id)}
-                      disabled={added}
-                    >
-                      <img
-                        src={recipe.image}
-                        alt=""
-                        className="pick-thumb"
-                        loading="lazy"
-                      />
-                      <span className="pick-text">
-                        <span className="pick-title">{recipe.title}</span>
-                        <span className="pick-meta">
-                          {totalMinutes(recipe)} min
-                          {recipe.sourceName && ` · ${recipe.sourceName}`}
-                        </span>
-                      </span>
-                      {added && <span className="pick-added">Added</span>}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
+            <>
+              No favorites yet.{' '}
+              <button
+                type="button"
+                className="text-btn"
+                onClick={() => {
+                  // This button disappears with the switch; keep focus in
+                  // the sheet so Escape and Tab still work.
+                  setTab('all');
+                  searchRef.current?.focus();
+                }}
+              >
+                Browse all recipes
+              </button>
+            </>
           )}
-        </div>
-      </div>
-    </div>
+        </p>
+      )}
+    </Sheet>
   );
 }

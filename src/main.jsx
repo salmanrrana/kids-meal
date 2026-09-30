@@ -1,104 +1,15 @@
 import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
-import {
-  Outlet,
-  RouterProvider,
-  createRootRoute,
-  createRoute,
-  createRouter,
-} from '@tanstack/react-router';
+import { RouterProvider } from '@tanstack/react-router';
+import { createAppRouter } from './router';
 
 import './styles.css';
 
-// Pages
-import { DiscoverPage } from './pages/DiscoverPage';
-import { LikedPage } from './pages/LikedPage';
-import { RecipeDetailPage } from './pages/RecipeDetailPage';
-import { PlannerPage } from './pages/PlannerPage';
-import { GroceryPage } from './pages/GroceryPage';
-import { LunchboxPage } from './pages/LunchboxPage';
+const router = createAppRouter();
 
-// Components
-import { Navigation } from './components/Navigation';
-import {
-  DINNER_BROWSE,
-  LUNCH_BROWSE,
-  browseSearchValidator,
-} from './lib/browse';
-
-// Root layout with bottom navigation
-const rootRoute = createRootRoute({
-  component: () => (
-    <div className="app-root">
-      <div className="app-content">
-        <Outlet />
-      </div>
-      <Navigation />
-    </div>
-  ),
-});
-
-// Routes
-const indexRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/',
-  validateSearch: browseSearchValidator(DINNER_BROWSE),
-  component: DiscoverPage,
-});
-
-const likedRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/liked',
-  component: LikedPage,
-});
-
-const recipeRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/recipe/$recipeId',
-  component: RecipeDetailPage,
-});
-
-const plannerRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/planner',
-  component: PlannerPage,
-});
-
-const groceryRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/grocery',
-  component: GroceryPage,
-});
-
-const lunchboxRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/lunchbox',
-  validateSearch: browseSearchValidator(LUNCH_BROWSE),
-  component: LunchboxPage,
-});
-
-// Build route tree
-const routeTree = rootRoute.addChildren([
-  indexRoute,
-  likedRoute,
-  recipeRoute,
-  plannerRoute,
-  groceryRoute,
-  lunchboxRoute,
-]);
-
-// Create router
-const router = createRouter({
-  routeTree,
-  defaultPreload: 'intent',
-  scrollRestoration: true,
-});
-
-// Render app
 const rootElement = document.getElementById('app');
 if (rootElement && !rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
-  root.render(
+  ReactDOM.createRoot(rootElement).render(
     <StrictMode>
       <RouterProvider router={router} />
     </StrictMode>,

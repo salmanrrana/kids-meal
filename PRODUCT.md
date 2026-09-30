@@ -14,23 +14,24 @@ A meal discovery and weekly planning app. Browse curated family recipes (all ≤
 
 ## Brand Personality
 
-Refined, calm, appetizing. The feel of a well-set table after the kids are in bed: dark, warm, unhurried. Quiet luxury for the family kitchen; confidence without fuss. Food photography is the hero; the interface is the dim dining room around it.
+Calm, appetizing, printed. The feel of a well-used cookbook or a newspaper food section: warm paper, black ink, square photos, and rules on the page. Confidence without fuss. Food photography is the only color; the interface is the paper it sits on.
 
 ## Anti-references
 
 - Kiddie UI: primary colors, bubbly mascots, emoji-as-design.
 - Recipe-blog clutter: ads-shaped layouts, ten competing CTAs, walls of chips.
-- Costume luxury: Times New Roman, gold gradients, shimmer sweeps, "luxury" as a word in class names. Luxury is restraint, not gold paint.
+- Template tells: rounded bordered cards for every list item, pill chips everywhere, icons in circles, hero-plus-CTA, three equal feature boxes, gradients, glass, dark-mode-with-gold "premium".
 - Generic SaaS dashboard chrome.
 
 ## Design Principles
 
-1. **The food is the brightest thing on screen.** Dark surfaces exist to make photography glow. Nothing else competes in saturation.
-2. **Champagne, by the drop.** One gold accent, reserved for the primary action and the active state. Never decoration.
-3. **Serif for the meal, sans for the machine.** Recipe titles and page headings get the display serif; buttons, labels, and data stay in the UI sans.
-4. **Disappear into the task.** Standard affordances, 150–250 ms motion, no choreography. Planning a week of dinners should feel effortless.
-5. **Every state is designed.** Empty boards, missing recipes, copied lists, today vs. other days: each one looks intentional.
+1. **The food is the only color.** Paper and ink everywhere else; nothing competes with the photos in saturation.
+2. **Rules, not boxes.** Structure comes from typography, whitespace, alignment, hairline rules, and identical photo crops. Nothing on a page is wrapped in a border or a filled box.
+3. **Accent marks state, never actions.** One paprika accent for today, the active tab, a saved heart, a checked item. Buttons are ink.
+4. **Serif for the meal, sans for the machine.** Recipe titles and page headings get the display serif; buttons, labels, and data stay in the UI sans.
+5. **Every repeated thing is the same size.** A recipe tile or row is identical to its siblings regardless of title length or photo shape.
+6. **Every state is designed.** Empty lists, missing recipes, copied lists, past days vs. today: each one looks intentional, and none of them needs an icon.
 
 ## Accessibility & Inclusion
 
-WCAG 2.1 AA. Body text ≥4.5:1 on its surface (audited against the dark palette). Visible focus rings on all interactive elements. `prefers-reduced-motion` honored everywhere. Touch targets ≥44px on the bottom nav and swipe surfaces.
+WCAG 2.1 AA. All text ≥4.5:1 on its surface, checked against the paper palette (the lightest text, ink-3, is about 5:1; past planner days use color, not opacity, so they keep it). Visible focus rings on all interactive elements, and when the focused control disappears (removing a meal, unfavoriting, closing a sheet), focus moves to the nearest sensible control. Reading and Tab order follow what's on screen. `prefers-reduced-motion` honored everywhere. Every touch target ≥44px: nav, buttons, tabs, rows, checkboxes, and inline text buttons.

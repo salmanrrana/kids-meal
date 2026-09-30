@@ -1,14 +1,19 @@
-import { useState, useMemo } from 'react';
-import { useNavigate } from '@tanstack/react-router';
-import { useAppStore, findRecipe, getPlannedMeal } from '../store/appStore';
+import { useMemo } from 'react';
+import { Link } from '@tanstack/react-router';
+import { findRecipe, getPlannedMeal, useAppStore } from '../store/appStore';
 import { formatWeekRange } from '../lib/week';
+import { Icon } from '../components/Icon';
+import { Toast, useToast } from '../components/Toast';
 import './GroceryPage.css';
 
-// Category definitions with keywords for matching
-const CATEGORIES = {
-  produce: {
+/** @typedef {import('../store/appStore').Recipe} Recipe */
+
+// Store aisles in the order the list shows them. An ingredient goes to the
+// aisle with its longest matching keyword (see aisleOf); no match is Other.
+// prettier-ignore
+const AISLES = [
+  {
     label: 'Produce',
-    icon: '🥬',
     keywords: [
       'lettuce', 'spinach', 'kale', 'arugula', 'cabbage', 'broccoli', 'cauliflower',
       'carrot', 'celery', 'onion', 'garlic', 'ginger', 'potato', 'sweet potato',
@@ -22,9 +27,8 @@ const CATEGORIES = {
       'berries', 'kiwi', 'clementine'
     ]
   },
-  meat: {
+  {
     label: 'Meat & Protein',
-    icon: '🥩',
     keywords: [
       'chicken', 'beef', 'pork', 'turkey', 'lamb', 'bacon', 'sausage', 'ham',
       'steak', 'ground beef', 'ground turkey', 'ground pork', 'ground chicken',
@@ -35,9 +39,8 @@ const CATEGORIES = {
       'hot dog', 'meatball', 'egg', 'eggs', 'tofu', 'tempeh', 'seitan'
     ]
   },
-  dairy: {
+  {
     label: 'Dairy',
-    icon: '🧀',
     keywords: [
       'milk', 'cream', 'half and half', 'butter', 'cheese', 'cheddar', 'mozzarella',
       'parmesan', 'feta', 'goat cheese', 'cream cheese', 'ricotta', 'cottage cheese',
@@ -46,9 +49,8 @@ const CATEGORIES = {
       'swiss', 'provolone', 'jack cheese', 'colby', 'american cheese', 'queso'
     ]
   },
-  pantry: {
+  {
     label: 'Pantry',
-    icon: '🥫',
     keywords: [
       'rice', 'pasta', 'noodle', 'bread', 'flour', 'sugar', 'oil', 'olive oil',
       'vegetable oil', 'coconut oil', 'sesame oil', 'vinegar', 'soy sauce',
@@ -69,9 +71,8 @@ const CATEGORIES = {
       'dressing', 'pickle', 'olive', 'dough', 'rolls'
     ]
   },
-  spices: {
+  {
     label: 'Spices & Seasonings',
-    icon: '🧂',
     keywords: [
       'salt', 'pepper', 'black pepper', 'white pepper', 'cayenne', 'paprika',
       'smoked paprika', 'chili powder', 'cumin', 'coriander', 'turmeric',
@@ -86,228 +87,212 @@ const CATEGORIES = {
       'herbs', 'seasoning'
     ]
   },
-  frozen: {
+  {
     label: 'Frozen',
-    icon: '🧊',
     keywords: [
       'frozen', 'ice cream', 'popsicle', 'frozen fruit', 'frozen vegetable',
       'frozen pizza', 'frozen dinner', 'frozen waffle', 'frozen yogurt'
     ]
-  }
-};
+  },
+  { label: 'Other', keywords: [] },
+];
 
-// Categorize an ingredient by keyword. The longest (most specific) match wins,
-// so "onion powder" lands in spices rather than produce via "onion".
-function categorizeIngredient(ingredient) {
+const COPIED = 'Copied to clipboard';
+const COPY_FAILED = "Couldn't copy the list";
+
+/**
+ * Aisle label for one ingredient line. The longest (most specific) keyword
+ * wins, so "onion powder" lands in spices rather than produce via "onion".
+ *
+ * @param {string} ingredient
+ */
+function aisleOf(ingredient) {
   const lower = ingredient.toLowerCase();
-  let best = { category: 'other', length: 0 };
+  let best = { label: 'Other', length: 0 };
 
-  for (const [category, { keywords }] of Object.entries(CATEGORIES)) {
+  for (const { label, keywords } of AISLES) {
     for (const keyword of keywords) {
       if (keyword.length > best.length && lower.includes(keyword)) {
-        best = { category, length: keyword.length };
+        best = { label, length: keyword.length };
       }
     }
   }
 
-  return best.category;
+  return best.label;
 }
 
+/**
+ * The week's planned recipes, Sunday to Saturday, each listed once.
+ *
+ * @param {import('../store/appStore').WeekPlan} weekPlan
+ */
+function plannedMeals(weekPlan) {
+  /** @type {Map<string, Recipe>} */
+  const meals = new Map();
+  for (let day = 0; day < 7; day++) {
+    for (const entry of weekPlan[day] ?? []) {
+      const recipe = findRecipe(getPlannedMeal(entry).recipeId);
+      if (recipe) meals.set(recipe.id, recipe);
+    }
+  }
+  return [...meals.values()];
+}
+
+/**
+ * Every distinct ingredient of the meals (ignoring case), alphabetical and
+ * grouped by aisle. Aisles with nothing in them are left out.
+ *
+ * @param {Recipe[]} meals
+ */
+function groceryAisles(meals) {
+  /** @type {Map<string, string>} */
+  const unique = new Map();
+  for (const meal of meals) {
+    for (const ingredient of meal.ingredients) {
+      const key = ingredient.toLowerCase().trim();
+      if (!unique.has(key)) unique.set(key, ingredient);
+    }
+  }
+  const sorted = [...unique.values()].sort((a, b) =>
+    a.toLowerCase().localeCompare(b.toLowerCase()),
+  );
+
+  /** @type {Map<string, string[]>} */
+  const byAisle = new Map(AISLES.map(({ label }) => [label, []]));
+  for (const item of sorted) byAisle.get(aisleOf(item))?.push(item);
+  return [...byAisle]
+    .filter(([, items]) => items.length > 0)
+    .map(([label, items]) => ({ label, items }));
+}
+
+/**
+ * Copies text to the clipboard and says whether it worked. The Clipboard API
+ * needs https, so a phone on the plain-http dev server falls back to copying
+ * from a hidden textarea. That takes focus, so focus goes back to whatever
+ * had it.
+ *
+ * @param {string} text
+ * @returns {Promise<boolean>}
+ */
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    const focused = document.activeElement;
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed'; // focusing it mustn't scroll the page
+    document.body.append(textarea);
+    textarea.select();
+    const copied = document.execCommand('copy');
+    textarea.remove();
+    if (focused instanceof HTMLElement) focused.focus();
+    return copied;
+  }
+}
+
+/**
+ * Grocery list (/grocery) for the week the planner is on: the meals being
+ * cooked, then every ingredient by aisle. Items are plain checkboxes, so
+ * ticking one off lasts until the page is left or reloaded.
+ */
 export function GroceryPage() {
-  const navigate = useNavigate();
-  const { currentWeek, mealPlans } = useAppStore();
-  const [copied, setCopied] = useState(false);
+  const currentWeek = useAppStore((state) => state.currentWeek);
+  const weekPlan = useAppStore((state) => state.mealPlans[state.currentWeek]);
+  const meals = useMemo(() => plannedMeals(weekPlan ?? {}), [weekPlan]);
+  const aisles = useMemo(() => groceryAisles(meals), [meals]);
+  const { toast, show } = useToast();
 
-  // Get all meals for the current week
-  const weekMeals = useMemo(() => {
-    const weekPlan = mealPlans[currentWeek] || {};
-    const meals = [];
+  const weekRange = formatWeekRange(currentWeek);
+  const itemCount = aisles.reduce((sum, { items }) => sum + items.length, 0);
+  // The button reads "Copied" while the confirmation toast is up.
+  const copied = toast?.text === COPIED;
 
-    for (let day = 0; day < 7; day++) {
-      const entries = weekPlan[day] || [];
-      entries.forEach((entry) => {
-        const recipe = findRecipe(getPlannedMeal(entry).recipeId);
-        if (recipe) meals.push(recipe);
-      });
-    }
-
-    return meals;
-  }, [mealPlans, currentWeek]);
-
-  // Aggregate and categorize ingredients
-  const groceryList = useMemo(() => {
-    const ingredientMap = new Map();
-
-    weekMeals.forEach(recipe => {
-      recipe.ingredients.forEach(ingredient => {
-        const normalized = ingredient.toLowerCase().trim();
-        if (!ingredientMap.has(normalized)) {
-          ingredientMap.set(normalized, {
-            text: ingredient,
-            category: categorizeIngredient(ingredient)
-          });
-        }
-      });
-    });
-
-    // Group by category
-    const grouped = {};
-    for (const { text, category } of ingredientMap.values()) {
-      if (!grouped[category]) {
-        grouped[category] = [];
-      }
-      grouped[category].push(text);
-    }
-
-    // Sort items within each category
-    for (const category of Object.keys(grouped)) {
-      grouped[category].sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
-    }
-
-    // Define category order
-    const categoryOrder = ['produce', 'meat', 'dairy', 'pantry', 'spices', 'frozen', 'other'];
-
-    // Build final list with categories in order
-    return categoryOrder
-      .filter(cat => grouped[cat] && grouped[cat].length > 0)
-      .map(cat => ({
-        category: cat,
-        label: CATEGORIES[cat]?.label || 'Other',
-        icon: CATEGORIES[cat]?.icon || '📦',
-        items: grouped[cat]
-      }));
-  }, [weekMeals]);
-
-  // Total ingredient count
-  const totalItems = groceryList.reduce((sum, cat) => sum + cat.items.length, 0);
-
-  // Format for copying
-  const formatForCopy = () => {
-    let text = 'GROCERY LIST\n';
-    text += '='.repeat(40) + '\n\n';
-
-    groceryList.forEach(({ label, items }) => {
-      text += `${label.toUpperCase()}\n`;
-      items.forEach(item => {
-        text += `  - ${item}\n`;
-      });
-      text += '\n';
-    });
-
-    return text.trim();
+  const copyList = async () => {
+    const aisleText = aisles.map(({ label, items }) =>
+      [label.toUpperCase(), ...items.map((item) => `- ${item}`)].join('\n'),
+    );
+    const ok = await copyText(
+      [`Grocery list for ${weekRange}`, ...aisleText].join('\n\n'),
+    );
+    show(ok ? COPIED : COPY_FAILED);
   };
-
-  const handleCopy = async () => {
-    const text = formatForCopy();
-    try {
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      const textarea = document.createElement('textarea');
-      textarea.value = text;
-      document.body.appendChild(textarea);
-      textarea.select();
-      document.execCommand('copy');
-      document.body.removeChild(textarea);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
-
-  const hasItems = totalItems > 0;
 
   return (
-    <div className="grocery-page page-with-nav">
-      <div className="page-container">
-        <header className="page-header grocery-header">
-          <div>
-            <h1 className="page-title">Grocery list</h1>
-            <p className="page-subtitle">
-              {hasItems
-                ? `${totalItems} items for ${formatWeekRange(currentWeek)}`
-                : formatWeekRange(currentWeek)}
-            </p>
-          </div>
-          {hasItems && (
-            <button type="button" className="btn btn-secondary btn-sm" onClick={handleCopy}>
-              {copied ? (
-                <>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  Copied
-                </>
-              ) : (
-                <>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                  </svg>
-                  Copy list
-                </>
-              )}
-            </button>
-          )}
-        </header>
-
-        {!hasItems ? (
-          <div className="empty-state">
-            <svg className="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-              <line x1="3" y1="6" x2="21" y2="6"></line>
-              <path d="M16 10a4 4 0 0 1-8 0"></path>
-            </svg>
-            <h2>Nothing to shop for yet</h2>
-            <p>Plan a few meals for the week and the shopping list builds itself.</p>
-            <button type="button" className="btn btn-primary" onClick={() => navigate({ to: '/planner' })}>
-              Plan the week
+    <div className="page grocery">
+      <header className="page-header">
+        <div className="page-heading">
+          <h1 className="page-title">Grocery list</h1>
+          <p className="page-subtitle">
+            {itemCount > 0
+              ? `${itemCount} ${itemCount === 1 ? 'item' : 'items'} for ${weekRange}`
+              : weekRange}
+          </p>
+        </div>
+        {itemCount > 0 && (
+          <div className="page-actions">
+            <button
+              type="button"
+              className="btn btn-outline grocery-copy"
+              onClick={copyList}
+            >
+              <Icon name={copied ? 'check' : 'copy'} />
+              {copied ? 'Copied' : 'Copy list'}
             </button>
           </div>
-        ) : (
-          <>
-            {/* Meal summary */}
-            <section className="meal-summary" aria-label="Meals this week">
-              <h2 className="summary-title">Cooking this week</h2>
-              <div className="meal-chips">
-                {weekMeals.map((meal, index) => (
-                  <span key={`${meal.id}-${index}`} className="meal-chip">
-                    {meal.title}
-                  </span>
-                ))}
-              </div>
-            </section>
-
-            {/* Grocery list by category */}
-            <div className="grocery-list">
-              {groceryList.map(({ category, label, items }) => (
-                <section key={category} className="grocery-category">
-                  <h3 className="category-label">
-                    {label}
-                    <span className="category-count">{items.length}</span>
-                  </h3>
-                  <ul className="ingredient-list">
-                    {items.map((item, index) => (
-                      <li key={index} className="ingredient-item">
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              ))}
-            </div>
-          </>
         )}
-      </div>
+      </header>
 
-      {copied && (
-        <div className="toast" role="status">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16" style={{ color: 'var(--success)' }}>
-            <polyline points="20 6 9 17 4 12"></polyline>
-          </svg>
-          Copied to clipboard
+      {itemCount > 0 ? (
+        <>
+          <section className="grocery-meals">
+            <h2 className="label">Planned meals</h2>
+            <ul className="grocery-meal-list">
+              {meals.map((meal) => (
+                <li key={meal.id}>
+                  <Link to="/recipe/$recipeId" params={{ recipeId: meal.id }}>
+                    {meal.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          <div className="grocery-aisles">
+            {aisles.map(({ label, items }) => (
+              <section key={label} className="grocery-aisle">
+                <div className="section-header">
+                  <h2 className="section-title">{label}</h2>
+                  <span className="section-count">{items.length}</span>
+                </div>
+                <ul>
+                  {items.map((item) => (
+                    <li key={item} className="grocery-item">
+                      <label className="checkbox">
+                        <input type="checkbox" />
+                        <span>{item}</span>
+                      </label>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div className="empty-state">
+          <h2>Nothing to shop for yet</h2>
+          <p>
+            Plan a few meals for the week and the shopping list builds itself.
+          </p>
+          <Link to="/planner" className="btn btn-primary">
+            Plan the week
+          </Link>
         </div>
       )}
+
+      <Toast toast={toast} />
     </div>
   );
 }

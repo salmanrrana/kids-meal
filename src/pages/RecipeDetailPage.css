@@ -1,374 +1,189 @@
-/* Recipe detail */
+/* Recipe page. Below 1024px: one stack with a full-bleed 4:3 photo. From
+   1024px: a sticky left column (photo, Add to plan, times) beside the title
+   and text. */
 
-/* Hero */
-.hero-image {
-  position: relative;
-  height: clamp(240px, 40vh, 420px);
-  background: var(--surface);
+.recipe-page {
+  --container: 1100px;
 }
 
-.hero-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Fade the photo into the page background */
-.hero-scrim {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    oklch(0.17 0.01 80 / 0.35) 0%,
-    transparent 30%,
-    transparent 62%,
-    var(--bg) 100%
-  );
-  pointer-events: none;
-}
-
-.hero-controls {
-  position: absolute;
-  top: max(16px, env(safe-area-inset-top));
-  left: 0;
-  right: 0;
+/* Back on the left, heart on the right, in a 44px row. */
+.recipe-topbar {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding: 0 16px;
+  padding-top: 8px;
 }
 
-.hero-btn {
-  width: 44px;
-  height: 44px;
-  background: var(--scrim);
-  border-color: transparent;
-  color: var(--scrim-ink);
+/* Line the heart's icon up with the content edge. */
+.recipe-topbar .icon-btn {
+  margin-right: -11px;
 }
 
-.hero-btn:hover {
-  background: var(--scrim);
-  border-color: var(--line-strong);
-  color: var(--scrim-ink);
-}
-
-.hero-btn.liked {
-  color: var(--gold);
-}
-
-.hero-btn.liked:hover {
-  color: var(--gold);
-}
-
-/* Title block */
-.recipe-info {
-  margin-top: -32px;
-  position: relative;
-}
-
-.recipe-title-row {
+.recipe-layout {
   display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 14px;
+  flex-direction: column;
 }
 
-.detail-title {
-  font-size: var(--text-2xl);
-  max-width: 24ch;
+/* Text keeps to the reading measure; only the photo runs wider. */
+.recipe-layout :is(.recipe-head, .recipe-add, .recipe-times),
+.recipe-body > * {
+  max-width: var(--measure);
 }
 
-.add-plan-btn {
-  flex-shrink: 0;
-  min-height: 44px;
-  margin-top: 2px;
+.recipe-photo {
+  aspect-ratio: 4 / 3;
+  max-height: 420px;
+  margin-inline: calc(-1 * var(--page-pad));
+  border-radius: 0;
+}
+
+.recipe-head {
+  margin-top: 20px;
 }
 
 .recipe-meta {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px 18px;
-  margin-bottom: 24px;
-}
-
-.meta-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
+  margin-top: 8px;
+  font-size: var(--t-ui);
+  line-height: 1.3;
   color: var(--ink-2);
-  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
 }
 
-.meta-item svg {
-  width: 16px;
-  height: 16px;
-  color: var(--ink-3);
+.recipe-add {
+  margin-top: 16px;
 }
 
-.meta-tag {
-  padding: 3px 10px;
-  border-radius: var(--radius-full);
-  background: var(--surface-2);
-  color: var(--ink-3);
-  font-size: var(--text-xs);
-  font-weight: 500;
-  text-transform: capitalize;
-}
-
-/* Tabs: segmented control */
-.tabs {
-  display: inline-flex;
-  gap: 2px;
-  padding: 3px;
-  border-radius: var(--radius-full);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  margin-bottom: 24px;
-}
-
-.tab {
-  padding: 7px 18px;
-  border: none;
-  border-radius: var(--radius-full);
-  background: transparent;
+.recipe-times {
+  margin-top: 12px;
+  font-size: var(--t-ui);
+  line-height: 1.3;
   color: var(--ink-2);
-  font-size: var(--text-sm);
-  font-weight: 500;
-  cursor: pointer;
-  transition:
-    color var(--t-fast),
-    background-color var(--t-fast);
+  font-variant-numeric: tabular-nums;
 }
 
-.tab:hover {
-  color: var(--ink);
+.recipe-intro {
+  margin-top: 24px;
 }
 
-.tab.active {
-  background: var(--gold);
-  color: var(--on-gold);
+.recipe-tip {
+  margin-top: 32px;
 }
 
-@media (pointer: coarse) {
-  .tab {
-    min-height: 44px;
-  }
+.recipe-tip .label {
+  margin-bottom: 6px;
 }
 
-/* Tab content */
-.tab-content {
-  padding-bottom: 32px;
+.recipe-ingredients {
+  margin-top: 32px;
 }
 
-.description {
-  color: var(--ink-2);
-  font-size: var(--text-md);
-  line-height: 1.6;
-  margin-bottom: 24px;
+.recipe-ingredients li {
+  min-height: 44px;
+  padding: 10px 0;
 }
 
-.time-breakdown {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 24px;
+.recipe-ingredients li + li {
+  border-top: 1px solid var(--rule);
 }
 
-.time-item {
-  flex: 1;
-  max-width: 140px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 12px 16px;
-  border-radius: var(--radius-md);
-  background: var(--surface);
-  border: 1px solid var(--line);
+.recipe-steps {
+  margin-top: 40px;
 }
 
-.time-label {
-  font-size: var(--text-xs);
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink-3);
-}
-
-.time-value {
-  font-family: var(--font-display);
-  font-size: var(--text-md);
-  color: var(--ink);
-}
-
-.lunchbox-tip {
-  padding: 12px 16px;
-  border: 1px solid var(--line);
-  border-left: 3px solid var(--gold);
-  border-radius: var(--radius-sm);
-  background: var(--surface-2, var(--surface));
-  font-size: var(--text-sm);
-  color: var(--ink-2);
-  margin-bottom: 20px;
-}
-
-.lunchbox-tip strong {
-  color: var(--ink);
-}
-
-.source-info {
-  font-size: var(--text-sm);
-  color: var(--ink-3);
-}
-
-/* Padding grows the tap area without moving the text */
-.source-info a {
-  display: inline-block;
-  padding: 12px 0;
-  margin: -12px 0;
-  color: var(--gold);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.source-info a:hover {
-  color: var(--gold-strong);
-}
-
-/* Ingredients */
-.ingredients-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  max-width: 560px;
-}
-
-.ingredient-row {
-  padding: 11px 0;
-  color: var(--ink-2);
-  border-bottom: 1px solid var(--line);
-}
-
-.ingredient-row:last-child {
-  border-bottom: none;
-}
-
-/* Steps: a true sequence, numbered in gold */
-.steps-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  max-width: 640px;
+.recipe-steps ol {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.step-item {
-  display: flex;
-  gap: 16px;
+/* Serif numeral in a 40px column, on the same baseline as the step's first line. */
+.recipe-steps li {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  align-items: baseline;
 }
 
-.step-number {
-  flex-shrink: 0;
+.recipe-step-number {
   font-family: var(--font-display);
-  font-size: var(--text-lg);
-  line-height: 1.3;
-  color: var(--gold);
-  min-width: 24px;
-  text-align: right;
-}
-
-.step-text {
-  color: var(--ink-2);
-  line-height: 1.6;
-  padding-top: 2px;
-}
-
-@media (max-width: 480px) {
-  .recipe-info {
-    margin-top: -24px;
-  }
-
-  .tabs {
-    display: flex;
-  }
-
-  .tab {
-    flex: 1;
-    padding: 7px 8px;
-  }
-
-  .time-breakdown .time-item {
-    max-width: none;
-    padding: 10px 12px;
-  }
-}
-
-/* Add to plan picker (uses .modal / .modal-overlay from styles.css) */
-.add-plan-modal {
-  max-width: 360px;
-}
-
-.add-plan-modal > .meal-kind-options {
-  padding: 16px 20px 0;
-  margin-bottom: 4px;
-}
-
-.add-plan-days {
-  list-style: none;
-  margin: 0;
-  padding: 8px;
-  overflow-y: auto;
-}
-
-.add-plan-day {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  width: 100%;
-  min-height: 48px;
-  padding: 10px 14px;
-  border: none;
-  border-radius: var(--radius-md);
-  background: transparent;
-  color: var(--ink);
-  font-size: var(--text-base);
-  font-weight: 500;
-  text-align: left;
-  cursor: pointer;
-  transition: background-color var(--t-fast);
-}
-
-.add-plan-day:hover {
-  background: var(--surface-2);
-}
-
-.add-plan-day-date {
+  font-size: var(--t-section);
+  line-height: 1.2;
   color: var(--ink-3);
-  font-size: var(--text-sm);
-  font-weight: 400;
+  font-variant-numeric: tabular-nums;
 }
 
-/* Phones: bottom sheet above the home bar */
-@media (max-width: 480px) {
-  .add-plan-overlay {
-    align-items: flex-end;
-    padding: 0;
+.recipe-steps p {
+  line-height: 1.6;
+}
+
+.recipe-source {
+  margin-top: 32px;
+  font-size: var(--t-ui);
+  line-height: 1.3;
+  color: var(--ink-2);
+}
+
+/* Phones and tablets: the column wrappers dissolve and every piece stacks
+   in document order, except the photo, which leads. It has no text, so
+   reading and Tab order still match what's on screen. */
+@media (max-width: 1023px) {
+  .recipe-aside,
+  .recipe-body {
+    display: contents;
   }
 
-  .add-plan-modal {
-    max-width: none;
-    border-bottom: none;
-    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    padding-bottom: env(safe-area-inset-bottom);
-    animation-name: sheet-in;
+  .recipe-photo {
+    order: -1;
   }
 }
 
-@keyframes sheet-in {
-  from {
-    transform: translateY(100%);
+@media (min-width: 600px) {
+  .recipe-topbar {
+    padding-top: 16px;
+  }
+}
+
+/* Desktop: photo column on the left stays in view while the text scrolls. */
+@media (min-width: 1024px) {
+  .recipe-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    /* A short recipe's extra height goes under the text, not between head and body. */
+    grid-template-rows: auto 1fr;
+    column-gap: 48px;
+    margin-top: 16px;
+  }
+
+  /* Sticks 24px below the top bar. */
+  .recipe-aside {
+    position: sticky;
+    top: calc(var(--bar-height) + 24px);
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: start;
+  }
+
+  .recipe-head,
+  .recipe-body {
+    grid-column: 2;
+    max-width: var(--measure);
+  }
+
+  .recipe-head {
+    margin-top: 0;
+  }
+
+  .recipe-photo {
+    aspect-ratio: 1;
+    max-height: none;
+    margin-inline: 0;
+    border-radius: 4px;
+  }
+
+  .recipe-times {
+    margin-top: 16px;
+  }
+
+  .recipe-ingredients {
+    margin-top: 40px;
   }
 }

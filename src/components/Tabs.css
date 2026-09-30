@@ -1,0 +1,91 @@
+/* Tabs: 44px text buttons, 2px accent under the active label, 1px rule under
+   the row. The rule is a background clipped to the content box, so a parent
+   can bleed the row to the screen edges with negative margin + equal padding
+   and the rule still lines up with the content around it. */
+
+.tabs-row {
+  position: relative;
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  background: linear-gradient(var(--rule), var(--rule)) no-repeat bottom / 100%
+    1px;
+  background-origin: content-box;
+  background-clip: content-box;
+}
+
+.tabs-row::-webkit-scrollbar {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .tabs-row {
+    gap: 20px;
+  }
+}
+
+/* A plain inline box with a 44px line, so the label and the smaller count
+   share a baseline. */
+.tabs-item {
+  position: relative;
+  display: inline-block;
+  flex: none;
+  height: 44px;
+  padding: 0 4px;
+  border: 0;
+  background: none;
+  color: var(--ink-2);
+  font-size: var(--t-ui);
+  font-weight: 500;
+  line-height: 44px;
+  transition: color var(--fade);
+}
+
+/* The first tab hangs out by its 4px padding so its label starts on the
+   content edge. The row makes room for it so it (and its focus ring) isn't
+   clipped; :where() keeps that at zero specificity, so a page's own margin
+   and padding on the row (the browse row's bleed) win. */
+:where(.tabs-row) {
+  margin-inline-start: -4px;
+  padding-inline-start: 4px;
+}
+
+.tabs-item:first-child {
+  margin-left: -4px;
+}
+
+/* The row clips overflow, so the focus ring goes inside the button. */
+.tabs-item:focus-visible {
+  outline-offset: -2px;
+}
+
+@media (hover: hover) {
+  .tabs-item:hover {
+    color: var(--ink);
+  }
+}
+
+.tabs-item[aria-pressed='true'] {
+  color: var(--ink);
+}
+
+.tabs-item[aria-pressed='true']::after {
+  content: '';
+  position: absolute;
+  right: 4px;
+  bottom: 0;
+  left: 4px;
+  height: 2px;
+  background: var(--accent);
+}
+
+.tabs-count {
+  margin-left: 6px;
+  font-size: var(--t-meta);
+  font-weight: 400;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
