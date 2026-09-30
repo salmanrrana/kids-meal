@@ -1,0 +1,111 @@
+/* Sheet: bottom sheet below 600px, centered 480px modal from 600px up. */
+
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-sheet);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background: var(--backdrop);
+  animation: sheet-backdrop-in 150ms var(--ease);
+}
+
+.sheet {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 85dvh;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-radius: 12px 12px 0 0;
+  background: var(--paper);
+  animation: sheet-up 220ms var(--ease);
+}
+
+.sheet:focus {
+  outline: none;
+}
+
+.sheet--tall {
+  height: 85dvh;
+}
+
+.sheet-header {
+  display: flex;
+  flex: none;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.sheet-title {
+  font-size: var(--t-section);
+  line-height: 1.2;
+}
+
+.sheet-subline {
+  margin-top: 2px;
+  font-size: var(--t-meta);
+  line-height: 1.3;
+  color: var(--ink-2);
+}
+
+/* Centers the × on the title's first line and lines its icon up with the edge. */
+.sheet-header .icon-btn {
+  margin: -9px -11px -9px 0;
+}
+
+.sheet-tools {
+  flex: none;
+  padding: 0 20px;
+}
+
+.sheet-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: 0 20px 16px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+@media (min-width: 600px) {
+  .sheet-backdrop {
+    align-items: center;
+    padding: 24px;
+  }
+
+  .sheet {
+    width: min(480px, 100vw - 48px);
+    max-height: 80vh;
+    padding-bottom: 0;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    animation: sheet-rise 180ms var(--ease);
+  }
+
+  .sheet--tall {
+    height: 80vh;
+  }
+}
+
+@keyframes sheet-backdrop-in {
+  from {
+    background-color: transparent;
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes sheet-rise {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}

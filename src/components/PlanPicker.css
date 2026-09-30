@@ -1,0 +1,66 @@
+/* PlanPicker body: week navigator, then 7 day rows. */
+
+.plan-week {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Line the chevrons up with the row edges. */
+.plan-week .icon-btn:first-child {
+  margin-left: -11px;
+}
+
+.plan-week .icon-btn:last-child {
+  margin-right: -11px;
+}
+
+.plan-week-range {
+  font-size: var(--t-ui);
+  line-height: 1.3;
+  font-variant-numeric: tabular-nums;
+}
+
+.plan-days li:not(:last-child) {
+  border-bottom: 1px solid var(--rule);
+}
+
+.plan-day {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font-size: var(--t-ui);
+  line-height: 1.3;
+  text-align: left;
+}
+
+.plan-day:focus-visible {
+  outline-offset: -2px;
+}
+
+.plan-day[aria-current='date'] .plan-day-label {
+  color: var(--accent);
+}
+
+.plan-day-date {
+  font-size: var(--t-meta);
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (hover: hover) {
+  .plan-day:hover .plan-day-label {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+}

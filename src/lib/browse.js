@@ -2,15 +2,7 @@
 // grouped into shelves, which quick filters exist, and how search matches.
 
 /**
- * @typedef {{
- *   id: string,
- *   title: string,
- *   description: string,
- *   prepTime: number,
- *   cookTime: number,
- *   tags: string[],
- *   ingredients: string[],
- * }} Recipe
+ * @typedef {import('../store/appStore').Recipe} Recipe
  * @typedef {{ id: string, name: string }} Group
  * @typedef {{ id: string, label: string, test: (recipe: Recipe) => boolean }} QuickFilter
  * @typedef {{

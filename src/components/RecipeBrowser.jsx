@@ -1,23 +1,25 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate, useSearch } from '@tanstack/react-router';
-import { useAppStore } from '../store/appStore';
 import { filterRecipes } from '../lib/browse';
-import { RecipeCard } from './RecipeCard';
-import { ThemeFilters } from './ThemeFilters';
+import { Icon } from './Icon';
+import { LikeButton } from './LikeButton';
+import { RecipeTile } from './RecipeTile';
+import { Tabs } from './Tabs';
 import './RecipeBrowser.css';
 
-const SHELF_SIZE = 10;
+// Tiles rendered per shelf. CSS shows exactly one row of them (two on phones).
+const SHELF_SIZE = 5;
 
 /**
  * Browse screen shared by Discover (dinners) and Lunchbox. With no filters it
- * shows one sideways-scrolling shelf per group; searching, picking a group, or
- * a quick filter switches to a results grid. Filters live in the URL
+ * shows one shelf per group; searching, picking a group, or a quick filter
+ * switches to one grid of every match. Filters live in the URL
  * (?q=&group=&quick=), so going back from a recipe keeps them.
  *
  * @param {{
  *   title: string,
  *   intro: string,
- *   recipes: import('../lib/browse').Recipe[],
+ *   recipes: import('../store/appStore').Recipe[],
  *   config: import('../lib/browse').BrowseConfig,
  *   searchPlaceholder: string,
  * }} props
@@ -32,9 +34,15 @@ export function RecipeBrowser({
   const navigate = useNavigate();
   /** @type {{ q?: string, group?: string, quick?: string }} */
   const { q = '', group, quick } = useSearch({ strict: false });
-  const likedRecipes = useAppStore((state) => state.likedRecipes);
-  const toggleLike = useAppStore((state) => state.toggleLike);
-  const likedIds = new Set(likedRecipes.map((recipe) => recipe.id));
+
+  // The search box keeps its own text, so the caret stays put while typing
+  // even though the URL catches up a moment later. When `q` changes while
+  // the box isn't focused (Clear filters, Back, the nav link), copy it in.
+  const [text, setText] = useState(q);
+  const searchRef = useRef(/** @type {HTMLInputElement | null} */ (null));
+  useEffect(() => {
+    if (document.activeElement !== searchRef.current) setText(q);
+  }, [q]);
 
   // Newest additions sit at the end of the data files; show them first.
   const ordered = useMemo(() => [...recipes].reverse(), [recipes]);
@@ -42,7 +50,7 @@ export function RecipeBrowser({
     () => filterRecipes(ordered, config, { q, group, quick }),
     [ordered, config, q, group, quick],
   );
-  // Group chip counts follow the search and quick filter, not the group itself.
+  // Tab counts follow the search and quick filter, not the group itself.
   const groupCounts = useMemo(() => {
     const counts = new Map();
     for (const recipe of filterRecipes(ordered, config, { q, quick })) {
@@ -59,7 +67,10 @@ export function RecipeBrowser({
   const setFilters = (patch, resetScroll = true) =>
     navigate({
       to: '.',
-      search: (prev) => ({ ...prev, ...patch }),
+      search: (/** @type {Record<string, unknown>} */ prev) => ({
+        ...prev,
+        ...patch,
+      }),
       replace: true,
       resetScroll,
     });
@@ -71,178 +82,141 @@ export function RecipeBrowser({
     navigate({ to: '/recipe/$recipeId', params: { recipeId: pick.id } });
   };
 
-  const renderCard = (recipe) => (
-    <RecipeCard
+  /** @param {import('../store/appStore').Recipe} recipe */
+  const renderTile = (recipe) => (
+    <RecipeTile
       key={recipe.id}
       recipe={recipe}
-      isLiked={likedIds.has(recipe.id)}
-      onLikeToggle={() => toggleLike(recipe)}
+      action={<LikeButton recipe={recipe} />}
     />
   );
 
   return (
-    <div className="browse-page page-with-nav">
-      <div className="page-container">
-        <header className="page-header browse-header">
-          <div>
-            <h1 className="page-title">{title}</h1>
-            <p className="page-subtitle">{intro}</p>
-          </div>
+    <div className="page browse">
+      <header className="page-header">
+        <div className="page-heading">
+          <h1 className="page-title">{title}</h1>
+          <p className="page-subtitle">{intro}</p>
+        </div>
+        <div className="page-actions">
           <button
             type="button"
-            className="btn btn-secondary btn-sm surprise-btn"
+            className="btn btn-outline"
             onClick={surpriseMe}
           >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.75"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              aria-hidden="true"
-            >
-              <polyline points="16 3 21 3 21 8" />
-              <line x1="4" y1="20" x2="21" y2="3" />
-              <polyline points="21 16 21 21 16 21" />
-              <line x1="15" y1="15" x2="21" y2="21" />
-              <line x1="4" y1="4" x2="9" y2="9" />
-            </svg>
+            <Icon name="shuffle" />
             Surprise me
           </button>
-        </header>
-
-        <div className="browse-search">
-          <svg
-            className="browse-search-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            strokeLinecap="round"
-            aria-hidden="true"
-          >
-            <circle cx="11" cy="11" r="7" />
-            <line x1="20" y1="20" x2="16" y2="16" />
-          </svg>
-          <input
-            type="search"
-            className="browse-search-input"
-            placeholder={searchPlaceholder}
-            aria-label={searchPlaceholder}
-            value={q}
-            onChange={(e) =>
-              setFilters({ q: e.target.value || undefined }, false)
-            }
-          />
         </div>
+      </header>
 
-        <ThemeFilters
-          options={[
-            {
-              id: 'all',
-              name: 'All',
-              count: [...groupCounts.values()].reduce((a, b) => a + b, 0),
-            },
-            ...config.groups.map((g) => ({
-              ...g,
-              count: groupCounts.get(g.id) ?? 0,
-            })),
-          ]}
-          activeId={group ?? 'all'}
-          onChange={(id) =>
-            setFilters({ group: id === 'all' ? undefined : id })
-          }
-          label="Recipe groups"
+      <div className="search-field">
+        <Icon name="search" />
+        <input
+          ref={searchRef}
+          type="search"
+          placeholder={searchPlaceholder}
+          aria-label={searchPlaceholder}
+          value={text}
+          onChange={(e) => {
+            setText(e.target.value);
+            setFilters({ q: e.target.value || undefined }, false);
+          }}
         />
+      </div>
 
-        <div className="browse-bar">
-          <p className="browse-count" aria-live="polite">
-            {isBrowsing
-              ? `${ordered.length} recipes`
-              : `${results.length} ${results.length === 1 ? 'match' : 'matches'}${groupName ? ` in ${groupName.toLowerCase()}` : ''}`}
-          </p>
-          <div
-            className="quick-filters"
-            role="group"
-            aria-label="Quick filters"
-          >
-            {config.quickFilters.map((filter) => (
-              <button
-                type="button"
-                key={filter.id}
-                className={`quick-filter ${quick === filter.id ? 'active' : ''}`}
-                aria-pressed={quick === filter.id}
-                onClick={() =>
+      <Tabs
+        className="browse-tabs"
+        label="Recipe groups"
+        options={[
+          {
+            id: 'all',
+            label: 'All',
+            count: [...groupCounts.values()].reduce((a, b) => a + b, 0),
+          },
+          ...config.groups.map((g) => ({
+            id: g.id,
+            label: g.name,
+            count: groupCounts.get(g.id) ?? 0,
+          })),
+        ]}
+        activeId={group ?? 'all'}
+        onChange={(id) => setFilters({ group: id === 'all' ? undefined : id })}
+      />
+
+      <div className="browse-status">
+        <p className="browse-count" aria-live="polite">
+          {isBrowsing
+            ? `${ordered.length} recipes`
+            : `${results.length} ${results.length === 1 ? 'match' : 'matches'}${groupName ? ` in ${groupName.toLowerCase()}` : ''}`}
+        </p>
+        <div className="browse-quick" role="group" aria-label="Quick filters">
+          {config.quickFilters.map((filter) => (
+            <label key={filter.id} className="checkbox">
+              <input
+                type="checkbox"
+                checked={quick === filter.id}
+                onChange={(e) =>
                   setFilters({
-                    quick: quick === filter.id ? undefined : filter.id,
+                    quick: e.target.checked ? filter.id : undefined,
                   })
                 }
-              >
-                {filter.label}
-              </button>
-            ))}
-          </div>
+              />
+              {filter.label}
+            </label>
+          ))}
         </div>
-
-        {isBrowsing ? (
-          config.groups.map((g) => {
-            const shelf = ordered.filter((r) => config.groupOf(r) === g.id);
-            if (shelf.length === 0) return null;
-            return (
-              <section
-                key={g.id}
-                className="shelf"
-                aria-labelledby={`shelf-${g.id}`}
-              >
-                <div className="shelf-head">
-                  <h2 id={`shelf-${g.id}`} className="shelf-title">
-                    {g.name}
-                  </h2>
-                  <button
-                    type="button"
-                    className="shelf-more"
-                    onClick={() => setFilters({ group: g.id })}
-                  >
-                    See all {shelf.length}
-                  </button>
-                </div>
-                <div className="shelf-track">
-                  {shelf.slice(0, SHELF_SIZE).map(renderCard)}
-                </div>
-              </section>
-            );
-          })
-        ) : results.length > 0 ? (
-          <div className="recipes-grid">{results.map(renderCard)}</div>
-        ) : (
-          <div className="empty-state">
-            <svg
-              className="empty-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-              aria-hidden="true"
-            >
-              <circle cx="11" cy="11" r="7" />
-              <line x1="20" y1="20" x2="16" y2="16" />
-            </svg>
-            <h2>No recipes match</h2>
-            <p>Try a different word, or clear the filters to see everything.</p>
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={() =>
-                setFilters({ q: undefined, group: undefined, quick: undefined })
-              }
-            >
-              Clear filters
-            </button>
-          </div>
-        )}
       </div>
+
+      {isBrowsing ? (
+        config.groups.map((g) => {
+          const shelf = ordered.filter((r) => config.groupOf(r) === g.id);
+          if (shelf.length === 0) return null;
+          return (
+            <section
+              key={g.id}
+              className="shelf"
+              aria-labelledby={`shelf-${g.id}`}
+            >
+              <div className="section-header">
+                <h2 id={`shelf-${g.id}`} className="section-title">
+                  {g.name}
+                </h2>
+                <button
+                  type="button"
+                  className="text-btn"
+                  onClick={() => setFilters({ group: g.id })}
+                >
+                  See all {shelf.length}
+                </button>
+              </div>
+              <div className="tile-grid">
+                {shelf.slice(0, SHELF_SIZE).map(renderTile)}
+              </div>
+            </section>
+          );
+        })
+      ) : results.length > 0 ? (
+        <>
+          {/* Keeps the outline h1 → h2 → h3 (tile titles) without a shelf. */}
+          <h2 className="sr-only">Results</h2>
+          <div className="tile-grid">{results.map(renderTile)}</div>
+        </>
+      ) : (
+        <div className="empty-state">
+          <h2>No recipes match</h2>
+          <p>Try a different word, or clear the filters to see everything.</p>
+          <button
+            type="button"
+            className="btn btn-outline"
+            onClick={() =>
+              setFilters({ q: undefined, group: undefined, quick: undefined })
+            }
+          >
+            Clear filters
+          </button>
+        </div>
+      )}
     </div>
   );
 }

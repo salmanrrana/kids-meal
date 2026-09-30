@@ -1,83 +1,94 @@
-/* Grocery list */
+/* Grocery list: the week's meals as a line of links, then aisle sections of
+   checkable items flowing into 2 columns at ≥600 and 3 at ≥1024. */
 
-.grocery-header {
+/* Wide enough for "Copy list", so the right-aligned button doesn't shift when
+   it reads "Copied". */
+.grocery-copy {
+  min-width: 8.5em;
+}
+
+.grocery-meals {
+  margin-bottom: 32px;
+}
+
+/* Lines are 28.5px apart. Each link's tap area reaches 8px above and below
+   its line (44.5px tall), so the tap areas of neighbouring lines overlap by
+   16px. */
+.grocery-meal-list {
+  margin-top: 8px;
+  font-size: var(--t-ui);
+  line-height: 1.9;
+}
+
+.grocery-meal-list li {
+  display: inline;
+}
+
+.grocery-meal-list li + li::before {
+  content: ' · ';
+  color: var(--ink-3);
+}
+
+/* inline-block keeps a title on one line when the list wraps; the padding
+   and matching negative margin make the tap area 44px without moving it. */
+.grocery-meal-list a {
+  display: inline-block;
+  padding-block: 8px;
+  margin-block: -8px;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--fade);
+}
+
+@media (hover: hover) {
+  .grocery-meal-list a:hover {
+    text-decoration-color: var(--accent);
+  }
+}
+
+.grocery-aisle {
+  break-inside: avoid;
+}
+
+.grocery-aisle + .grocery-aisle {
+  margin-top: 32px;
+}
+
+@media (min-width: 600px) {
+  .grocery-aisles {
+    columns: 2;
+    column-gap: 48px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grocery-aisles {
+    columns: 3;
+  }
+}
+
+.grocery-item + .grocery-item {
+  border-top: 1px solid var(--rule);
+}
+
+/* Full-width row; long items wrap under their own text, box on the first line. */
+.grocery-item .checkbox {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 16px;
-  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 10px 0;
+  font-size: var(--t-body);
+  line-height: 1.4;
 }
 
-/* Week's meals summary */
-.meal-summary {
-  margin-bottom: 28px;
+.grocery-item input {
+  margin-top: 2px;
 }
 
-.summary-title {
-  font-size: var(--text-lg);
-  margin-bottom: 12px;
+.grocery-item span {
+  transition: color var(--fade);
 }
 
-.meal-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.meal-chip {
-  padding: 6px 14px;
-  border-radius: var(--radius-full);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  color: var(--ink-2);
-  font-size: var(--text-sm);
-}
-
-/* Categories */
-.grocery-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 16px;
-  align-items: start;
-  padding-bottom: 32px;
-}
-
-.grocery-category {
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-lg);
-  padding: 16px 18px 12px;
-}
-
-.category-label {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  font-size: var(--text-lg);
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--line);
-}
-
-.category-count {
-  font-family: var(--font-ui);
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--gold);
-}
-
-.ingredient-list {
-  list-style: none;
-  margin: 0;
-  padding: 4px 0 0;
-}
-
-.ingredient-item {
-  padding: 9px 0;
-  font-size: var(--text-base);
-  color: var(--ink-2);
-  border-bottom: 1px solid var(--line);
-}
-
-.ingredient-item:last-child {
-  border-bottom: none;
+.grocery-item input:checked + span {
+  color: var(--ink-3);
+  text-decoration: line-through;
 }

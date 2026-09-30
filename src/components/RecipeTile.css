@@ -1,0 +1,109 @@
+/* Recipe tile. Height = photo (width) + 10 + two title lines + 44 meta row,
+   so every tile in a grid comes out the same size. */
+
+.tile {
+  position: relative;
+  min-width: 0;
+}
+
+.tile-photo {
+  aspect-ratio: 1;
+}
+
+.tile-title {
+  display: -webkit-box;
+  height: 2.5em;
+  margin-top: 10px;
+  overflow: hidden;
+  font-size: var(--t-title);
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+}
+
+/* The title link stretches over the whole tile (the tile, not the title,
+   is its positioned ancestor, so the clamp above doesn't clip it). */
+.tile-link {
+  text-decoration: none;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.tile-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.tile-link:focus-visible {
+  outline: none;
+}
+
+.tile-link:focus-visible::after {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (hover: hover) {
+  .tile-link:hover {
+    text-decoration-line: underline;
+  }
+}
+
+.tile-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 44px;
+}
+
+.tile-time {
+  font-size: var(--t-meta);
+  line-height: 1.3;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The action sits above the stretched link; the negative margin lines its
+   22px icon up with the photo's right edge. */
+.tile-meta .icon-btn {
+  position: relative;
+  z-index: 1;
+  margin-right: -11px;
+}
+
+/* Planner cells */
+.tile--compact .tile-title {
+  font-size: var(--t-ui);
+}
+
+.tile--compact .tile-meta {
+  height: 40px;
+}
+
+/* Tile grid: 2 / 3 / 4 / 5 columns at <600 / ≥600 / ≥1024 / ≥1280. */
+.tile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 12px;
+}
+
+@media (min-width: 600px) {
+  .tile-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .tile-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .tile-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,24 @@
+/* Photo: paper-2 placeholder, 4px radius, and a 1px edge drawn above the image. */
+
+.photo {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--paper-2);
+}
+
+.photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: var(--photo-edge);
+  pointer-events: none;
+}
+
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
